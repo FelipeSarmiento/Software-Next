@@ -38,6 +38,7 @@ export const authOptions = {
             }
         })
     ],
+    secret: process.env.NEXT_PUBLIC_SECRET,
     callbacks: {
         session: async ({session, token}) => ({
             ...session,
