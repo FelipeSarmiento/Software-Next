@@ -47,7 +47,7 @@ export function NavBar() {
                                     <div className="flex space-x-4 items-center">
                                         <a href="/"><p
                                             className="rounded-md py-2 text-xl bg-gradient-to-r text-white font-bold ">Software
-                                            Next <span className="text-xs text-cyan-500">beta</span></p></a>
+                                            Next <span className="text-xs text-cyan-500">alpha</span></p></a>
                                         <div className="hidden md:block">
                                             {navigation.map((item) => (
                                                 <Link

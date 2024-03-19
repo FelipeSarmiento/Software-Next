@@ -18,7 +18,8 @@ config.autoAddCss = false
 const inter = Inter({subsets: ["latin"]});
 
 export const metadata = {
-    title: "Software Next",
+    title: "Software Next - Alpha version",
+    favicon: "/favicon.ico",
     description: "Software Next: The Next Generation of Software Development",
 };
 
@@ -29,6 +30,7 @@ export default function RootLayout({children}) {
     return (
         <html className="dark" lang="en">
         <head>
+            <link rel="icon" href="https://cdn.hugeicons.com/icons/snow-stroke-rounded.svg" />
             <ColorSchemeScript defaultColorScheme="auto" />
         </head>
             <body className={inter.className + " min-h-screen from-30% [::-webkit-scrollbar{display:none;}] shrink-0 overflow-x-hidden"}>
