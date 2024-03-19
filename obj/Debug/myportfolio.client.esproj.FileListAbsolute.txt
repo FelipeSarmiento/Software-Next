@@ -1,0 +1,2 @@
+C:\Users\felip\OneDrive\Escritorio\MyPortfolio2\myportfolio.client\obj\Debug\myportfolio.client.esproj.CoreCompileInputs.cache
+C:\Users\felip\OneDrive\Escritorio\MyPortfolio\myportfolio.client\obj\Debug\myportfolio.client.esproj.CoreCompileInputs.cache
