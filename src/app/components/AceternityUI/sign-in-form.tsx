@@ -18,7 +18,7 @@ export function SignInForm() {
 
     return (
         <div
-            className="w-full rounded-none md:rounded-2xl p-4 px-10 md:p-8 shadow-input bg-black border-gray-600 border-2">
+            className="w-full rounded-3xl p-4 px-10 md:p-8 shadow-input bg-black border-gray-600 border-2">
             <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
                 Welcome to MyPortfolio
             </h2>

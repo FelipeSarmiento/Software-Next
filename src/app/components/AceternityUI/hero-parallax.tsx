@@ -104,15 +104,15 @@ export const HeroParallax = ({
 export const Header = () => {
     return (
         <div className="max-w-7xl relative mx-auto py-10 md:py-20 px-4 w-full  left-0 top-0">
-            <h1 className="text-xl md:text-5xl font-bold dark:text-white">
+            <h1 className="text-2xl md:text-5xl font-bold dark:text-white">
                 <span className="text-6xl md:text-7xl text-cyan-500">
                     Software Next
                 </span>
                 <br />
                 The Next Generation of Software Development
             </h1>
-            <p className="max-w-5xl text-white text-md mt-8 leading-normal   dark:text-neutral-200">
-                Empowering You to Build Websites and Custom Software Effortlessly. Say goodbye to coding complexities and hello to seamless website creation with our intuitive platform. Whether you're a novice or a seasoned pro, our user-friendly tools make website development a breeze, no coding skills required. But that's not all - dive deeper into the realm of custom software tailored to your unique needs. From concept to execution, we're your partner in crafting bespoke solutions that elevate your digital presence. Experience the future of software development, simplified and personalized, with Software Next.
+            <p className="max-w-5xl text-white text-lg mt-8 leading-relaxed   dark:text-neutral-200">
+                Easy Website Creation, Custom Software Solutions. Build websites hassle-free, no coding needed. Plus, get tailored software for your unique needs. Simplifying software development for everyone.
             </p>
         </div>
     );
