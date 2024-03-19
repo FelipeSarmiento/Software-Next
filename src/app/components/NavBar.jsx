@@ -1,5 +1,5 @@
 'use client'
-import { useSession, signOut } from "next-auth/react"
+import {useSession, signOut} from "next-auth/react"
 import {Fragment} from 'react'
 import {Disclosure, Menu, Transition} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
@@ -21,7 +21,7 @@ function classNames(...classes) {
 
 export function NavBar() {
 
-    const { data: session } = useSession()
+    const {data: session} = useSession()
 
     return (
         <Disclosure as="nav" className="border-b-4 border-cyan-500 sticky bg-black top-0 z-50">
@@ -46,7 +46,8 @@ export function NavBar() {
                                 <div className="sm:ml-6 sm:block">
                                     <div className="flex space-x-4 items-center">
                                         <a href="/"><p
-                                            className="rounded-md py-2 text-lg bg-gradient-to-r text-white font-bold ">Software Next <span className="text-xs text-cyan-500">beta</span></p></a>
+                                            className="rounded-md py-2 text-lg bg-gradient-to-r text-white font-bold ">Software
+                                            Next <span className="text-xs text-cyan-500">beta</span></p></a>
                                         <div className="hidden">
                                             {navigation.map((item) => (
                                                 <Link
@@ -85,9 +86,10 @@ export function NavBar() {
                                         <Menu as="div" className="relative ml-3">
                                             <div>
                                                 <Button title="Cerrar Sesión" onClick={() => signOut()}
-                                                      className="relative flex pb-1 h-8 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
+                                                        className="relative flex pb-1 h-8 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
                                                     <span className="absolute -inset-1.5"/>
-                                                    <span className="md:block px-1 flex h-auto">{ session.user.name }</span>
+                                                    <span
+                                                        className="md:block px-1 flex h-auto">{session.user.name}</span>
                                                     <div>
                                                         <FontAwesomeIcon icon={faRightToBracket}
                                                                          className="text-sm px-1"/>
@@ -100,58 +102,68 @@ export function NavBar() {
                             </div>
                         </div>
                     </div>
-
-                    <Disclosure.Panel className="absolute top-full bg-black border-b-4 border-cyan-500 w-full md:hidden">
-                        <div className="space-y-1 px-2 pb-3 pt-2">
-                            {navigation.map((item) => (
-                                <Disclosure.Button
-                                    key={item.name}
-                                    as="a"
-                                    href={item.href}
-                                    className={classNames(
-                                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                        'block rounded-md px-3 py-2 text-base font-medium'
-                                    )}
-                                    aria-current={item.current ? 'page' : undefined}
-                                >
-                                    {item.name}
-                                </Disclosure.Button>
-                            ))}
-                            <hr/>
-                            <div className="flex items-center pt-2 px-2 text-lg">
-                                {
-                                    !session ? (
-                                        <Menu as="div" className="relative">
-                                            <div>
-                                                <Link href="/Auth/Login"
-                                                      className="relative flex pb-1 h-8 items-center justify-start px-0 border-2 border-green-500 text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
-                                                    <span className="absolute -inset-1.5"/>
-                                                    <div>
-                                                        <FontAwesomeIcon icon={faRightToBracket}
-                                                                         className="text-sm px-1"/>
-                                                    </div>
-                                                    <span className="px-1 flex h-auto">Log in</span>
-                                                </Link>
-                                            </div>
-                                        </Menu>
-                                    ) : (
-                                        <Menu as="div" className="relative">
-                                            <div>
-                                                <Disclosure.Button title="Cerrar Sesión" onClick={() => signOut()}
-                                                        className="relative flex pb-1 h-8 items-center px-1 text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
-                                                    <span className="md:block flex h-auto">{ session.user.name }</span>
-                                                    <div>
-                                                        <FontAwesomeIcon icon={faRightToBracket}
-                                                                         className="text-sm px-1"/>
-                                                    </div>
-                                                </Disclosure.Button>
-                                            </div>
-                                        </Menu>
-                                    )
-                                }
+                    <Transition
+                        enter="transition duration-100 ease-out"
+                        enterFrom="transform scale-95 opacity-0"
+                        enterTo="transform scale-100 opacity-100"
+                        leave="transition duration-75 ease-out"
+                        leaveFrom="transform scale-100 opacity-100"
+                        leaveTo="transform scale-95 opacity-0"
+                    >
+                        <Disclosure.Panel
+                            className="absolute top-full bg-black border-b-4 border-cyan-500 w-full md:hidden">
+                            <div className="space-y-1 px-2 pb-3 pt-2">
+                                {navigation.map((item) => (
+                                    <Disclosure.Button
+                                        key={item.name}
+                                        as="a"
+                                        href={item.href}
+                                        className={classNames(
+                                            item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                            'block rounded-md px-3 py-2 text-base font-medium'
+                                        )}
+                                        aria-current={item.current ? 'page' : undefined}
+                                    >
+                                        {item.name}
+                                    </Disclosure.Button>
+                                ))}
+                                <hr/>
+                                <div className="flex items-center pt-2 px-2 text-lg">
+                                    {
+                                        !session ? (
+                                            <Menu as="div" className="relative">
+                                                <div>
+                                                    <Link href="/Auth/Login"
+                                                          className="relative flex pb-1 h-8 items-center justify-start px-0 text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
+                                                        <span className="absolute -inset-1.5"/>
+                                                        <div>
+                                                            <FontAwesomeIcon icon={faRightToBracket}
+                                                                             className="text-sm px-1"/>
+                                                        </div>
+                                                        <span className="px-1 flex h-auto">Log in</span>
+                                                    </Link>
+                                                </div>
+                                            </Menu>
+                                        ) : (
+                                            <Menu as="div" className="relative">
+                                                <div>
+                                                    <Disclosure.Button title="Cerrar Sesión" onClick={() => signOut()}
+                                                                       className="relative flex pb-1 h-8 items-center px-1 text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
+                                                        <span
+                                                            className="md:block flex h-auto">{session.user.name}</span>
+                                                        <div>
+                                                            <FontAwesomeIcon icon={faRightToBracket}
+                                                                             className="text-sm px-1"/>
+                                                        </div>
+                                                    </Disclosure.Button>
+                                                </div>
+                                            </Menu>
+                                        )
+                                    }
+                                </div>
                             </div>
-                        </div>
-                    </Disclosure.Panel>
+                        </Disclosure.Panel>
+                    </Transition>
                 </>
             )}
         </Disclosure>

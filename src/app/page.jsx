@@ -156,7 +156,7 @@ export default function Home() {
                 </div>
             </div>
             */}
-                <HeroParallax products={products} />;
+                <HeroParallax products={products} />
             </div>
         </>
 

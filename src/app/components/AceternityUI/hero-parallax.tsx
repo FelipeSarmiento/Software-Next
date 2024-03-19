@@ -39,25 +39,25 @@ export const HeroParallax = ({
         springConfig
     );
     const rotateX = useSpring(
-        useTransform(scrollYProgress, [0, 0.2], [15, 0]),
+        useTransform(scrollYProgress, [0, 0.1], [15, 0]),
         springConfig
     );
     const opacity = useSpring(
-        useTransform(scrollYProgress, [0, 0.2], [0.2, 1]),
+        useTransform(scrollYProgress, [0, 0.1], [0.1, 1]),
         springConfig
     );
     const rotateZ = useSpring(
-        useTransform(scrollYProgress, [0, 0.2], [20, 0]),
+        useTransform(scrollYProgress, [0, 0.1], [20, 0]),
         springConfig
     );
     const translateY = useSpring(
-        useTransform(scrollYProgress, [0, 0.2], [-700, 500]),
+        useTransform(scrollYProgress, [0, 0.1], [-700, 200]),
         springConfig
     );
     return (
         <div
             ref={ref}
-            className="h-[300vh] py-40 overflow-hidden  antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+            className="h-[300vh] py-20 overflow-hidden  antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
         >
             <Header />
             <motion.div
@@ -103,15 +103,15 @@ export const HeroParallax = ({
 
 export const Header = () => {
     return (
-        <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0">
-            <h1 className="text-2xl md:text-5xl font-bold dark:text-white">
-                <span className="text-7xl text-cyan-500">
+        <div className="max-w-7xl relative mx-auto py-10 md:py-20 px-4 w-full  left-0 top-0">
+            <h1 className="text-xl md:text-5xl font-bold dark:text-white">
+                <span className="text-6xl md:text-7xl text-cyan-500">
                     Software Next
                 </span>
                 <br />
                 The Next Generation of Software Development
             </h1>
-            <p className="max-w-5xl text-white md:text-xl mt-8 dark:text-neutral-200">
+            <p className="max-w-5xl text-white text-md mt-8 leading-normal   dark:text-neutral-200">
                 Empowering You to Build Websites and Custom Software Effortlessly. Say goodbye to coding complexities and hello to seamless website creation with our intuitive platform. Whether you're a novice or a seasoned pro, our user-friendly tools make website development a breeze, no coding skills required. But that's not all - dive deeper into the realm of custom software tailored to your unique needs. From concept to execution, we're your partner in crafting bespoke solutions that elevate your digital presence. Experience the future of software development, simplified and personalized, with Software Next.
             </p>
         </div>
