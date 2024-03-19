@@ -166,7 +166,7 @@ export const Lid = ({
                 <div className="absolute inset-0 bg-[#272729] rounded-lg" />
                 <Image
                     src={src as string}
-                    alt="Laura sofia "
+                    alt="Software Next"
                     fill
                     className="object-fill absolute rounded-lg h-full w-full border-2 border-gray-500"
                 />

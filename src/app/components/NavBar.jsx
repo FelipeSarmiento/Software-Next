@@ -9,10 +9,10 @@ import Link from 'next/link'
 import {Button} from "keep-react";
 
 const navigation = [
-    {name: '¿Como usar?', href: '/', current: false},
-    {name: 'Crear mi portafolio', href: '/Dashboard', current: false},
-    {name: 'Portafolios', href: '/', current: false},
-    {name: 'Quienes Somos?', href: '/', current: false}
+    {name: 'How to use?', href: '/', current: false},
+    {name: 'About', href: '/', current: false},
+    {name: 'Projects', href: '/', current: false},
+    {name: 'Dashboard', href: '/Dashboard', current: false},
 ]
 
 function classNames(...classes) {
@@ -46,7 +46,7 @@ export function NavBar() {
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4 items-center">
                                         <a href="/"><p
-                                            className="rounded-md py-2 text-lg bg-gradient-to-r text-white font-bold ">My Portfolio</p></a>
+                                            className="rounded-md py-2 text-lg bg-gradient-to-r text-white font-bold ">Software Next</p></a>
                                         {navigation.map((item) => (
                                             <Link
                                                 key={item.name}
