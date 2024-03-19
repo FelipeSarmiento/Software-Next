@@ -17,8 +17,8 @@ config.autoAddCss = false
 const inter = Inter({subsets: ["latin"]});
 
 export const metadata = {
-    title: "My Portfolio",
-    description: "My Portfolio App",
+    title: "Software Next",
+    description: "Software Next: The Next Generation of Software Development",
 };
 
 export default function RootLayout({children}) {
@@ -28,7 +28,6 @@ export default function RootLayout({children}) {
     return (
         <html className="dark" lang="en">
         <head>
-
             <ColorSchemeScript defaultColorScheme="auto" />
         </head>
             <body className={inter.className + " min-h-screen from-30% [::-webkit-scrollbar{display:none;}] shrink-0 overflow-x-hidden"}>

@@ -38,7 +38,7 @@ export function SignInForm() {
                     <Input id="password" placeholder="••••••••" type="password" name="password"
                            value={formState.password} onChange={onInputChange}/>
                 </LabelInputContainer>
-                <button onClick={() => {signIn('credentials', {email: formState.email, password: formState.password})
+                <button onClick={() => {signIn('credentials', {email: formState.email, password: formState.password,redirect: true, callbackUrl: '/dashboard'})
 
                 }
                 }

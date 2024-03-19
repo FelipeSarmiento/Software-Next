@@ -46,7 +46,7 @@ export function NavBar() {
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4 items-center">
                                         <a href="/"><p
-                                            className="rounded-md py-2 text-lg bg-gradient-to-r text-white font-bold ">Software Next</p></a>
+                                            className="rounded-md py-2 text-lg bg-gradient-to-r text-white font-bold ">Software Next <span className="text-xs text-cyan-500">beta</span></p></a>
                                         {navigation.map((item) => (
                                             <Link
                                                 key={item.name}
@@ -75,7 +75,7 @@ export function NavBar() {
                                                         <FontAwesomeIcon icon={faRightToBracket}
                                                                          className="text-sm px-1"/>
                                                     </div>
-                                                    <span className="px-1 flex h-auto">Ingresar</span>
+                                                    <span className="px-1 flex h-auto">Log in</span>
                                                 </Link>
                                             </div>
                                         </Menu>

@@ -1,11 +1,12 @@
 'use client'
 
 import {MacbookScroll} from "./components/AceternityUI/macbook-scroll";
+import {HeroParallax} from "@/app/components/AceternityUI/hero-parallax";
 
 export default function Home() {
     return (
         <>
-            <div className=" min-h-[calc(100vh_-_84px)] py-3 px-5">
+            <div className=" min-h-[calc(100vh_-_84px)]">
 
                 {/*
             <div className="mx-auto max-w-7xl py-12 sm:px-6 sm:py-16 lg:px-8">
@@ -60,23 +61,105 @@ export default function Home() {
                 </div>
             </div>
             */}
-                <div className="overflow-hidden w-full">
-                    <MacbookScroll
-                        title={
-                            <span>
-                                Innovate with <br/><span className="font-extrabold">My Portfolio</span>
-                            </span>
-                        }
-                        src={`https://i.postimg.cc/vmtM81wW/dashboard-My-Portfolio.png`}
-                        showGradient={false}
-                    />
-                </div>
-                    <div className="h-screen bg-red-500">
-                        Otra seccion
-                    </div>
-
+                <HeroParallax products={products} />;
             </div>
         </>
 
     )
 }
+
+export const products = [
+    {
+        title: "Moonbeam",
+        link: "https://gomoonbeam.com",
+        thumbnail:
+            "https://aceternity.com/images/products/thumbnails/new/moonbeam.png",
+    },
+    {
+        title: "Cursor",
+        link: "https://cursor.so",
+        thumbnail:
+            "https://aceternity.com/images/products/thumbnails/new/cursor.png",
+    },
+    {
+        title: "Rogue",
+        link: "https://userogue.com",
+        thumbnail:
+            "https://aceternity.com/images/products/thumbnails/new/rogue.png",
+    },
+
+    {
+        title: "Editorially",
+        link: "https://editorially.org",
+        thumbnail:
+            "https://aceternity.com/images/products/thumbnails/new/editorially.png",
+    },
+    {
+        title: "Editrix AI",
+        link: "https://editrix.ai",
+        thumbnail:
+            "https://aceternity.com/images/products/thumbnails/new/editrix.png",
+    },
+    {
+        title: "Pixel Perfect",
+        link: "https://app.pixelperfect.quest",
+        thumbnail:
+            "https://aceternity.com/images/products/thumbnails/new/pixelperfect.png",
+    },
+
+    {
+        title: "Algochurn",
+        link: "https://algochurn.com",
+        thumbnail:
+            "https://aceternity.com/images/products/thumbnails/new/algochurn.png",
+    },
+    {
+        title: "Aceternity UI",
+        link: "https://ui.aceternity.com",
+        thumbnail:
+            "https://aceternity.com/images/products/thumbnails/new/aceternityui.png",
+    },
+    {
+        title: "Tailwind Master Kit",
+        link: "https://tailwindmasterkit.com",
+        thumbnail:
+            "https://aceternity.com/images/products/thumbnails/new/tailwindmasterkit.png",
+    },
+    {
+        title: "SmartBridge",
+        link: "https://smartbridgetech.com",
+        thumbnail:
+            "https://aceternity.com/images/products/thumbnails/new/smartbridge.png",
+    },
+    {
+        title: "Renderwork Studio",
+        link: "https://renderwork.studio",
+        thumbnail:
+            "https://aceternity.com/images/products/thumbnails/new/renderwork.png",
+    },
+
+    {
+        title: "Creme Digital",
+        link: "https://cremedigital.com",
+        thumbnail:
+            "https://aceternity.com/images/products/thumbnails/new/cremedigital.png",
+    },
+    {
+        title: "Golden Bells Academy",
+        link: "https://goldenbellsacademy.com",
+        thumbnail:
+            "https://aceternity.com/images/products/thumbnails/new/goldenbellsacademy.png",
+    },
+    {
+        title: "Invoker Labs",
+        link: "https://invoker.lol",
+        thumbnail:
+            "https://aceternity.com/images/products/thumbnails/new/invoker.png",
+    },
+    {
+        title: "E Free Invoice",
+        link: "https://efreeinvoice.com",
+        thumbnail:
+            "https://aceternity.com/images/products/thumbnails/new/efreeinvoice.png",
+    },
+];
