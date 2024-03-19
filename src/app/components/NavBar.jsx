@@ -24,15 +24,15 @@ export function NavBar() {
     const { data: session } = useSession()
 
     return (
-        <Disclosure as="nav" className="border-b-4 border-white sticky bg-black top-0 z-50">
+        <Disclosure as="nav" className="border-b-4 border-cyan-500 sticky bg-black top-0 z-50">
             {({open}) => (
                 <>
-                    <div className="mx-autopx-2 sm:px-6 lg:px-24">
+                    <div className="relative mx-auto px-3 sm:px-6 lg:px-24">
                         <div className="relative flex h-16 py-3 items-center justify-between">
                             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                                 {/* Mobile menu button*/}
                                 <Disclosure.Button
-                                    className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                                    className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-black hover:text-white focus:outline-none">
                                     <span className="absolute -inset-0.5"/>
                                     <span className="sr-only">Open main menu</span>
                                     {open ? (
@@ -43,27 +43,29 @@ export function NavBar() {
                                 </Disclosure.Button>
                             </div>
                             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                                <div className="hidden sm:ml-6 sm:block">
+                                <div className="sm:ml-6 sm:block">
                                     <div className="flex space-x-4 items-center">
                                         <a href="/"><p
                                             className="rounded-md py-2 text-lg bg-gradient-to-r text-white font-bold ">Software Next <span className="text-xs text-cyan-500">beta</span></p></a>
-                                        {navigation.map((item) => (
-                                            <Link
-                                                key={item.name}
-                                                className={classNames(
-                                                    item.current ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gradient-to-r from-black via-zinc-700 to-black hover:text-white',
-                                                    'rounded-md px-3 py-2 text-sm font-medium'
-                                                )}
-                                                aria-current={item.current ? 'page' : undefined}
-                                                href={item.href}>
-                                                {item.name}
-                                            </Link>
-                                        ))}
+                                        <div className="hidden">
+                                            {navigation.map((item) => (
+                                                <Link
+                                                    key={item.name}
+                                                    className={classNames(
+                                                        item.current ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gradient-to-r from-black via-zinc-700 to-black hover:text-white',
+                                                        'rounded-md px-3 py-2 text-sm font-medium'
+                                                    )}
+                                                    aria-current={item.current ? 'page' : undefined}
+                                                    href={item.href}>
+                                                    {item.name}
+                                                </Link>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div
-                                className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                                className="absolute hidden md:flex inset-y-0 right-0 items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                                 {
                                     !session ? (
                                         <Menu as="div" className="relative ml-3">
@@ -83,9 +85,9 @@ export function NavBar() {
                                         <Menu as="div" className="relative ml-3">
                                             <div>
                                                 <Button title="Cerrar Sesión" onClick={() => signOut()}
-                                                      className="relative flex px-2 pb-1 h-8 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
+                                                      className="relative flex pb-1 h-8 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
                                                     <span className="absolute -inset-1.5"/>
-                                                    <span className="px-1 flex h-auto">{ session.user.name }</span>
+                                                    <span className="md:block px-1 flex h-auto">{ session.user.name }</span>
                                                     <div>
                                                         <FontAwesomeIcon icon={faRightToBracket}
                                                                          className="text-sm px-1"/>
@@ -99,7 +101,7 @@ export function NavBar() {
                         </div>
                     </div>
 
-                    <Disclosure.Panel className="sm:hidden">
+                    <Disclosure.Panel className="absolute top-full bg-black border-b-4 border-cyan-500 w-full md:hidden">
                         <div className="space-y-1 px-2 pb-3 pt-2">
                             {navigation.map((item) => (
                                 <Disclosure.Button
@@ -115,6 +117,39 @@ export function NavBar() {
                                     {item.name}
                                 </Disclosure.Button>
                             ))}
+                            <hr/>
+                            <div className="flex items-center pt-2 px-2 text-lg">
+                                {
+                                    !session ? (
+                                        <Menu as="div" className="relative">
+                                            <div>
+                                                <Link href="/Auth/Login"
+                                                      className="relative flex pb-1 h-8 items-center justify-start px-0 border-2 border-green-500 text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
+                                                    <span className="absolute -inset-1.5"/>
+                                                    <div>
+                                                        <FontAwesomeIcon icon={faRightToBracket}
+                                                                         className="text-sm px-1"/>
+                                                    </div>
+                                                    <span className="px-1 flex h-auto">Log in</span>
+                                                </Link>
+                                            </div>
+                                        </Menu>
+                                    ) : (
+                                        <Menu as="div" className="relative">
+                                            <div>
+                                                <Disclosure.Button title="Cerrar Sesión" onClick={() => signOut()}
+                                                        className="relative flex pb-1 h-8 items-center px-1 text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
+                                                    <span className="md:block flex h-auto">{ session.user.name }</span>
+                                                    <div>
+                                                        <FontAwesomeIcon icon={faRightToBracket}
+                                                                         className="text-sm px-1"/>
+                                                    </div>
+                                                </Disclosure.Button>
+                                            </div>
+                                        </Menu>
+                                    )
+                                }
+                            </div>
                         </div>
                     </Disclosure.Panel>
                 </>
