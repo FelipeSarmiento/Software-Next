@@ -9,6 +9,7 @@ import {config} from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import StoreProvider from "../lib/redux/StoreProvider";
 import {BackgroundBeams} from "./components/AceternityUI/background-beams";
+import { Analytics } from "@vercel/analytics/react"
 
 import {ColorSchemeScript, createTheme, MantineProvider} from '@mantine/core';
 
@@ -33,6 +34,7 @@ export default function RootLayout({children}) {
             <body className={inter.className + " min-h-screen from-30% [::-webkit-scrollbar{display:none;}] shrink-0 overflow-x-hidden"}>
                     <SessionProvider session={session}>
                         <StoreProvider>
+                            <Analytics/>
                             <MantineProvider>
                             <NavBar/>
                             {children}

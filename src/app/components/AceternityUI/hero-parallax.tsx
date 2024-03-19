@@ -111,7 +111,7 @@ export const Header = () => {
                 <br />
                 The Next Generation of Software Development
             </h1>
-            <p className="max-w-5xl text-white text-lg mt-8 leading-relaxed   dark:text-neutral-200">
+            <p className="max-w-5xl text-white text-2xl mt-8 leading-relaxed   dark:text-neutral-200">
                 Easy Website Creation, Custom Software Solutions. Build websites hassle-free, no coding needed. Plus, get tailored software for your unique needs. Simplifying software development for everyone.
             </p>
         </div>
