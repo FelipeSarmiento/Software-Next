@@ -33,7 +33,7 @@ export default function RootLayout({children}) {
             <link rel="icon" href="https://cdn.hugeicons.com/icons/snow-stroke-rounded.svg" />
             <ColorSchemeScript defaultColorScheme="auto" />
         </head>
-            <body className={inter.className + " min-h-screen from-30% [::-webkit-scrollbar{display:none;}] shrink-0 overflow-x-hidden"}>
+            <body className={inter.className + "bg-black min-h-screen from-30% [::-webkit-scrollbar{display:none;}] shrink-0 overflow-x-hidden"}>
                     <SessionProvider session={session}>
                         <StoreProvider>
                             <Analytics/>
