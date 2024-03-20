@@ -40,7 +40,9 @@ export default function RootLayout({children}) {
                             <MantineProvider>
                             <NavBar/>
                             {children}
-                            <BackgroundBeams />
+                            <div className="hidden lg:block">
+                                <BackgroundBeams />
+                            </div>
                             </MantineProvider>
                         </StoreProvider>
                     </SessionProvider>
