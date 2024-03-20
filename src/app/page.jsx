@@ -101,8 +101,11 @@ export default function Home() {
     ];
     return (
         <>
-            <div className=" min-h-[calc(100vh_-_84px)]">
+            <div className="bg-black min-h-[calc(100vh_-_84px)]">
                 <HeroParallax products={products} />
+            </div>
+            <div className="h-10 bg-red-500">
+
             </div>
         </>
 
