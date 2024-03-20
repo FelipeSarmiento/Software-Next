@@ -113,9 +113,9 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
             value: "product",
             content: (
                 <div
-                    className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-black border-2 border-stone-800">
+                    className="w-full overflow-y-auto relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-black border-2 border-stone-800">
                     <p>Items</p>
-                    <section className="grid grid-cols-7 gap-4 place-items-center text-white w-full p-4">
+                    <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 place-items-center text-white w-full p-4">
                         {items.map((item, index) => {
                             return (
                                 <div
@@ -124,7 +124,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                                         ref.current.close()
                                     }}
                                     key={index}
-                                    className="rounded-md relative hover:border-white flex flex-col items-center justify-center border-2 text-white border-gray-500 size-32">
+                                    className="rounded-md relative hover:border-white flex flex-col items-center justify-center border-2 text-white border-gray-500 size-24 lg:size-32">
                                     { item.type === "container" ? ( <IconContainer stroke={2} className="size-16" /> ) : ""}
                                     { item.type === "article" ? ( <IconArticle stroke={2} className="size-16" /> ) : ""}
                                     { item.type === "section" ? ( <IconSection stroke={2} className="size-16" /> ) : ""}
