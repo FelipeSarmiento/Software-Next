@@ -111,7 +111,7 @@ export function NavBar() {
                         leaveTo="transform scale-95 opacity-0"
                     >
                         <Disclosure.Panel
-                            className="absolute top-full bg-black border-b-4 border-cyan-500 w-full md:hidden">
+                            className="absolute top-full bg-black z-50 border-b-4 border-cyan-500 w-full md:hidden">
                             <div className="space-y-1 px-2 pb-3 pt-2">
                                 {navigation.map((item) => (
                                     <Disclosure.Button

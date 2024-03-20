@@ -7,7 +7,7 @@ export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueId
             const newObj = structuredClone(obj)
             return newObj.map((component, index) => {
                 if (component !== undefined) {
-                    let className = `${component["settings" + viewport.type]?.className} ${(idUniqueIdentifier === component?.idUniqueIdentifier ? " outline outline-2 outline-offset-2 outline-cyan-400 z-50" : "")}`
+                    let className = `${component["settings" + viewport.type]?.className} ${(idUniqueIdentifier === component?.idUniqueIdentifier ? " outline outline-2 outline-offset-2 outline-cyan-400 z-40" : "")}`
                     className = className.replaceAll("sm:", "").replaceAll("md:", "").replaceAll("lg:", "").replaceAll("xl:", "");
                     switch (component.group) {
                         case "element":
