@@ -419,7 +419,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 }
                                                             })
                                                         }}
-                                                               value={borderWidth.borderTop.split("-")[2].replace("[", "").replace("]", "").replace("px", "")}
+                                                               value={borderWidth.borderTop?.split("-")[2]?.replace("[", "")?.replace("]", "")?.replace("px", "")}
                                                                type="number"
                                                                className="absolute appearance-none bg-black border-2 border-gray-500 rounded-md -translate-y-2/4 left-2/4 -translate-x-2/4 w-8 h-5 text-white text-xs text-center outline-none"/>
 
@@ -436,7 +436,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 }
                                                             })
                                                         }} type="number"
-                                                               value={borderWidth.borderBottom.split("-")[2].replace("[", "").replace("]", "").replace("px", "")}
+                                                               value={borderWidth.borderBottom?.split("-")[2]?.replace("[", "")?.replace("]", "")?.replace("px", "")}
                                                                className="absolute appearance-none bottom-0 bg-black border-2 border-gray-500 rounded-md translate-y-2/4 left-2/4 -translate-x-2/4 w-8 h-5 text-white text-xs text-center outline-none"/>
 
                                                         <p className="absolute top-2/4 -translate-y-2/4 left-2/4 -translate-x-2/4 text-xs text-white">PX</p>
@@ -454,7 +454,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 }
                                                             })
                                                         }}
-                                                               value={borderWidth.borderLeft.split("-")[2].replace("[", "").replace("]", "").replace("px", "")}
+                                                               value={borderWidth.borderLeft?.split("-")[2]?.replace("[", "")?.replace("]", "")?.replace("px", "")}
                                                                type="number"
                                                                className="absolute appearance-none top-2/4 bg-black border-2 border-gray-500 rounded-md -translate-y-2/4 -translate-x-2/4 w-8 h-5 text-white text-xs text-center outline-none"/>
                                                         <input onChange={({target}) => {
@@ -470,7 +470,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 }
                                                             })
                                                         }}
-                                                               value={borderWidth.borderRight.split("-")[2].replace("[", "").replace("]", "").replace("px", "")}
+                                                               value={borderWidth.borderRight?.split("-")[2]?.replace("[", "")?.replace("]", "")?.replace("px", "")}
                                                                type="number"
                                                                className="absolute appearance-none top-2/4 bg-black border-2 border-gray-500 rounded-md -translate-y-2/4 right-0 translate-x-2/4 w-8 h-5 text-white text-xs text-center outline-none"/>
                                                     </div>
@@ -606,7 +606,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                     }
                                                                 })
                                                             }}
-                                                            value={margins.marginTop?.split("-")[1].replace("[", "").replace("]", "").replace("px", "")}
+                                                            value={margins.marginTop?.split("-")[1]?.replace("[", "")?.replace("]", "")?.replace("px", "")}
                                                             type="number"
                                                             className="absolute appearance-none bg-black border-2 border-gray-500 rounded-md -translate-y-2/4 left-2/4 -translate-x-2/4 w-8 h-5 text-white text-xs text-center outline-none"/>
 
@@ -625,7 +625,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 })
                                                             }}
                                                             type="number"
-                                                            value={margins.marginBottom.split("-")[1].replace("[", "").replace("]", "").replace("px", "")}
+                                                            value={margins.marginBottom?.split("-")[1]?.replace("[", "")?.replace("]", "")?.replace("px", "")}
                                                             className="absolute appearance-none bottom-0 bg-black border-2 border-gray-500 rounded-md translate-y-2/4 left-2/4 -translate-x-2/4 w-8 h-5 text-white text-xs text-center outline-none"/>
 
                                                         <span className="absolute text-xs top-3 left-2/4 -translate-x-2/4">
@@ -646,7 +646,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         }
                                                                     })
                                                                 }}
-                                                                       value={paddings.paddingTop.split("-")[1].replace("[", "").replace("]", "").replace("px", "")}
+                                                                       value={paddings.paddingTop?.split("-")[1]?.replace("[", "")?.replace("]", "")?.replace("px", "")}
                                                                        type="number"
                                                                        className="absolute appearance-none bg-black border-2 border-gray-500 rounded-md -translate-y-2/4 left-2/4 -translate-x-2/4 w-8 h-5 text-white text-xs text-center outline-none"/>
 
@@ -663,7 +663,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         }
                                                                     })
                                                                 }}
-                                                                       value={paddings.paddingBottom.split("-")[1].replace("[", "").replace("]", "").replace("px", "")}
+                                                                       value={paddings.paddingBottom?.split("-")[1]?.replace("[", "")?.replace("]", "")?.replace("px", "")}
                                                                        type="number"
                                                                        className="absolute appearance-none bg-black border-2 border-gray-500 rounded-md -translate-y-2/4 -bottom-2/4 left-2/4 -translate-x-2/4 w-8 h-5 text-white text-xs text-center outline-none"/>
 
@@ -684,7 +684,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         }
                                                                     })
                                                                 }}
-                                                                       value={paddings.paddingLeft.split("-")[1].replace("[", "").replace("]", "").replace("px", "")}
+                                                                       value={paddings.paddingLeft?.split("-")[1]?.replace("[", "")?.replace("]", "")?.replace("px", "")}
                                                                        type="number"
                                                                        className="absolute appearance-none bg-black border-2 border-gray-500 rounded-md -translate-y-2/4 top-2/4 -translate-x-2/4 w-8 h-5 text-white text-xs text-center outline-none"/>
                                                                 <input onChange={({target}) => {
@@ -700,7 +700,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         }
                                                                     })
                                                                 }}
-                                                                       value={paddings.paddingRight.split("-")[1].replace("[", "").replace("]", "").replace("px", "")}
+                                                                       value={paddings.paddingRight?.split("-")[1]?.replace("[", "")?.replace("]", "")?.replace("px", "")}
                                                                        type="number"
                                                                        className="absolute appearance-none bg-black border-2 border-gray-500 rounded-md -translate-y-2/4 top-2/4 right-0 translate-x-2/4 w-8 h-5 text-white text-xs text-center outline-none"/>
                                                             </div>
@@ -720,7 +720,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                     }
                                                                 })
                                                             }}
-                                                            value={margins.marginLeft.split("-")[1].replace("[", "").replace("]", "").replace("px", "")}
+                                                            value={margins.marginLeft?.split("-")[1]?.replace("[", "")?.replace("]", "")?.replace("px", "")}
                                                             type="number"
                                                             className="absolute appearance-none top-2/4 bg-black border-2 border-gray-500 rounded-md -translate-y-2/4 -translate-x-2/4 w-8 h-5 text-white text-xs text-center outline-none"/>
                                                         <input
@@ -737,7 +737,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                     }
                                                                 })
                                                             }}
-                                                            value={margins.marginRight.split("-")[1].replace("[", "").replace("]", "").replace("px", "")}
+                                                            value={margins.marginRight?.split("-")[1]?.replace("[", "")?.replace("]", "")?.replace("px", "")}
                                                             type="number"
                                                             className="absolute appearance-none top-2/4 bg-black border-2 border-gray-500 rounded-md -translate-y-2/4 right-0 translate-x-2/4 w-8 h-5 text-white text-xs text-center outline-none"/>
                                                     </div>

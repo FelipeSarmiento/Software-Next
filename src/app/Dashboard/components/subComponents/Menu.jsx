@@ -80,7 +80,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                         </div>
                                     ) : ''
                                 }
-                                <div className="pl-3">
+                                <div className="ml-3 w-full">
                                     {section.items.map((option, optionIndex) => (
                                         <>
                                             {option.group === "container" ? (
@@ -145,10 +145,10 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
         return content
     }
     return (
-        <Disclosure as="div" className="">
+        <Disclosure as="div" className="w-full">
             {({open}) => (
                 <>
-                    <h3 className="relative flow-root">
+                    <h3 className="relative flow-root w-full">
                         <div
                             onClick={ () => selectItem()}
                              className={`relative focus:border-stone-800 border-2 border-cyan-500 rounded-md mt-1 h-10 z-50 flex w-full items-center justify-between text-sm  px-2 bg-black`}>
@@ -188,7 +188,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                 </div>
                             ) : ''
                         }
-                        <div className="pl-3">
+                        <div className="ml-3 w-full">
                             <div className="relative pl-3">
                                 {
                                     createContent(items)

@@ -389,7 +389,7 @@ export default function Dashboard() {
                                                 }
                                             </div>
                                             <div className="col-span-2 order-1 lg:order-2 lg:col-span-3 relative flex items-center justify-center">
-                                                <div className="absolute md:hidden top-2/4 left-0 -translate-y-2/4">
+                                                <div className="absolute lg:hidden top-2/4 left-0 -translate-y-2/4">
                                                     <div className="relative">
                                                         <Drawer
                                                             classNames={{
@@ -427,12 +427,13 @@ export default function Dashboard() {
                                                                             }}
                                                                             classNames={{
                                                                                 root: "h-full m-0 px-1 " + (viewport.type === item.type ? "text-cyan-400" : " text-white"),
+                                                                                dropdown: "hidden lg:block"
                                                                             }}>
                                                                             {item.icon}
                                                                         </Button>
                                                                     </HoverCard.Target>
                                                                     <HoverCard.Dropdown classNames={{
-                                                                        dropdown: "bg-stone-950 h-min m-0 p-0 text-center"
+                                                                        dropdown: "hidden lg:block bg-stone-950 h-min m-0 p-0 text-center"
                                                                     }}>
                                                                         <Text className="text-white h-full py-1 px-2"
                                                                               size="sm">
@@ -448,14 +449,14 @@ export default function Dashboard() {
                                                         )
                                                     }
                                                 )}
-                                                <div className="absolute md:hidden top-2/4 right-0 -translate-y-2/4">
+                                                <div className="absolute lg:hidden top-2/4 right-0 -translate-y-2/4">
                                                     <Drawer
                                                         classNames={{
                                                             body: "bg-stone-950",
                                                             content: "bg-stone-950",
                                                             header: "bg-stone-950"
                                                         }}
-                                                        offset={8} radius="md" opened={openDrawerSettings} position="right" onClose={ () => { setOpenDrawerSettings(!openDrawerSettings) }}>
+                                                        radius="md" opened={openDrawerSettings} position="right" onClose={ () => { setOpenDrawerSettings(!openDrawerSettings) }}>
                                                         <DropMenu items={optionItem} viewport={viewport} keepOptions={keepOptions}
                                                                   modifyItemsDashboard={modifyItemsDashboard}
                                                                   title={optionItem !== undefined ? "Options for " + optionItem.label : "Options"}
@@ -506,9 +507,9 @@ export default function Dashboard() {
                                                       functions={onSelectItem} addSection={addSection}
                                                       deleteItemDashboard={deleteItemDashboard}/>
                                         </div>
-                                        <div className="lg:col-span-3 bg-stone-950  border-dotted border-2 flex justify-center rounded-md border-stone-800 h-[60vh] overflow-visible shrink-0 overflow-x-hidden p-1">
+                                        <div className="lg:col-span-3 bg-stone-950  border-dotted border-2 flex justify-center rounded-md border-stone-800 h-[60vh] shrink-0 p-1">
                                             <div
-                                                className={`overflow-x-hidden container outline outline-offset-2 outline-1 outline-white rounded-md h-full p-1`}
+                                                className={`outline outline-offset-2 outline-1 outline-white rounded-md h-full p-1`}
                                                 style={{"width": viewport.value}}>
                                                 <DashboardPreview idUniqueIdentifier={optionItem?.idUniqueIdentifier}
                                                                   viewport={viewport} onSelectItem={onSelectItem}
