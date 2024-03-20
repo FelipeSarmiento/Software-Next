@@ -16,12 +16,12 @@ export const DropMenu = ({items, title, type, functions, modifyItemsDashboard, a
                     <li className="relative flex items-center justify-center h-10 text-white font-bold text-lg">
                         <a>
                             <span className="absolute top-2/4 -translate-y-2/4 left-2">
-                                { title === 'Tree View' ? <IconBinaryTree/>: <IconSettings/>}
+                                { title !== 'Tree View' ? <IconSettings/>: "" }
                             </span>
                             <span className="">
                             {title}
                             </span>
-                            { title === 'Tree View' ? <span className="absolute top-2/4 -translate-y-2/4 right-2"></span> : '' }</a>
+                            { title === 'Tree View' ? <span className="absolute top-2/4 -translate-y-2/4 right-2"> <IconBinaryTree/> </span> : '' }</a>
                     </li>
                 </ul>
                 <section className="overflow-auto h-[calc(100%_-_48px)]">

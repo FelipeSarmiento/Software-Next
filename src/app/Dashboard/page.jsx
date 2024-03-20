@@ -315,7 +315,7 @@ export default function Dashboard() {
                                 <section aria-labelledby="products-heading" className="h-[56vh] pt-3">
                                     <div className="grid grid-cols-1 relative gap-x-5 gap-y-4 lg:grid-cols-5 h-full">
                                         <div className="col-span-1 lg:col-span-5 grid grid-cols-2 lg:grid-cols-5 gap-y-3 py-2 h-15 rounded-md w-full bg-stone-950 border-2 border-stone-800">
-                                            <div className="col-span-1 order-2 lg:order-1 flex justify-end lg:justify-start items-center px-2">
+                                            <div className="col-span-1 hidden order-2 lg:order-1 lg:flex justify-end lg:justify-start items-center px-2">
                                                 <button
                                                     disabled={optionItem === undefined}
                                                     onClick={() => {
@@ -398,6 +398,79 @@ export default function Dashboard() {
                                                                 header: "bg-stone-950"
                                                             }}
                                                              radius="md" opened={openDrawerTreeView} onClose={ () => { setOpenDrawerTreeView(!openDrawerTreeView) } }>
+                                                            <div className="flex justify-start py-2 lg:justify-start items-center px-2">
+                                                                <button
+                                                                    disabled={optionItem === undefined}
+                                                                    onClick={() => {
+                                                                        let id = window.crypto.randomUUID() + optionItem?.type;
+                                                                        setItemCopied({
+                                                                            ...optionItem,
+                                                                            id,
+                                                                            idUniqueIdentifier: id
+
+                                                                        })
+                                                                    }}
+                                                                    title="Copy"
+                                                                    className={`mx-2 rounded-md border-2 disabled:border-red-500 ${itemCopied !== undefined ? 'text-cyan-400 border-cyan-400' : 'text-white'}`}>
+                                                                    <IconCopy/>
+                                                                </button>
+                                                                <button
+                                                                    disabled={(!(itemCopied !== undefined && optionItem?.group !== "element"))}
+                                                                    onClick={() => {
+                                                                        optionItem ? addSection(itemCopied, optionItem?.idUniqueIdentifier) : addSection(itemCopied)
+                                                                        setItemCopied(undefined)
+                                                                    }}
+                                                                    title="Paste" className="mx-2 disabled:text-red-500">
+                                                                    <IconClipboard/>
+                                                                </button>
+                                                                <button title="Cut" className="mx-2">
+                                                                    <IconCut/>
+                                                                </button>
+                                                                {
+                                                                    optionItem !== undefined ?
+                                                                        <>
+                                                                            <Popover
+                                                                                classNames={{
+                                                                                    dropdown: "bg-stone-950 h-min m-0 p-0 text-center text-white"
+                                                                                }}
+                                                                                width={200} position="bottom"
+                                                                                clickOutsideEvents={['mouseup', 'touchend']}>
+                                                                                <Popover.Target>
+                                                                                    <button
+                                                                                        title={"Delete " + optionItem.type}
+                                                                                        className="mx-2">
+                                                                                        <FontAwesomeIcon icon={faTrash}/>
+                                                                                    </button>
+                                                                                </Popover.Target>
+                                                                                <Popover.Dropdown>
+                                                                                    <Text
+                                                                                        classNames={{
+                                                                                            root: "text-white h-full py-1 px-2"
+                                                                                        }}
+                                                                                        size="xs">Are you sure you want to delete the
+                                                                                        item?</Text>
+                                                                                    <div className="flex justify-around py-2">
+                                                                                        <button
+                                                                                            onClick={() => {
+                                                                                                deleteItemDashboard(optionItem.idUniqueIdentifier)
+                                                                                            }}
+                                                                                            className="text-lime-400">
+                                                                                            <IconCheck/>
+                                                                                        </button>
+                                                                                        <button
+                                                                                            onClick={() => {
+                                                                                                document.mo
+                                                                                            }}
+                                                                                            className="text-red-500">
+                                                                                            <IconX/>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </Popover.Dropdown>
+                                                                            </Popover>
+
+                                                                        </> : ""
+                                                                }
+                                                            </div>
                                                             <DropMenu currentPage={actualPage} items={itemsDashboard.pages[actualPage]}
                                                                       optionSelected={optionItem}
                                                                       title="Tree View"
@@ -457,6 +530,14 @@ export default function Dashboard() {
                                                             header: "bg-stone-950"
                                                         }}
                                                         radius="md" opened={openDrawerSettings} position="right" onClose={ () => { setOpenDrawerSettings(!openDrawerSettings) }}>
+                                                        <button
+                                                            onClick={() => {
+                                                                setKeepOptions(!keepOptions)
+                                                            }}
+                                                            className={"h-full m-0 flex py-2 px-1 hover:bg-transparent hover:text-cyan-400" + (keepOptions ? ' text-cyan-400' : ' text-white')}>
+                                                            <span>Keep options</span>
+                                                            <IconComponents/>
+                                                        </button>
                                                         <DropMenu items={optionItem} viewport={viewport} keepOptions={keepOptions}
                                                                   modifyItemsDashboard={modifyItemsDashboard}
                                                                   title={optionItem !== undefined ? "Options for " + optionItem.label : "Options"}
@@ -469,7 +550,7 @@ export default function Dashboard() {
                                                     </Button>
                                                 </div>
                                             </div>
-                                            <div className="col-span-1 relative order-3">
+                                            <div className="col-span-1 hidden lg:block relative order-3">
                                                 <div className="absolute top-2/4 left-0 -translate-y-2/4">
                                                     <Group justify="center">
                                                         <HoverCard shadow="md" closeDelay={0}>
