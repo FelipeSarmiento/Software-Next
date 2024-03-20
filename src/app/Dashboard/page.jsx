@@ -486,7 +486,7 @@ export default function Dashboard() {
                                                                 </Button>
                                                             </HoverCard.Target>
                                                             <HoverCard.Dropdown classNames={{
-                                                                dropdown: "bg-stone-950 h-min m-0 p-0 text-center"
+                                                                dropdown: "hidden lg:block bg-stone-950 h-min m-0 p-0 text-center"
                                                             }}>
                                                                 <Text className="text-white h-full py-1 px-2" size="sm">
                                                                     Allow to apply the styles<br/>values of the
