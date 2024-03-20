@@ -1,4 +1,5 @@
 'use client'
+import {useDisclosure as discloHOOK} from "@mantine/hooks";
 import React, {useEffect, useState} from 'react'
 import {
     setItemsDashboard as setItems,
@@ -24,7 +25,7 @@ import {
     IconComponents, IconX, IconCheck, IconBinaryTree, IconSettings
 } from '@tabler/icons-react';
 import {Disclosure} from "@headlessui/react";
-import {Button, Group, HoverCard, Popover, Text} from '@mantine/core';
+import {Button, Drawer, Group, HoverCard, Popover, Text} from '@mantine/core';
 
 export default function Dashboard() {
 
@@ -231,6 +232,9 @@ export default function Dashboard() {
         });
         return elements.join(' ');
     }
+    const [openDrawerSettings, setOpenDrawerSettings] = useState(false)
+    const [openDrawerTreeView, setOpenDrawerTreeView] = useState(false)
+
 
     if (itemsDashboard === undefined) {
         return (
@@ -239,7 +243,6 @@ export default function Dashboard() {
             </div>
         );
     }
-
     return (
         <div className="min-h-full pt-4">
             <header className=" shadow">
@@ -311,9 +314,8 @@ export default function Dashboard() {
                             <main className="mx-auto max-w-11/12 px-8 sm:px-6 lg:px-8 pt-6">
                                 <section aria-labelledby="products-heading" className="h-[56vh] pt-3">
                                     <div className="grid grid-cols-1 relative gap-x-5 gap-y-4 lg:grid-cols-5 h-full">
-                                        <div
-                                            className="col-span-1 grid grid-cols-2 lg:grid-cols-5 gap-y-3 py-2 h-15 rounded-md w-full bg-stone-950 border-2 border-stone-800">
-                                            <div className="col-span-1 order-2 flex justify-end lg:justify-start items-center px-2">
+                                        <div className="col-span-1 lg:col-span-5 grid grid-cols-2 lg:grid-cols-5 gap-y-3 py-2 h-15 rounded-md w-full bg-stone-950 border-2 border-stone-800">
+                                            <div className="col-span-1 order-2 lg:order-1 flex justify-end lg:justify-start items-center px-2">
                                                 <button
                                                     disabled={optionItem === undefined}
                                                     onClick={() => {
@@ -386,9 +388,29 @@ export default function Dashboard() {
                                                         </> : ""
                                                 }
                                             </div>
-                                            <div className="col-span-2 order-1 lg:col-span-3 relative flex items-center justify-center">
-                                                <div className="absolute md:hidden top-2/4 left-2 -translate-y-2/4">
-                                                    <span className="italic text-xs"><IconBinaryTree/></span>
+                                            <div className="col-span-2 order-1 lg:order-2 lg:col-span-3 relative flex items-center justify-center">
+                                                <div className="absolute md:hidden top-2/4 left-0 -translate-y-2/4">
+                                                    <div className="relative">
+                                                        <Drawer
+                                                            classNames={{
+                                                                body: "bg-stone-950",
+                                                                content: "bg-stone-950",
+                                                                header: "bg-stone-950"
+                                                            }}
+                                                            offset={8} radius="md" opened={openDrawerTreeView} onClose={ () => { setOpenDrawerTreeView(!openDrawerTreeView) } }>
+                                                            <DropMenu currentPage={actualPage} items={itemsDashboard.pages[actualPage]}
+                                                                      optionSelected={optionItem}
+                                                                      title="Tree View"
+                                                                      type="tree-view"
+                                                                      functions={onSelectItem} addSection={addSection}
+                                                                      deleteItemDashboard={deleteItemDashboard}/>
+                                                        </Drawer>
+                                                        <Button onClick={ () => { setOpenDrawerTreeView(!openDrawerTreeView) } }>
+                                                        <span className="italic text-xs">
+                                                            <IconBinaryTree/>
+                                                        </span>
+                                                        </Button>
+                                                    </div>
                                                 </div>
                                                 {viewports.map((item, index) => {
                                                         return (
@@ -426,8 +448,24 @@ export default function Dashboard() {
                                                         )
                                                     }
                                                 )}
-                                                <div className="absolute md:hidden top-2/4 right-2 -translate-y-2/4">
-                                                    <span className="italic text-xs"><IconSettings/></span>
+                                                <div className="absolute md:hidden top-2/4 right-0 -translate-y-2/4">
+                                                    <Drawer
+                                                        classNames={{
+                                                            body: "bg-stone-950",
+                                                            content: "bg-stone-950",
+                                                            header: "bg-stone-950"
+                                                        }}
+                                                        offset={8} radius="md" opened={openDrawerSettings} position="right" onClose={ () => { setOpenDrawerSettings(!openDrawerSettings) }}>
+                                                        <DropMenu items={optionItem} viewport={viewport} keepOptions={keepOptions}
+                                                                  modifyItemsDashboard={modifyItemsDashboard}
+                                                                  title={optionItem !== undefined ? "Options for " + optionItem.label : "Options"}
+                                                                  type="options"/>
+                                                    </Drawer>
+                                                    <Button onClick={ () => { setOpenDrawerSettings(!openDrawerSettings) } }>
+                                                        <span className="italic text-xs">
+                                                            <IconSettings/>
+                                                        </span>
+                                                    </Button>
                                                 </div>
                                             </div>
                                             <div className="col-span-1 relative order-3">
@@ -460,14 +498,15 @@ export default function Dashboard() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <DropMenu currentPage={actualPage} items={itemsDashboard.pages[actualPage]}
-                                                  optionSelected={optionItem}
-                                                  title="Tree View"
-                                                  type="tree-view"
-                                                  functions={onSelectItem} addSection={addSection}
-                                                  deleteItemDashboard={deleteItemDashboard}/>
-                                        <div
-                                            className="lg:col-span-3 bg-stone-950  border-dotted border-2 flex justify-center rounded-md border-stone-800 h-[60vh] overflow-visible shrink-0 overflow-x-hidden p-1">
+                                        <div className="hidden lg:block lg:cols-span-1">
+                                            <DropMenu currentPage={actualPage} items={itemsDashboard.pages[actualPage]}
+                                                      optionSelected={optionItem}
+                                                      title="Tree View"
+                                                      type="tree-view"
+                                                      functions={onSelectItem} addSection={addSection}
+                                                      deleteItemDashboard={deleteItemDashboard}/>
+                                        </div>
+                                        <div className="lg:col-span-3 bg-stone-950  border-dotted border-2 flex justify-center rounded-md border-stone-800 h-[60vh] overflow-visible shrink-0 overflow-x-hidden p-1">
                                             <div
                                                 className={`overflow-x-hidden container outline outline-offset-2 outline-1 outline-white rounded-md h-full p-1`}
                                                 style={{"width": viewport.value}}>
@@ -476,10 +515,12 @@ export default function Dashboard() {
                                                                   components={itemsDashboard.pages[actualPage]}/>
                                             </div>
                                         </div>
+                                        <div className="hidden lg:block lg:cols-span-1">
                                         <DropMenu items={optionItem} viewport={viewport} keepOptions={keepOptions}
                                                   modifyItemsDashboard={modifyItemsDashboard}
                                                   title={optionItem !== undefined ? "Options for " + optionItem.label : "Options"}
                                                   type="options"/>
+                                        </div>
                                     </div>
                                 </section>
                             </main>

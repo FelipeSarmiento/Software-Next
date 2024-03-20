@@ -10,7 +10,7 @@ export const DropMenu = ({items, title, type, functions, modifyItemsDashboard, a
     const [itemsPrimary, setItemsPrimary] = useState(items ?? undefined)
     return (
         <>
-            <div className="hidden lg:block h-[60vh] relative w-full bg-stone-950 border-2 border-stone-800 rounded-md p-1">
+            <div className="h-full lg:block lg:h-[60vh] relative w-full bg-stone-950 border-2 border-stone-800 rounded-md p-1">
                 <h3 className="sr-only">{title}</h3>
                 <ul role="list" className="border-b border-stone-800 text-sm font-medium text-white">
                     <li className="relative flex items-center justify-center h-10 text-white font-bold text-lg">
