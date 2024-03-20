@@ -104,14 +104,14 @@ export const HeroParallax = ({
 export const Header = () => {
     return (
         <div className="max-w-7xl relative mx-auto py-10 md:py-20 px-4 w-full  left-0 top-0">
-            <h1 className="text-2xl md:text-5xl font-bold dark:text-white">
+            <h1 className="text-2xl md:text-5xl font-bold text-white">
                 <span className="text-6xl md:text-7xl text-cyan-500">
                     Software Next
                 </span>
                 <br />
                 The Next Generation of Software Development
             </h1>
-            <p className="max-w-5xl text-white text-2xl mt-8 leading-relaxed   dark:text-neutral-200">
+            <p className="max-w-5xl text-white text-2xl mt-8 leading-relaxed  text-neutral-200">
                 Easy Website Creation, Custom Software Solutions. Build websites hassle-free, no coding needed. Plus, get tailored software for your unique needs. Simplifying software development for everyone.
             </p>
         </div>
