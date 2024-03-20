@@ -28,7 +28,7 @@ export default function RootLayout({children}) {
 
     const session = getServerSession(authOptions);
     return (
-        <html className="dark bg-black" lang="en">
+        <html className="dark" lang="en">
         <head>
             <link rel="icon" href="https://cdn.hugeicons.com/icons/snow-stroke-rounded.svg" />
         </head>
@@ -37,10 +37,12 @@ export default function RootLayout({children}) {
                         <StoreProvider>
                             <Analytics/>
                             <MantineProvider>
-                            <NavBar/>
-                            {children}
-                            <div className="hidden lg:block">
-                                <BackgroundBeams />
+                            <div className="bg-black lg:bg-transparent">
+                                <NavBar/>
+                                {children}
+                                <div className="hidden lg:block">
+                                    <BackgroundBeams />
+                                </div>
                             </div>
                             </MantineProvider>
                         </StoreProvider>
