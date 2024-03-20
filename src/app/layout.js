@@ -28,11 +28,11 @@ export default function RootLayout({children}) {
 
     const session = getServerSession(authOptions);
     return (
-        <html className="dark" lang="en">
+        <html className="dark bg-black" lang="en">
         <head>
             <link rel="icon" href="https://cdn.hugeicons.com/icons/snow-stroke-rounded.svg" />
         </head>
-            <body className={inter.className + "bg-black min-h-screen from-30% [::-webkit-scrollbar{display:none;}] shrink-0 overflow-x-hidden"}>
+            <body className={inter.className + " bg-black min-h-screen from-30% [::-webkit-scrollbar{display:none;}] shrink-0 overflow-x-hidden"}>
                     <SessionProvider session={session}>
                         <StoreProvider>
                             <Analytics/>
