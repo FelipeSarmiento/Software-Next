@@ -397,7 +397,7 @@ export default function Dashboard() {
                                                                 content: "bg-stone-950",
                                                                 header: "bg-stone-950"
                                                             }}
-                                                            offset={8} radius="md" opened={openDrawerTreeView} onClose={ () => { setOpenDrawerTreeView(!openDrawerTreeView) } }>
+                                                             radius="md" opened={openDrawerTreeView} onClose={ () => { setOpenDrawerTreeView(!openDrawerTreeView) } }>
                                                             <DropMenu currentPage={actualPage} items={itemsDashboard.pages[actualPage]}
                                                                       optionSelected={optionItem}
                                                                       title="Tree View"

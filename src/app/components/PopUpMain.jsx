@@ -113,9 +113,9 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
             value: "product",
             content: (
                 <div
-                    className="w-full overflow-y-auto relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-black border-2 border-stone-800">
+                    className="w-full overflow-y-auto relative h-full rounded-2xl pt-3 lg:p-10 text-xl md:text-4xl font-bold text-white bg-black border-2 border-stone-800">
                     <p>Items</p>
-                    <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 place-items-center text-white w-full p-4">
+                    <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2 place-items-center text-white w-full p-2">
                         {items.map((item, index) => {
                             return (
                                 <div
@@ -147,19 +147,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                     </section>
                 </div>
             ),
-        },
-        {
-            title: "Services",
-            value: "services",
-            content: (
-                <div
-                    className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-black border-2 border-stone-800">
-                    <p>Services tab</p>
-                    <DummyContent/>
-                </div>
-            ),
-        },
-
+        }
     ];
 
     function classNames(classes, query) {
