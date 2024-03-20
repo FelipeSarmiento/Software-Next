@@ -1,6 +1,11 @@
 'use client'
 import React, {useEffect, useState} from 'react'
-import {setItemsDashboard as setItems, setMediaQuery, setOptionSelected, setOptions} from '../../lib/features/dashboard/thunks'
+import {
+    setItemsDashboard as setItems,
+    setMediaQuery,
+    setOptionSelected,
+    setOptions
+} from '../../lib/features/dashboard/thunks'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown, faChevronUp, faFloppyDisk, faTrash} from '@fortawesome/free-solid-svg-icons'
 import {useSession} from 'next-auth/react'
@@ -16,7 +21,7 @@ import {
     IconDeviceLaptop,
     IconDeviceMobile,
     IconDeviceTv,
-    IconComponents, IconX, IconCheck
+    IconComponents, IconX, IconCheck, IconBinaryTree, IconSettings
 } from '@tabler/icons-react';
 import {Disclosure} from "@headlessui/react";
 import {Button, Group, HoverCard, Popover, Text} from '@mantine/core';
@@ -68,11 +73,26 @@ export default function Dashboard() {
                 } else if (newObj[key] === valorBuscado) {
                     if (newObj.hasOwnProperty('settings' + viewport.type)) {
                         if (keepOptions) {
-                            nuevoValor.settingsMobile = {...nuevoValor.settingsMobile, className: classNames(nuevoValor.settingsMobile, "")};
-                            nuevoValor.settingsTablet = {...nuevoValor.settingsTablet, className: classNames(nuevoValor.settingsTablet, "sm")};
-                            nuevoValor.settingsLaptop = {...nuevoValor.settingsLaptop, className: classNames(nuevoValor.settingsLaptop, "md")};
-                            nuevoValor.settingsDesktop = {...nuevoValor.settingsDesktop, className: classNames(nuevoValor.settingsDesktop, "lg")};
-                            nuevoValor.settingsTV = {...nuevoValor.settingsTV, className: classNames(nuevoValor.settingsTV, "xl")};
+                            nuevoValor.settingsMobile = {
+                                ...nuevoValor.settingsMobile,
+                                className: classNames(nuevoValor.settingsMobile, "")
+                            };
+                            nuevoValor.settingsTablet = {
+                                ...nuevoValor.settingsTablet,
+                                className: classNames(nuevoValor.settingsTablet, "sm")
+                            };
+                            nuevoValor.settingsLaptop = {
+                                ...nuevoValor.settingsLaptop,
+                                className: classNames(nuevoValor.settingsLaptop, "md")
+                            };
+                            nuevoValor.settingsDesktop = {
+                                ...nuevoValor.settingsDesktop,
+                                className: classNames(nuevoValor.settingsDesktop, "lg")
+                            };
+                            nuevoValor.settingsTV = {
+                                ...nuevoValor.settingsTV,
+                                className: classNames(nuevoValor.settingsTV, "xl")
+                            };
                             newObj.settingsMobile = nuevoValor.settingsMobile;
                             newObj.settingsTablet = nuevoValor.settingsTablet;
                             newObj.settingsLaptop = nuevoValor.settingsLaptop;
@@ -140,7 +160,7 @@ export default function Dashboard() {
                 if (typeof item[key] === 'object' && !key.includes('settings')) {
                     item[key] = setId(item[key]);
                 }
-                if (item.hasOwnProperty('idUniqueIdentifier')){
+                if (item.hasOwnProperty('idUniqueIdentifier')) {
                     let id = window.crypto.randomUUID() + item.label;
                     item.id = id;
                     item.idUniqueIdentifier = id;
@@ -223,8 +243,8 @@ export default function Dashboard() {
     return (
         <div className="min-h-full pt-4">
             <header className=" shadow">
-                <div className="mx-auto relative flex justify-between px-4 py-6 sm:px-6 lg:px-24">
-                    <h1 className="flex items-center text-3xl font-bold tracking-tight text-white">
+                <div className="mx-auto relative grid grid-cols-2 ld:grid-cols-5 md:flex justify-between px-4 py-6 sm:px-6 lg:px-24">
+                    <h1 className="col-span-2 flex items-center justify-around text-3xl font-bold tracking-tight text-white">
                         Dashboard
                         <Disclosure as="div"
                                     className="relative w-28 flex flex-col justify-center ml-4 border-white h-8">
@@ -272,13 +292,12 @@ export default function Dashboard() {
                             )}
                         </Disclosure>
                     </h1>
-                    <div
-                        className="absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 flex items-center justify-center">
+                    <div className="col-span-2 lg:absolute lg:top-2/4 lg:left-2/4 lg:-translate-x-2/4 lg:-translate-y-2/4 flex items-center pt-5 pb-2 justify-center">
                         <h2 className="text-lg font-bold text-white">"{actualPage.charAt(0).toUpperCase() + actualPage.slice(1)}"
                             Page</h2>
                     </div>
                     <button onClick={() => saveItemsDashboard(itemsDashboard)}
-                            className="text-white border-2 border-white hover:bg-gradient-to-r from-black via-zinc-700 to-black px-4 rounded-md">
+                            className="col-span-2 text-white border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
                         Save &nbsp;<span className={unSaved ? 'text-red-500' : 'text-white'}>
                         <FontAwesomeIcon icon={faFloppyDisk}/>
                     </span>
@@ -292,11 +311,12 @@ export default function Dashboard() {
                             <main className="mx-auto max-w-11/12 px-8 sm:px-6 lg:px-8 pt-6">
                                 <section aria-labelledby="products-heading" className="h-[56vh] pt-3">
                                     <div className="grid grid-cols-1 relative gap-x-5 gap-y-4 lg:grid-cols-5 h-full">
-                                        <div className="lg:col-span-5 grid grid-cols-5 h-10 rounded-md w-full bg-stone-950 border-2 border-stone-800">
-                                            <div className="col-span-1 flex items-center px-2">
+                                        <div
+                                            className="col-span-1 grid grid-cols-2 lg:grid-cols-5 gap-y-3 py-2 h-15 rounded-md w-full bg-stone-950 border-2 border-stone-800">
+                                            <div className="col-span-1 order-2 flex justify-end lg:justify-start items-center px-2">
                                                 <button
-                                                    disabled={ optionItem === undefined }
-                                                    onClick={ () => {
+                                                    disabled={optionItem === undefined}
+                                                    onClick={() => {
                                                         let id = window.crypto.randomUUID() + optionItem?.type;
                                                         setItemCopied({
                                                             ...optionItem,
@@ -305,12 +325,13 @@ export default function Dashboard() {
 
                                                         })
                                                     }}
-                                                    title="Copy" className={`mx-2 rounded-md border-2 disabled:border-red-500 ${ itemCopied !== undefined ? 'text-cyan-400 border-cyan-400' : 'text-white' }`}>
+                                                    title="Copy"
+                                                    className={`mx-2 rounded-md border-2 disabled:border-red-500 ${itemCopied !== undefined ? 'text-cyan-400 border-cyan-400' : 'text-white'}`}>
                                                     <IconCopy/>
                                                 </button>
                                                 <button
                                                     disabled={(!(itemCopied !== undefined && optionItem?.group !== "element"))}
-                                                    onClick={ () => {
+                                                    onClick={() => {
                                                         optionItem ? addSection(itemCopied, optionItem?.idUniqueIdentifier) : addSection(itemCopied)
                                                         setItemCopied(undefined)
                                                     }}
@@ -327,10 +348,12 @@ export default function Dashboard() {
                                                                 classNames={{
                                                                     dropdown: "bg-stone-950 h-min m-0 p-0 text-center text-white"
                                                                 }}
-                                                                width={200} position="bottom" clickOutsideEvents={['mouseup', 'touchend']}>
+                                                                width={200} position="bottom"
+                                                                clickOutsideEvents={['mouseup', 'touchend']}>
                                                                 <Popover.Target>
                                                                     <button
-                                                                        title={"Delete " + optionItem.type} className="mx-2">
+                                                                        title={"Delete " + optionItem.type}
+                                                                        className="mx-2">
                                                                         <FontAwesomeIcon icon={faTrash}/>
                                                                     </button>
                                                                 </Popover.Target>
@@ -339,17 +362,20 @@ export default function Dashboard() {
                                                                         classNames={{
                                                                             root: "text-white h-full py-1 px-2"
                                                                         }}
-                                                                        size="xs">Are you sure you want to delete the item?</Text>
+                                                                        size="xs">Are you sure you want to delete the
+                                                                        item?</Text>
                                                                     <div className="flex justify-around py-2">
                                                                         <button
-                                                                            onClick={ () => {
+                                                                            onClick={() => {
                                                                                 deleteItemDashboard(optionItem.idUniqueIdentifier)
                                                                             }}
                                                                             className="text-lime-400">
                                                                             <IconCheck/>
                                                                         </button>
                                                                         <button
-                                                                            onClick={ () => { document.mo }}
+                                                                            onClick={() => {
+                                                                                document.mo
+                                                                            }}
                                                                             className="text-red-500">
                                                                             <IconX/>
                                                                         </button>
@@ -360,45 +386,52 @@ export default function Dashboard() {
                                                         </> : ""
                                                 }
                                             </div>
-                                            <div className="col-span-3 relative flex items-center justify-center">
-                                                <div className="absolute top-2/4 left-0 -translate-y-2/4">
-                                                    <span className="italic text-xs">Min Width: { viewport.value }</span>
+                                            <div className="col-span-2 order-1 lg:col-span-3 relative flex items-center justify-center">
+                                                <div className="absolute md:hidden top-2/4 left-2 -translate-y-2/4">
+                                                    <span className="italic text-xs"><IconBinaryTree/></span>
                                                 </div>
                                                 {viewports.map((item, index) => {
-                                                    return (
-                                                        <Group key={index} justify="center">
-                                                            <HoverCard shadow="md" closeDelay={0}>
-                                                                <HoverCard.Target>
-                                                                    <Button
-                                                                        onClick={() => {
-                                                                            setViewport({
-                                                                                value: item.value,
-                                                                                type: item.type,
-                                                                                breakpointID: item.breakpointID
-                                                                            })
-                                                                        }}
-                                                                        classNames={{
-                                                                            root: "h-full m-0 px-1 " + (viewport.type === item.type ? "text-cyan-400" : " text-white"),
-                                                                        }}>
-                                                                        {item.icon}
-                                                                    </Button>
-                                                                </HoverCard.Target>
-                                                                <HoverCard.Dropdown classNames={{
-                                                                    dropdown: "bg-stone-950 h-min m-0 p-0 text-center"
-                                                                }}>
-                                                                    <Text className="text-white h-full py-1 px-2" size="sm">
-                                                                        {item.type} view
-                                                                    </Text>
-                                                                    <Text className="text-white h-full italic py-1 px-2" size="sm">
-                                                                        width: {item.value}
-                                                                    </Text>
-                                                                </HoverCard.Dropdown>
-                                                            </HoverCard>
-                                                        </Group>
-                                                    )
-                                                }
+                                                        return (
+                                                            <Group key={index} justify="center">
+                                                                <HoverCard shadow="md" closeDelay={0}>
+                                                                    <HoverCard.Target>
+                                                                        <Button
+                                                                            onClick={() => {
+                                                                                setViewport({
+                                                                                    value: item.value,
+                                                                                    type: item.type,
+                                                                                    breakpointID: item.breakpointID
+                                                                                })
+                                                                            }}
+                                                                            classNames={{
+                                                                                root: "h-full m-0 px-1 " + (viewport.type === item.type ? "text-cyan-400" : " text-white"),
+                                                                            }}>
+                                                                            {item.icon}
+                                                                        </Button>
+                                                                    </HoverCard.Target>
+                                                                    <HoverCard.Dropdown classNames={{
+                                                                        dropdown: "bg-stone-950 h-min m-0 p-0 text-center"
+                                                                    }}>
+                                                                        <Text className="text-white h-full py-1 px-2"
+                                                                              size="sm">
+                                                                            {item.type} view
+                                                                        </Text>
+                                                                        <Text className="text-white h-full italic py-1 px-2"
+                                                                              size="sm">
+                                                                            width: {item.value}
+                                                                        </Text>
+                                                                    </HoverCard.Dropdown>
+                                                                </HoverCard>
+                                                            </Group>
+                                                        )
+                                                    }
                                                 )}
-                                                <div className="absolute top-2/4 right-0 -translate-y-2/4">
+                                                <div className="absolute md:hidden top-2/4 right-2 -translate-y-2/4">
+                                                    <span className="italic text-xs"><IconSettings/></span>
+                                                </div>
+                                            </div>
+                                            <div className="col-span-1 relative order-3">
+                                                <div className="absolute top-2/4 left-0 -translate-y-2/4">
                                                     <Group justify="center">
                                                         <HoverCard shadow="md" closeDelay={0}>
                                                             <HoverCard.Target>
@@ -417,28 +450,34 @@ export default function Dashboard() {
                                                                 dropdown: "bg-stone-950 h-min m-0 p-0 text-center"
                                                             }}>
                                                                 <Text className="text-white h-full py-1 px-2" size="sm">
-                                                                    Allow to apply the styles<br/>values of the component for<br/>all views.This option allow you <br/> to design faster on responsive design
+                                                                    Allow to apply the styles<br/>values of the
+                                                                    component for<br/>all views.This option allow
+                                                                    you <br/> to design faster on responsive design
                                                                 </Text>
                                                             </HoverCard.Dropdown>
                                                         </HoverCard>
                                                     </Group>
                                                 </div>
                                             </div>
-                                            <div className="col-span-1">
-
-                                            </div>
                                         </div>
-                                        <DropMenu currentPage={actualPage} items={itemsDashboard.pages[actualPage]} optionSelected={optionItem}
+                                        <DropMenu currentPage={actualPage} items={itemsDashboard.pages[actualPage]}
+                                                  optionSelected={optionItem}
                                                   title="Tree View"
                                                   type="tree-view"
                                                   functions={onSelectItem} addSection={addSection}
                                                   deleteItemDashboard={deleteItemDashboard}/>
-                                        <div className="lg:col-span-3 bg-stone-950  border-dotted border-2 flex justify-center rounded-md border-stone-800 h-[60vh] overflow-visible shrink-0 overflow-x-hidden p-1">
-                                            <div className={`overflow-x-hidden container outline outline-offset-2 outline-1 outline-white rounded-md h-full p-1`} style={{"width": viewport.value }}>
-                                                <DashboardPreview  idUniqueIdentifier={optionItem?.idUniqueIdentifier} viewport={viewport} onSelectItem={onSelectItem} components={itemsDashboard.pages[actualPage]}/>
+                                        <div
+                                            className="lg:col-span-3 bg-stone-950  border-dotted border-2 flex justify-center rounded-md border-stone-800 h-[60vh] overflow-visible shrink-0 overflow-x-hidden p-1">
+                                            <div
+                                                className={`overflow-x-hidden container outline outline-offset-2 outline-1 outline-white rounded-md h-full p-1`}
+                                                style={{"width": viewport.value}}>
+                                                <DashboardPreview idUniqueIdentifier={optionItem?.idUniqueIdentifier}
+                                                                  viewport={viewport} onSelectItem={onSelectItem}
+                                                                  components={itemsDashboard.pages[actualPage]}/>
                                             </div>
                                         </div>
-                                        <DropMenu items={optionItem} viewport={viewport} keepOptions={keepOptions} modifyItemsDashboard={modifyItemsDashboard}
+                                        <DropMenu items={optionItem} viewport={viewport} keepOptions={keepOptions}
+                                                  modifyItemsDashboard={modifyItemsDashboard}
                                                   title={optionItem !== undefined ? "Options for " + optionItem.label : "Options"}
                                                   type="options"/>
                                     </div>
@@ -459,10 +498,6 @@ export default function Dashboard() {
                     pages:
                         {
                             index: {
-                                sections: [],
-                                order: []
-                            },
-                            about: {
                                 sections: [],
                                 order: []
                             }
