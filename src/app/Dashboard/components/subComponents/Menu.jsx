@@ -48,7 +48,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                         <span className="pl-1">{section.label}</span>
                                     </span>
                                     <div className="relative">
-                                        <div className="absolute top-2/4 -translate-y-2/4 right-6">
+                                        <div className="absolute top-2/4 text-white -translate-y-2/4 right-6">
                                             <PopUpMain addSection={addSection}
                                                        idUniqueIdentifier={section.idUniqueIdentifier}
                                                        title="Add Item"/>
@@ -58,7 +58,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                             {
                                                 section.items?.length > 0 ? (
                                                     <Disclosure.Button className="h-full">
-                                                        <span className="flex items-center">
+                                                        <span className="flex items-center text-white">
                                                           {open ? (
                                                               <FontAwesomeIcon icon={faChevronUp}/>
                                                           ) : (
@@ -162,7 +162,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                                title="Add Item"/>
                                 </div>
                                 <div
-                                    className="ml-1 absolute top-2/4 -translate-y-2/4 flex items-center right-0 hover:text-gray-500">
+                                    className="ml-1 absolute top-2/4 -translate-y-2/4 flex items-center right-0 text-white hover:text-gray-500">
                                     {
                                         items.length > 0 ? (
                                             <Disclosure.Button className="h-full">
