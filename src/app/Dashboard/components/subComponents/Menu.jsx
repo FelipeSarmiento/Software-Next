@@ -157,7 +157,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                         <span className="pl-1">{currentPage.charAt(0).toUpperCase() + currentPage.slice(1) } Page</span>
                                     </span>
                             <div className="relative">
-                                <div className="absolute top-2/4 -translate-y-2/4 right-6">
+                                <div className="absolute text-white top-2/4 -translate-y-2/4 right-6">
                                     <PopUpMain addSection={addSection}
                                                title="Add Item"/>
                                 </div>
@@ -166,7 +166,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                     {
                                         items.length > 0 ? (
                                             <Disclosure.Button className="h-full">
-                                                        <span className="flex items-center">
+                                                        <span className="flex items-center text-white">
                                                           {open ? (
                                                               <FontAwesomeIcon icon={faChevronUp}/>
                                                           ) : (
