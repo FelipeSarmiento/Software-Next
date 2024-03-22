@@ -20,11 +20,11 @@ export function SignUpForm() {
     return (
         <div
             className="w-full rounded-3xl p-4 px-10 md:p-8 shadow-input bg-black border-gray-600 border-2">
-            <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-                Welcome to MyPortfolio
+            <h2 className="font-bold text-xl text-neutral-200">
+                Welcome to Software Next
             </h2>
-            <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-                Register to start designing your portfolio
+            <p className="text-sm max-w-sm mt-2 text-neutral-300">
+                Register to start designing your web site
             </p>
             <form className="my-8" onSubmit={ (e) => {
                 e.preventDefault()
@@ -58,26 +58,26 @@ export function SignUpForm() {
                             signIn('credentials', {email: formState.email, password: formState.password, redirect: true, callbackUrl: '/Dashboard'})
                         })
                 }}
-                        className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--white)_inset,0px_-1px_0px_0px_var(--white)_inset]">
+                        className="bg-gradient-to-br relative group/btn from-zinc-900 to-zinc-900 block bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_var(--white)_inset,0px_-1px_0px_0px_var(--white)_inset]">
                     Sign Up &rarr;
                     <BottomGradient/>
                 </button>
 
                 <div
-                    className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full"/>
+                    className="bg-gradient-to-r from-transparent via-neutral-700 to-transparent my-8 h-[1px] w-full"/>
 
                 <div className="flex flex-col space-y-4">
                     <button onClick={() => signIn()}
-                            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
-                        <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300"/>
-                        <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+                            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-zinc-900 shadow-[0px_0px_1px_1px_var(--neutral-800)]">
+                        <IconBrandGoogle className="h-4 w-4 text-neutral-300"/>
+                        <span className="text-neutral-300 text-sm">
                             Sign in with Google
                         </span>
                         <BottomGradient/>
                     </button>
-                    <Link href='/Auth/Login' className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
-                        <IconMail className="h-4 w-4 text-neutral-800 dark:text-neutral-300"/>
-                        <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+                    <Link href='/Auth/Login' className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-zinc-900 shadow-[0px_0px_1px_1px_var(--neutral-800)]">
+                        <IconMail className="h-4 w-4 text-neutral-300"/>
+                        <span className="text-neutral-300 text-sm">
                             Sign in
                         </span>
                         <BottomGradient/>

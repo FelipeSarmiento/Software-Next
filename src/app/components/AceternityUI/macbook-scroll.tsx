@@ -75,7 +75,7 @@ export const MacbookScroll = ({
                     translateY: textTransform,
                     opacity: textOpacity,
                 }}
-                className="dark:text-white text-neutral-800 text-5xl font-bold mb-20 text-center"
+                className="text-white text-5xl font-bold mb-20 text-center"
             >
                 {title || (
                     <span>
@@ -92,7 +92,7 @@ export const MacbookScroll = ({
                 translate={translate}
             />
             {/* Base area */}
-            <div className="h-[22rem] w-[32rem] bg-gray-200 dark:bg-[#272729] rounded-2xl overflow-hidden relative -z-10">
+            <div className="h-[22rem] w-[32rem] bg-[#272729] rounded-2xl overflow-hidden relative -z-10">
                 {/* above keyboard bar */}
                 <div className="h-10 w-full relative">
                     <div className="absolute inset-x-0 mx-auto w-[80%] h-4 bg-[#050505]" />
@@ -111,7 +111,7 @@ export const MacbookScroll = ({
                 <Trackpad />
                 <div className="h-2 w-20 mx-auto inset-x-0 absolute bottom-0 bg-gradient-to-t from-[#272729] to-[#050505] rounded-tr-3xl rounded-tl-3xl" />
                 {showGradient && (
-                    <div className="h-40 w-full absolute bottom-0 inset-x-0 bg-gradient-to-t dark:from-black from-white via-white dark:via-black to-transparent z-50"></div>
+                    <div className="h-40 w-full absolute bottom-0 inset-x-0 bg-gradient-to-t from-black via-black to-transparent z-50"></div>
                 )}
                 {badge && <div className="absolute bottom-4 left-4">{badge}</div>}
             </div>

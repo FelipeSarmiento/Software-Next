@@ -1,12 +1,5 @@
 'use client'
-import {useDisclosure as discloHOOK} from "@mantine/hooks";
 import React, {useEffect, useState} from 'react'
-import {
-    setItemsDashboard as setItems,
-    setMediaQuery,
-    setOptionSelected,
-    setOptions
-} from '../../lib/features/dashboard/thunks'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown, faChevronUp, faFloppyDisk, faTrash} from '@fortawesome/free-solid-svg-icons'
 import {useSession} from 'next-auth/react'
@@ -22,10 +15,12 @@ import {
     IconDeviceLaptop,
     IconDeviceMobile,
     IconDeviceTv,
-    IconComponents, IconX, IconCheck, IconBinaryTree, IconSettings
+    IconComponents, IconX, IconCheck, IconBinaryTree, IconSettings, IconExternalLink
 } from '@tabler/icons-react';
 import {Disclosure} from "@headlessui/react";
 import {Button, Drawer, Group, HoverCard, Popover, Text} from '@mantine/core';
+import {redirect} from "next/navigation";
+import Link from "next/link";
 
 export default function Dashboard() {
 
@@ -244,7 +239,7 @@ export default function Dashboard() {
         );
     }
     return (
-        <div className="min-h-full pt-4">
+        <div className="min-h-full bg-black lg:bg-transparent pt-4">
             <header className=" shadow">
                 <div className="mx-auto relative grid grid-cols-2 ld:grid-cols-5 md:flex justify-between px-4 py-6 sm:px-6 lg:px-24">
                     <h1 className="col-span-2 flex items-center justify-around text-3xl font-bold tracking-tight text-white">
@@ -299,12 +294,19 @@ export default function Dashboard() {
                         <h2 className="text-lg font-bold text-white">"{actualPage.charAt(0).toUpperCase() + actualPage.slice(1)}"
                             Page</h2>
                     </div>
-                    <button onClick={() => saveItemsDashboard(itemsDashboard)}
-                            className="col-span-2 text-white border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
-                        Save &nbsp;<span className={unSaved ? 'text-red-500' : 'text-white'}>
+                    <div className="flex space-x-4">
+                        <Link target="_blank" href={'/' + session?.user.id}>
+                        <button className="col-span-2 text-white text-nowrap flex items-center justify-center border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
+                            Visit &nbsp;<IconExternalLink/>
+                        </button>
+                        </Link>
+                        <button onClick={() => saveItemsDashboard(itemsDashboard)}
+                                className="col-span-2 text-white border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
+                            Save &nbsp;<span className={unSaved ? 'text-red-500' : 'text-white'}>
                         <FontAwesomeIcon icon={faFloppyDisk}/>
                     </span>
-                    </button>
+                        </button>
+                    </div>
                 </div>
             </header>
             <main>
