@@ -301,7 +301,7 @@ export default function Dashboard() {
                         </button>
                         </Link>
                         <button onClick={() => saveItemsDashboard(itemsDashboard)}
-                                className="col-span-2 text-white border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
+                                className="col-span-2 text-white text-nowrap flex items-center justify-center border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
                             Save &nbsp;<span className={unSaved ? 'text-red-500' : 'text-white'}>
                         <FontAwesomeIcon icon={faFloppyDisk}/>
                     </span>
