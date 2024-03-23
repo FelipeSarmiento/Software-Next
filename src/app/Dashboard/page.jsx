@@ -342,9 +342,6 @@ export default function Dashboard() {
                                                     title="Paste" className="mx-2 disabled:text-red-500">
                                                     <IconClipboard/>
                                                 </button>
-                                                <button title="Cut" className="mx-2">
-                                                    <IconCut/>
-                                                </button>
                                                 {
                                                     optionItem !== undefined ?
                                                         <>
@@ -377,9 +374,6 @@ export default function Dashboard() {
                                                                             <IconCheck/>
                                                                         </button>
                                                                         <button
-                                                                            onClick={() => {
-                                                                                document.mo
-                                                                            }}
                                                                             className="text-red-500">
                                                                             <IconX/>
                                                                         </button>
@@ -425,9 +419,7 @@ export default function Dashboard() {
                                                                     title="Paste" className="mx-2 disabled:text-red-500">
                                                                     <IconClipboard/>
                                                                 </button>
-                                                                <button title="Cut" className="mx-2">
-                                                                    <IconCut/>
-                                                                </button>
+
                                                                 {
                                                                     optionItem !== undefined ?
                                                                         <>
@@ -537,7 +529,7 @@ export default function Dashboard() {
                                                                 setKeepOptions(!keepOptions)
                                                             }}
                                                             className={"h-full m-0 flex py-2 px-1 hover:bg-transparent hover:text-cyan-400" + (keepOptions ? ' text-cyan-400' : ' text-white')}>
-                                                            <span>Keep options</span>
+                                                            <span>Keep Settings</span>
                                                             <IconComponents/>
                                                         </button>
                                                         <DropMenu items={optionItem} viewport={viewport} keepOptions={keepOptions}
@@ -564,7 +556,7 @@ export default function Dashboard() {
                                                                     classNames={{
                                                                         root: "h-full m-0 px-1 hover:bg-transparent hover:text-cyan-400" + (keepOptions ? " text-cyan-400" : " text-white"),
                                                                     }}>
-                                                                    <span>Keep options</span>
+                                                                    <span>Keep Settings</span>
                                                                     <IconComponents/>
                                                                 </Button>
                                                             </HoverCard.Target>
@@ -605,7 +597,7 @@ export default function Dashboard() {
                                         <div className="hidden lg:block lg:cols-span-1">
                                         <DropMenu items={optionItem} viewport={viewport} keepOptions={keepOptions}
                                                   modifyItemsDashboard={modifyItemsDashboard}
-                                                  title={optionItem !== undefined ? "Options for " + optionItem.label : "Options"}
+                                                  title={optionItem !== undefined ? "Settings for " + optionItem.label : "Settings"}
                                                   type="options"/>
                                         </div>
                                     </div>

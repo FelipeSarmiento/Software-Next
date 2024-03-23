@@ -61,11 +61,17 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
             marginBottom: "mb-[0px]",
             height: "h-[50%]",
             width: "w-[100%]",
+            minWidth: "min-w-[100%]",
+            minHeight: "min-h-[50%]",
             borderRight: "border-r-[1px]",
             borderLeft: "border-l-[1px]",
             borderTop: "border-t-[1px]",
             borderBottom: "border-b-[1px]",
-            opacity: "opacity-2"
+            opacity: "opacity-2",
+            top: "top-[0px]",
+            left: "left-[0px]",
+            right: "right-[0px]",
+            bottom: "bottom-[0px]",
         }
         let newSection = {
             id: id,

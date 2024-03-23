@@ -24,7 +24,7 @@ export const DropMenu = ({items, title, type, functions, modifyItemsDashboard, a
                             { title === 'Tree View' ? <span className="absolute top-2/4 -translate-y-2/4 right-2"> <IconBinaryTree/> </span> : '' }</a>
                     </li>
                 </ul>
-                <section className="overflow-auto h-[calc(100%_-_48px)]">
+                <section className="overflow-auto h-[calc(100%_-_48px)] snap-x span-end">
                     {
                         type === 'options' ? <Options viewport={viewport} keepOptions={keepOptions} options={itemsPrimary} modifyItemsDashboard={modifyItemsDashboard}/> : <Menu deleteItemDashboard={deleteItemDashboard} currentPage={currentPage} addSection={addSection} items={itemsPrimary.sections} functions={functions} optionSelected={optionSelected}/>
                     }
