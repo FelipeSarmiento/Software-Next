@@ -8,7 +8,22 @@ import {
 import Image from "next/image";
 import {Tabs} from "./AceternityUI/tabs";
 import {useRef, useState} from "react";
-import { IconPhoto, IconPackage, IconLetterCase, IconLink, IconForms, IconSection, IconLayoutNavbar, IconContainer, IconArticle, IconCrop54, IconLayoutNavbarCollapse,IconLayoutBottombar, IconLayoutSidebar } from '@tabler/icons-react';
+import {
+    IconPhoto,
+    IconPackage,
+    IconLetterCase,
+    IconLink,
+    IconForms,
+    IconSection,
+    IconLayoutNavbar,
+    IconContainer,
+    IconArticle,
+    IconCrop54,
+    IconLayoutNavbarCollapse,
+    IconLayoutBottombar,
+    IconLayoutSidebar,
+    IconRowInsertBottom
+} from '@tabler/icons-react';
 import {useSelector} from "react-redux";
 
 export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
@@ -23,14 +38,15 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
         {label: "Footer", type: "footer", group: "container"},
         {label: "Aside", type: "aside", group: "container"},
         {label: "Form", type: "form", group: "container"},
-        {label: "Link", type: "link", group: "container"},
-        {label: "Text", type: "text", group: "element"},
-        {label: "Image", type: "image", group: "element"}
+        {label: "Button", type: "button", group: "container"},
+        {label: "Link", type: "link", group: "container", specificAttributes: {href: "", target: ""}},
+        {label: "Text", type: "text", group: "element", specificAttributes: {text: "PRUEBA123"}},
+        {label: "Image", type: "image", group: "element", specificAttributes: {src: "", alt: ""}}
     ]
 
     const viewPort = useSelector((state) => state.itemsDashboard.mediaQuery);
 
-    const buildSection = ({label : section, type, group}) => {
+    const buildSection = ({label : section, type, group, specificAttributes}) => {
         let id = window.crypto.randomUUID() + section;
         let settings = {
             id: "",
@@ -105,11 +121,9 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                 ...newSection,
                 items: []
             }
-        } else {
-            newSection = {
-                ...newSection,
-                value: type
-            }
+        }
+        if (specificAttributes) {
+            newSection = Object.assign(newSection, specificAttributes)
         }
         idUniqueIdentifier ? addSection(newSection, idUniqueIdentifier) : addSection(newSection);
     }
@@ -144,6 +158,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                                     { item.type === "text" ? ( <IconLetterCase stroke={2} className="size-16" /> ) : ""}
                                     { item.type === "link" ? ( <IconLink stroke={2} className="size-16" /> ) : ""}
                                     { item.type === "form" ? ( <IconForms stroke={2} className="size-16" /> ) : ""}
+                                    { item.type === "button" ? ( <IconRowInsertBottom stroke={2} className="size-16" /> ) : ""}
                                     <div className="text-sm">
                                         {item.label}
                                     </div>

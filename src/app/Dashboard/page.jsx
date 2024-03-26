@@ -106,11 +106,19 @@ export default function Dashboard() {
                     if (newObj.hasOwnProperty('value')) {
                         newObj.value = nuevoValor.value;
                     }
+                    if (newObj.hasOwnProperty('text')) {
+                        newObj.text = nuevoValor.text;
+                    }
+                    if (newObj.hasOwnProperty('src')) {
+                        newObj.src = nuevoValor.src;
+                    }
+                    if (newObj.hasOwnProperty('alt')) {
+                        newObj.alt = nuevoValor.alt;
+                    }
                 }
             }
             return newObj;
         };
-        console.log("modify", modify(itemsDashboard))
         setItemsDashboard({...modify(itemsDashboard)});
         setUnSaved(true)
     };
@@ -149,7 +157,6 @@ export default function Dashboard() {
     };
 
     const addSection = (section, idItem) => {
-        console.log("addSection", section)
         const setId = (obj) => {
             const item = structuredClone(obj);
             for (let key in item) {
@@ -164,10 +171,7 @@ export default function Dashboard() {
             }
             return item;
         }
-
-        console.log("setID: ", setId(section))
         section = setId(section);
-        console.log("AddSection2: ", section)
 
         if (idItem) {
             const addItemToSection = (obj) => {

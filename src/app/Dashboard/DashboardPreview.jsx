@@ -15,12 +15,12 @@ export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueId
                                 case "text":
                                     return (
                                         <p onClick={ () => { onSelectItem(component) } } className={className} key={component.idUniqueIdentifier}>
-                                            {component.value}
+                                            {component.text}
                                         </p>
                                     )
                                 case "image":
                                     return (
-                                        <img onClick={ () => { onSelectItem(component) } } className={className} key={component.idUniqueIdentifier} />
+                                        <img src={ component.src } onClick={ () => { onSelectItem(component) } } className={className} key={component.idUniqueIdentifier} />
                                     )
                                 default:
                                     return <div key={component.idUniqueIdentifier}>Component not found</div>
@@ -86,6 +86,12 @@ export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueId
                                         <form key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </form>
+                                    )
+                                case "button":
+                                    return (
+                                        <button key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
+                                            {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
+                                        </button>
                                     )
                                 case "footer":
                                     return (

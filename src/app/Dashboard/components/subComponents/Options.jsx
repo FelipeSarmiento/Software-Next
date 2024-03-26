@@ -31,17 +31,15 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
         let option = optionItem;
         switch (target.id) {
             case 'valueInput':
-                setValueInput(target.value)
                 option = {
                     ...optionItem,
-                    value: target.value
+                    [target.name]: target.value
                 }
                 setOptionItem(option)
                 modifyItemsDashboard(option.idUniqueIdentifier, option)
                 break
             default:
                 if (keepOptions) {
-                    console.log("keepOptions: " + keepOptions)
                     option = {
                         ...optionItem,
                         settingsMobile: {...optionItem.settingsMobile, [target.name]: target.value},
@@ -77,8 +75,35 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                 backgroundColor: options['settings' + viewport.type].backgroundColor.split("-")[1].replace("[", "").replace("]", ""),
                 decorationColor: options['settings' + viewport.type].decorationColor.split("-")[1].replace("[", "").replace("]", ""),
             })
-            if (options.hasOwnProperty("value")) {
-                setValueInput(options.value)
+            if (options.hasOwnProperty("text")) {
+                setSpecificAttributes({
+                    ...specificAttributes,
+                    text: options.text
+                })
+            }
+            if (options.hasOwnProperty("src")) {
+                setSpecificAttributes({
+                    ...specificAttributes,
+                    src: options.src
+                })
+            }
+            if (options.hasOwnProperty("href")) {
+                setSpecificAttributes({
+                    ...specificAttributes,
+                    href: options.href
+                })
+            }
+            if (options.hasOwnProperty("alt")) {
+                setSpecificAttributes({
+                    ...specificAttributes,
+                    alt: options.alt
+                })
+            }
+            if (options.hasOwnProperty("target")) {
+                setSpecificAttributes({
+                    ...specificAttributes,
+                    target: options.target
+                })
             }
 
             setBorderWidth({
@@ -188,7 +213,13 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
     const [colorOptions, setColorOptions] = useState(
         {}
     )
-    const [valueInput, setValueInput] = useState()
+    const [specificAttributes, setSpecificAttributes] = useState({
+        text: "",
+        src: "",
+        alt: "",
+        href: "",
+        target: "",
+    })
     const [borderWidth, setBorderWidth] = useState({
         borderRight: "",
         borderLeft: "",
@@ -249,10 +280,99 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
 
     return optionItem !== undefined ? (
             <div className="py-2 pr-2">
+                { optionItem.hasOwnProperty("text") ? (
+                    <div className="py-2 flex items-center relative h-max">
+                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                            <div className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
+                                <IconCursorText/>
+                                <span className="text-xs font-bold">Text</span>
+                            </div>
+                            <input
+                                onChange={ ({target}) => {
+                                    setSpecificAttributes({
+                                        ...specificAttributes,
+                                        text: target.value
+                                    })
+                                    onChangeInput({
+                                        target: {
+                                            id: "valueInput",
+                                            name: "text",
+                                            value: target.value
+                                        }
+                                    })
+                                }}
+                                name="text"
+                                value={specificAttributes.text}
+                                min={0}
+                                type="text"
+                                className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                        </div>
+                    </div>
+                ) : "" }
+                { optionItem.hasOwnProperty("alt") ? (
+                    <div className="py-2 flex items-center relative h-max">
+                        <div
+                            className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                            <div
+                                className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
+                                <IconCursorText/>
+                                <span className="text-xs font-bold">Alternative<br/>Text</span>
+                            </div>
+                            <input
+                                onChange={onChangeInput} onKeyUp={onChangeInput}
+                                name="value"
+                                id="valueInput"
+                                value={specificAttributes.alt}
+                                min={0}
+                                type="text"
+                                className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                        </div>
+                    </div>
+                ) : "" }
+                { optionItem.hasOwnProperty("src") ? (
+                    <div className="py-2 flex items-center relative h-max">
+                        <div
+                            className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                            <div
+                                className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
+                                <IconCursorText/>
+                                <span className="text-xs font-bold">SRC</span>
+                            </div>
+                            <input
+                                onChange={ (e) => {
+                                    e.preventDefault()
+                                    console.log(e.target.files[0])
+                                    let reader = new FileReader();
+                                    reader.readAsDataURL(e.target?.files[0])
+                                    reader.onload = function () {
+                                        setSpecificAttributes({
+                                            ...specificAttributes,
+                                            src: reader.result
+                                        })
+                                        onChangeInput({
+                                            target: {
+                                                id: "valueInput",
+                                                name: "src",
+                                                value: reader.result
+                                            }
+                                        })
+                                    }
+                                    reader.onerror = function (error) {
+                                        console.log('Error: ', error);
+                                    }
+                                }}
+                                name="image"
+                                id="valueInput"
+                                min={0}
+                                type="file"
+                                accept="image/*"
+                                className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                        </div>
+                    </div>
+                ) : "" }
                 {optionItem.hasOwnProperty("settings" + viewport.type) ? (
                     <>
-                        {optionItem.hasOwnProperty("value") ? (
-                            <Disclosure as="div" className="border-white pt-2">
+                        <Disclosure as="div" className="border-white pt-2">
                                 {({open}) => (
                                     <>
                                         <h3 className="flow-root">
@@ -275,24 +395,6 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                         <Disclosure.Panel className="pl-2 w-full py-1">
                                             <div className="relative flex items-center w-full">
                                                 <div className="py-1 border-l-2 w-full pl-1">
-                                                    <div className="py-2 flex items-center relative h-max">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-full">
-                                                            <div
-                                                                className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
-                                                                <IconCursorText/>
-                                                                <span className="text-xs font-bold">Value</span>
-                                                            </div>
-                                                            <input
-                                                                onChange={onChangeInput} onKeyUp={onChangeInput}
-                                                                name="value"
-                                                                id="valueInput"
-                                                                value={valueInput}
-                                                                min={0}
-                                                                type="text"
-                                                                className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
-                                                        </div>
-                                                    </div>
                                                     <div className="py-2 flex items-center relative h-max">
                                                         <div
                                                             className="relative flex rounded-md border-[1px] border-white h-10 w-full">
@@ -395,9 +497,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                     </>
                                 )}
                             </Disclosure>
-                        ) : null}
-                        {optionItem['settings' + viewport.type].hasOwnProperty("backgroundColor") ? (
-                            <Disclosure as="div" className="border-white pt-2">
+                        <Disclosure as="div" className="border-white pt-2">
                                 {({open}) => (
                                     <>
                                         <h3 className="flow-root">
@@ -454,7 +554,6 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                     </>
                                 )}
                             </Disclosure>
-                        ) : null}
                         {/*
                         BORDERS
                         BORDERS
@@ -493,9 +592,11 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
 
 
                                                     */}
-                                                <div className="relative h-24 my-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
+                                                <div
+                                                    className="relative h-24 my-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
                                                     <div className="absolute left-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setBorderWidth({
@@ -536,7 +637,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         })
                                                                     }
                                                                 }
-                                                                value={ borderWidth.borderTop.unit }
+                                                                value={borderWidth.borderTop.unit}
                                                                 className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
@@ -548,8 +649,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                    <div
+                                                        className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setBorderWidth({
@@ -590,7 +693,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         })
                                                                     }
                                                                 }
-                                                                value={ borderWidth.borderBottom.unit }
+                                                                value={borderWidth.borderBottom.unit}
                                                                 className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
@@ -602,11 +705,13 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <span className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
+                                                    <span
+                                                        className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
                                                             Borders
                                                         </span>
                                                     <div className="absolute top-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setBorderWidth({
@@ -647,7 +752,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         })
                                                                     }
                                                                 }
-                                                                value={ borderWidth.borderLeft.unit }
+                                                                value={borderWidth.borderLeft.unit}
                                                                 className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
@@ -659,8 +764,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                    <div
+                                                        className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setBorderWidth({
@@ -701,7 +808,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         })
                                                                     }
                                                                 }
-                                                                value={ borderWidth.borderRight.unit }
+                                                                value={borderWidth.borderRight.unit}
                                                                 className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
@@ -836,9 +943,11 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                     <Disclosure.Panel className="pl-2 w-full py-1">
                                         <div className="relative flex items-center w-full">
                                             <div className="border-l-2 w-full pl-1 pt-2">
-                                                <div className="relative h-24 mt-2 mb-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
+                                                <div
+                                                    className="relative h-24 mt-2 mb-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
                                                     <div className="absolute left-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setMargins({
@@ -879,7 +988,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         })
                                                                     }
                                                                 }
-                                                                value={ margins.marginTop.unit }
+                                                                value={margins.marginTop.unit}
                                                                 className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
@@ -891,8 +1000,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                    <div
+                                                        className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setMargins({
@@ -933,7 +1044,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         })
                                                                     }
                                                                 }
-                                                                value={ margins.marginBottom.unit }
+                                                                value={margins.marginBottom.unit}
                                                                 className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
@@ -945,11 +1056,13 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <span className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
+                                                    <span
+                                                        className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
                                                             Margins
                                                         </span>
                                                     <div className="absolute top-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setMargins({
@@ -990,7 +1103,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         })
                                                                     }
                                                                 }
-                                                                value={ margins.marginLeft.unit }
+                                                                value={margins.marginLeft.unit}
                                                                 className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
@@ -1002,8 +1115,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                    <div
+                                                        className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setMargins({
@@ -1044,7 +1159,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         })
                                                                     }
                                                                 }
-                                                                value={ margins.marginRight.unit }
+                                                                value={margins.marginRight.unit}
                                                                 className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
@@ -1057,9 +1172,11 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="relative h-24 mt-12 mb-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
+                                                <div
+                                                    className="relative h-24 mt-12 mb-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
                                                     <div className="absolute left-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setPaddings({
@@ -1100,7 +1217,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         })
                                                                     }
                                                                 }
-                                                                value={ paddings.paddingTop.unit }
+                                                                value={paddings.paddingTop.unit}
                                                                 className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
@@ -1112,8 +1229,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                    <div
+                                                        className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setPaddings({
@@ -1154,7 +1273,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         })
                                                                     }
                                                                 }
-                                                                value={ paddings.paddingBottom.unit }
+                                                                value={paddings.paddingBottom.unit}
                                                                 className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
@@ -1166,11 +1285,13 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <span className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
+                                                    <span
+                                                        className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
                                                             Paddings
                                                         </span>
                                                     <div className="absolute top-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setPaddings({
@@ -1211,7 +1332,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         })
                                                                     }
                                                                 }
-                                                                value={ paddings.paddingLeft.unit }
+                                                                value={paddings.paddingLeft.unit}
                                                                 className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
@@ -1223,8 +1344,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                    <div
+                                                        className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setPaddings({
@@ -1265,7 +1388,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         })
                                                                     }
                                                                 }
-                                                                value={ paddings.paddingRight.unit }
+                                                                value={paddings.paddingRight.unit}
                                                                 className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
@@ -1279,8 +1402,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                     </div>
                                                 </div>
                                                 <div className="py-4 flex items-center relative h-max">
-                                                    <div className="relative flex rounded-md border-[1px] border-white h-10 w-full">
-                                                        <div className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
+                                                    <div
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                                        <div
+                                                            className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
                                                             <IconArrowsVertical/>
                                                             <span className="text-xs font-bold">Height</span>
                                                         </div>
@@ -1339,10 +1464,13 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                     </div>
                                                 </div>
                                                 <div className="py-2 flex items-center relative h-max">
-                                                    <div className="relative flex rounded-md border-[1px] border-white h-10 w-full">
-                                                        <div className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
+                                                    <div
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                                        <div
+                                                            className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
                                                             <IconArrowsVertical/>
-                                                            <span className="text-xs text-center font-bold">Min<br/>Height</span>
+                                                            <span
+                                                                className="text-xs text-center font-bold">Min<br/>Height</span>
                                                         </div>
                                                         <input
                                                             onChange={
@@ -1461,10 +1589,13 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                     </div>
                                                 </div>
                                                 <div className="py-2 flex items-center relative h-max">
-                                                    <div className="relative flex rounded-md border-[1px] border-white h-10 w-full">
-                                                        <div className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
+                                                    <div
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                                        <div
+                                                            className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
                                                             <IconArrowsVertical/>
-                                                            <span className="text-xs text-center font-bold">Min<br/>Width</span>
+                                                            <span
+                                                                className="text-xs text-center font-bold">Min<br/>Width</span>
                                                         </div>
                                                         <input
                                                             onChange={
@@ -2087,24 +2218,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                 </>
                             )}
                         </Disclosure>
-                        {optionItem['settings' + viewport.type].hasOwnProperty("backgroundColorSecondary") ? (
-                            <>
-                                <p>Background Color Secondary</p>
-                            </>
-                        ) : null}
-                        {optionItem['settings' + viewport.type].hasOwnProperty("backgroundColorThird") ? (
-                            <>
-                                <p>Background Color Third</p>
-                            </>
-                        ) : null}
                     </>
-                ) : (
-                    <Disclosure as="div" className="border-white py-5">
-                        <p className="text-white">
-                            Select an item from tree view to see the settings
-                        </p>
-                    </Disclosure>
-                )
+                ) : ""
                 }
             </div>
         ) :

@@ -16,7 +16,7 @@ import {
     IconLayoutSidebar,
     IconLink,
     IconForms,
-    IconPackages
+    IconPackages, IconRowInsertBottom
 } from '@tabler/icons-react';
 
 export const Menu = ({items, functions, deleteItemDashboard, addSection, optionSelected, currentPage}) => {
@@ -34,25 +34,46 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                 <div onClick={() => selectItem(section)}
                                      className={`relative focus:border-stone-800 border-2 rounded-md mt-1 h-10 z-50 flex w-full items-center justify-between text-sm  px-2 bg-black ${(optionSelected?.idUniqueIdentifier === section?.idUniqueIdentifier ? "border-cyan-400 " : "border-stone-800 ")}`}>
                                     <span className={`font-medium flex items-center text-nowrap truncate "  ${(optionSelected?.idUniqueIdentifier === section?.idUniqueIdentifier ? "text-cyan-400" : "text-white")}`}>
-                                        {section.type === "container" ? (<IconContainer stroke={2}/>) : ""}
-                                        {section.type === "article" ? (<IconArticle stroke={2}/>) : ""}
-                                        {section.type === "section" ? (<IconSection stroke={2}/>) : ""}
-                                        {section.type === "div" ? (<IconCrop54 stroke={2}/>) : ""}
-                                        {section.type === "main" ? (<IconPackage stroke={2}/>) : ""}
-                                        {section.type === "header" ? (<IconLayoutNavbar stroke={2}/>) : ""}
-                                        {section.type === "nav" ? (<IconLayoutNavbarCollapse stroke={2}/>) : ""}
-                                        {section.type === "footer" ? (<IconLayoutBottombar stroke={2}/>) : ""}
-                                        {section.type === "aside" ? (<IconLayoutSidebar stroke={2}/>) : ""}
-                                        {section.type === "form" ? (<IconForms stroke={2}/>) : ""}
-                                        {section.type === "link" ? (<IconLink stroke={2}/>) : ""}
+                                        {section.type === "container" ? (
+                                            <IconContainer stroke={2}/>) : ""}
+                                        {section.type === "article" ? (
+                                            <IconArticle stroke={2}/>) : ""}
+                                        {section.type === "section" ? (
+                                            <IconSection stroke={2}/>) : ""}
+                                        {section.type === "div" ? (
+                                            <IconCrop54 stroke={2}/>) : ""}
+                                        {section.type === "main" ? (
+                                            <IconPackage stroke={2}/>) : ""}
+                                        {section.type === "header" ? (
+                                            <IconLayoutNavbar stroke={2}/>) : ""}
+                                        {section.type === "nav" ? (
+                                            <IconLayoutNavbarCollapse stroke={2}/>) : ""}
+                                        {section.type === "footer" ? (
+                                            <IconLayoutBottombar stroke={2}/>) : ""}
+                                        {section.type === "aside" ? (
+                                            <IconLayoutSidebar stroke={2}/>) : ""}
+                                        {section.type === "image" ? (
+                                            <IconPhoto stroke={2}/>) : ""}
+                                        {section.type === "button" ? (
+                                            <IconRowInsertBottom stroke={2}/>) : ""}
+                                        {section.type === "text" ? (
+                                            <IconLetterCase stroke={2}/>) : ""}
+                                        {section.type === "link" ? (
+                                            <IconLink stroke={2}/>) : ""}
+                                        {section.type === "form" ? (
+                                            <IconForms stroke={2}/>) : ""}
                                         <span className="pl-1">{section.label}</span>
                                     </span>
                                     <div className="relative">
-                                        <div className="absolute top-2/4 text-white -translate-y-2/4 right-6">
-                                            <PopUpMain addSection={addSection}
-                                                       idUniqueIdentifier={section.idUniqueIdentifier}
-                                                       title="Add Item"/>
-                                        </div>
+                                        {
+                                            section.group === 'container' ? (
+                                                <div className="absolute top-2/4 text-white -translate-y-2/4 right-6">
+                                                    <PopUpMain addSection={addSection}
+                                                               idUniqueIdentifier={section.idUniqueIdentifier}
+                                                               title="Add Item"/>
+                                                </div>
+                                            ) : ''
+                                        }
                                         <div
                                             className="ml-1 absolute top-2/4 -translate-y-2/4 flex items-center right-0 hover:text-gray-500">
                                             {
@@ -74,14 +95,14 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                             </h3>
                             <Disclosure.Panel className="relative h-full">
                                 {
-                                    section.items.length > 0 ? (
+                                    section.items?.length > 0 ? (
                                         <div className="h-full left-2 py-1 w-1 absolute">
                                             <div className="border-cyan-400 h-full w-full border-2 bg-cyan-400 rounded-md"/>
                                         </div>
                                     ) : ''
                                 }
                                 <div className="ml-3 w-full">
-                                    {section.items.map((option, optionIndex) => (
+                                    {section.items?.map((option, optionIndex) => (
                                         <>
                                             {option.group === "container" ? (
                                                 <div key={option.idUniqueIdentifier} className="relative pl-3">
@@ -120,13 +141,20 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                                                         <IconLayoutSidebar stroke={2}/>) : ""}
                                                                     {option.type === "image" ? (
                                                                         <IconPhoto stroke={2}/>) : ""}
+                                                                    {option.type === "button" ? (
+                                                                        <IconRowInsertBottom stroke={2}/>) : ""}
                                                                     {option.type === "text" ? (
                                                                         <IconLetterCase stroke={2}/>) : ""}
                                                                     {option.type === "link" ? (
                                                                         <IconLink stroke={2}/>) : ""}
                                                                     {option.type === "form" ? (
                                                                         <IconForms stroke={2}/>) : ""}
-                                                                    <span className="pl-1">{ option.value !== " " ? option.value : option.value }</span>
+                                                                    <span className="pl-1">
+                                                                        { option.text !== "" ? option.text : "" }
+                                                                        { option.src !== "" ? option.label : ""}
+                                                                        { option.alt !== "" ? option.label : ""}
+                                                                        { option.href !== "" ? option.label : ""}
+                                                                    </span>
                                                                 </span>
                                                             </Disclosure.Button>
                                                         </h3>
