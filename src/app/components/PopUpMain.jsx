@@ -29,17 +29,23 @@ import {useSelector} from "react-redux";
 export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
 
     const items = [
-        {label: "Section", type: "section", group: "container"},
-        {label: "Article", type: "article", group: "container"},
-        {label: "Div", type: "div", group: "container"},
-        {label: "Main", type: "main", group: "container"},
-        {label: "Header", type: "header", group: "container"},
-        {label: "Nav", type: "nav", group: "container"},
-        {label: "Footer", type: "footer", group: "container"},
-        {label: "Aside", type: "aside", group: "container"},
-        {label: "Form", type: "form", group: "container"},
-        {label: "Button", type: "button", group: "container"},
-        {label: "Link", type: "link", group: "container", specificAttributes: {href: "", target: ""}, specificSettings: {
+        {label: "Section", type: "section", group: "container", description: "A thematic grouping of content."},
+        {label: "Article", type: "article", group: "container", description: "A self-contained composition."},
+        {label: "Div", type: "div", group: "container", description: "Has no special meaning. Represents its children."},
+        {label: "Main", type: "main", group: "container", description: "Represents the main content."},
+        {label: "Header", type: "header", group: "container", description: "Introductory or navigational content."},
+        {label: "Nav", type: "nav", group: "container", description: "Links to other pages or parts within the page."},
+        {label: "Footer", type: "footer", group: "container", description: "Contains information about its section."},
+        {label: "Aside", type: "aside", group: "container", description: "Contains tangentially related content."},
+        {label: "Form", type: "form", group: "container", description: "Contains interactive controls."},
+        {label: "Button", type: "button", group: "container", description: "Clickable button for forms or documents."},
+        {
+            label: "Link",
+            type: "link",
+            group: "container",
+            description: "Represents a hyperlink.",
+            specificAttributes: {href: "", target: ""},
+            specificSettings: {
                 height: "h-[0]",
                 width: "w-[0]",
                 minHeight: "min-h-[0]",
@@ -48,7 +54,8 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                 borderLeft: "border-l-[1]",
                 borderBottom: "border-b-[1]",
                 borderTop: "border-t-[1]",
-            }},
+            }
+        },
         {label: "Text", type: "text", group: "element", specificAttributes: {text: "Text"}, specificSettings: {
                 height: "h-[0]",
                 width: "w-[0]",
@@ -58,7 +65,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                 borderLeft: "border-l-[1]",
                 borderBottom: "border-b-[1]",
                 borderTop: "border-t-[1]",
-            }},
+            }, description: "Represents text content."},
         {label: "Image", type: "image", group: "element", specificAttributes: {src: "", alt: ""}, specificSettings: {
                 height: "h-[0]",
                 width: "w-[0]",
@@ -68,12 +75,13 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                 borderLeft: "border-l-[1]",
                 borderBottom: "border-b-[1]",
                 borderTop: "border-t-[1]",
-            }}
+            }, description: "Represents an image content."}
     ]
+
 
     const viewPort = useSelector((state) => state.itemsDashboard.mediaQuery);
 
-    const buildSection = ({label : section, type, group, specificAttributes, specificSettings}) => {
+    const buildSection = ({label: section, type, group, specificAttributes, specificSettings}) => {
         let id = window.crypto.randomUUID() + section;
         let settings = {
             id: "",
@@ -169,7 +177,8 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                 <div
                     className="w-full overflow-y-auto relative h-full rounded-2xl pt-3 lg:p-10 text-xl md:text-4xl font-bold text-white bg-black border-2 border-stone-800">
                     <p>Items</p>
-                    <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2 place-items-center text-white w-full p-2">
+                    <section
+                        className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2 place-items-center text-white w-full p-2">
                         {items.map((item, index) => {
                             return (
                                 <div
@@ -179,20 +188,21 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                                     }}
                                     key={index}
                                     className="rounded-md relative hover:border-white flex flex-col items-center justify-center border-2 text-white border-gray-500 size-24 lg:size-32">
-                                    { item.type === "container" ? ( <IconContainer stroke={2} className="size-16" /> ) : ""}
-                                    { item.type === "article" ? ( <IconArticle stroke={2} className="size-16" /> ) : ""}
-                                    { item.type === "section" ? ( <IconSection stroke={2} className="size-16" /> ) : ""}
-                                    { item.type === "div" ? ( <IconCrop54 stroke={2} className="size-16" /> ) : ""}
-                                    { item.type === "main" ? ( <IconPackage stroke={2} className="size-16" /> ) : ""}
-                                    { item.type === "header" ? ( <IconLayoutNavbar stroke={2} className="size-16" /> ) : ""}
-                                    { item.type === "nav" ? ( <IconLayoutNavbarCollapse stroke={2} className="size-16" /> ) : ""}
-                                    { item.type === "footer" ? ( <IconLayoutBottombar stroke={2} className="size-16" /> ) : ""}
-                                    { item.type === "aside" ? ( <IconLayoutSidebar stroke={2} className="size-16" /> ) : ""}
-                                    { item.type === "image" ? ( <IconPhoto stroke={2} className="size-16" /> ) : ""}
-                                    { item.type === "text" ? ( <IconLetterCase stroke={2} className="size-16" /> ) : ""}
-                                    { item.type === "link" ? ( <IconLink stroke={2} className="size-16" /> ) : ""}
-                                    { item.type === "form" ? ( <IconForms stroke={2} className="size-16" /> ) : ""}
-                                    { item.type === "button" ? ( <IconRowInsertBottom stroke={2} className="size-16" /> ) : ""}
+                                    {item.type === "container" ? (<IconContainer stroke={2} className="size-16"/>) : ""}
+                                    {item.type === "article" ? (<IconArticle stroke={2} className="size-16"/>) : ""}
+                                    {item.type === "section" ? (<IconSection stroke={2} className="size-16"/>) : ""}
+                                    {item.type === "div" ? (<IconCrop54 stroke={2} className="size-16"/>) : ""}
+                                    {item.type === "main" ? (<IconPackage stroke={2} className="size-16"/>) : ""}
+                                    {item.type === "header" ? (<IconLayoutNavbar stroke={2} className="size-16"/>) : ""}
+                                    {item.type === "nav" ? (<IconLayoutNavbarCollapse stroke={2} className="size-16"/>) : ""}
+                                    {item.type === "footer" ? (<IconLayoutBottombar stroke={2} className="size-16"/>) : ""}
+                                    {item.type === "aside" ? (<IconLayoutSidebar stroke={2} className="size-16"/>) : ""}
+                                    {item.type === "image" ? (<IconPhoto stroke={2} className="size-16"/>) : ""}
+                                    {item.type === "text" ? (<IconLetterCase stroke={2} className="size-16"/>) : ""}
+                                    {item.type === "link" ? (<IconLink stroke={2} className="size-16"/>) : ""}
+                                    {item.type === "form" ? (<IconForms stroke={2} className="size-16"/>) : ""}
+                                    {item.type === "button" ? (
+                                        <IconRowInsertBottom stroke={2} className="size-16"/>) : ""}
                                     <div className="text-sm">
                                         {item.label}
                                     </div>
@@ -208,7 +218,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
     function classNames(classes, query) {
         classes.className = ""
         const elements = Object.entries(classes).map(([key, value]) => {
-            if (value === "" ) return "";
+            if (value === "") return "";
             return (query ? query + ":" : "") + value;
         });
         return elements.join(' ');
@@ -235,7 +245,62 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                             <h1 className="text-3xl font-bold tracking-tight text-white my-2">{title}</h1>
                             <div
                                 className="h-full [perspective:1000px] py-5 relative flex flex-col w-10/12 mx-auto  items-start justify-start">
-                                <Tabs contentClassName="mt-10" tabs={tabs}/>
+                                <div
+                                    className="w-full overflow-y-auto relative h-full rounded-2xl pt-3 lg:p-10 text-xl md:text-4xl font-bold text-white">
+                                    <section
+                                        className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-2 place-items-center text-white w-full p-2">
+                                        {items.map((item, index) => {
+                                            return (
+                                                <div
+                                                    onClick={() => {
+                                                        buildSection(item)
+                                                        ref.current.close()
+                                                    }}
+                                                    key={index}
+                                                    className="rounded-md relative hover:border-white flex items-center border-2 text-white border-gray-500 h-32 w-80  ">
+                                                    <div className="w-2/6 flex items-center justify-center">
+                                                        {item.type === "container" ? (
+                                                            <IconContainer stroke={2} className="size-16"/>) : ""}
+                                                        {item.type === "article" ? (
+                                                            <IconArticle stroke={2} className="size-16"/>) : ""}
+                                                        {item.type === "section" ? (
+                                                            <IconSection stroke={2} className="size-16"/>) : ""}
+                                                        {item.type === "div" ? (
+                                                            <IconCrop54 stroke={2} className="size-16"/>) : ""}
+                                                        {item.type === "main" ? (
+                                                            <IconPackage stroke={2} className="size-16"/>) : ""}
+                                                        {item.type === "header" ? (
+                                                            <IconLayoutNavbar stroke={2} className="size-16"/>) : ""}
+                                                        {item.type === "nav" ? (
+                                                            <IconLayoutNavbarCollapse stroke={2} className="size-16"/>) : ""}
+                                                        {item.type === "footer" ? (
+                                                            <IconLayoutBottombar stroke={2} className="size-16"/>) : ""}
+                                                        {item.type === "aside" ? (
+                                                            <IconLayoutSidebar stroke={2} className="size-16"/>) : ""}
+                                                        {item.type === "image" ? (
+                                                            <IconPhoto stroke={2} className="size-16"/>) : ""}
+                                                        {item.type === "text" ? (
+                                                            <IconLetterCase stroke={2} className="size-16"/>) : ""}
+                                                        {item.type === "link" ? (
+                                                            <IconLink stroke={2} className="size-16"/>) : ""}
+                                                        {item.type === "form" ? (
+                                                            <IconForms stroke={2} className="size-16"/>) : ""}
+                                                        {item.type === "button" ? (
+                                                            <IconRowInsertBottom stroke={2} className="size-16"/>) : ""}
+                                                    </div>
+                                                    <div className="w-4/6 flex flex-col items-start">
+                                                        <span className="text-sm font-bold">
+                                                            {item.label}
+                                                        </span>
+                                                        <span className="text-xs text-left pr-30">
+                                                            {item.description}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                    </section>
+                                </div>
                             </div>
                         </header>
                     </div>

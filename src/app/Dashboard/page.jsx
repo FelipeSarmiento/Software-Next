@@ -359,7 +359,7 @@ export default function Dashboard() {
                                                             >
                                                                 <Menu.Target>
                                                                     <Button classNames={{
-                                                                        root: "text-white hover:bg-transparent p-0 mx-2 my-0",
+                                                                        root: "text-white hover:bg-transparent p-0 mx-2 my-0 h-auto",
                                                                     }}>
                                                                         <IconTrash/>
                                                                     </Button>
@@ -434,12 +434,12 @@ export default function Dashboard() {
                                                                                 classNames={{
                                                                                     dropdown: "bg-stone-950 h-min m-0 p-0 text-center text-white",
                                                                                     item: "text-white",
-                                                                                    root: "text-white hover:bg-transparent"
+                                                                                    root: "text-white bg-transparent hover:bg-transparent"
                                                                                 }}
                                                                             >
                                                                                 <Menu.Target>
                                                                                     <Button classNames={{
-                                                                                        root: "text-white hover:bg-transparent p-0 mx-2 my-0",
+                                                                                        root: "text-white hover:bg-transparent p-0 mx-2 my-0 h-auto",
                                                                                     }}>
                                                                                         <IconTrash/>
                                                                                     </Button>
