@@ -15,10 +15,10 @@ import {
     IconDeviceLaptop,
     IconDeviceMobile,
     IconDeviceTv,
-    IconComponents, IconX, IconCheck, IconBinaryTree, IconSettings, IconExternalLink
+    IconComponents, IconX, IconCheck, IconBinaryTree, IconSettings, IconExternalLink, IconTrash
 } from '@tabler/icons-react';
 import {Disclosure} from "@headlessui/react";
-import {Button, Drawer, Group, HoverCard, Popover, Text} from '@mantine/core';
+import {Button, Drawer, Group, HoverCard, Popover, Text, Menu} from '@mantine/core';
 import {redirect} from "next/navigation";
 import Link from "next/link";
 
@@ -298,17 +298,17 @@ export default function Dashboard() {
                         <h2 className="text-lg font-bold text-white">"{actualPage.charAt(0).toUpperCase() + actualPage.slice(1)}"
                             Page</h2>
                     </div>
-                    <div className="flex space-x-4 justify-center   ">
+                    <div className="col-span-2 py-2 flex space-x-4 justify-center">
                         <Link target="_blank" href={'/' + session?.user.id}>
-                        <button className="col-span-2 text-white text-nowrap flex items-center justify-center border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
+                        <button className="text-white text-nowrap flex items-center justify-center border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
                             Visit &nbsp;<IconExternalLink/>
                         </button>
                         </Link>
                         <button onClick={() => saveItemsDashboard(itemsDashboard)}
-                                className="col-span-2 text-white text-nowrap flex items-center justify-center border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
+                                className="text-white text-nowrap flex items-center justify-center border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
                             Save &nbsp;<span className={unSaved ? 'text-red-500' : 'text-white'}>
                         <FontAwesomeIcon icon={faFloppyDisk}/>
-                    </span>
+                            </span>
                         </button>
                     </div>
                 </div>
@@ -349,42 +349,44 @@ export default function Dashboard() {
                                                 {
                                                     optionItem !== undefined ?
                                                         <>
-                                                            <Popover
+                                                            <Menu
+                                                                position="right"
                                                                 classNames={{
-                                                                    dropdown: "bg-stone-950 h-min m-0 p-0 text-center text-white"
+                                                                    dropdown: "bg-stone-950 h-min m-0 p-0 text-center text-white",
+                                                                    item: "text-white",
+                                                                    root: "text-white hover:bg-transparent"
                                                                 }}
-                                                                width={200} position="bottom"
-                                                                clickOutsideEvents={['mouseup', 'touchend']}>
-                                                                <Popover.Target>
-                                                                    <button
-                                                                        title={"Delete " + optionItem.type}
-                                                                        className="mx-2">
-                                                                        <FontAwesomeIcon icon={faTrash}/>
-                                                                    </button>
-                                                                </Popover.Target>
-                                                                <Popover.Dropdown>
-                                                                    <Text
-                                                                        classNames={{
-                                                                            root: "text-white h-full py-1 px-2"
-                                                                        }}
-                                                                        size="xs">Are you sure you want to delete the
-                                                                        item?</Text>
-                                                                    <div className="flex justify-around py-2">
-                                                                        <button
-                                                                            onClick={() => {
-                                                                                deleteItemDashboard(optionItem.idUniqueIdentifier)
-                                                                            }}
-                                                                            className="text-lime-400">
-                                                                            <IconCheck/>
-                                                                        </button>
-                                                                        <button
-                                                                            className="text-red-500">
-                                                                            <IconX/>
-                                                                        </button>
-                                                                    </div>
-                                                                </Popover.Dropdown>
-                                                            </Popover>
+                                                            >
+                                                                <Menu.Target>
+                                                                    <Button classNames={{
+                                                                        root: "text-white hover:bg-transparent p-0 mx-2 my-0",
+                                                                    }}>
+                                                                        <IconTrash/>
+                                                                    </Button>
+                                                                </Menu.Target>
 
+                                                                <Menu.Dropdown>
+                                                                    <Menu.Item>
+                                                                        <div>
+                                                                            Are you sure you want to delete the item?
+                                                                        </div>
+                                                                        <div className="flex items-center justify-around h-10">
+                                                                            <button
+                                                                                onClick={() => {
+                                                                                    deleteItemDashboard(optionItem.idUniqueIdentifier)
+                                                                                }}
+                                                                                className="text-green-500">
+                                                                                <IconCheck/>
+                                                                            </button>
+                                                                            <button className="text-red-500">
+                                                                                <IconX/>
+                                                                            </button>
+                                                                        </div>
+                                                                    </Menu.Item>
+
+                                                                    {/* Other items ... */}
+                                                                </Menu.Dropdown>
+                                                            </Menu>
                                                         </> : ""
                                                 }
                                             </div>
@@ -427,45 +429,44 @@ export default function Dashboard() {
                                                                 {
                                                                     optionItem !== undefined ?
                                                                         <>
-                                                                            <Popover
+                                                                            <Menu
+                                                                                position="bottom"
                                                                                 classNames={{
-                                                                                    dropdown: "bg-stone-950 h-min m-0 p-0 text-center text-white"
+                                                                                    dropdown: "bg-stone-950 h-min m-0 p-0 text-center text-white",
+                                                                                    item: "text-white",
+                                                                                    root: "text-white hover:bg-transparent"
                                                                                 }}
-                                                                                width={200} position="bottom"
-                                                                                clickOutsideEvents={['mouseup', 'touchend']}>
-                                                                                <Popover.Target>
-                                                                                    <button
-                                                                                        title={"Delete " + optionItem.type}
-                                                                                        className="mx-2">
-                                                                                        <FontAwesomeIcon icon={faTrash}/>
-                                                                                    </button>
-                                                                                </Popover.Target>
-                                                                                <Popover.Dropdown>
-                                                                                    <Text
-                                                                                        classNames={{
-                                                                                            root: "text-white h-full py-1 px-2"
-                                                                                        }}
-                                                                                        size="xs">Are you sure you want to delete the
-                                                                                        item?</Text>
-                                                                                    <div className="flex justify-around py-2">
-                                                                                        <button
-                                                                                            onClick={() => {
-                                                                                                deleteItemDashboard(optionItem.idUniqueIdentifier)
-                                                                                            }}
-                                                                                            className="text-lime-400">
-                                                                                            <IconCheck/>
-                                                                                        </button>
-                                                                                        <button
-                                                                                            onClick={() => {
-                                                                                                document.mo
-                                                                                            }}
-                                                                                            className="text-red-500">
-                                                                                            <IconX/>
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </Popover.Dropdown>
-                                                                            </Popover>
+                                                                            >
+                                                                                <Menu.Target>
+                                                                                    <Button classNames={{
+                                                                                        root: "text-white hover:bg-transparent p-0 mx-2 my-0",
+                                                                                    }}>
+                                                                                        <IconTrash/>
+                                                                                    </Button>
+                                                                                </Menu.Target>
 
+                                                                                <Menu.Dropdown>
+                                                                                    <Menu.Item>
+                                                                                        <div>
+                                                                                            Are you sure you want to delete the item?
+                                                                                        </div>
+                                                                                        <div className="flex items-center justify-around h-10">
+                                                                                            <button
+                                                                                                onClick={() => {
+                                                                                                    deleteItemDashboard(optionItem.idUniqueIdentifier)
+                                                                                                }}
+                                                                                                className="text-green-500">
+                                                                                                <IconCheck/>
+                                                                                            </button>
+                                                                                            <button className="text-red-500">
+                                                                                                <IconX/>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </Menu.Item>
+
+                                                                                    {/* Other items ... */}
+                                                                                </Menu.Dropdown>
+                                                                            </Menu>
                                                                         </> : ""
                                                                 }
                                                             </div>

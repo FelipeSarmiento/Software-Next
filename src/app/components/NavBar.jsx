@@ -28,7 +28,7 @@ export function NavBar() {
             {({open}) => (
                 <>
                     <div className="relative mx-auto px-3 sm:px-6 lg:px-24">
-                        <div className="relative flex h-16 py-3 items-center justify-between">
+                        <div className="relative flex h-16 py-4 items-center justify-between">
                             <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                                 {/* Mobile menu button*/}
                                 <Disclosure.Button
