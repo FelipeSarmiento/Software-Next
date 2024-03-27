@@ -150,10 +150,8 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                                                     {option.type === "form" ? (
                                                                         <IconForms stroke={2}/>) : ""}
                                                                     <span className="pl-1">
-                                                                        { option.text !== "" ? option.text : "" }
-                                                                        { option.src !== "" ? option.label : ""}
-                                                                        { option.alt !== "" ? option.label : ""}
-                                                                        { option.href !== "" ? option.label : ""}
+                                                                        { option.type === "text" ? option.text !== "" ? option.text : option.label : "" }
+                                                                        { option.type === "image" ? "Image" : "" }
                                                                     </span>
                                                                 </span>
                                                             </Disclosure.Button>

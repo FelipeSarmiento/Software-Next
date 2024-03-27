@@ -40,11 +40,11 @@ export default function Dashboard() {
     const [optionItem, setOptionItem] = useState();
     const [unSaved, setUnSaved] = useState(false)
     const [viewport, setViewport] = useState({
-        value: "1024px",
+        value: "1280px",
         type: "Desktop",
         breakpointID: "lg"
     });
-    const [keepOptions, setKeepOptions] = useState(false)
+    const [keepOptions, setKeepOptions] = useState(true)
 
     useEffect(() => {
         if (session && itemsDashboard === undefined) {
@@ -298,7 +298,7 @@ export default function Dashboard() {
                         <h2 className="text-lg font-bold text-white">"{actualPage.charAt(0).toUpperCase() + actualPage.slice(1)}"
                             Page</h2>
                     </div>
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-4 justify-center   ">
                         <Link target="_blank" href={'/' + session?.user.id}>
                         <button className="col-span-2 text-white text-nowrap flex items-center justify-center border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
                             Visit &nbsp;<IconExternalLink/>
@@ -586,9 +586,9 @@ export default function Dashboard() {
                                                       functions={onSelectItem} addSection={addSection}
                                                       deleteItemDashboard={deleteItemDashboard}/>
                                         </div>
-                                        <div className="lg:col-span-3 bg-stone-950 overflow-x-auto  border-dotted border-2 flex justify-center rounded-md border-stone-800 h-[60vh] shrink-0 p-1">
+                                        <div className="lg:col-span-3 bg-stone-950 overflow-x-auto  border-dotted border-2 flex justify-start rounded-md border-stone-800 h-[60vh] shrink-0 p-1">
                                             <div
-                                                className={`outline outline-offset-2 outline-1 outline-white overflow-x-auto rounded-md h-full p-1`}
+                                                className={`outline outline-offset-2 outline-1 mx-auto outline-white overflow-x-auto rounded-md h-full p-1`}
                                                 style={{
                                                     "width": viewport.value,
                                                     "min-width": viewport.value

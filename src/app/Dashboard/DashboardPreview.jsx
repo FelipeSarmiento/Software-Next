@@ -112,8 +112,8 @@ export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueId
     }
 
     return (
-        <>
+        <div className="h-auto w-auto">
             {createContent(components.sections)}
-        </>
+        </div>
     )
 }

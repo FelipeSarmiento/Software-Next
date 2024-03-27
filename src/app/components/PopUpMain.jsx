@@ -39,14 +39,41 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
         {label: "Aside", type: "aside", group: "container"},
         {label: "Form", type: "form", group: "container"},
         {label: "Button", type: "button", group: "container"},
-        {label: "Link", type: "link", group: "container", specificAttributes: {href: "", target: ""}},
-        {label: "Text", type: "text", group: "element", specificAttributes: {text: "PRUEBA123"}},
-        {label: "Image", type: "image", group: "element", specificAttributes: {src: "", alt: ""}}
+        {label: "Link", type: "link", group: "container", specificAttributes: {href: "", target: ""}, specificSettings: {
+                height: "h-[0]",
+                width: "w-[0]",
+                minHeight: "min-h-[0]",
+                minWidth: "min-w-[0]",
+                borderRight: "border-r-[1]",
+                borderLeft: "border-l-[1]",
+                borderBottom: "border-b-[1]",
+                borderTop: "border-t-[1]",
+            }},
+        {label: "Text", type: "text", group: "element", specificAttributes: {text: "Text"}, specificSettings: {
+                height: "h-[0]",
+                width: "w-[0]",
+                minHeight: "min-h-[0]",
+                minWidth: "min-w-[0]",
+                borderRight: "border-r-[1]",
+                borderLeft: "border-l-[1]",
+                borderBottom: "border-b-[1]",
+                borderTop: "border-t-[1]",
+            }},
+        {label: "Image", type: "image", group: "element", specificAttributes: {src: "", alt: ""}, specificSettings: {
+                height: "h-[0]",
+                width: "w-[0]",
+                minHeight: "min-h-[0]",
+                minWidth: "min-w-[0]",
+                borderRight: "border-r-[1]",
+                borderLeft: "border-l-[1]",
+                borderBottom: "border-b-[1]",
+                borderTop: "border-t-[1]",
+            }}
     ]
 
     const viewPort = useSelector((state) => state.itemsDashboard.mediaQuery);
 
-    const buildSection = ({label : section, type, group, specificAttributes}) => {
+    const buildSection = ({label : section, type, group, specificAttributes, specificSettings}) => {
         let id = window.crypto.randomUUID() + section;
         let settings = {
             id: "",
@@ -61,11 +88,17 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
             decorationColor: "decoration-[rgba(255,255,255,1)]",
             backgroundColor: "bg-[rgba(0,0,0,0)]",
             borderWidth: "",
-            borderRadius: "rounded-[6px]",
+            borderRadius: "rounded-[0px]",
             borderColor: "border-[rgba(0,0,0,1)]",
             justifyContent: "justify-center",
             itemsAlign: "items-center",
             display: "flex",
+            flexDirection: "flex-row",
+            flexWrap: "flex-wrap",
+            gridCols: "grid-cols-1",
+            gridRows: "grid-cols-1",
+            gapX: "gap-x-[0]",
+            gapY: "gap-y-[0]",
             position: "relative",
             paddingRight: "pr-[0px]",
             paddingLeft: "pl-[0px]",
@@ -77,8 +110,8 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
             marginBottom: "mb-[0px]",
             height: "h-[50%]",
             width: "w-[100%]",
-            minWidth: "min-w-[100%]",
-            minHeight: "min-h-[50%]",
+            minWidth: "min-w-[0]",
+            minHeight: "min-h-[0]",
             borderRight: "border-r-[1px]",
             borderLeft: "border-l-[1px]",
             borderTop: "border-t-[1px]",
@@ -89,6 +122,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
             right: "right-[0px]",
             bottom: "bottom-[0px]",
         }
+        settings = Object.assign(settings, specificSettings)
         let newSection = {
             id: id,
             idUniqueIdentifier: id,

@@ -15,17 +15,20 @@ import {
     IconAlignBoxRightMiddle,
     IconBorderRadius,
     IconCursorText,
-    IconColumns1, IconGrid4x4, IconTextIncrease, IconSquareX
+    IconColumns1,
+    IconGrid4x4,
+    IconTextIncrease,
+    IconSquareX,
+    IconPhoto,
+    IconArrowsUpDown,
+    IconTextWrap,
+    IconTextWrapDisabled
 } from '@tabler/icons-react';
 import {ColorInput, ColorPicker, NumberInput, Select} from "@mantine/core";
 import {useSelector} from "react-redux";
 
 export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) => {
-
-    const colors = ['transparent', 'white', 'black', 'slate', 'gray', 'zinc', 'neutral', 'stone', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose'];
-    const sizes = ['xs', 'base', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'];
-    const radius = ['none', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'];
-    const units = ['px', 'rem', 'vw', 'vh', '%', ''];
+    const units = ['auto', 'px', 'rem', 'vw', 'vh', '%'];
 
     const onChangeInput = ({target}) => {
         let option = optionItem;
@@ -187,6 +190,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                 unit: options['settings' + viewport.type].textSize.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
             })
             setDisplay(options['settings' + viewport.type].display)
+            setFlexDirection(options['settings' + viewport.type].flexDirection)
+            setFlexWrap(options['settings' + viewport.type].flexWrap)
             setPositions({
                 top: {
                     value: options['settings' + viewport.type].top?.match(/\d+/g) ? options['settings' + viewport.type].top.match(/\d+/g).map(Number)[0] : "",
@@ -204,6 +209,20 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                     value: options['settings' + viewport.type].bottom?.match(/\d+/g) ? options['settings' + viewport.type].bottom.match(/\d+/g).map(Number)[0] : "",
                     unit: options['settings' + viewport.type].bottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 }
+            })
+            setGaps({
+                gapX: {
+                    value: options['settings' + viewport.type].gapX?.match(/\d+/g) ? options['settings' + viewport.type].gapX?.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].gapX?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                gapY: {
+                    value: options['settings' + viewport.type].gapY?.match(/\d+/g) ? options['settings' + viewport.type].gapY?.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].gapY?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+            })
+            setGridTemplate({
+                gridCols: options['settings' + viewport.type].gridCols?.match(/\d+/g) ? options['settings' + viewport.type].gridCols?.match(/\d+/g).map(Number)[0] : "",
+                gridRows: options['settings' + viewport.type].gridRows?.match(/\d+/g) ? options['settings' + viewport.type].gridRows?.match(/\d+/g).map(Number)[0] : ""
             })
 
         }
@@ -276,11 +295,15 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
     })
     const [colorsUsed, setColorsUsed] = useState([])
     const [display, setDisplay] = useState()
+    const [flexDirection, setFlexDirection] = useState()
+    const [flexWrap, setFlexWrap] = useState()
+    const [gaps, setGaps] = useState({})
+    const [gridTemplate, setGridTemplate] = useState({})
 
 
     return optionItem !== undefined ? (
             <div className="py-2 pr-2">
-                { optionItem.hasOwnProperty("text") ? (
+                {optionItem.hasOwnProperty("text") ? (
                     <div className="py-2 flex items-center relative h-max">
                         <div className="relative flex rounded-md border-[1px] border-white h-10 w-full">
                             <div className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
@@ -288,7 +311,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                 <span className="text-xs font-bold">Text</span>
                             </div>
                             <input
-                                onChange={ ({target}) => {
+                                onChange={({target}) => {
                                     setSpecificAttributes({
                                         ...specificAttributes,
                                         text: target.value
@@ -308,79 +331,107 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                 className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                         </div>
                     </div>
-                ) : "" }
-                { optionItem.hasOwnProperty("alt") ? (
+                ) : ""}
+
+                {optionItem.hasOwnProperty("src") ? (
+                    <>
+                        <div className="py-2 flex items-center relative h-max">
+                            <div
+                                className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                <div
+                                    className="w-[30%] flex space-x-1 items-center justify-center border-r-[1px] h-full">
+                                    <IconPhoto stroke={2}/>
+                                    <span className="text-xs font-bold">SRC</span>
+                                </div>
+                                <div
+                                    className="relative w-[70%] before:content-['Select'] before:top-2/4 before:left-2/4 before:-translate-x-2/4 before:-translate-y-2/4 before:absolute">
+                                    <input
+                                        onChange={(e) => {
+                                            e.preventDefault()
+                                            console.log(e.target.files[0])
+                                            let reader = new FileReader();
+                                            reader.readAsDataURL(e.target?.files[0])
+                                            reader.onload = function () {
+                                                setSpecificAttributes({
+                                                    ...specificAttributes,
+                                                    src: reader.result
+                                                })
+                                                onChangeInput({
+                                                    target: {
+                                                        id: "valueInput",
+                                                        name: "src",
+                                                        value: reader.result
+                                                    }
+                                                })
+                                            }
+                                            reader.onerror = function (error) {
+                                                console.log('Error: ', error);
+                                            }
+                                        }}
+                                        name="image"
+                                        id="valueInput"
+                                        min={0}
+                                        type="file"
+                                        accept="image/*"
+                                        className="w-full rounded-r-md appearance-none opacity-0 focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                </div>
+                            </div>
+                        </div>
+                        {
+                            specificAttributes.src !== "" ? (
+                                <div className="py-2 flex items-center relative h-max">
+                                    <div
+                                        className="relative flex items-center justify-center rounded-md border-[1px] object-contain border-white h-36 w-full">
+                                        <img className="object-contain h-full w-full" src={specificAttributes.src}
+                                             alt={specificAttributes.alt}/>
+                                    </div>
+                                </div>
+                            ) : ""
+
+                        }
+                    </>
+                ) : ""}
+                {optionItem.hasOwnProperty("alt") ? (
                     <div className="py-2 flex items-center relative h-max">
                         <div
                             className="relative flex rounded-md border-[1px] border-white h-10 w-full">
                             <div
                                 className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
                                 <IconCursorText/>
-                                <span className="text-xs font-bold">Alternative<br/>Text</span>
+                                <span className="text-xs text-center font-bold">Alt</span>
                             </div>
                             <input
-                                onChange={onChangeInput} onKeyUp={onChangeInput}
-                                name="value"
-                                id="valueInput"
+                                onChange={({target}) => {
+                                    setSpecificAttributes({
+                                        ...specificAttributes,
+                                        alt: target.value
+                                    })
+                                    onChangeInput({
+                                        target: {
+                                            id: "valueInput",
+                                            name: "alt",
+                                            value: target.value
+                                        }
+                                    })
+                                }}
                                 value={specificAttributes.alt}
                                 min={0}
                                 type="text"
                                 className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                         </div>
                     </div>
-                ) : "" }
-                { optionItem.hasOwnProperty("src") ? (
-                    <div className="py-2 flex items-center relative h-max">
-                        <div
-                            className="relative flex rounded-md border-[1px] border-white h-10 w-full">
-                            <div
-                                className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
-                                <IconCursorText/>
-                                <span className="text-xs font-bold">SRC</span>
-                            </div>
-                            <input
-                                onChange={ (e) => {
-                                    e.preventDefault()
-                                    console.log(e.target.files[0])
-                                    let reader = new FileReader();
-                                    reader.readAsDataURL(e.target?.files[0])
-                                    reader.onload = function () {
-                                        setSpecificAttributes({
-                                            ...specificAttributes,
-                                            src: reader.result
-                                        })
-                                        onChangeInput({
-                                            target: {
-                                                id: "valueInput",
-                                                name: "src",
-                                                value: reader.result
-                                            }
-                                        })
-                                    }
-                                    reader.onerror = function (error) {
-                                        console.log('Error: ', error);
-                                    }
-                                }}
-                                name="image"
-                                id="valueInput"
-                                min={0}
-                                type="file"
-                                accept="image/*"
-                                className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
-                        </div>
-                    </div>
-                ) : "" }
+                ) : ""}
                 {optionItem.hasOwnProperty("settings" + viewport.type) ? (
                     <>
                         <Disclosure as="div" className="border-white pt-2">
-                                {({open}) => (
-                                    <>
-                                        <h3 className="flow-root">
-                                            <div
-                                                className={"border-2 rounded-md py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
-                                                <span className="font-bold text-white">Text</span>
-                                                <div className="relative">
-                                                    <Disclosure.Button className="p-2 ml-1">
+                            {({open}) => (
+                                <>
+                                    <h3 className="flow-root">
+                                        <div
+                                            className={"border-2 rounded-md py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
+                                            <span className="font-bold text-white">Text</span>
+                                            <div className="relative">
+                                                <Disclosure.Button className="p-2 ml-1">
                                                             <span className="flex items-center">
                                                               {open ? (
                                                                   <FontAwesomeIcon icon={faChevronUp}/>
@@ -388,124 +439,124 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                   <FontAwesomeIcon icon={faChevronDown}/>
                                                               )}
                                                             </span>
-                                                    </Disclosure.Button>
-                                                </div>
+                                                </Disclosure.Button>
                                             </div>
-                                        </h3>
-                                        <Disclosure.Panel className="pl-2 w-full py-1">
-                                            <div className="relative flex items-center w-full">
-                                                <div className="py-1 border-l-2 w-full pl-1">
-                                                    <div className="py-2 flex items-center relative h-max">
+                                        </div>
+                                    </h3>
+                                    <Disclosure.Panel className="pl-2 w-full py-1">
+                                        <div className="relative flex items-center w-full">
+                                            <div className="py-1 border-l-2 w-full pl-1">
+                                                <div className="py-2 flex items-center relative h-max">
+                                                    <div
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 w-full">
                                                         <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-full">
-                                                            <div
-                                                                className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
-                                                                <IconTextIncrease/>
-                                                                <span className="text-[12px] font-bold">Font Size</span>
-                                                            </div>
-                                                            <input
-                                                                onChange={
-                                                                    ({target}) => {
-                                                                        setFontSize({
-                                                                            ...fontSize,
-                                                                            value: target.value
-                                                                        })
-                                                                        onChangeInput({
-                                                                            target: {
-                                                                                id: "textSize",
-                                                                                name: "textSize",
-                                                                                value: "text-[" + target.value + fontSize.unit + "]"
-                                                                            }
-                                                                        })
-                                                                    }
-                                                                }
-                                                                value={fontSize.value}
-                                                                min={0}
-                                                                type="number"
-                                                                className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
-                                                            <select
-                                                                onChange={
-                                                                    ({target}) => {
-                                                                        setFontSize({
-                                                                            ...fontSize,
-                                                                            unit: target.value
-                                                                        })
-                                                                        onChangeInput({
-                                                                            target: {
-                                                                                id: "textSize",
-                                                                                name: "textSize",
-                                                                                value: "text-[" + fontSize.value + target.value + "]"
-                                                                            }
-                                                                        })
-                                                                    }
-                                                                }
-                                                                value={fontSize.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
-                                                                name="" id="">
-                                                                {
-                                                                    units.map((unit, index) => {
-                                                                        return (<option key={index * Math.random()}
-                                                                                        value={unit}>{unit}</option>)
+                                                            className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
+                                                            <IconTextIncrease/>
+                                                            <span className="text-[12px] font-bold">Font Size</span>
+                                                        </div>
+                                                        <input
+                                                            onChange={
+                                                                ({target}) => {
+                                                                    setFontSize({
+                                                                        ...fontSize,
+                                                                        value: target.value
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "textSize",
+                                                                            name: "textSize",
+                                                                            value: "text-[" + target.value + fontSize.unit + "]"
+                                                                        }
                                                                     })
                                                                 }
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div className="text-white py-2 flex justify-center">
-                                                        <h4>Font color</h4>
-                                                    </div>
-                                                    <ColorPicker
-                                                        fullWidth
-                                                        onChange={(value) => {
-                                                            setColorOptions({
-                                                                ...colorOptions,
-                                                                textColor: value
-                                                            })
-                                                            onChangeInput({
-                                                                target: {
-                                                                    id: "textColor",
-                                                                    name: "textColor",
-                                                                    value: "text-[" + value.replaceAll(" ", "") + "]"
+                                                            }
+                                                            value={fontSize.value}
+                                                            min={0}
+                                                            type="number"
+                                                            className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                        <select
+                                                            onChange={
+                                                                ({target}) => {
+                                                                    setFontSize({
+                                                                        ...fontSize,
+                                                                        unit: target.value
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "textSize",
+                                                                            name: "textSize",
+                                                                            value: "text-[" + fontSize.value + target.value + "]"
+                                                                        }
+                                                                    })
                                                                 }
-                                                            })
-                                                        }}
-                                                        format="rgba"
-                                                        onChangeEnd={(value) => {
-                                                            colorsUsed.includes(value) ? null : setColorsUsed([...colorsUsed, value])
-                                                        }}
-                                                        swatches={colorsUsed}
-                                                        defaultValue={colorOptions.textColor}
-                                                        classNames={{
-                                                            input: "bg-black text-white "
-                                                        }}
-                                                    />
-                                                    <label className="text-white" htmlFor="FontWeight">Font Weight</label>
-                                                    <select onChange={onChangeInput}
-                                                            value={optionItem['settings' + viewport.type].textWeight}
-                                                            id="FontWeight" name="textWeight"
-                                                            className="appearance-none rounded-md py-1 border-2 border-gray-500 bg-black text-white px-1 w-full focus:outline-none">
-                                                        <option value="font-light">Light</option>
-                                                        <option value="font-normal">Normal</option>
-                                                        <option value="font-medium">Medium</option>
-                                                        <option value="font-semibold">Semibold</option>
-                                                        <option value="font-bold">Bold</option>
-                                                        <option value="font-extrabold">Extrabold</option>
-                                                    </select>
+                                                            }
+                                                            value={fontSize.unit}
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                            name="" id="">
+                                                            {
+                                                                units.map((unit, index) => {
+                                                                    return (<option key={index * Math.random()}
+                                                                                    value={unit}>{unit}</option>)
+                                                                })
+                                                            }
+                                                        </select>
+                                                    </div>
                                                 </div>
+                                                <div className="text-white py-2 flex justify-center">
+                                                    <h4>Font color</h4>
+                                                </div>
+                                                <ColorPicker
+                                                    fullWidth
+                                                    onChange={(value) => {
+                                                        setColorOptions({
+                                                            ...colorOptions,
+                                                            textColor: value
+                                                        })
+                                                        onChangeInput({
+                                                            target: {
+                                                                id: "textColor",
+                                                                name: "textColor",
+                                                                value: "text-[" + value.replaceAll(" ", "") + "]"
+                                                            }
+                                                        })
+                                                    }}
+                                                    format="rgba"
+                                                    onChangeEnd={(value) => {
+                                                        colorsUsed.includes(value) ? null : setColorsUsed([...colorsUsed, value])
+                                                    }}
+                                                    swatches={colorsUsed}
+                                                    defaultValue={colorOptions.textColor}
+                                                    classNames={{
+                                                        input: "bg-black text-white "
+                                                    }}
+                                                />
+                                                <label className="text-white" htmlFor="FontWeight">Font Weight</label>
+                                                <select onChange={onChangeInput}
+                                                        value={optionItem['settings' + viewport.type].textWeight}
+                                                        id="FontWeight" name="textWeight"
+                                                        className="appearance-none rounded-md py-1 border-2 border-gray-500 bg-black text-white px-1 w-full focus:outline-none">
+                                                    <option value="font-light">Light</option>
+                                                    <option value="font-normal">Normal</option>
+                                                    <option value="font-medium">Medium</option>
+                                                    <option value="font-semibold">Semibold</option>
+                                                    <option value="font-bold">Bold</option>
+                                                    <option value="font-extrabold">Extrabold</option>
+                                                </select>
                                             </div>
-                                        </Disclosure.Panel>
-                                    </>
-                                )}
-                            </Disclosure>
+                                        </div>
+                                    </Disclosure.Panel>
+                                </>
+                            )}
+                        </Disclosure>
                         <Disclosure as="div" className="border-white pt-2">
-                                {({open}) => (
-                                    <>
-                                        <h3 className="flow-root">
-                                            <div
-                                                className={"border-2 rounded-md py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
-                                                <span className="font-bold text-white">Background</span>
-                                                <div className="relative">
-                                                    <Disclosure.Button className="p-2 ml-1">
+                            {({open}) => (
+                                <>
+                                    <h3 className="flow-root">
+                                        <div
+                                            className={"border-2 rounded-md py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
+                                            <span className="font-bold text-white">Background</span>
+                                            <div className="relative">
+                                                <Disclosure.Button className="p-2 ml-1">
                                                             <span className="flex items-center">
                                                               {open ? (
                                                                   <FontAwesomeIcon icon={faChevronUp}/>
@@ -513,47 +564,47 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                   <FontAwesomeIcon icon={faChevronDown}/>
                                                               )}
                                                             </span>
-                                                    </Disclosure.Button>
-                                                </div>
+                                                </Disclosure.Button>
                                             </div>
-                                        </h3>
-                                        <Disclosure.Panel className="pl-2 w-full py-1">
-                                            <div className="relative flex items-center w-full">
-                                                <div className="py-2 relative border-l-2 w-full pl-1">
-                                                    <div className="text-white pb-2 flex justify-center">
-                                                        <h4>Background color</h4>
-                                                    </div>
-                                                    <ColorPicker
-                                                        fullWidth
-                                                        onChange={(value) => {
-                                                            setColorOptions({
-                                                                ...colorOptions,
-                                                                backgroundColor: value
-                                                            })
-                                                            onChangeInput({
-                                                                target: {
-                                                                    id: "backgroundColor",
-                                                                    name: "backgroundColor",
-                                                                    value: "bg-[" + value.replaceAll(" ", "") + "]"
-                                                                }
-                                                            })
-                                                        }}
-                                                        onChangeEnd={(value) => {
-                                                            colorsUsed.includes(value) ? null : setColorsUsed([...colorsUsed, value])
-                                                        }}
-                                                        format="rgba"
-                                                        swatches={colorsUsed}
-                                                        defaultValue={colorOptions.backgroundColor}
-                                                        classNames={{
-                                                            input: "bg-black text-white "
-                                                        }}
-                                                    />
+                                        </div>
+                                    </h3>
+                                    <Disclosure.Panel className="pl-2 w-full py-1">
+                                        <div className="relative flex items-center w-full">
+                                            <div className="py-2 relative border-l-2 w-full pl-1">
+                                                <div className="text-white pb-2 flex justify-center">
+                                                    <h4>Background color</h4>
                                                 </div>
+                                                <ColorPicker
+                                                    fullWidth
+                                                    onChange={(value) => {
+                                                        setColorOptions({
+                                                            ...colorOptions,
+                                                            backgroundColor: value
+                                                        })
+                                                        onChangeInput({
+                                                            target: {
+                                                                id: "backgroundColor",
+                                                                name: "backgroundColor",
+                                                                value: "bg-[" + value.replaceAll(" ", "") + "]"
+                                                            }
+                                                        })
+                                                    }}
+                                                    onChangeEnd={(value) => {
+                                                        colorsUsed.includes(value) ? null : setColorsUsed([...colorsUsed, value])
+                                                    }}
+                                                    format="rgba"
+                                                    swatches={colorsUsed}
+                                                    defaultValue={colorOptions.backgroundColor}
+                                                    classNames={{
+                                                        input: "bg-black text-white "
+                                                    }}
+                                                />
                                             </div>
-                                        </Disclosure.Panel>
-                                    </>
-                                )}
-                            </Disclosure>
+                                        </div>
+                                    </Disclosure.Panel>
+                                </>
+                            )}
+                        </Disclosure>
                         {/*
                         BORDERS
                         BORDERS
@@ -638,7 +689,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                     }
                                                                 }
                                                                 value={borderWidth.borderTop.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -694,7 +745,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                     }
                                                                 }
                                                                 value={borderWidth.borderBottom.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -753,7 +804,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                     }
                                                                 }
                                                                 value={borderWidth.borderLeft.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -809,7 +860,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                     }
                                                                 }
                                                                 value={borderWidth.borderRight.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -866,7 +917,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 }
                                                             }
                                                             value={rounded.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -943,465 +994,16 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                     <Disclosure.Panel className="pl-2 w-full py-1">
                                         <div className="relative flex items-center w-full">
                                             <div className="border-l-2 w-full pl-1 pt-2">
-                                                <div
-                                                    className="relative h-24 mt-2 mb-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
-                                                    <div className="absolute left-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
-                                                            <input
-                                                                onChange={({target}) => {
-                                                                    setMargins({
-                                                                        ...margins,
-                                                                        marginTop: {
-                                                                            value: target.value,
-                                                                            unit: margins.marginTop.unit
-                                                                        }
-                                                                    })
-                                                                    onChangeInput({
-                                                                        target: {
-                                                                            id: "margins",
-                                                                            name: "marginTop",
-                                                                            value: "mt-[" + target.value + margins.marginTop.unit + "]"
-                                                                        }
-                                                                    })
-                                                                }}
-                                                                value={margins.marginTop.value}
-                                                                min={0}
-                                                                type="number"
-                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
-                                                            <select
-                                                                onChange={
-                                                                    ({target}) => {
-                                                                        setMargins({
-                                                                            ...margins,
-                                                                            marginTop: {
-                                                                                value: margins.marginTop.value,
-                                                                                unit: target.value
-                                                                            }
-                                                                        })
-                                                                        onChangeInput({
-                                                                            target: {
-                                                                                id: "margins",
-                                                                                name: "marginTop",
-                                                                                value: "mt-[" + margins.marginTop.value + target.value + "]"
-                                                                            }
-                                                                        })
-                                                                    }
-                                                                }
-                                                                value={margins.marginTop.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
-                                                                name="" id="">
-                                                                {
-                                                                    units.map((unit, index) => {
-                                                                        return (<option key={index * Math.random()}
-                                                                                        value={unit}>{unit}</option>)
-                                                                    })
-                                                                }
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
-                                                            <input
-                                                                onChange={({target}) => {
-                                                                    setMargins({
-                                                                        ...margins,
-                                                                        marginBottom: {
-                                                                            value: target.value,
-                                                                            unit: margins.marginBottom.unit
-                                                                        }
-                                                                    })
-                                                                    onChangeInput({
-                                                                        target: {
-                                                                            id: "margins",
-                                                                            name: "marginBottom",
-                                                                            value: "mb-[" + target.value + margins.marginBottom.unit + "]"
-                                                                        }
-                                                                    })
-                                                                }}
-                                                                value={margins.marginBottom.value}
-                                                                min={0}
-                                                                type="number"
-                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
-                                                            <select
-                                                                onChange={
-                                                                    ({target}) => {
-                                                                        setMargins({
-                                                                            ...margins,
-                                                                            marginBottom: {
-                                                                                value: margins.marginBottom.value,
-                                                                                unit: target.value
-                                                                            }
-                                                                        })
-                                                                        onChangeInput({
-                                                                            target: {
-                                                                                id: "margins",
-                                                                                name: "marginBottom",
-                                                                                value: "mb-[" + margins.marginBottom.value + target.value + "]"
-                                                                            }
-                                                                        })
-                                                                    }
-                                                                }
-                                                                value={margins.marginBottom.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
-                                                                name="" id="">
-                                                                {
-                                                                    units.map((unit, index) => {
-                                                                        return (<option key={index * Math.random()}
-                                                                                        value={unit}>{unit}</option>)
-                                                                    })
-                                                                }
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <span
-                                                        className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
-                                                            Margins
-                                                        </span>
-                                                    <div className="absolute top-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
-                                                            <input
-                                                                onChange={({target}) => {
-                                                                    setMargins({
-                                                                        ...margins,
-                                                                        marginLeft: {
-                                                                            value: target.value,
-                                                                            unit: margins.marginLeft.unit
-                                                                        }
-                                                                    })
-                                                                    onChangeInput({
-                                                                        target: {
-                                                                            id: "margins",
-                                                                            name: "marginLeft",
-                                                                            value: "ml-[" + target.value + margins.marginLeft.unit + "]"
-                                                                        }
-                                                                    })
-                                                                }}
-                                                                value={margins.marginLeft.value}
-                                                                min={0}
-                                                                type="number"
-                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
-                                                            <select
-                                                                onChange={
-                                                                    ({target}) => {
-                                                                        setMargins({
-                                                                            ...margins,
-                                                                            marginLeft: {
-                                                                                value: margins.marginLeft.value,
-                                                                                unit: target.value
-                                                                            }
-                                                                        })
-                                                                        onChangeInput({
-                                                                            target: {
-                                                                                id: "margins",
-                                                                                name: "marginLeft",
-                                                                                value: "ml-[" + margins.marginLeft.value + target.value + "]"
-                                                                            }
-                                                                        })
-                                                                    }
-                                                                }
-                                                                value={margins.marginLeft.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
-                                                                name="" id="">
-                                                                {
-                                                                    units.map((unit, index) => {
-                                                                        return (<option key={index * Math.random()}
-                                                                                        value={unit}>{unit}</option>)
-                                                                    })
-                                                                }
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
-                                                            <input
-                                                                onChange={({target}) => {
-                                                                    setMargins({
-                                                                        ...margins,
-                                                                        marginRight: {
-                                                                            value: target.value,
-                                                                            unit: margins.marginRight.unit
-                                                                        }
-                                                                    })
-                                                                    onChangeInput({
-                                                                        target: {
-                                                                            id: "margins",
-                                                                            name: "marginRight",
-                                                                            value: "mr-[" + target.value + margins.marginRight.unit + "]"
-                                                                        }
-                                                                    })
-                                                                }}
-                                                                value={margins.marginRight.value}
-                                                                min={0}
-                                                                type="number"
-                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
-                                                            <select
-                                                                onChange={
-                                                                    ({target}) => {
-                                                                        setMargins({
-                                                                            ...margins,
-                                                                            marginRight: {
-                                                                                value: margins.marginRight.value,
-                                                                                unit: target.value
-                                                                            }
-                                                                        })
-                                                                        onChangeInput({
-                                                                            target: {
-                                                                                id: "margins",
-                                                                                name: "marginRight",
-                                                                                value: "mr-[" + margins.marginRight.value + target.value + "]"
-                                                                            }
-                                                                        })
-                                                                    }
-                                                                }
-                                                                value={margins.marginRight.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
-                                                                name="" id="">
-                                                                {
-                                                                    units.map((unit, index) => {
-                                                                        return (<option key={index * Math.random()}
-                                                                                        value={unit}>{unit}</option>)
-                                                                    })
-                                                                }
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    className="relative h-24 mt-12 mb-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
-                                                    <div className="absolute left-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
-                                                            <input
-                                                                onChange={({target}) => {
-                                                                    setPaddings({
-                                                                        ...paddings,
-                                                                        paddingTop: {
-                                                                            value: target.value,
-                                                                            unit: paddings.paddingTop.unit
-                                                                        }
-                                                                    })
-                                                                    onChangeInput({
-                                                                        target: {
-                                                                            id: "paddings",
-                                                                            name: "paddingTop",
-                                                                            value: "pt-[" + target.value + paddings.paddingTop.unit + "]"
-                                                                        }
-                                                                    })
-                                                                }}
-                                                                value={paddings.paddingTop.value}
-                                                                min={0}
-                                                                type="number"
-                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
-                                                            <select
-                                                                onChange={
-                                                                    ({target}) => {
-                                                                        setPaddings({
-                                                                            ...paddings,
-                                                                            paddingTop: {
-                                                                                value: paddings.paddingTop.value,
-                                                                                unit: target.value
-                                                                            }
-                                                                        })
-                                                                        onChangeInput({
-                                                                            target: {
-                                                                                id: "paddings",
-                                                                                name: "paddingTop",
-                                                                                value: "pt-[" + paddings.paddingTop.value + target.value + "]"
-                                                                            }
-                                                                        })
-                                                                    }
-                                                                }
-                                                                value={paddings.paddingTop.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
-                                                                name="" id="">
-                                                                {
-                                                                    units.map((unit, index) => {
-                                                                        return (<option key={index * Math.random()}
-                                                                                        value={unit}>{unit}</option>)
-                                                                    })
-                                                                }
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
-                                                            <input
-                                                                onChange={({target}) => {
-                                                                    setPaddings({
-                                                                        ...paddings,
-                                                                        paddingBottom: {
-                                                                            value: target.value,
-                                                                            unit: paddings.paddingBottom.unit
-                                                                        }
-                                                                    })
-                                                                    onChangeInput({
-                                                                        target: {
-                                                                            id: "paddings",
-                                                                            name: "paddingBottom",
-                                                                            value: "pb-[" + target.value + paddings.paddingBottom.unit + "]"
-                                                                        }
-                                                                    })
-                                                                }}
-                                                                value={paddings.paddingBottom.value}
-                                                                min={0}
-                                                                type="number"
-                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
-                                                            <select
-                                                                onChange={
-                                                                    ({target}) => {
-                                                                        setPaddings({
-                                                                            ...paddings,
-                                                                            paddingBottom: {
-                                                                                value: paddings.paddingBottom.value,
-                                                                                unit: target.value
-                                                                            }
-                                                                        })
-                                                                        onChangeInput({
-                                                                            target: {
-                                                                                id: "paddings",
-                                                                                name: "paddingBottom",
-                                                                                value: "pb-[" + paddings.paddingBottom.value + target.value + "]"
-                                                                            }
-                                                                        })
-                                                                    }
-                                                                }
-                                                                value={paddings.paddingBottom.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
-                                                                name="" id="">
-                                                                {
-                                                                    units.map((unit, index) => {
-                                                                        return (<option key={index * Math.random()}
-                                                                                        value={unit}>{unit}</option>)
-                                                                    })
-                                                                }
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <span
-                                                        className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
-                                                            Paddings
-                                                        </span>
-                                                    <div className="absolute top-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
-                                                            <input
-                                                                onChange={({target}) => {
-                                                                    setPaddings({
-                                                                        ...paddings,
-                                                                        paddingLeft: {
-                                                                            value: target.value,
-                                                                            unit: paddings.paddingLeft.unit
-                                                                        }
-                                                                    })
-                                                                    onChangeInput({
-                                                                        target: {
-                                                                            id: "paddings",
-                                                                            name: "paddingLeft",
-                                                                            value: "pl-[" + target.value + paddings.paddingLeft.unit + "]"
-                                                                        }
-                                                                    })
-                                                                }}
-                                                                value={paddings.paddingLeft.value}
-                                                                min={0}
-                                                                type="number"
-                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
-                                                            <select
-                                                                onChange={
-                                                                    ({target}) => {
-                                                                        setPaddings({
-                                                                            ...paddings,
-                                                                            paddingLeft: {
-                                                                                value: paddings.paddingLeft.value,
-                                                                                unit: target.value
-                                                                            }
-                                                                        })
-                                                                        onChangeInput({
-                                                                            target: {
-                                                                                id: "paddings",
-                                                                                name: "paddingLeft",
-                                                                                value: "pl-[" + paddings.paddingLeft.value + target.value + "]"
-                                                                            }
-                                                                        })
-                                                                    }
-                                                                }
-                                                                value={paddings.paddingLeft.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
-                                                                name="" id="">
-                                                                {
-                                                                    units.map((unit, index) => {
-                                                                        return (<option key={index * Math.random()}
-                                                                                        value={unit}>{unit}</option>)
-                                                                    })
-                                                                }
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
-                                                            <input
-                                                                onChange={({target}) => {
-                                                                    setPaddings({
-                                                                        ...paddings,
-                                                                        paddingRight: {
-                                                                            value: target.value,
-                                                                            unit: paddings.paddingRight.unit
-                                                                        }
-                                                                    })
-                                                                    onChangeInput({
-                                                                        target: {
-                                                                            id: "paddings",
-                                                                            name: "paddingRight",
-                                                                            value: "pr-[" + target.value + paddings.paddingRight.unit + "]"
-                                                                        }
-                                                                    })
-                                                                }}
-                                                                value={paddings.paddingRight.value}
-                                                                min={0}
-                                                                type="number"
-                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
-                                                            <select
-                                                                onChange={
-                                                                    ({target}) => {
-                                                                        setPaddings({
-                                                                            ...paddings,
-                                                                            paddingRight: {
-                                                                                value: paddings.paddingRight.value,
-                                                                                unit: target.value
-                                                                            }
-                                                                        })
-                                                                        onChangeInput({
-                                                                            target: {
-                                                                                id: "paddings",
-                                                                                name: "paddingRight",
-                                                                                value: "pr-[" + paddings.paddingRight.value + target.value + "]"
-                                                                            }
-                                                                        })
-                                                                    }
-                                                                }
-                                                                value={paddings.paddingRight.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
-                                                                name="" id="">
-                                                                {
-                                                                    units.map((unit, index) => {
-                                                                        return (<option key={index * Math.random()}
-                                                                                        value={unit}>{unit}</option>)
-                                                                    })
-                                                                }
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="py-4 flex items-center relative h-max">
+                                                {/*
+                                                WIDTH AND HEIGHT
+                                                WIDTH AND HEIGHT
+                                                WIDTH AND HEIGHT
+                                                WIDTH AND HEIGHT
+                                                WIDTH AND HEIGHT
+                                                WIDTH AND HEIGHT
+                                                WIDTH AND HEIGHT
+                                                */}
+                                                <div className="pb-2 flex items-center relative h-max">
                                                     <div
                                                         className="relative flex rounded-md border-[1px] border-white h-10 w-full">
                                                         <div
@@ -1452,7 +1054,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 }
                                                             }
                                                             value={size.height.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -1515,7 +1117,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 }
                                                             }
                                                             value={size.minHeight.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -1577,7 +1179,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 }
                                                             }
                                                             value={size.width.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -1640,7 +1242,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 }
                                                             }
                                                             value={size.minWidth.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -1651,6 +1253,460 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                         </select>
                                                     </div>
                                                 </div>
+                                                {/*
+                                                MARGINS AND PADDINGS
+                                                MARGINS AND PADDINGS
+                                                MARGINS AND PADDINGS
+                                                MARGINS AND PADDINGS
+                                                MARGINS AND PADDINGS
+                                                MARGINS AND PADDINGS
+                                                MARGINS AND PADDINGS
+                                                */}
+                                                <div className="relative h-24 mt-6 mb-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
+                                                    <div className="absolute left-2/4 -translate-x-2/4 -translate-y-2/4">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                            <input
+                                                                onChange={({target}) => {
+                                                                    setMargins({
+                                                                        ...margins,
+                                                                        marginTop: {
+                                                                            value: target.value,
+                                                                            unit: margins.marginTop.unit
+                                                                        }
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "margins",
+                                                                            name: "marginTop",
+                                                                            value: "mt-[" + target.value + margins.marginTop.unit + "]"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                value={margins.marginTop.value}
+                                                                min={0}
+                                                                type="number"
+                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                            <select
+                                                                onChange={
+                                                                    ({target}) => {
+                                                                        setMargins({
+                                                                            ...margins,
+                                                                            marginTop: {
+                                                                                value: margins.marginTop.value,
+                                                                                unit: target.value
+                                                                            }
+                                                                        })
+                                                                        onChangeInput({
+                                                                            target: {
+                                                                                id: "margins",
+                                                                                name: "marginTop",
+                                                                                value: "mt-[" + margins.marginTop.value + target.value + "]"
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                }
+                                                                value={margins.marginTop.unit}
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                name="" id="">
+                                                                {
+                                                                    units.map((unit, index) => {
+                                                                        return (<option key={index * Math.random()}
+                                                                                        value={unit}>{unit}</option>)
+                                                                    })
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                            <input
+                                                                onChange={({target}) => {
+                                                                    setMargins({
+                                                                        ...margins,
+                                                                        marginBottom: {
+                                                                            value: target.value,
+                                                                            unit: margins.marginBottom.unit
+                                                                        }
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "margins",
+                                                                            name: "marginBottom",
+                                                                            value: "mb-[" + target.value + margins.marginBottom.unit + "]"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                value={margins.marginBottom.value}
+                                                                min={0}
+                                                                type="number"
+                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                            <select
+                                                                onChange={
+                                                                    ({target}) => {
+                                                                        setMargins({
+                                                                            ...margins,
+                                                                            marginBottom: {
+                                                                                value: margins.marginBottom.value,
+                                                                                unit: target.value
+                                                                            }
+                                                                        })
+                                                                        onChangeInput({
+                                                                            target: {
+                                                                                id: "margins",
+                                                                                name: "marginBottom",
+                                                                                value: "mb-[" + margins.marginBottom.value + target.value + "]"
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                }
+                                                                value={margins.marginBottom.unit}
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                name="" id="">
+                                                                {
+                                                                    units.map((unit, index) => {
+                                                                        return (<option key={index * Math.random()}
+                                                                                        value={unit}>{unit}</option>)
+                                                                    })
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <span
+                                                        className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
+                                                            Margins
+                                                        </span>
+                                                    <div className="absolute top-2/4 -translate-x-2/4 -translate-y-2/4">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                            <input
+                                                                onChange={({target}) => {
+                                                                    setMargins({
+                                                                        ...margins,
+                                                                        marginLeft: {
+                                                                            value: target.value,
+                                                                            unit: margins.marginLeft.unit
+                                                                        }
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "margins",
+                                                                            name: "marginLeft",
+                                                                            value: "ml-[" + target.value + margins.marginLeft.unit + "]"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                value={margins.marginLeft.value}
+                                                                min={0}
+                                                                type="number"
+                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                            <select
+                                                                onChange={
+                                                                    ({target}) => {
+                                                                        setMargins({
+                                                                            ...margins,
+                                                                            marginLeft: {
+                                                                                value: margins.marginLeft.value,
+                                                                                unit: target.value
+                                                                            }
+                                                                        })
+                                                                        onChangeInput({
+                                                                            target: {
+                                                                                id: "margins",
+                                                                                name: "marginLeft",
+                                                                                value: "ml-[" + margins.marginLeft.value + target.value + "]"
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                }
+                                                                value={margins.marginLeft.unit}
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                name="" id="">
+                                                                {
+                                                                    units.map((unit, index) => {
+                                                                        return (<option key={index * Math.random()}
+                                                                                        value={unit}>{unit}</option>)
+                                                                    })
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                            <input
+                                                                onChange={({target}) => {
+                                                                    setMargins({
+                                                                        ...margins,
+                                                                        marginRight: {
+                                                                            value: target.value,
+                                                                            unit: margins.marginRight.unit
+                                                                        }
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "margins",
+                                                                            name: "marginRight",
+                                                                            value: "mr-[" + target.value + margins.marginRight.unit + "]"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                value={margins.marginRight.value}
+                                                                min={0}
+                                                                type="number"
+                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                            <select
+                                                                onChange={
+                                                                    ({target}) => {
+                                                                        setMargins({
+                                                                            ...margins,
+                                                                            marginRight: {
+                                                                                value: margins.marginRight.value,
+                                                                                unit: target.value
+                                                                            }
+                                                                        })
+                                                                        onChangeInput({
+                                                                            target: {
+                                                                                id: "margins",
+                                                                                name: "marginRight",
+                                                                                value: "mr-[" + margins.marginRight.value + target.value + "]"
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                }
+                                                                value={margins.marginRight.unit}
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                name="" id="">
+                                                                {
+                                                                    units.map((unit, index) => {
+                                                                        return (<option key={index * Math.random()}
+                                                                                        value={unit}>{unit}</option>)
+                                                                    })
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="relative h-24 mt-12 mb-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
+                                                    <div className="absolute left-2/4 -translate-x-2/4 -translate-y-2/4">
+                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                            <input
+                                                                onChange={({target}) => {
+                                                                    setPaddings({
+                                                                        ...paddings,
+                                                                        paddingTop: {
+                                                                            value: target.value,
+                                                                            unit: paddings.paddingTop.unit
+                                                                        }
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "paddings",
+                                                                            name: "paddingTop",
+                                                                            value: "pt-[" + target.value + paddings.paddingTop.unit + "]"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                value={paddings.paddingTop.value}
+                                                                min={0}
+                                                                type="number"
+                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                            <select
+                                                                onChange={
+                                                                    ({target}) => {
+                                                                        setPaddings({
+                                                                            ...paddings,
+                                                                            paddingTop: {
+                                                                                value: paddings.paddingTop.value,
+                                                                                unit: target.value
+                                                                            }
+                                                                        })
+                                                                        onChangeInput({
+                                                                            target: {
+                                                                                id: "paddings",
+                                                                                name: "paddingTop",
+                                                                                value: "pt-[" + paddings.paddingTop.value + target.value + "]"
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                }
+                                                                value={paddings.paddingTop.unit}
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                name="" id="">
+                                                                {
+                                                                    units.map((unit, index) => {
+                                                                        return (<option key={index * Math.random()}
+                                                                                        value={unit}>{unit}</option>)
+                                                                    })
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
+                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                            <input onChange={({target}) => {
+                                                                    setPaddings({
+                                                                        ...paddings,
+                                                                        paddingBottom: {
+                                                                            value: target.value,
+                                                                            unit: paddings.paddingBottom.unit
+                                                                        }
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "paddings",
+                                                                            name: "paddingBottom",
+                                                                            value: "pb-[" + target.value + paddings.paddingBottom.unit + "]"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                value={paddings.paddingBottom.value}
+                                                                min={0}
+                                                                type="number"
+                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                            <select
+                                                                onChange={
+                                                                    ({target}) => {
+                                                                        setPaddings({
+                                                                            ...paddings,
+                                                                            paddingBottom: {
+                                                                                value: paddings.paddingBottom.value,
+                                                                                unit: target.value
+                                                                            }
+                                                                        })
+                                                                        onChangeInput({
+                                                                            target: {
+                                                                                id: "paddings",
+                                                                                name: "paddingBottom",
+                                                                                value: "pb-[" + paddings.paddingBottom.value + target.value + "]"
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                }
+                                                                value={paddings.paddingBottom.unit}
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                name="" id="">
+                                                                {
+                                                                    units.map((unit, index) => {
+                                                                        return (<option key={index * Math.random()}
+                                                                                        value={unit}>{unit}</option>)
+                                                                    })
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <span className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
+                                                            Paddings
+                                                        </span>
+                                                    <div className="absolute top-2/4 -translate-x-2/4 -translate-y-2/4">
+                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                            <input onChange={({target}) => {
+                                                                    setPaddings({
+                                                                        ...paddings,
+                                                                        paddingLeft: {
+                                                                            value: target.value,
+                                                                            unit: paddings.paddingLeft.unit
+                                                                        }
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "paddings",
+                                                                            name: "paddingLeft",
+                                                                            value: "pl-[" + target.value + paddings.paddingLeft.unit + "]"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                value={paddings.paddingLeft.value}
+                                                                min={0}
+                                                                type="number"
+                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                            <select
+                                                                onChange={
+                                                                    ({target}) => {
+                                                                        setPaddings({
+                                                                            ...paddings,
+                                                                            paddingLeft: {
+                                                                                value: paddings.paddingLeft.value,
+                                                                                unit: target.value
+                                                                            }
+                                                                        })
+                                                                        onChangeInput({
+                                                                            target: {
+                                                                                id: "paddings",
+                                                                                name: "paddingLeft",
+                                                                                value: "pl-[" + paddings.paddingLeft.value + target.value + "]"
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                }
+                                                                value={paddings.paddingLeft.unit}
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                name="" id="">
+                                                                {
+                                                                    units.map((unit, index) => {
+                                                                        return (<option key={index * Math.random()}
+                                                                                        value={unit}>{unit}</option>)
+                                                                    })
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
+                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                            <input onChange={({target}) => {
+                                                                    setPaddings({
+                                                                        ...paddings,
+                                                                        paddingRight: {
+                                                                            value: target.value,
+                                                                            unit: paddings.paddingRight.unit
+                                                                        }
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "paddings",
+                                                                            name: "paddingRight",
+                                                                            value: "pr-[" + target.value + paddings.paddingRight.unit + "]"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                value={paddings.paddingRight.value}
+                                                                min={0}
+                                                                type="number"
+                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                            <select
+                                                                onChange={
+                                                                    ({target}) => {
+                                                                        setPaddings({
+                                                                            ...paddings,
+                                                                            paddingRight: {
+                                                                                value: paddings.paddingRight.value,
+                                                                                unit: target.value
+                                                                            }
+                                                                        })
+                                                                        onChangeInput({
+                                                                            target: {
+                                                                                id: "paddings",
+                                                                                name: "paddingRight",
+                                                                                value: "pr-[" + paddings.paddingRight.value + target.value + "]"
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                }
+                                                                value={paddings.paddingRight.unit}
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                name="" id="">
+                                                                {
+                                                                    units.map((unit, index) => {
+                                                                        return (<option key={index * Math.random()}
+                                                                                        value={unit}>{unit}</option>)
+                                                                    })
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </Disclosure.Panel>
@@ -1658,13 +1714,13 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                             )}
                         </Disclosure>
                         {/*
-                        POSITION
-                        POSITION
-                        POSITION
-                        POSITION
-                        POSITION
-                        POSITION
-                        POSITION
+                        DISPLAY AND POSITION
+                        DISPLAY AND POSITION
+                        DISPLAY AND POSITION
+                        DISPLAY AND POSITION
+                        DISPLAY AND POSITION
+                        DISPLAY AND POSITION
+                        DISPLAY AND POSITION
                         */}
                         <Disclosure as="div" className="border-white pt-2">
                             {({open}) => (
@@ -1672,7 +1728,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                     <h3 className="flow-root">
                                         <div
                                             className={"border-2 rounded-md py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
-                                            <span className="font-bold text-white">Position</span>
+                                            <span className="font-bold text-white">Display and Position</span>
                                             <div className="relative">
                                                 <Disclosure.Button className="p-2 ml-1">
                                                             <span className="flex items-center">
@@ -1746,6 +1802,256 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                         <span className="px-2">Grid</span>
                                                     </button>
                                                 </div>
+                                                {
+                                                    display === 'flex' ? (
+                                                        <>
+                                                            <div className="w-full p-3 flex justify-center space-x-3">
+                                                                <button
+                                                                    onClick={() => {
+                                                                        setFlexDirection("flex-col")
+                                                                        onChangeInput({
+                                                                            target: {
+                                                                                id: "display",
+                                                                                name: "flexDirection",
+                                                                                value: "flex-col"
+                                                                            }
+                                                                        })
+                                                                    }}
+                                                                    className={`w-3/6 flex items-center px-2 rounded-md border-2 py-1 ${flexDirection === 'flex-col' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                    <IconArrowsUpDown/>
+                                                                    <span className="px-2">Flex Col</span>
+                                                                </button>
+                                                                <button
+                                                                    onClick={() => {
+                                                                        setFlexDirection("flex-row")
+                                                                        onChangeInput({
+                                                                            target: {
+                                                                                id: "display",
+                                                                                name: "flexDirection",
+                                                                                value: "flex-row"
+                                                                            }
+                                                                        })
+                                                                    }}
+                                                                    className={`w-3/6 flex items-center px-2 rounded-md border-2 py-1 ${flexDirection === 'flex-row' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="rotate-90">
+                                                                    <IconArrowsUpDown/>
+                                                                </span>
+                                                                    <span className="px-2">Flex Row</span>
+                                                                </button>
+                                                            </div>
+                                                            <div className="w-full p-3 flex justify-center space-x-3">
+                                                                <button
+                                                                    onClick={() => {
+                                                                        setFlexWrap("flex-wrap")
+                                                                        onChangeInput({
+                                                                            target: {
+                                                                                id: "wrap",
+                                                                                name: "flexWrap",
+                                                                                value: "flex-wrap"
+                                                                            }
+                                                                        })
+                                                                    }}
+                                                                    className={`w-3/6 flex items-center px-2 rounded-md border-2 py-1 ${flexWrap === 'flex-wrap' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                    <IconTextWrap/>
+                                                                    <span className="px-2">Wrap</span>
+                                                                </button>
+                                                                <button
+                                                                    onClick={() => {
+                                                                        setFlexWrap("flex-nowrap")
+                                                                        onChangeInput({
+                                                                            target: {
+                                                                                id: "wrap",
+                                                                                name: "flexWrap",
+                                                                                value: "flex-nowrap"
+                                                                            }
+                                                                        })
+                                                                    }}
+                                                                    className={`w-3/6 flex items-center px-2 rounded-md border-2 py-1 ${flexWrap === 'flex-nowrap' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span>
+                                                                    <IconTextWrapDisabled/>
+                                                                </span>
+                                                                    <span className="px-2">No wrap</span>
+                                                                </button>
+                                                            </div>
+                                                        </>
+                                                    ) : ''
+                                                }
+                                                {
+                                                    display === 'grid' ? (
+                                                        <div className="grid grid-cols-2 gap-2">
+                                                            <div className="relative flex rounded-md border-[1px] border-white h-10">
+                                                                <div
+                                                                    className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
+                                                                    <span className="text-[12px] font-bold">Cols</span>
+                                                                </div>
+                                                                <input
+                                                                    onChange={
+                                                                        ({target}) => {
+                                                                            setGridTemplate({
+                                                                                ...gridTemplate,
+                                                                                gridCols: target.value
+                                                                            })
+                                                                            onChangeInput({
+                                                                                target: {
+                                                                                    id: "gridCols",
+                                                                                    name: "gridCols",
+                                                                                    value: "grid-cols-" + target.value
+                                                                                }
+                                                                            })
+                                                                        }
+                                                                    }
+                                                                    value={gridTemplate.gridCols}
+                                                                    min={0}
+                                                                    max={12}
+                                                                    type="number"
+                                                                    className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                            </div>
+                                                            <div className="relative flex rounded-md border-[1px] border-white h-10">
+                                                                <div
+                                                                    className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
+                                                                    <span className="text-[12px] font-bold">Rows</span>
+                                                                </div>
+                                                                <input
+                                                                    onChange={
+                                                                        ({target}) => {
+                                                                            setGridTemplate({
+                                                                                ...gridTemplate,
+                                                                                gridRows: target.value
+                                                                            })
+                                                                            onChangeInput({
+                                                                                target: {
+                                                                                    id: "gridRows",
+                                                                                    name: "gridRows",
+                                                                                    value: "grid-rows-" + target.value
+                                                                                }
+                                                                            })
+                                                                        }
+                                                                    }
+                                                                    value={gridTemplate.gridRows}
+                                                                    min={0}
+                                                                    max={12}
+                                                                    type="number"
+                                                                    className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                            </div>
+                                                            <div className="relative flex rounded-md border-[1px] border-white h-10">
+                                                                <div
+                                                                    className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
+                                                                    <span className="text-[12px] font-bold">Gap X</span>
+                                                                </div>
+                                                                <input
+                                                                    onChange={
+                                                                        ({target}) => {
+                                                                            setGaps({
+                                                                                ...gaps,
+                                                                                gapX: {
+                                                                                    value: target.value,
+                                                                                    unit: gaps.gapX?.unit
+                                                                                }
+                                                                            })
+                                                                            onChangeInput({
+                                                                                target: {
+                                                                                    id: "gaps",
+                                                                                    name: "gapX",
+                                                                                    value: "gap-x-[" + target.value + gaps.gapX?.unit + "]"
+                                                                                }
+                                                                            })
+                                                                        }
+                                                                    }
+                                                                    value={gaps.gapX?.value}
+                                                                    min={0}
+                                                                    type="number"
+                                                                    className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                                <select
+                                                                    onChange={
+                                                                        ({target}) => {
+                                                                            setGaps({
+                                                                                ...gaps,
+                                                                                gapX: {
+                                                                                    value: gaps.gapX?.value,
+                                                                                    unit: target.value
+                                                                                }
+                                                                            })
+                                                                            onChangeInput({
+                                                                                target: {
+                                                                                    id: "gaps",
+                                                                                    name: "gapX",
+                                                                                    value: "gap-x-[" + gaps.gapX?.value + target.value + "]"
+                                                                                }
+                                                                            })
+                                                                        }
+                                                                    }
+                                                                    value={gaps.gapX?.unit}
+                                                                    className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                    name="" id="">
+                                                                    {
+                                                                        units.map((unit, index) => {
+                                                                            return (<option key={index * Math.random()}
+                                                                                            value={unit}>{unit}</option>)
+                                                                        })
+                                                                    }
+                                                                </select>
+                                                            </div>
+                                                            <div className="relative flex rounded-md border-[1px] border-white h-10">
+                                                                <div
+                                                                    className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
+                                                                    <span className="text-[12px] font-bold">Gap Y</span>
+                                                                </div>
+                                                                <input
+                                                                    onChange={
+                                                                        ({target}) => {
+                                                                            setGaps({
+                                                                                ...gaps,
+                                                                                gapY: {
+                                                                                    value: target.value,
+                                                                                    unit: gaps.gapY?.unit
+                                                                                }
+                                                                            })
+                                                                            onChangeInput({
+                                                                                target: {
+                                                                                    id: "gaps",
+                                                                                    name: "gapY",
+                                                                                    value: "gap-y-[" + target.value + gaps.gapY?.unit + "]"
+                                                                                }
+                                                                            })
+                                                                        }
+                                                                    }
+                                                                    value={gaps.gapY?.value}
+                                                                    min={0}
+                                                                    type="number"
+                                                                    className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                                <select
+                                                                    onChange={
+                                                                        ({target}) => {
+                                                                            setGaps({
+                                                                                ...gaps,
+                                                                                gapY: {
+                                                                                    value: gaps.gapY?.value,
+                                                                                    unit: target.value
+                                                                                }
+                                                                            })
+                                                                            onChangeInput({
+                                                                                target: {
+                                                                                    id: "gaps",
+                                                                                    name: "gapY",
+                                                                                    value: "gap-y-[" + gaps.gapY?.value + target.value + "]"
+                                                                                }
+                                                                            })
+                                                                        }
+                                                                    }
+                                                                    value={gaps.gapY?.unit}
+                                                                    className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                    name="" id="">
+                                                                    {
+                                                                        units.map((unit, index) => {
+                                                                            return (<option key={index * Math.random()}
+                                                                                            value={unit}>{unit}</option>)
+                                                                        })
+                                                                    }
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    ) : ''
+                                                }
                                                 {/*
                                                     ALIGN AND JUSTIFY
                                                     ALIGN AND JUSTIFY
@@ -2024,7 +2330,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 }
                                                             }
                                                             value={positions.top.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -2083,7 +2389,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 }
                                                             }
                                                             value={positions.bottom.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -2142,7 +2448,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 }
                                                             }
                                                             value={positions.left.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -2201,7 +2507,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 }
                                                             }
                                                             value={positions.right.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 right-0 w-7 h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {

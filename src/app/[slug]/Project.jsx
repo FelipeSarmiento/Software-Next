@@ -12,16 +12,14 @@ export const Project = ({ components, viewport }) => {
                             switch (component.type) {
                                 case "text":
                                     return (
-                                        <p  className={className} key={component.idUniqueIdentifier}>
+                                        <p className={className} key={component.idUniqueIdentifier}>
                                             {component.value}
                                         </p>
                                     )
                                 case "image":
                                     return (
-                                        <img  className={className} key={component.idUniqueIdentifier} />
+                                        <img src={ component.src } className={className} key={component.idUniqueIdentifier}  alt={ component.alt }/>
                                     )
-                                default:
-                                    return <div key={component.idUniqueIdentifier}>Component not found</div>
                             }
                         case "container":
                             switch (component.type) {
@@ -91,11 +89,7 @@ export const Project = ({ components, viewport }) => {
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </form>
                                     )
-                                default:
-                                    return <div key={component.idUniqueIdentifier}>Component not found</div>
                             }
-                        default:
-                            return <div key={component.idUniqueIdentifier}>Component not found</div>
                     }
                 }
             })
