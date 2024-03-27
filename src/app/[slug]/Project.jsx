@@ -13,7 +13,7 @@ export const Project = ({ components, viewport }) => {
                                 case "text":
                                     return (
                                         <p className={className} key={component.idUniqueIdentifier}>
-                                            {component.value}
+                                            {component.text}
                                         </p>
                                     )
                                 case "image":
