@@ -23,7 +23,7 @@ export default function RootLayout({children}) {
     const session = getServerSession(authOptions);
 
     return (
-        <body className={inter.className + " bg-black text-white     min-h-screen from-30% [::-webkit-scrollbar{display:none;}] shrink-0 overflow-x-hidden"}>
+        <body className={inter.className + " bg-black text-white min-h-screen from-30% [::-webkit-scrollbar{display:none;}] shrink-0 overflow-x-hidden"}>
         <SessionProvider session={session}>
             <StoreProvider>
                 <Analytics/>

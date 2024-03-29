@@ -53,13 +53,13 @@ export const StickyScroll = ({
             animate={{
                 backgroundColor: backgroundColors[activeCard % backgroundColors.length],
             }}
-            className="h-[30rem] overflow-y-auto flex justify-center relative space-x-10 rounded-md p-10"
+            className="h-[25rem] border-2 border-green-500 w-full m-auto overflow-y-auto  flex justify-center space-x-36 relative rounded-md"
             ref={ref}
         >
-            <div className="div relative flex items-start px-4">
-                <div className="max-w-2xl">
+            <div className="relative border-2 border-blue-500 flex px-4 ">
+                <div className="max-w-5xl">
                     {content.map((item, index) => (
-                        <div key={item.title + index} className="my-20">
+                        <div key={item.title + index} className="h-60 border-2 border-red-500">
                             <motion.h2
                                 initial={{
                                     opacity: 0,
@@ -78,13 +78,12 @@ export const StickyScroll = ({
                                 animate={{
                                     opacity: activeCard === index ? 1 : 0.3,
                                 }}
-                                className="text-kg text-slate-300 max-w-sm mt-10"
+                                className="text-kg text-slate-300 max-w-sm"
                             >
                                 {item.description}
                             </motion.p>
                         </div>
                     ))}
-                    <div className="h-40" />
                 </div>
             </div>
             <motion.div
@@ -92,7 +91,7 @@ export const StickyScroll = ({
                     background: linearGradients[activeCard % linearGradients.length],
                 }}
                 className={cn(
-                    "hidden lg:block h-60 w-80 rounded-md bg-white sticky top-10 overflow-hidden",
+                    "hidden lg:block h-60 w-80 rounded-md bg-white top-2/4 -translate-y-2/4 sticky overflow-hidden border-2 border-red-500 ",
                     contentClassName
                 )}
             >

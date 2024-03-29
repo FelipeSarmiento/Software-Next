@@ -32,7 +32,7 @@ export default function Home() {
                         <div className="bg-black lg:bg-transparent">
                             <NavBar/>
                             <div className="min-h-[calc(100vh_-_84px)]">
-                                <div className="bg-black lg:bg-transparent min-h-[calc(100vh_-_84px)]">
+                                <div className="bg-black lg:bg-transparent min-h-[calc(100vh_-_84px)] snap-y">
                                     <Index/>
                                 </div>
                             </div>
