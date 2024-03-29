@@ -7,6 +7,7 @@ import {TextGenerateEffect} from "../components/AceternityUI/text-generate-effec
 import {AnimatePresence, motion} from "framer-motion";
 import {CanvasRevealEffect} from "../components/AceternityUI/canvas-reveal-effect";
 import {WavyBackground} from "@/app/components/AceternityUI/wavy-background";
+import { IconHandClick } from "@tabler/icons-react";
 
 export function Index() {
     const words = `Welcome to Software Next, where creativity meets simplicity in website creation!
@@ -14,8 +15,7 @@ Are you looking to build a stunning website without the hassle of coding? Look n
 
     return (
         <>
-            <div
-                className="h-[calc(100vh_-_80px)] w-full flex flex-col items-center pt-24 sm:pt-36 xl:pt-40 2xl:pt-60 overflow-hidden rounded-md">
+            <div className="h-[calc(100vh_-_80px)] w-full flex flex-col items-center pt-24 sm:pt-36 xl:pt-40 2xl:pt-60 overflow-hidden rounded-md">
                 <h1 className="md:text-6xl text-5xl lg:text-8xl font-bold text-center text-white relative z-20">
                     <span className="text-cyan-500">Software Next</span>
                 </h1>
@@ -48,58 +48,59 @@ Are you looking to build a stunning website without the hassle of coding? Look n
                         className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
                 </div>
             </div>
-            <div className="pb-24 pt-5 w-full overflow-hidden rounded-md">
-                <div className="flex flex-col lg:flex-row bg-black w-full gap-4 mx-auto px-8">
-                    <Card
-                        title={
-                            <span className="text-white text-xl text-center leading-normal">Build your website with ease, no programming knowledge needed</span>
-                        }
-                        icon={
-                            <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">No coding Required</span>
-                        }>
-                        <CanvasRevealEffect
-                            animationSpeed={5.1}
-                            containerClassName="bg-sky-900"
-                        />
-                    </Card>
-                    <Card
-                        title={
-                            <span className="text-white text-xl text-center leading-normal">Choose from a wide range of professionally designed templates</span>
-                        }
-                        icon={
-                            <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">Customizable Templates</span>
-                        }>
-                        <CanvasRevealEffect
-                            animationSpeed={5.1}
-                            containerClassName="bg-sky-900"
-                        />
-                    </Card>
-                    <Card
-                        title={
-                            <span className="text-white text-xl text-center leading-normal">See your changes go live immediately without the need for separate hosting</span>
-                        }
-                        icon={
-                            <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">Instant Publishing</span>
-                        }>
-                        <CanvasRevealEffect
-                            animationSpeed={5.1}
-                            containerClassName="bg-sky-900"
-                        />
-                    </Card>
-                    <Card
-                        title={
-                            <span className="text-white text-xl text-center leading-normal">Take advantage of additional services like site creation assistance or dedicated developer support.</span>
-                        }
-                        icon={
-                            <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">Optional Services</span>
-                        }>
-                        <CanvasRevealEffect
-                            animationSpeed={5.1}
-                            containerClassName="bg-sky-900"
-                        />
-                    </Card>
+            <div className="pt-5 pb-48 w-full overflow-hidden rounded-md">
+                    <div className="flex flex-col lg:flex-row bg-black w-full gap-4 mx-auto px-8">
+                        <Card
+                            title={
+                                <span className="text-white text-xl text-center leading-normal">Build your website with ease, no programming knowledge needed</span>
+                            }
+                            icon={
+                                <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">No coding Required</span>
+                            }>
+                            <CanvasRevealEffect
+                                animationSpeed={5.1}
+                                containerClassName="bg-sky-900"
+                            />
+                        </Card>
+                        <Card
+                            title={
+                                <span className="text-white text-xl text-center leading-normal">Choose from a wide range of professionally designed templates</span>
+                            }
+                            icon={
+                                <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">Customizable Templates</span>
+                            }>
+                            <CanvasRevealEffect
+                                animationSpeed={5.1}
+                                containerClassName="bg-sky-900"
+                            />
+                        </Card>
+                        <Card
+                            title={
+                                <span className="text-white text-xl text-center leading-normal">See your changes go live immediately without the need for separate hosting</span>
+                            }
+                            icon={
+                                <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">Instant Publishing</span>
+                            }>
+                            <CanvasRevealEffect
+                                animationSpeed={5.1}
+                                containerClassName="bg-sky-900"
+                            />
+                        </Card>
+                        <Card
+                            title={
+                                <span className="text-white text-xl text-center leading-normal">Take advantage of additional services like site creation assistance or dedicated developer support.</span>
+                            }
+                            icon={
+                                <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">Optional Services</span>
+                            }>
+                            <CanvasRevealEffect
+                                animationSpeed={5.1}
+                                containerClassName="bg-sky-900"
+                            />
+                        </Card>
+                    </div>
                 </div>
-            </div>
+
             <div className="relative">
                 <WavyBackground waveOpacity={0.2} className="max-w-4xl mx-auto flex flex-col items-center justify-center">
                     <p className="md:text-4xl mt-5 text-white font-bold inter-var text-center">
@@ -160,14 +161,16 @@ const Card = ({
             </AnimatePresence>
 
             <div className="relative z-20 w-full h-20">
-                <div
-                    className="text-center group-hover/canvas-card:-translate-y-4 group-hover/canvas-card:hidden transition duration-200 w-full h-full flex items-center justify-center">
+                <div className="text-center group-hover/canvas-card:-translate-y-4 group-hover/canvas-card:hidden transition duration-200 w-full h-full flex items-center justify-center">
                     {icon}
                 </div>
             </div>
             <h2 className="text-white px-6 text-xl text-center opacity-0 group-hover/canvas-card:opacity-100 z-10 absolute  font-bold group-hover/canvas-card:text-white transition duration-200">
                 {title}
             </h2>
+            <span className="absolute bottom-5 right-5">
+                <IconHandClick/>
+            </span>
         </div>
     );
 };
