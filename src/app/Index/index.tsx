@@ -15,7 +15,7 @@ Are you looking to build a stunning website without the hassle of coding? Look n
     return (
         <>
             <div
-                className="h-[calc(100vh_-_80px)] w-full flex flex-col items-center pt-12 md:pt-28 xl:pt-40 2xl:pt-60 overflow-hidden rounded-md">
+                className="h-[calc(100vh_-_80px)] w-full flex flex-col items-center pt-24 sm:pt-36 xl:pt-40 2xl:pt-60 overflow-hidden rounded-md">
                 <h1 className="md:text-6xl text-5xl lg:text-8xl font-bold text-center text-white relative z-20">
                     <span className="text-cyan-500">Software Next</span>
                 </h1>
