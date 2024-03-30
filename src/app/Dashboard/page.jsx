@@ -439,7 +439,7 @@ export default function Dashboard() {
                                                                             >
                                                                                 <Menu.Target>
                                                                                     <Button classNames={{
-                                                                                        root: "text-white hover:bg-transparent p-0 mx-2 my-0 h-auto",
+                                                                                        root: "text-white hover:bg-transparent bg-transparent p-0 mx-2 my-0 h-auto",
                                                                                     }}>
                                                                                         <IconTrash/>
                                                                                     </Button>

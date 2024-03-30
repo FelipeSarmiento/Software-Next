@@ -1093,7 +1093,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                     })
                                                                 }
                                                             }
-                                                            value={size.minHeight.value}
+                                                            value={size.minHeight?.value}
                                                             min={0}
                                                             type="number"
                                                             className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
@@ -1116,7 +1116,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                     })
                                                                 }
                                                             }
-                                                            value={size.minHeight.unit}
+                                                            value={size.minHeight?.unit}
                                                             className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
@@ -1155,7 +1155,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                     })
                                                                 }
                                                             }
-                                                            value={size.width.value}
+                                                            value={size.width?.value}
                                                             min={0}
                                                             type="number"
                                                             className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
@@ -1218,7 +1218,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                     })
                                                                 }
                                                             }
-                                                            value={size.minWidth.value}
+                                                            value={size.minWidth?.value}
                                                             min={0}
                                                             type="number"
                                                             className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
@@ -1241,7 +1241,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                     })
                                                                 }
                                                             }
-                                                            value={size.minWidth.unit}
+                                                            value={size.minWidth?.unit}
                                                             className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
@@ -1283,7 +1283,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         }
                                                                     })
                                                                 }}
-                                                                value={margins.marginTop.value}
+                                                                value={margins.marginTop?.value}
                                                                 min={0}
                                                                 type="number"
                                                                 className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
@@ -1306,7 +1306,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                         })
                                                                     }
                                                                 }
-                                                                value={margins.marginTop.unit}
+                                                                value={margins.marginTop?.unit}
                                                                 className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
