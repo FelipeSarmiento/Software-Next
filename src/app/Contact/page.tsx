@@ -54,11 +54,6 @@ export default function Home() {
             </div>
             <div className="">
                 <div className="max-w-2xl w-full mx-auto rounded-none md:rounded-2xl p-4 md:px-4 shadow-input">
-                    <p className="text-sm text-neutral-300 text-center">
-                        You can fill out the contact form below, and we'll get back to you as soon as possible <br/>
-                        Thank you for choosing our platform. We look forward to hearing from you!
-                    </p>
-
                     <form ref={form} onSubmit={sendEmail} className="my-8">
                         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
                             <LabelInputContainer>
