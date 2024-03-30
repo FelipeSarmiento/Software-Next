@@ -25,7 +25,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
     }
 
     const createContent = (section) => {
-        let content = section.map((section, sectionIndex) => (
+        return section.map((section, sectionIndex) => (
             section !== undefined ? (
                 <Disclosure as="div" key={section.idUniqueIdentifier} className="span-end">
                     {({open}) => (
@@ -168,7 +168,6 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                 </Disclosure>
             ) : ''
         ))
-        return content
     }
     return (
         <Disclosure as="div" className="w-full span-end">

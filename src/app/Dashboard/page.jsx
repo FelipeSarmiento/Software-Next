@@ -40,9 +40,9 @@ export default function Dashboard() {
     const [optionItem, setOptionItem] = useState();
     const [unSaved, setUnSaved] = useState(false)
     const [viewport, setViewport] = useState({
-        value: "1280px",
-        type: "Desktop",
-        breakpointID: "lg"
+        value: "1024px",
+        type: "Laptop",
+        breakpointID: "md"
     });
     const [keepOptions, setKeepOptions] = useState(true)
 
@@ -58,7 +58,6 @@ export default function Dashboard() {
     }
 
     const onSelectItem = (value) => {
-        console.log("value", value)
         setOptionItem(value);
     }
     const modifyItemsDashboard = (valorBuscado, nuevoValor) => {
