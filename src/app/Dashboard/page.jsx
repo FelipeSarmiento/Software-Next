@@ -359,7 +359,7 @@ export default function Dashboard() {
                                                             >
                                                                 <Menu.Target>
                                                                     <Button classNames={{
-                                                                        root: "text-white hover:bg-transparent p-0 mx-2 my-0 h-auto",
+                                                                        root: "text-white hover:bg-transparent bg-transparent p-0 mx-2 my-0 h-auto",
                                                                     }}>
                                                                         <IconTrash/>
                                                                     </Button>
@@ -498,7 +498,7 @@ export default function Dashboard() {
                                                                                 })
                                                                             }}
                                                                             classNames={{
-                                                                                root: "h-full m-0 px-1 " + (viewport.type === item.type ? "text-cyan-400" : " text-white"),
+                                                                                root: "h-full m-0 px-1 bg-transparent active:bg-transparent hover:bg-transparent" + (viewport.type === item.type ? "text-cyan-400" : " text-white"),
                                                                                 dropdown: "hidden lg:block"
                                                                             }}>
                                                                             {item.icon}
