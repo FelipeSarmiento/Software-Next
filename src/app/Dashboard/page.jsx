@@ -557,7 +557,7 @@ export default function Dashboard() {
                                                             onClick={() => {
                                                                 setKeepOptions(!keepOptions)
                                                             }}
-                                                            className={"h-full m-0 flex py-2 px-1 hover:bg-transparent bg-transparent hover:text-cyan-400" + (keepOptions ? ' text-cyan-400' : ' text-white')}>
+                                                            className={"h-full m-0 flex py-2 px-1 hover:bg-transparent bg-transparent hover:text-cyan-400 " + (keepOptions ? ' text-cyan-400' : ' text-white')}>
                                                             <span>Keep Settings</span>
                                                             <IconComponents/>
                                                         </button>
@@ -587,7 +587,7 @@ export default function Dashboard() {
                                                                         setKeepOptions(!keepOptions)
                                                                     }}
                                                                     classNames={{
-                                                                        root: "h-full m-0 px-1 hover:bg-transparent hover:text-cyan-400" + (keepOptions ? " text-cyan-400" : " text-white"),
+                                                                        root: "h-full m-0 px-1 hover:bg-transparent bg-transparent hover:text-cyan-400 " + (keepOptions ? " text-cyan-400" : " text-white"),
                                                                     }}>
                                                                     <span>Keep Settings</span>
                                                                     <IconComponents/>

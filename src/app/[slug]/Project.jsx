@@ -83,6 +83,12 @@ export const Project = ({ components, viewport }) => {
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </form>
                                     )
+                                case "button":
+                                    return (
+                                        <button key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
+                                            {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
+                                        </button>
+                                    )
                                 case "footer":
                                     return (
                                         <form key={component.idUniqueIdentifier}  className={className}>
