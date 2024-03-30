@@ -9,8 +9,8 @@ import Link from 'next/link'
 import {Button} from "keep-react";
 
 const navigation = [
-    {name: 'How to use?', href: '/', current: false},
-    {name: 'About', href: '/', current: false},
+    {name: 'How to use?', href: '/HowToUse', current: false},
+    {name: 'About', href: '/About', current: false},
     {name: 'Projects', href: '/', current: false},
     {name: 'Dashboard', href: '/Dashboard', current: false},
 ]

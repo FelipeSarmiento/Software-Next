@@ -109,15 +109,15 @@ Are you looking to build a stunning website without the hassle of coding? Look n
                         with us.
                     </p>
                     <p className="md:text-4xl mix mix-blend-multiply mt-5 text-white font-bold inter-var text-center">
-                        Ready to get started? Sign up now and unlock the power of online creativity with <span
-                        className="text-cyan-400">Software Next</span>!
+                        Ready to get started? Sign up now and unlock the power of online creativity with <br/><span
+                        className="text-cyan-400 font-extrabold py-5">Software Next</span>!
                     </p>
                     <button
-                        className="relative my-20 inline-flex h-16 w-36 overflow-hidden rounded-md p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                        className="relative my-20 inline-flex h-16 w-36 overflow-hidden rounded-3xl p-[2px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
                         <span
                             className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#22d3ee_0%,#bae6fd_50%,#22d3ee_100%)]"/>
                         <span
-                            className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-md bg-black px-3 text-lg font-medium text-white backdrop-blur-3xl">
+                            className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-3xl bg-black px-3 text-lg font-medium text-white backdrop-blur-3xl">
                             Sign Up
                         </span>
                     </button>
