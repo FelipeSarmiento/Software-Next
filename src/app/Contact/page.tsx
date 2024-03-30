@@ -31,8 +31,6 @@ export default function Home() {
     };
 
     const words = `Welcome to our About page! Here you can learn more about our platform:`
-
-    // @ts-ignore
     return (
         <>
             <div className="">

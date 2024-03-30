@@ -299,7 +299,6 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
     const [gaps, setGaps] = useState({})
     const [gridTemplate, setGridTemplate] = useState({})
 
-    const content = useMemo(() => {
         return (optionItem !== undefined ? (
                 <div className="py-2 pr-2">
                     {optionItem.hasOwnProperty("text") ? (
@@ -2535,7 +2534,4 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                     </p>
                 </Disclosure>
             ))
-    }, [options]);
-
-        return content
 };
