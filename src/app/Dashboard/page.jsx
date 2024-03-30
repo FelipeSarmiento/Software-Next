@@ -352,7 +352,7 @@ export default function Dashboard() {
                                                             <Menu
                                                                 position="right"
                                                                 classNames={{
-                                                                    dropdown: "bg-stone-950 h-min m-0 p-0 text-center text-white",
+                                                                    dropdown: "bg-stone-950 hover:bg-stone-950 h-min m-0 p-0 text-center text-white",
                                                                     item: "text-white",
                                                                     root: "text-white hover:bg-transparent bg-transparent"
                                                                 }}
@@ -441,7 +441,7 @@ export default function Dashboard() {
                                                                             <Menu
                                                                                 position="bottom"
                                                                                 classNames={{
-                                                                                    dropdown: "bg-stone-950 h-min m-0 p-0 text-center text-white",
+                                                                                    dropdown: "bg-stone-950 hover:bg-stone-950 h-min m-0 p-0 text-center text-white",
                                                                                     item: "text-white",
                                                                                     root: "text-white bg-transparent hover:bg-transparent"
                                                                                 }}
