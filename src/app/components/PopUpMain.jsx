@@ -178,7 +178,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                     className="w-full overflow-y-auto relative h-full rounded-2xl pt-3 lg:p-10 text-xl md:text-4xl font-bold text-white bg-black border-2 border-stone-800">
                     <p>Items</p>
                     <section
-                        className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2 place-items-center text-white w-full p-2">
+                        className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 md:gap-2 place-items-center text-white w-full p-2">
                         {items.map((item, index) => {
                             return (
                                 <div
@@ -248,7 +248,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                                 <div
                                     className="w-full overflow-y-auto relative h-full rounded-2xl pt-3 lg:p-10 text-xl md:text-4xl font-bold text-white">
                                     <section
-                                        className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-2 place-items-center text-white w-full p-2">
+                                        className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-2 place-items-center text-white w-full p-2">
                                         {items.map((item, index) => {
                                             return (
                                                 <div

@@ -479,7 +479,7 @@ export default function Dashboard() {
                                                         </Drawer>
                                                         <Button
                                                             classNames={{
-                                                                root: "bg-transparent hover:bg-transparent text-white p-0 m-0 h-auto",
+                                                                root: "bg-transparent hover:bg-transparent text-white m-0 h-auto",
                                                             }}
                                                             onClick={ () => { setOpenDrawerTreeView(!openDrawerTreeView) } }>
                                                         <span className="italic text-xs">
@@ -546,7 +546,11 @@ export default function Dashboard() {
                                                                   title={optionItem !== undefined ? "Options for " + optionItem.label : "Options"}
                                                                   type="options"/>
                                                     </Drawer>
-                                                    <Button onClick={ () => { setOpenDrawerSettings(!openDrawerSettings) } }>
+                                                    <Button
+                                                        classNames={{
+                                                            root: "bg-transparent hover:bg-transparent text-white m-0 h-auto"
+                                                        }}
+                                                        onClick={ () => { setOpenDrawerSettings(!openDrawerSettings) } }>
                                                         <span className="italic text-xs">
                                                             <IconSettings/>
                                                         </span>
