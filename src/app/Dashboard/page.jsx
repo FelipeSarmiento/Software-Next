@@ -354,7 +354,7 @@ export default function Dashboard() {
                                                                 classNames={{
                                                                     dropdown: "bg-stone-950 h-min m-0 p-0 text-center text-white",
                                                                     item: "text-white",
-                                                                    root: "text-white hover:bg-transparent"
+                                                                    root: "text-white hover:bg-transparent bg-transparent"
                                                                 }}
                                                             >
                                                                 <Menu.Target>
@@ -477,7 +477,11 @@ export default function Dashboard() {
                                                                       functions={onSelectItem} addSection={addSection}
                                                                       deleteItemDashboard={deleteItemDashboard}/>
                                                         </Drawer>
-                                                        <Button onClick={ () => { setOpenDrawerTreeView(!openDrawerTreeView) } }>
+                                                        <Button
+                                                            classNames={{
+                                                                root: "bg-transparent hover:bg-transparent text-white p-0 m-0 h-auto",
+                                                            }}
+                                                            onClick={ () => { setOpenDrawerTreeView(!openDrawerTreeView) } }>
                                                         <span className="italic text-xs">
                                                             <IconBinaryTree/>
                                                         </span>
@@ -533,7 +537,7 @@ export default function Dashboard() {
                                                             onClick={() => {
                                                                 setKeepOptions(!keepOptions)
                                                             }}
-                                                            className={"h-full m-0 flex py-2 px-1 hover:bg-transparent hover:text-cyan-400" + (keepOptions ? ' text-cyan-400' : ' text-white')}>
+                                                            className={"h-full m-0 flex py-2 px-1 hover:bg-transparent bg-transparent hover:text-cyan-400" + (keepOptions ? ' text-cyan-400' : ' text-white')}>
                                                             <span>Keep Settings</span>
                                                             <IconComponents/>
                                                         </button>
