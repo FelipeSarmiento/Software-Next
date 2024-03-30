@@ -51,7 +51,6 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                         settingsDesktop: {...optionItem.settingsDesktop, [target.name]: target.value},
                         settingsTV: {...optionItem.settingsTV, [target.name]: target.value}
                     }
-                    console.log(option)
                     setOptionItem(option)
                     modifyItemsDashboard(option.idUniqueIdentifier, option)
                 } else {
@@ -73,10 +72,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
         setOptionItem(options);
         if (options !== undefined) {
             setColorOptions({
-                textColor: options['settings' + viewport.type].textColor.split("-")[1].replace("[", "").replace("]", ""),
-                borderColor: options['settings' + viewport.type].borderColor.split("-")[1].replace("[", "").replace("]", ""),
-                backgroundColor: options['settings' + viewport.type].backgroundColor.split("-")[1].replace("[", "").replace("]", ""),
-                decorationColor: options['settings' + viewport.type].decorationColor.split("-")[1].replace("[", "").replace("]", ""),
+                textColor: options['settings' + viewport.type].textColor?.split("-")[1].replace("[", "").replace("]", ""),
+                borderColor: options['settings' + viewport.type].borderColor?.split("-")[1].replace("[", "").replace("]", ""),
+                backgroundColor: options['settings' + viewport.type].backgroundColor?.split("-")[1].replace("[", "").replace("]", ""),
+                decorationColor: options['settings' + viewport.type].decorationColor?.split("-")[1].replace("[", "").replace("]", ""),
             })
             if (options.hasOwnProperty("text")) {
                 setSpecificAttributes({
@@ -1195,7 +1194,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                         className="relative flex rounded-md border-[1px] border-white h-10 w-full">
                                                         <div
                                                             className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
-                                                            <IconArrowsVertical/>
+                                                            <span className="rotate-90"><IconArrowsVertical/></span>
                                                             <span
                                                                 className="text-xs text-center font-bold">Min<br/>Width</span>
                                                         </div>

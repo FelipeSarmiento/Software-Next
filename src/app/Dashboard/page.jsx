@@ -58,6 +58,7 @@ export default function Dashboard() {
     }
 
     const onSelectItem = (value) => {
+        console.log("value", value)
         setOptionItem(value);
     }
     const modifyItemsDashboard = (valorBuscado, nuevoValor) => {
@@ -317,7 +318,7 @@ export default function Dashboard() {
                 <div className="mx-auto w-full min-h-[calc(80vh_-_64px)]">
                     <div className="h-full">
                         <div className="h-full">
-                            <main className="mx-auto max-w-11/12 px-8 sm:px-6 lg:px-8 pt-6">
+                            <main className="mx-auto max-w-11/12 px-4 sm:px-6 lg:px-8 pt-6">
                                 <section aria-labelledby="products-heading" className="h-[56vh] pt-3">
                                     <div className="grid grid-cols-1 relative gap-x-5 gap-y-4 lg:grid-cols-5 h-full">
                                         <div className="col-span-1 lg:col-span-5 grid grid-cols-2 lg:grid-cols-5 gap-y-3 py-2 h-15 rounded-md w-full bg-stone-950 border-2 border-stone-800">
@@ -391,6 +392,15 @@ export default function Dashboard() {
                                                 }
                                             </div>
                                             <div className="col-span-2 order-1 lg:order-2 lg:col-span-3 relative flex items-center justify-center">
+                                                {/*
+                                                MOBILE TREE VIEW
+                                                MOBILE TREE VIEW
+                                                MOBILE TREE VIEW
+                                                MOBILE TREE VIEW
+                                                MOBILE TREE VIEW
+                                                MOBILE TREE VIEW
+                                                MOBILE TREE VIEW
+                                                */}
                                                 <div className="absolute lg:hidden top-2/4 left-0 -translate-y-2/4">
                                                     <div className="relative">
                                                         <Drawer
@@ -502,7 +512,7 @@ export default function Dashboard() {
                                                                                 })
                                                                             }}
                                                                             classNames={{
-                                                                                root: "h-full m-0 px-1 bg-transparent active:bg-transparent hover:bg-transparent" + (viewport.type === item.type ? "text-cyan-400" : " text-white"),
+                                                                                root: "h-full m-0 px-1 bg-transparent active:bg-transparent hover:bg-transparent " + (viewport.type === item.type ? "text-cyan-400" : " text-white"),
                                                                                 dropdown: "hidden lg:block"
                                                                             }}>
                                                                             {item.icon}
@@ -525,6 +535,16 @@ export default function Dashboard() {
                                                         )
                                                     }
                                                 )}
+                                                {/*
+                                                MOBILE SETTINGS
+                                                MOBILE SETTINGS
+                                                MOBILE SETTINGS
+                                                MOBILE SETTINGS
+                                                MOBILE SETTINGS
+                                                MOBILE SETTINGS
+                                                MOBILE SETTINGS
+                                                MOBILE SETTINGS
+                                                */}
                                                 <div className="absolute lg:hidden top-2/4 right-0 -translate-y-2/4">
                                                     <Drawer
                                                         classNames={{
@@ -543,7 +563,7 @@ export default function Dashboard() {
                                                         </button>
                                                         <DropMenu items={optionItem} viewport={viewport} keepOptions={keepOptions}
                                                                   modifyItemsDashboard={modifyItemsDashboard}
-                                                                  title={optionItem !== undefined ? "Options for " + optionItem.label : "Options"}
+                                                                  title={optionItem !== undefined ? "Settings for " + optionItem.label : "Settings"}
                                                                   type="options"/>
                                                     </Drawer>
                                                     <Button
