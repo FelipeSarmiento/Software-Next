@@ -19,8 +19,9 @@ import {
 } from '@tabler/icons-react';
 import {Disclosure} from "@headlessui/react";
 import {Button, Drawer, Group, HoverCard, Popover, Text, Menu} from '@mantine/core';
-import {redirect} from "next/navigation";
 import Link from "next/link";
+
+import pako from 'pako';
 
 export default function Dashboard() {
 
@@ -53,7 +54,7 @@ export default function Dashboard() {
     }, [session]);
 
     async function saveItemsDashboard(bodySet) {
-        const resp = await saveDataToFirestore(bodySet, session?.user.id);
+        const resp = await saveDataToFirestore(btoa(bodySet), session?.user.id);
         setUnSaved(false)
     }
 
@@ -304,7 +305,10 @@ export default function Dashboard() {
                             Visit &nbsp;<IconExternalLink/>
                         </button>
                         </Link>
-                        <button onClick={() => saveItemsDashboard(itemsDashboard)}
+                        <button onClick={() => {
+                            console.log("btoa", btoa(JSON.stringify(itemsDashboard)))
+                            saveItemsDashboard(itemsDashboard)
+                        }}
                                 className="text-white text-nowrap flex items-center justify-center border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
                             Save &nbsp;<span className={unSaved ? 'text-red-500' : 'text-white'}>
                         <FontAwesomeIcon icon={faFloppyDisk}/>
@@ -659,9 +663,7 @@ export default function Dashboard() {
                 setActualPage("index")
                 return
             }
-            setItemsDashboard(
-                itemsDashboardResp
-            );
+            setItemsDashboard(itemsDashboardResp);
             setActualPage(Object.keys(itemsDashboardResp.pages)[0])
         } catch (error) {
             console.error('Error fetching itemsDashboard:', error);

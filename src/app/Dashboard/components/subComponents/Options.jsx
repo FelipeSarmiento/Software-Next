@@ -22,7 +22,7 @@ import {
     IconPhoto,
     IconArrowsUpDown,
     IconTextWrap,
-    IconTextWrapDisabled
+    IconTextWrapDisabled, IconAlignLeft, IconAlignCenter, IconAlignRight, IconAlignJustified
 } from '@tabler/icons-react';
 import {ColorInput, ColorPicker, NumberInput, Select} from "@mantine/core";
 import {useSelector} from "react-redux";
@@ -540,6 +540,86 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                         <option value="font-bold">Bold</option>
                                                         <option value="font-extrabold">Extrabold</option>
                                                     </select>
+
+                                                    <div className="relative my-2 flex h-10 w-full">
+                                                        <div
+                                                            className="w-[35%] flex items-center text-xs justify-start px-2 border-r-[1px] h-full">
+                                                            <span className="rotate-90"><IconSpacingVertical/></span>
+                                                            <span className="font-bold">Text Align</span>
+                                                        </div>
+                                                        <div className="flex items-center justify-around w-[65%]">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "position",
+                                                                            name: "textAlign",
+                                                                            value: "text-left"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`text-center ${(optionItem['settings' + viewport.type].textAlign === 'text-left' ? 'text-cyan-400' : 'text-white')}`}
+                                                                title="Left">
+                                                                <IconAlignLeft/>
+                                                            </button>
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "position",
+                                                                            name: "textAlign",
+                                                                            value: "text-center"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`text-center ${(optionItem['settings' + viewport.type].textAlign === 'text-center' ? 'text-cyan-400' : 'text-white')}`}
+                                                                title="Center">
+                                                                <IconAlignCenter/>
+                                                            </button>
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "position",
+                                                                            name: "textAlign",
+                                                                            value: "text-right"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`text-center ${(optionItem['settings' + viewport.type].textAlign === 'text-right' ? 'text-cyan-400' : 'text-white')}`}
+                                                                title="Right">
+                                                                <IconAlignRight/>
+                                                            </button>
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "position",
+                                                                            name: "textAlign",
+                                                                            value: "text-justify"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`text-center ${(optionItem['settings' + viewport.type].textAlign === 'text-justify' ? 'text-cyan-400' : 'text-white')}`}
+                                                                title="Justify">
+                                                                <IconAlignJustified/>
+                                                            </button>
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "position",
+                                                                            name: "textAlign",
+                                                                            value: ""
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`text-center ${(optionItem['settings' + viewport.type].textAlign === '' ? 'text-cyan-400' : 'text-white')}`}
+                                                                title="NONE">
+                                                                <IconSquareX/>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </Disclosure.Panel>
@@ -2136,6 +2216,21 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 title="Baseline">
                                                                 <IconAlignBoxCenterStretch/>
                                                             </button>
+
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "position",
+                                                                            name: "itemsAlign",
+                                                                            value: ""
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`text-center ${(optionItem['settings' + viewport.type].itemsAlign === '' ? 'text-cyan-400' : 'text-white')}`}
+                                                                title="NONE">
+                                                                <IconSquareX/>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                     <div className="relative my-2 flex h-10 w-full">
@@ -2228,6 +2323,20 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                                                 className={`rotate-90 text-center ${(optionItem['settings' + viewport.type].justifyContent === 'justify-evenly' ? 'text-cyan-400' : 'text-white')}`}
                                                                 title="Evenly">
                                                                 <IconAlignBoxCenterStretch/>
+                                                            </button>
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "position",
+                                                                            name: "justifyContent",
+                                                                            value: ""
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`text-center ${(optionItem['settings' + viewport.type].justifyContent === '' ? 'text-cyan-400' : 'text-white')}`}
+                                                                title="NONE">
+                                                                <IconSquareX/>
                                                             </button>
                                                         </div>
                                                     </div>

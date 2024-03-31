@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import "@/settings/assets/globals.css";
-import {SparklesCore} from "@/../src/app/components/AceternityUI/sparkles";
 import {TextGenerateEffect} from "../components/AceternityUI/text-generate-effect";
 
 import {AnimatePresence, motion} from "framer-motion";
@@ -15,8 +14,8 @@ Are you looking to build a stunning website without the hassle of coding? Look n
 
     return (
         <>
-            <div className="h-[calc(100vh_-_80px)] w-full flex flex-col items-center pt-24 sm:pt-36 xl:pt-40 2xl:pt-60 overflow-hidden rounded-md">
-                <h1 className="md:text-6xl text-5xl lg:text-8xl font-bold text-center text-white relative z-20">
+            <div className="h-[calc(100vh_-_80px)] w-full flex flex-col justify-center items-center overflow-hidden rounded-md">
+                <h1 className="md:text-6xl text-5xl 2xl:text-8xl font-bold text-center text-white relative z-20">
                     <span className="text-cyan-500">Software Next</span>
                 </h1>
                 <div className="w-full md:w-[40rem] h-40 relative">
@@ -29,18 +28,8 @@ Are you looking to build a stunning website without the hassle of coding? Look n
                         className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-sm"/>
                     <div
                         className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-1/4"/>
-
-                    {/* Core component */}
-                    <SparklesCore
-                        background="transparent"
-                        minSize={0.5}
-                        maxSize={1}
-                        particleDensity={1000}
-                        className="w-full h-full"
-                        particleColor="#1fbdd8"
-                    />
                     <div className="absolute w-full px-4 xl:w-[200%] left-2/4 -translate-x-2/4 top-12 z-30 text-white">
-                        <TextGenerateEffect className="text-center leading-normal text-2xl md:text-3xl" words={words}/>
+                        <TextGenerateEffect className="text-center leading-normal px-24 text-2xl md:text-3xl" words={words}/>
                     </div>
 
                     {/* Radial Gradient to prevent sharp edges */}
@@ -48,7 +37,7 @@ Are you looking to build a stunning website without the hassle of coding? Look n
                         className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
                 </div>
             </div>
-            <div className="pt-5 pb-48 w-full overflow-hidden rounded-md">
+            <div className="pt-12 pb-48 w-full overflow-hidden rounded-md">
                     <div className="flex flex-col lg:flex-row bg-black w-full gap-4 mx-auto px-8">
                         <Card
                             title={
