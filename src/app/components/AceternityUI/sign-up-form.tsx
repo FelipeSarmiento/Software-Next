@@ -2,86 +2,103 @@
 import {Label} from "./label";
 import {Input} from "./input";
 import {cn} from "../../../settings/utils/cn";
-import { FirebaseAuth } from "../../../settings/firebase/firebase";
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import {
-    IconBrandGoogle,
-    IconMail,
-} from "@tabler/icons-react";
 import {useForm} from "../../../lib/hooks/useForm";
 import Link from "next/link";
-import {signIn} from "next-auth/react";
+import { registerUser } from '../../../data/page'
+import {useState} from "react";
 
 export function SignUpForm() {
 
     const {onInputChange, formState} = useForm({
     })
 
+    const [errorMessage, setErrorMessage] = useState('' as string)
+
+    const handleSignUp = async () => {
+        try {
+            await registerUser(formState)
+            setErrorMessage('')
+        }
+        catch (e) {
+            if (e.message.includes('duplicate')){
+                if (e.message.includes('email')){
+                    setErrorMessage('Email already exists')
+                }
+                else if (e.message.includes('username')){
+                    setErrorMessage('Username already exists')
+                    }
+            }
+        }
+    }
+
     return (
         <div
             className="w-full rounded-3xl p-4 px-10 md:p-8 shadow-input bg-black border-gray-600 border-2">
-            <h2 className="font-bold text-xl text-neutral-200">
+            <h2 className="font-bold text-2xl text-center text-neutral-200">
                 Welcome to Software Next
             </h2>
-            <p className="text-sm max-w-sm mt-2 text-neutral-300">
+            <p className="text-lg mt-2 text-center text-neutral-300">
                 Register to start designing your web site
             </p>
-            <form className="my-8" onSubmit={ (e) => {
+            <form className="my-8 grid grid-cols-2 gap-5" onSubmit={ (e) => {
                 e.preventDefault()
+                handleSignUp()
             } }>
                 <LabelInputContainer className="mb-4">
-                    <Label htmlFor="email">Name</Label>
-                    <Input required={true} id="name" placeholder="Name" type="text" name="name" value={formState.name}
+                    <Label htmlFor="email">First Name *</Label>
+                    <Input required={true} id="firstName" placeholder="First Name" type="text" name="firstName" minLength={1} value={formState.firstName}
                            onChange={onInputChange}/>
                 </LabelInputContainer>
                 <LabelInputContainer className="mb-4">
-                    <Label htmlFor="email">Email Address</Label>
+                    <Label htmlFor="email">Last Name *</Label>
+                    <Input required={true} id="lastName" placeholder="Last Name" type="text" name="lastName" value={formState.lastName}
+                           onChange={onInputChange}/>
+                </LabelInputContainer>
+                <LabelInputContainer className="mb-4">
+                    <Label htmlFor="email">Username *</Label>
+                    <Input required={true} id="username" placeholder="Username" type="text" name="username" value={formState.username}
+                           onChange={onInputChange}/>
+                </LabelInputContainer>
+                <LabelInputContainer className="mb-4">
+                    <Label htmlFor="password">Phone number</Label>
+                    <Input id="phoneNumber" placeholder="Phone Number" type="text" name="phoneNumber"
+                           value={formState.phoneNumber} onChange={onInputChange}/>
+                </LabelInputContainer>
+                <LabelInputContainer className="mb-4">
+                    <Label htmlFor="email">Email Address *</Label>
                     <Input required={true} id="email" placeholder="Email" type="email" name="email" value={formState.email}
                            onChange={onInputChange}/>
                 </LabelInputContainer>
                 <LabelInputContainer className="mb-4">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">Password *</Label>
                     <Input required={true} id="password" placeholder="••••••••" type="password" name="password"
                            value={formState.password} onChange={onInputChange}/>
                 </LabelInputContainer>
-                <button onClick={async () => {
-                    await createUserWithEmailAndPassword(FirebaseAuth, formState.email, formState.password)
-                        .then((userCredential) => {
-                            updateProfile(userCredential.user, {
-                                displayName: formState.name,
-                            }).then(() => {
-                                console.log('Profile updated')
-                            }).catch((error) => {
-                                console.log(error)
-
-                            })
-                            signIn('credentials', {email: formState.email, password: formState.password, redirect: true, callbackUrl: '/Dashboard'})
-                        })
-                }}
-                        className="bg-gradient-to-br relative group/btn from-zinc-900 to-zinc-900 block bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_var(--white)_inset,0px_-1px_0px_0px_var(--white)_inset]">
-                    Sign Up &rarr;
-                    <BottomGradient/>
-                </button>
-
-                <div
-                    className="bg-gradient-to-r from-transparent via-neutral-700 to-transparent my-8 h-[1px] w-full"/>
-
-                <div className="flex flex-col space-y-4">
-                    <button onClick={() => signIn()}
-                            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-zinc-900 shadow-[0px_0px_1px_1px_var(--neutral-800)]">
-                        <IconBrandGoogle className="h-4 w-4 text-neutral-300"/>
-                        <span className="text-neutral-300 text-sm">
-                            Sign in with Google
-                        </span>
+                {
+                    errorMessage !== '' && (
+                        <LabelInputContainer className="md:col-span-2">
+                            <p className="text-center font-bold">
+                                <span className="px-4 py-2 rounded-lg border-2 text-red-500 border-red-500">{ errorMessage }</span>
+                            </p>
+                        </LabelInputContainer>
+                    )
+                }
+                <div className="md:col-span-2">
+                    <button type="submit" className="bg-gradient-to-br relative group/btn from-zinc-900 to-zinc-900 block bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_0px_0px_0px_var(--white)_inset,0px_-1px_0px_0px_var(--white)_inset]">
+                        Sign Up &rarr;
                         <BottomGradient/>
                     </button>
-                    <Link href='/Auth/Login' className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-zinc-900 shadow-[0px_0px_1px_1px_var(--neutral-800)]">
-                        <IconMail className="h-4 w-4 text-neutral-300"/>
-                        <span className="text-neutral-300 text-sm">
-                            Sign in
-                        </span>
-                        <BottomGradient/>
-                    </Link>
+
+                    <div className="bg-gradient-to-r from-transparent via-neutral-700 to-transparent my-8 h-[1px] w-full"/>
+
+                    <div className="flex flex-col space-y-4">
+                        <Link href='/Auth/Login' className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-zinc-900 shadow-[0px_0px_1px_1px_var(--neutral-800)]">
+                            <span className="text-neutral-300">
+                                Sign in
+                            </span>
+                            <BottomGradient/>
+                        </Link>
+                    </div>
                 </div>
             </form>
         </div>

@@ -51,7 +51,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="">
-                <div className="max-w-2xl w-full mx-auto rounded-none md:rounded-2xl p-4 md:px-4 shadow-input">
+                <div className="max-w-2xl w-full z-50 mx-auto rounded-none md:rounded-2xl p-4 md:px-4 shadow-input">
                     <form ref={form} onSubmit={sendEmail} className="my-8">
                         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
                             <LabelInputContainer>

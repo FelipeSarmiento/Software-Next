@@ -1,5 +1,4 @@
 'use client'
-import {useSession, signOut} from "next-auth/react"
 import {Fragment} from 'react'
 import {Disclosure, Menu, Transition} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
@@ -7,6 +6,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faRightToBracket} from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import {Button} from "keep-react";
+import cookieCutter from 'cookie-cutter'
 
 const navigation = [
     {name: 'How to use?', href: '/HowToUse', current: false},
@@ -21,8 +21,7 @@ function classNames(...classes) {
 }
 
 export function NavBar() {
-
-    const {data: session} = useSession()
+    const session = cookieCutter.get('session')
 
     return (
         <Disclosure as="nav" className="border-b-4 border-cyan-500 sticky bg-black top-0 z-50">
@@ -90,7 +89,7 @@ export function NavBar() {
                                                         className="relative flex pb-1 h-8 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
                                                     <span className="absolute -inset-1.5"/>
                                                     <span
-                                                        className="md:block px-1 flex h-auto">{session.user.name}</span>
+                                                        className="md:block px-1 flex h-auto">{JSON.stringify(session)}</span>
                                                     <div>
                                                         <FontAwesomeIcon icon={faRightToBracket}
                                                                          className="text-sm px-1"/>
@@ -151,7 +150,7 @@ export function NavBar() {
                                                     <Disclosure.Button title="Cerrar Sesión" onClick={() => signOut()}
                                                                        className="relative flex pb-1 h-8 items-center px-1 text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
                                                         <span
-                                                            className="md:block flex h-auto">{session.user.name}</span>
+                                                            className="md:block flex h-auto">{JSON.stringify(session)}</span>
                                                         <div>
                                                             <FontAwesomeIcon icon={faRightToBracket}
                                                                              className="text-sm px-1"/>
