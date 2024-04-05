@@ -19,38 +19,8 @@ export const login = async (user: any) => {
     if (match) {
 
         delete rows[0].password
-        saveSession(JSON.stringify(rows[0]))
+
     } else {
         throw new Error('Invalid emails or password')
     }
-}
-
-export const logout = async () => {
-    cookies().set('session', '', {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 0,
-        path: '/',
-    })
-}
-
-export const saveSession = async (session: any) => {
-    // @ts-ignore
-    const encryptedSessionData = CryptoJS.AES.encrypt(session, process.env.REACT_APP_SECRET_KEY) // Encrypt your session data
-    // @ts-ignore
-    cookies().set('session', encryptedSessionData, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 60 * 60 * 24 * 7, // One week
-        path: '/',
-    })
-}
-
-export const getSession = async () => {
-    // @ts-ignore
-    const encryptedSessionData = cookies().get('session')
-    console.log("encryptedSessionData: ", encryptedSessionData)
-    // @ts-ignore
-    // return CryptoJS.AES.decrypt(encryptedSessionData, process.env.REACT_APP_SECRET_KEY).toString(CryptoJS.enc.Utf8)
-    return 'test'
 }
