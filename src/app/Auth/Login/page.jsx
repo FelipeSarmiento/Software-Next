@@ -4,8 +4,8 @@ import {BackgroundGradient} from "../../components/AceternityUI/background-gradi
 export default function Home(){
 
     return (
-        <div className="min-h-[calc(100vh_-_84px)] py-10 flex items-center justify-center ">
-            <BackgroundGradient containerClassName="w-1/4">
+        <div className="min-h-[calc(100vh_-_84px)] px-4 py-10 flex items-center justify-center ">
+            <BackgroundGradient containerClassName="md:w-1/4">
                 <SignInForm/>
             </BackgroundGradient>
         </div>

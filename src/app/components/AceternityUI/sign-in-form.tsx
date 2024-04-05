@@ -25,12 +25,16 @@ export function SignInForm() {
 
     return (
         <div
-            className="w-full rounded-3xl p-4 px-10 md:p-8 shadow-input bg-black border-gray-600 border-2">
-            <h2 className="font-bold text-xl text-neutral-200">
+            className="w-full rounded-3xl p-4 px-5 md:p-8 shadow-input bg-black border-gray-600 border-2">
+            <h2 className="font-bold text-xl text-center text-neutral-200">
                 Welcome to Software Next
             </h2>
-            <p className="text-sm max-w-sm mt-2 text-neutral-300">
+            <p className="text-sm max-w-sm mt-2 text-center text-neutral-300">
                 Login to start designing your web site
+            </p>
+
+            <p className="text-xs px-3 mt-2 text-center text-red-300">
+                Is not working yet, so you can't login right now, soon you will be able to login
             </p>
             <form className="my-8" onSubmit={(e) => {
                 e.preventDefault()
