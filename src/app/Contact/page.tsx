@@ -44,14 +44,14 @@ export default function Home() {
                         <h1 className="text-4xl md:text-8xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
                             Contact
                         </h1>
-                        <p className="mt-4 font-normal text-2xl text-neutral-300 max-w-xl text-center mx-auto">
+                        <p className="mt-4 font-normal text-xl md:text-2xl text-neutral-300 max-w-xl text-center mx-auto">
                             Welcome to our Contact page! We're here to assist you with any questions, feedback, or inquiries you may have. Feel free to reach out to us using the contact information provided below:
                         </p>
                     </div>
                 </div>
             </div>
             <div className="">
-                <div className="max-w-2xl w-full mx-auto rounded-none md:rounded-2xl p-4 md:px-4 shadow-input">
+                <div className="max-w-2xl w-full z-50 mx-auto rounded-none md:rounded-2xl p-4 md:px-4 shadow-input">
                     <form ref={form} onSubmit={sendEmail} className="my-8">
                         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
                             <LabelInputContainer>

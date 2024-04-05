@@ -1,20 +1,27 @@
 "use client";
-import {signIn, getSession,} from "next-auth/react"
 import {Label} from "./label";
 import {Input} from "./input";
 import {cn} from "../../../settings/utils/cn";
-import {
-    IconBrandGoogle,
-    IconMail
-} from "@tabler/icons-react";
 import {useForm} from "../../../lib/hooks/useForm";
 import Link from "next/link";
+// import { login } from "@/data/page";
+import {useState} from "react";
 
 export function SignInForm() {
 
 
-    const {onInputChange, formState} = useForm({
-    })
+    const {onInputChange, formState} = useForm({})
+
+    const [errorMessage, setErrorMessage] = useState('' as string)
+    const handleSignIn = async () => {
+        // try {
+        //     let result = await login(formState)
+        //     console.log("login: ", result)
+        //     setErrorMessage('')
+        // } catch (e) {
+        //     setErrorMessage(e.message)
+        // }
+    }
 
     return (
         <div
@@ -25,24 +32,33 @@ export function SignInForm() {
             <p className="text-sm max-w-sm mt-2 text-neutral-300">
                 Login to start designing your web site
             </p>
-            <form className="my-8" onSubmit={ (e) => {
+            <form className="my-8" onSubmit={(e) => {
                 e.preventDefault()
-            } }>
+                handleSignIn()
+            }}>
                 <LabelInputContainer className="mb-4">
                     <Label htmlFor="email">Email Address</Label>
-                    <Input id="email" placeholder="Email" type="email" name="email" value={formState.email}
+                    <Input required={true} id="email" placeholder="Email" type="email" name="email"
+                           value={formState.email}
                            onChange={onInputChange}/>
                 </LabelInputContainer>
                 <LabelInputContainer className="mb-4">
                     <Label htmlFor="password">Password</Label>
-                    <Input id="password" placeholder="••••••••" type="password" name="password"
+                    <Input required={true} id="password" placeholder="••••••••" type="password" name="password"
                            value={formState.password} onChange={onInputChange}/>
                 </LabelInputContainer>
-                <button onClick={() => {signIn('credentials', {email: formState.email, password: formState.password, redirect: true, callbackUrl: '/Dashboard'})
-
+                {
+                    errorMessage !== '' && (
+                        <LabelInputContainer className="md:col-span-2">
+                            <p className="text-center font-bold">
+                                <span
+                                    className="px-4 py-2 rounded-lg border-2 text-red-500 border-red-500">{errorMessage}</span>
+                            </p>
+                        </LabelInputContainer>
+                    )
                 }
-                }
-                        className="bg-gradient-to-br relative group/btn from-zinc-900 to-zinc-900 block bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_var(--white)_inset,0px_-1px_0px_0px_var(--white)_inset]">
+                <button
+                    className="bg-gradient-to-br relative group/btn from-zinc-900 to-zinc-900 block bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_0px_0px_0px_var(--white)_inset,0px_-1px_0px_0px_var(--white)_inset]">
                     Sign in &rarr;
                     <BottomGradient/>
                 </button>
@@ -51,21 +67,13 @@ export function SignInForm() {
                     className="bg-gradient-to-r from-transparent via-neutral-700 to-transparent my-8 h-[1px] w-full"/>
 
                 <div className="flex flex-col space-y-4">
-                    <button onClick={() => signIn()}
-                            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium bg-zinc-900 shadow-[0px_0px_1px_1px_var(--neutral-800)]">
-                        <IconBrandGoogle className="h-4 w-4 text-neutral-300"/>
+                    <Link href='/Auth/Register'
+                          className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-zinc-900 shadow-[0px_0px_1px_1px_var(--neutral-800)]">
                         <span className="text-neutral-300 text-sm">
-                            Sign in with Google
-                        </span>
-                        <BottomGradient/>
-                    </button>
-                        <Link href='/Auth/Register' className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-zinc-900 shadow-[0px_0px_1px_1px_var(--neutral-800)]">
-                            <IconMail className="h-4 w-4 text-neutral-300"/>
-                            <span className="text-neutral-300 text-sm">
                             Sign up
                         </span>
-                            <BottomGradient/>
-                        </Link>
+                        <BottomGradient/>
+                    </Link>
                 </div>
             </form>
         </div>

@@ -6,7 +6,8 @@ import {TextGenerateEffect} from "../components/AceternityUI/text-generate-effec
 import {AnimatePresence, motion} from "framer-motion";
 import {CanvasRevealEffect} from "../components/AceternityUI/canvas-reveal-effect";
 import {WavyBackground} from "@/app/components/AceternityUI/wavy-background";
-import { IconHandClick } from "@tabler/icons-react";
+import {IconHandClick} from "@tabler/icons-react";
+import Link from "next/link";
 
 export function Index() {
     const words = `Welcome to Software Next, where creativity meets simplicity in website creation!
@@ -14,102 +15,108 @@ Are you looking to build a stunning website without the hassle of coding? Look n
 
     return (
         <>
-            <div className="h-[calc(100vh_-_80px)] w-full flex flex-col justify-center items-center overflow-hidden rounded-md">
+            <div
+                className="h-[calc(100vh_-_80px)] w-full flex flex-col py-4 md:py-0 md:justify-center items-center overflow-hidden rounded-md">
                 <h1 className="md:text-6xl text-5xl 2xl:text-8xl font-bold text-center text-white relative z-20">
                     <span className="text-cyan-500">Software Next</span>
                 </h1>
-                <div className="w-full md:w-[40rem] h-40 relative">
+                <div className="w-full md:w-[40rem] flex flex-col items-center h-40 relative">
                     {/* Gradients */}
                     <div
-                        className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent h-[2px] w-3/4 blur-sm"/>
+                        className="absolute top-3 bg-gradient-to-r from-transparent via-cyan-500 to-transparent h-[2px] w-full blur-sm"/>
                     <div
-                        className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent h-px w-3/4"/>
+                        className="absolute top-3 bg-gradient-to-r from-transparent via-cyan-500 to-transparent h-px w-full"/>
                     <div
-                        className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-sm"/>
+                        className="absolute top-3 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-2/4 blur-sm"/>
                     <div
-                        className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-1/4"/>
+                        className="absolute top-3 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-2/4"/>
                     <div className="absolute w-full px-4 xl:w-[200%] left-2/4 -translate-x-2/4 top-12 z-30 text-white">
-                        <TextGenerateEffect className="text-center leading-normal px-24 text-2xl md:text-3xl" words={words}/>
+                        <TextGenerateEffect className="text-center leading-normal px-6 md:px-24 text-xl md:text-3xl"
+                                            words={words}/>
                     </div>
 
                     {/* Radial Gradient to prevent sharp edges */}
                     <div
-                        className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
+                        className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(500px_200px_at_top,transparent_20%,white)]"></div>
                 </div>
             </div>
             <div className="pt-12 pb-48 w-full overflow-hidden rounded-md">
-                    <div className="flex flex-col lg:flex-row bg-black w-full gap-4 mx-auto px-8">
-                        <Card
-                            title={
-                                <span className="text-white text-xl text-center leading-normal">Build your website with ease, no programming knowledge needed</span>
-                            }
-                            icon={
-                                <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">No coding Required</span>
-                            }>
-                            <CanvasRevealEffect
-                                animationSpeed={5.1}
-                                containerClassName="bg-sky-900"
-                            />
-                        </Card>
-                        <Card
-                            title={
-                                <span className="text-white text-xl text-center leading-normal">Choose from a wide range of professionally designed templates</span>
-                            }
-                            icon={
-                                <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">Customizable Templates</span>
-                            }>
-                            <CanvasRevealEffect
-                                animationSpeed={5.1}
-                                containerClassName="bg-sky-900"
-                            />
-                        </Card>
-                        <Card
-                            title={
-                                <span className="text-white text-xl text-center leading-normal">See your changes go live immediately without the need for separate hosting</span>
-                            }
-                            icon={
-                                <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">Instant Publishing</span>
-                            }>
-                            <CanvasRevealEffect
-                                animationSpeed={5.1}
-                                containerClassName="bg-sky-900"
-                            />
-                        </Card>
-                        <Card
-                            title={
-                                <span className="text-white text-xl text-center leading-normal">Take advantage of additional services like site creation assistance or dedicated developer support.</span>
-                            }
-                            icon={
-                                <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">Optional Services</span>
-                            }>
-                            <CanvasRevealEffect
-                                animationSpeed={5.1}
-                                containerClassName="bg-sky-900"
-                            />
-                        </Card>
-                    </div>
+                <div className="flex flex-col lg:flex-row bg-black w-full gap-4 mx-auto px-8">
+                    <Card
+                        title={
+                            <span className="text-white text-xl text-center leading-normal">Build your website with ease, no programming knowledge needed</span>
+                        }
+                        icon={
+                            <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">No coding Required</span>
+                        }>
+                        <CanvasRevealEffect
+                            animationSpeed={5.1}
+                            containerClassName="bg-sky-900"
+                        />
+                    </Card>
+                    <Card
+                        title={
+                            <span className="text-white text-xl text-center leading-normal">Choose from a wide range of professionally designed templates</span>
+                        }
+                        icon={
+                            <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">Customizable Templates</span>
+                        }>
+                        <CanvasRevealEffect
+                            animationSpeed={5.1}
+                            containerClassName="bg-sky-900"
+                        />
+                    </Card>
+                    <Card
+                        title={
+                            <span className="text-white text-xl text-center leading-normal">See your changes go live immediately without the need for separate hosting</span>
+                        }
+                        icon={
+                            <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">Instant Publishing</span>
+                        }>
+                        <CanvasRevealEffect
+                            animationSpeed={5.1}
+                            containerClassName="bg-sky-900"
+                        />
+                    </Card>
+                    <Card
+                        title={
+                            <span className="text-white text-xl text-center leading-normal">Take advantage of additional services like site creation assistance or dedicated developer support.</span>
+                        }
+                        icon={
+                            <span className="text-white text-3xl px-5 text-center leading-normal font-extrabold">Optional Services</span>
+                        }>
+                        <CanvasRevealEffect
+                            animationSpeed={5.1}
+                            containerClassName="bg-sky-900"
+                        />
+                    </Card>
                 </div>
+            </div>
 
             <div className="relative">
-                <WavyBackground waveOpacity={0.2} className="max-w-4xl mx-auto flex flex-col items-center justify-center">
-                    <p className="md:text-4xl mt-5 text-white font-bold inter-var text-center">
+                <WavyBackground waveOpacity={0.2}
+                                className="max-w-4xl mx-auto flex flex-col items-center justify-center">
+                    <p className=" text-lg md:text-4xl mt-5 text-white font-bold inter-var text-center">
                         Whether you're starting a blog, showcasing your portfolio, or launching an online store, we've
                         got you covered. Join thousands of satisfied users who have already created their dream websites
                         with us.
                     </p>
-                    <p className="md:text-4xl mix mix-blend-multiply mt-5 text-white font-bold inter-var text-center">
+                    <p className="text-lg md:text-4xl mix mix-blend-multiply mt-5 text-white font-bold inter-var text-center">
                         Ready to get started? Sign up now and unlock the power of online creativity with <br/><span
                         className="text-cyan-400 font-extrabold py-5">Software Next</span>!
                     </p>
-                    <button
-                        className="relative my-20 inline-flex h-16 w-36 overflow-hidden rounded-3xl p-[2px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                    <Link href="/Auth/Register">
+                        <button
+                            className="relative my-20 inline-flex h-16 w-36 overflow-hidden rounded-3xl p-[2px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
                         <span
                             className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#22d3ee_0%,#bae6fd_50%,#22d3ee_100%)]"/>
-                        <span
-                            className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-3xl bg-black px-3 text-lg font-medium text-white backdrop-blur-3xl">
+
+                            <span
+                                className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-3xl bg-black px-3 text-lg font-medium text-white backdrop-blur-3xl">
                             Sign Up
-                        </span>
-                    </button>
+                            </span>
+                        </button>
+                    </Link>
                 </WavyBackground>
             </div>
         </>
@@ -150,7 +157,8 @@ const Card = ({
             </AnimatePresence>
 
             <div className="relative z-20 w-full h-20">
-                <div className="text-center group-hover/canvas-card:-translate-y-4 group-hover/canvas-card:hidden transition duration-200 w-full h-full flex items-center justify-center">
+                <div
+                    className="text-center group-hover/canvas-card:-translate-y-4 group-hover/canvas-card:hidden transition duration-200 w-full h-full flex items-center justify-center">
                     {icon}
                 </div>
             </div>
