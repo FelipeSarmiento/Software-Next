@@ -15,7 +15,7 @@ Are you looking to build a stunning website without the hassle of coding? Look n
 
     return (
         <>
-            <div className="h-[calc(100vh_-_80px)] bg-red-500 w-full flex flex-col py-4 md:py-0 justify-center items-center overflow-hidden rounded-md">
+            <div className="h-[calc(100vh_-_80px)] w-full flex flex-col py-4 md:py-0 justify-center items-center overflow-hidden rounded-md">
                 <h1 className="md:text-6xl text-5xl 2xl:text-8xl font-bold text-center text-white relative z-20">
                     <span className="text-cyan-500">Software Next</span>
                 </h1>
