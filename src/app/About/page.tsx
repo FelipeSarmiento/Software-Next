@@ -79,7 +79,7 @@ export default function Home() {
                         </h1>
                         <p className="mt-4 font-normal text-base text-neutral-300 max-w-lg mx-auto">
                             <ul className="list-disc">
-                                <li>A user-friendly platform for building websites without coding.</li>
+                                <li>A user-friendly platform for building websites without coding. </li>
                                 <li>A wide range of customizable templates and components.</li>
                                 <li>Instant publishing of changes without the hassle of hosting.</li>
                                 <li>Optional services for additional assistance in website creation.</li>
