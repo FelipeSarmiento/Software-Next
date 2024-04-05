@@ -4,7 +4,7 @@ import {Input} from "./input";
 import {cn} from "../../../settings/utils/cn";
 import {useForm} from "../../../lib/hooks/useForm";
 import Link from "next/link";
-import { login } from "@/data/page";
+// import { login } from "@/data/page";
 import {useState} from "react";
 
 export function SignInForm() {
@@ -14,13 +14,13 @@ export function SignInForm() {
 
     const [errorMessage, setErrorMessage] = useState('' as string)
     const handleSignIn = async () => {
-        try {
-            let result = await login(formState)
-            console.log("login: ", result)
-            setErrorMessage('')
-        } catch (e) {
-            setErrorMessage(e.message)
-        }
+        // try {
+        //     let result = await login(formState)
+        //     console.log("login: ", result)
+        //     setErrorMessage('')
+        // } catch (e) {
+        //     setErrorMessage(e.message)
+        // }
     }
 
     return (

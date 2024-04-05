@@ -4,7 +4,7 @@ import {Input} from "./input";
 import {cn} from "../../../settings/utils/cn";
 import {useForm} from "../../../lib/hooks/useForm";
 import Link from "next/link";
-import { registerUser } from '../../../data/page'
+// import { registerUser } from '../../../data/page'
 import {useState} from "react";
 
 export function SignUpForm() {
@@ -15,20 +15,20 @@ export function SignUpForm() {
     const [errorMessage, setErrorMessage] = useState('' as string)
 
     const handleSignUp = async () => {
-        try {
-            await registerUser(formState)
-            setErrorMessage('')
-        }
-        catch (e) {
-            if (e.message.includes('duplicate')){
-                if (e.message.includes('email')){
-                    setErrorMessage('Email already exists')
-                }
-                else if (e.message.includes('username')){
-                    setErrorMessage('Username already exists')
-                    }
-            }
-        }
+        // try {
+        //     await registerUser(formState)
+        //     setErrorMessage('')
+        // }
+        // catch (e) {
+        //     if (e.message.includes('duplicate')){
+        //         if (e.message.includes('email')){
+        //             setErrorMessage('Email already exists')
+        //         }
+        //         else if (e.message.includes('username')){
+        //             setErrorMessage('Username already exists')
+        //             }
+        //     }
+        // }
     }
 
     return (
