@@ -23,12 +23,12 @@ export default function RootLayout({children}) {
     const session = getServerSession(authOptions);
 
     return (
-        <body className={inter.className + " bg-black text-white min-h-screen from-30% [::-webkit-scrollbar{display:none;}] shrink-0 overflow-x-hidden"}>
+        <body className={"bg-black text-white min-h-screen overflow-x-hidden"}>
         <SessionProvider session={session}>
             <StoreProvider>
                 <Analytics/>
                 <MantineProvider>
-                    <div className="bg-black lg:bg-transparent">
+                    <div className="">
                         <NavBar/>
                         <div className="min-h-[calc(100vh_-_84px)]">
                             {children}

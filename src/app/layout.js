@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function RootLayout({children}) {
     return (
-        <html className="" lang="en">
+        <html className="dark" lang="en">
         <head>
             <link rel="icon" href="https://cdn.hugeicons.com/icons/snow-stroke-rounded.svg" />
         </head>
