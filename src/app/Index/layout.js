@@ -12,6 +12,7 @@ import {BackgroundBeams} from "@/app/components/AceternityUI/background-beams";
 import { Analytics } from "@vercel/analytics/react"
 
 import {ColorSchemeScript, createTheme, MantineProvider} from '@mantine/core';
+import {Index} from "@/app/Index/index";
 
 config.autoAddCss = false
 
@@ -23,24 +24,26 @@ export default function RootLayout({children}) {
     const session = getServerSession(authOptions);
 
     return (
-        <body className={inter.className + " bg-black text-white min-h-screen from-30% [::-webkit-scrollbar{display:none;}] shrink-0 overflow-x-hidden"}>
-        <SessionProvider session={session}>
-            <StoreProvider>
-                <Analytics/>
-                <MantineProvider>
-                    <div className="bg-black lg:bg-transparent">
-                        <NavBar/>
-                        <div className="min-h-[calc(100vh_-_84px)]">
-                            {children}
-                        </div>
-                        <div className="hidden lg:block">
+        <>
+            <body className={"bg-transparent min-h-screen overflow-x-hidden"}>
+            <SessionProvider session={session}>
+                <StoreProvider>
+                    <Analytics/>
+                    <MantineProvider>
+                        <div className="relative bg-black">
+                            <NavBar/>
+                            <div className="min-h-[calc(100vh_-_84px)]">
+                                <div className="min-h-[calc(100vh_-_84px)] snap-y">
+                                    { children }
+                                </div>
+                            </div>
                             <BackgroundBeams />
                         </div>
-                    </div>
-                </MantineProvider>
-            </StoreProvider>
-        </SessionProvider>
-        <script src="https://cdn.tailwindcss.com"></script>
-        </body>
+                    </MantineProvider>
+                </StoreProvider>
+            </SessionProvider>
+            <script src="https://cdn.tailwindcss.com"></script>
+            </body>
+        </>
     );
 }
