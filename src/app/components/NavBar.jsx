@@ -6,7 +6,6 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faRightToBracket} from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import {Button} from "keep-react";
-import cookieCutter from 'cookie-cutter'
 
 const navigation = [
     {name: 'How to use?', href: '/HowToUse', current: false},
@@ -21,7 +20,8 @@ function classNames(...classes) {
 }
 
 export function NavBar() {
-    const session = cookieCutter.get('session')
+
+    const session = ""
 
     return (
         <Disclosure as="nav" className="border-b-4 border-cyan-500 sticky bg-black top-0 z-50">
