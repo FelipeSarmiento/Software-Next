@@ -5,7 +5,6 @@ import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faRightToBracket} from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
-import {Button} from "keep-react";
 import { getSession, logout as logOut } from '@/./data/page';
 
 const navigation = [
@@ -161,7 +160,7 @@ export function NavBar() {
                                                     <Disclosure.Button title="Cerrar Sesión" onClick={() => logout()}
                                                                        className="relative flex pb-1 h-8 items-center px-1 text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
                                                         <span
-                                                            className="md:block flex h-auto">{JSON.stringify(session)}</span>
+                                                            className="md:block flex h-auto">{ session }</span>
                                                         <div>
                                                             <FontAwesomeIcon icon={faRightToBracket}
                                                                              className="text-sm px-1"/>
