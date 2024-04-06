@@ -14,6 +14,7 @@ export function SignInForm() {
 
     const [errorMessage, setErrorMessage] = useState('' as string)
     const handleSignIn = async () => {
+        setErrorMessage('')
         try {
             let result = await login(formState)
             if (result.ok) {
