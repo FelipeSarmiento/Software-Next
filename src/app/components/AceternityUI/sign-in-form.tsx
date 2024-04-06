@@ -20,12 +20,12 @@ export function SignInForm() {
             let result = await login(formState)
             if (result.ok) {
                 await setSession(result.user)
+                window.location.reload()
             }
             setErrorMessage(result.message)
         } catch (e) {
             setErrorMessage(e.message)
         }
-        window.location.reload()
     }
 
     return (
