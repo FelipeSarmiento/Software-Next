@@ -19,8 +19,7 @@ export function SignInForm() {
         try {
             let result = await login(formState)
             if (result.ok) {
-                await setSession(result.user)
-                window.location.reload()
+                await setSession(result.user).then(() => { window.location.reload() })
             }
             setErrorMessage(result.message)
         } catch (e) {
@@ -34,21 +33,18 @@ export function SignInForm() {
             <h2 className="font-bold text-xl text-center text-neutral-200">
                 Welcome to Software Next
             </h2>
-            <p className="text-sm max-w-sm mt-2 text-center text-neutral-300">
+            <p className="text-sm mt-2 text-center text-neutral-300">
                 Login to start designing your web site
             </p>
 
-            <p className="text-xs px-3 mt-2 text-center text-red-300">
-                Is not working yet, so you can't login right now, soon you will be able to login
-            </p>
             <form className="my-8" onSubmit={(e) => {
                 e.preventDefault()
                 handleSignIn()
             }}>
                 <LabelInputContainer className="mb-4">
-                    <Label htmlFor="email">Email Address</Label>
-                    <Input required={true} id="email" placeholder="Email" type="email" name="email"
-                           value={formState.email}
+                    <Label htmlFor="email">Email / Username</Label>
+                    <Input required={true} id="user" placeholder="Email / Username" type="text" name="user"
+                           value={formState.user}
                            onChange={onInputChange}/>
                 </LabelInputContainer>
                 <LabelInputContainer className="mb-4">

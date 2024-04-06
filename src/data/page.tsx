@@ -10,12 +10,12 @@ export const registerUser = async (users) => {
 }
 export const login = async (user: any) => {
     const {password, email} = user
-    const {rows} = await sql`SELECT * FROM users WHERE email = ${email}`;
+    const {rows} = await sql`SELECT * FROM users WHERE email = ${user} OR username = ${user}`;
     if (rows.length === 0) {
         return {
             user: null,
             ok: false,
-            message: 'Invalid email or password'
+            message: 'Invalid email or username'
         }
     }
     else {
@@ -31,7 +31,7 @@ export const login = async (user: any) => {
             return {
                 user: null,
                 ok: false,
-                message: 'Invalid email or password'
+                message: 'Password is incorrect'
             }
         }
     }
