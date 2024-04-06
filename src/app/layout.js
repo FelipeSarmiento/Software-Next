@@ -1,8 +1,4 @@
-
-import {Inter} from "next/font/google";
 import "../settings/assets/globals.css";
-
-const inter = Inter({subsets: ["latin"]});
 
 export const metadata = {
     title: "Software Next - Alpha version",
