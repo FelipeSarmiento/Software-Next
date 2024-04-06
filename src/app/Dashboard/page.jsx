@@ -1,15 +1,13 @@
 'use client'
 import React, {useEffect, useState} from 'react'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronDown, faChevronUp, faFloppyDisk, faTrash} from '@fortawesome/free-solid-svg-icons'
-import {useSession} from 'next-auth/react'
+import {faChevronDown, faChevronUp, faFloppyDisk} from '@fortawesome/free-solid-svg-icons'
 import {DropMenu} from "./components/DropMenu";
 import {DashboardPreview} from "./DashboardPreview.jsx";
 import {fetchDataFromFirestore, saveDataToFirestore} from "../../settings/firebase/firebase";
 import {
     IconClipboard,
     IconCopy,
-    IconCut,
     IconDeviceDesktop,
     IconDeviceIpadHorizontal,
     IconDeviceLaptop,
@@ -20,12 +18,15 @@ import {
 import {Disclosure} from "@headlessui/react";
 import {Button, Drawer, Group, HoverCard, Popover, Text, Menu} from '@mantine/core';
 import Link from "next/link";
-
-import pako from 'pako';
+import {getSession} from "@/data/page";
 
 export default function Dashboard() {
 
-    const {data: session} = useSession();
+    const [session, setSession] = useState()
+
+    useEffect(() => {
+        getSession().then((session) => setSession(session))
+    }, []);
 
     const viewports = [
         {value: "390px", type: "Mobile", breakpointID: "", icon: <IconDeviceMobile/>},
@@ -54,7 +55,7 @@ export default function Dashboard() {
     }, [session]);
 
     async function saveItemsDashboard(bodySet) {
-        const resp = await saveDataToFirestore(btoa(bodySet), session?.user.id);
+        const resp = await saveDataToFirestore(btoa(bodySet), session?.userId);
         setUnSaved(false)
     }
 
@@ -648,7 +649,7 @@ export default function Dashboard() {
 
     async function getItemsDashboard() {
         try {
-            const itemsDashboardResp = await fetchDataFromFirestore(session?.user.id);
+            const itemsDashboardResp = await fetchDataFromFirestore(session?.userId);
             if (!itemsDashboardResp) {
                 setItemsDashboard({
                     pages:
