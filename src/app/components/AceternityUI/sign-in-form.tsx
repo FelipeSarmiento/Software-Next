@@ -18,10 +18,9 @@ export function SignInForm() {
         try {
             let result = await login(formState)
             if (result.ok) {
-                alert('Login successful')
+                alert(result.message)
             }
-            console.log("login: ", result)
-            setErrorMessage('')
+            setErrorMessage(result.message)
         } catch (e) {
             setErrorMessage(e.message)
         }

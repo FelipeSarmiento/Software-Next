@@ -13,7 +13,11 @@ export const login = async (user: any) => {
     const {password, email} = user
     const {rows} = await sql`SELECT * FROM users WHERE email = ${email}`;
     if (rows.length === 0) {
-        throw new Error('User not found')
+        return {
+            user: null,
+            ok: false,
+            message: 'Invalid email or password'
+        }
     }
     else {
         const match = compare(password, rows[0].password, process.env.REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#')
@@ -21,10 +25,15 @@ export const login = async (user: any) => {
             delete rows[0].password
             return {
                 user: rows[0],
-                ok: true
+                ok: true,
+                message: 'Login successful'
             }
         } else {
-            throw new Error('Invalid emails or password')
+            return {
+                user: null,
+                ok: false,
+                message: 'Invalid email or password'
+            }
         }
     }
 }
