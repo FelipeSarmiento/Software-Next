@@ -4,7 +4,7 @@ import {Input} from "./input";
 import {cn} from "../../../settings/utils/cn";
 import {useForm} from "../../../lib/hooks/useForm";
 import Link from "next/link";
-// import { registerUser } from '../../../data/page'
+import { registerUser } from '@/./data/page'
 import {useState} from "react";
 
 export function SignUpForm() {
@@ -12,23 +12,26 @@ export function SignUpForm() {
     const {onInputChange, formState} = useForm({
     })
 
-    const [errorMessage, setErrorMessage] = useState('' as string)
+    const [message, setMessage] = useState({
+        message: '',
+        type: ''
+    } as {message: string, type: string})
 
     const handleSignUp = async () => {
-        // try {
-        //     await registerUser(formState)
-        //     setErrorMessage('')
-        // }
-        // catch (e) {
-        //     if (e.message.includes('duplicate')){
-        //         if (e.message.includes('email')){
-        //             setErrorMessage('Email already exists')
-        //         }
-        //         else if (e.message.includes('username')){
-        //             setErrorMessage('Username already exists')
-        //             }
-        //     }
-        // }
+        try {
+            await registerUser(formState)
+            setMessage({message: 'User created successfully', type: 'success'})
+        }
+        catch (e) {
+            if (e.message.includes('duplicate')){
+                if (e.message.includes('email')){
+                    setMessage({message: 'Email already exists', type: 'success'})
+                }
+                else if (e.message.includes('username')){
+                    setMessage({message: 'Username already exists', type: 'success'})
+                    }
+            }
+        }
     }
 
     return (
@@ -78,10 +81,10 @@ export function SignUpForm() {
                            value={formState.password} onChange={onInputChange}/>
                 </LabelInputContainer>
                 {
-                    errorMessage !== '' && (
+                    message.message !== '' && (
                         <LabelInputContainer className="md:col-span-2">
                             <p className="text-center font-bold">
-                                <span className="px-4 py-2 rounded-lg border-2 text-red-500 border-red-500">{ errorMessage }</span>
+                                <span className={"px-4 py-2 rounded-lg border-2 " + ( message.type === 'success' ? 'border-green-500 text-green-500' : 'border-red-500 text-red-500' )}>{ message.message }</span>
                             </p>
                         </LabelInputContainer>
                     )
