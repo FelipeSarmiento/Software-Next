@@ -18,6 +18,7 @@ export function SignUpForm() {
     } as {message: string, type: string})
 
     const handleSignUp = async () => {
+        setMessage({message: '', type: ''})
         try {
             await registerUser(formState)
             setMessage({message: 'User created successfully', type: 'success'})

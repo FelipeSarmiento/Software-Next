@@ -4,7 +4,7 @@ import {Input} from "./input";
 import {cn} from "../../../settings/utils/cn";
 import {useForm} from "../../../lib/hooks/useForm";
 import Link from "next/link";
-// import { login } from "@/data/page";
+import { login } from "@/data/page";
 import {useState} from "react";
 
 export function SignInForm() {
@@ -14,13 +14,16 @@ export function SignInForm() {
 
     const [errorMessage, setErrorMessage] = useState('' as string)
     const handleSignIn = async () => {
-        // try {
-        //     let result = await login(formState)
-        //     console.log("login: ", result)
-        //     setErrorMessage('')
-        // } catch (e) {
-        //     setErrorMessage(e.message)
-        // }
+        try {
+            let result = await login(formState)
+            if (result.ok) {
+                alert('Login successful')
+            }
+            console.log("login: ", result)
+            setErrorMessage('')
+        } catch (e) {
+            setErrorMessage(e.message)
+        }
     }
 
     return (
@@ -53,10 +56,9 @@ export function SignInForm() {
                 </LabelInputContainer>
                 {
                     errorMessage !== '' && (
-                        <LabelInputContainer className="md:col-span-2">
+                        <LabelInputContainer className="md:col-span-2 my-5">
                             <p className="text-center font-bold">
-                                <span
-                                    className="px-4 py-2 rounded-lg border-2 text-red-500 border-red-500">{errorMessage}</span>
+                                <span className="px-4 py-2 rounded-lg border-2 border-red-500 text-red-500">{ errorMessage }</span>
                             </p>
                         </LabelInputContainer>
                     )
