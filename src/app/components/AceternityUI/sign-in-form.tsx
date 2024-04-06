@@ -6,6 +6,7 @@ import {useForm} from "../../../lib/hooks/useForm";
 import Link from "next/link";
 import { login } from "@/data/page";
 import {useState} from "react";
+import { setSession } from "@/data/page";
 
 export function SignInForm() {
 
@@ -18,12 +19,13 @@ export function SignInForm() {
         try {
             let result = await login(formState)
             if (result.ok) {
-                alert(result.message)
+                await setSession(result.user)
             }
             setErrorMessage(result.message)
         } catch (e) {
             setErrorMessage(e.message)
         }
+        window.location.reload()
     }
 
     return (

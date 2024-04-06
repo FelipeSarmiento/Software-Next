@@ -1,8 +1,7 @@
 'use server'
 import {sql} from "@vercel/postgres";
-// import { cookies } from 'next/headers'
-import {redirect} from 'next/navigation'
 import {encrypt, decrypt, compare} from 'n-krypta';
+import { cookies } from 'next/headers';
 
 export const registerUser = async (users) => {
     const {username, password, email, firstName, lastName, phoneNumber} = users
@@ -36,4 +35,28 @@ export const login = async (user: any) => {
             }
         }
     }
+}
+
+export const logout = async () => {
+    cookies().set('userSession', '', {
+        httpOnly: false,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 0,
+        path: '/'
+    })
+}
+
+export const getSession = async () => {
+    const session = cookies().get('userSession')?.value
+    return session ? JSON.parse(decrypt(session, process.env.REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#' )) : null
+}
+
+export const setSession = async (session: any) => {
+    const encryptedSession = encrypt(JSON.stringify(session), process.env.REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#')
+    cookies().set('userSession', encryptedSession, {
+        httpOnly: false,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 60 * 60 * 24 * 7,
+        path: '/'
+    })
 }

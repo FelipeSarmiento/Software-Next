@@ -1,5 +1,3 @@
-import { getServerSession } from "next-auth/next"
-import { authOptions } from '../../pages/api/auth/[...nextauth]';
 import {Inter} from "next/font/google";
 import {NavBar} from "./components/NavBar";
 import '@mantine/core/styles.css';
@@ -15,13 +13,14 @@ import "../settings/assets/globals.css";
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import {MantineProvider} from '@mantine/core';
 import { Index } from './Index';
+import ReactSession from "@/./lib/features/ReactSession";
 
 config.autoAddCss = false
 
 const inter = Inter({subsets: ["latin"]});
 export default function Home() {
 
-    const session = getServerSession(authOptions);
+    ReactSession.setStoreType("localStorage");
     return (
         <>
             <body className={"bg-black text-white min-h-screen overflow-x-hidden"}>
