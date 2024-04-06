@@ -13,14 +13,11 @@ import "../settings/assets/globals.css";
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import {MantineProvider} from '@mantine/core';
 import { Index } from './Index';
-import ReactSession from "@/./lib/features/ReactSession";
 
 config.autoAddCss = false
 
 const inter = Inter({subsets: ["latin"]});
 export default function Home() {
-
-    ReactSession.setStoreType("localStorage");
     return (
         <>
             <body className={"bg-black text-white min-h-screen overflow-x-hidden"}>
