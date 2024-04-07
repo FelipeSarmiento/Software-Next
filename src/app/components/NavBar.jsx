@@ -25,13 +25,12 @@ export function NavBar() {
 
     const logout = () => {
         setSession('')
-        logOut()
-        window.location.reload()
+        logOut().then(() => { window.location.reload() })
     }
 
     useEffect(() => {
         getSession().then((session) => {
-            setSession(session.username)
+            setSession(session?.username)
         })
     }, []);
 
