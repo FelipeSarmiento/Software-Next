@@ -8,8 +8,8 @@ export const registerUser = async (users) => {
     let passwordEncrypted = encrypt(password, process.env.REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#');
     return await sql`INSERT INTO users (first_name, last_name, username, email, phone_number, password) VALUES (${firstName}, ${lastName}, ${username}, ${email}, ${phoneNumber}, ${passwordEncrypted}) RETURNING *`;
 }
-export const login = async (user: any) => {
-    const {password, email} = user
+export const login = async (User: any) => {
+    const {password, user} = User
     const {rows} = await sql`SELECT * FROM users WHERE email = ${user} OR username = ${user}`;
     if (rows.length === 0) {
         return {
@@ -20,6 +20,7 @@ export const login = async (user: any) => {
     }
     else {
         const match = compare(password, rows[0].password, process.env.REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#')
+        console.log("MATCH: ", match)
         if (match) {
             delete rows[0].password
             return {
@@ -48,11 +49,12 @@ export const logout = async () => {
 
 export const getSession = async () => {
     const session = cookies().get('userSession')?.value
-    return session ? JSON.parse(decrypt(session, process.env.REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#' )) : null
+    const decryptedSession = session ? JSON.parse(decrypt(session, process.env.REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#').replaceAll('"', '').replaceAll("'", '"')) : null
+    return decryptedSession ?? null
 }
 
 export const setSession = async (session: any) => {
-    const encryptedSession = encrypt(JSON.stringify(session), process.env.REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#')
+    const encryptedSession = encrypt('"' + JSON.stringify(session).replaceAll('"', "'").replaceAll("_", "") + '"', process.env.REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#')
     cookies().set('userSession', encryptedSession, {
         httpOnly: false,
         secure: process.env.NODE_ENV === 'production',

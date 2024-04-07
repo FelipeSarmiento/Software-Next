@@ -30,7 +30,9 @@ export function NavBar() {
     }
 
     useEffect(() => {
-        getSession().then((session) => setSession(session?.username))
+        getSession().then((session) => {
+            setSession(session.username)
+        })
     }, []);
 
     return (
@@ -95,7 +97,7 @@ export function NavBar() {
                                     ) : (
                                         <Menu as="div" className="relative ml-3">
                                             <div>
-                                                <Disclosure.Button title="Cerrar Sesión" onClick={() => logout()}
+                                                <Disclosure.Button title="Log out" onClick={() => logout()}
                                                         className="relative flex pb-1 h-8 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
                                                     <span className="absolute -inset-1.5"/>
                                                     <span
@@ -157,7 +159,7 @@ export function NavBar() {
                                         ) : (
                                             <Menu as="div" className="relative">
                                                 <div>
-                                                    <Disclosure.Button title="Cerrar Sesión" onClick={() => logout()}
+                                                    <Disclosure.Button title="Log out" onClick={() => logout()}
                                                                        className="relative flex pb-1 h-8 items-center px-1 text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
                                                         <span
                                                             className="md:block flex h-auto">{ session }</span>

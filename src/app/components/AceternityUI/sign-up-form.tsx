@@ -26,10 +26,10 @@ export function SignUpForm() {
         catch (e) {
             if (e.message.includes('duplicate')){
                 if (e.message.includes('email')){
-                    setMessage({message: 'Email already exists', type: 'success'})
+                    setMessage({message: 'Email already exists', type: 'error'})
                 }
                 else if (e.message.includes('username')){
-                    setMessage({message: 'Username already exists', type: 'success'})
+                    setMessage({message: 'Username already exists', type: 'error'})
                     }
             }
         }
