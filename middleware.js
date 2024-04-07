@@ -1,14 +1,21 @@
 import { NextResponse } from 'next/server'
 import {getSession} from "@/data/page";
 
-export async function middleware(req) {
-    // const session = getSession()
-    // if (!session) {
-    //     return NextResponse.redirect(new URL('/Auth/Login', req.url))
-    // }
-    // return NextResponse.next()
+export function middleware(req) {
+    return getSession().then((session) => {
+        if (!session) {
+            if (req.nextUrl.pathname === '/Dashboard') {
+                return NextResponse.redirect(new URL('/Auth/Login', req.url))
+            }
+        }
+        else {
+            if (req.nextUrl.pathname === '/Auth/Login' || req.nextUrl.pathname === '/Auth/Register') {
+                return NextResponse.redirect(new URL('/', req.url))
+            }
+        }
+    })
 }
 
 export const config = {
-    matcher: '/Dashboard',
+    matcher: ['/Dashboard', '/Auth/Login', '/Auth/Register'],
 }
