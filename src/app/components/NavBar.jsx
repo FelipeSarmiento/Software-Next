@@ -95,9 +95,14 @@ export function NavBar() {
                                         </Menu>
                                     ) : (
                                         <Menu as="div" className="relative ml-3">
-                                            <div>
+                                            <div className="flex">
+                                                <Link href="/MyProjects" className="relative flex px-2 pb-1 h-8 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
+                                                    <span className="absolute -inset-1.5"/>
+                                                    <span className="px-1 flex h-auto">My Projects</span>
+                                                </Link>
+                                                <div className="border-[1px] border-white" />
                                                 <Disclosure.Button title="Log out" onClick={() => logout()}
-                                                        className="relative flex pb-1 h-8 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
+                                                        className="relative flex pb-1 h-8 px-2 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
                                                     <span className="absolute -inset-1.5"/>
                                                     <span
                                                         className="md:block px-1 flex h-auto">{ session }</span>

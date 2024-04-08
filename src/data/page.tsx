@@ -3,6 +3,15 @@ import {sql} from "@vercel/postgres";
 import {encrypt, decrypt, compare} from 'n-krypta';
 import { cookies } from 'next/headers';
 
+/*
+*  AUTHENTICATION AND USERS
+*  AUTHENTICATION AND USERS
+*  AUTHENTICATION AND USERS
+*  AUTHENTICATION AND USERS
+*  AUTHENTICATION AND USERS
+*  AUTHENTICATION AND USERS
+*/
+
 export const registerUser = async (users) => {
     const {username, password, email, firstName, lastName, phoneNumber} = users
     let passwordEncrypted = encrypt(password, process.env.REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#');
@@ -26,7 +35,7 @@ export const login = async (User: any) => {
             return {
                 user: rows[0],
                 ok: true,
-                message: 'Login successful'
+                message: ''
             }
         } else {
             return {
@@ -61,4 +70,100 @@ export const setSession = async (session: any) => {
         maxAge: 60 * 60 * 24 * 7,
         path: '/'
     })
+}
+
+export const getUser = async (idUser) => {
+    const {rows} = await sql`SELECT * FROM users WHERE idUser = ${idUser}`;
+    return rows[0]
+}
+
+/*
+*  PROJECTS
+*  PROJECTS
+*  PROJECTS
+*  PROJECTS
+*  PROJECTS
+*  PROJECTS
+*/
+
+export const getProjects = async () => {
+    const {rows} = await sql`SELECT * FROM projects WHERE ispublic = true`;
+    return {
+        ok: true,
+        projects: rows
+    }
+
+}
+
+export const getProjectsByUser = async () => {
+
+    const session = await getSession()
+    if (!session) {
+        return {
+            ok: false,
+            message: 'You must be logged in to see your projects'
+        }
+    }
+    const {iduser} = session
+    const {rows} = await sql`SELECT * FROM projects WHERE iduser = ${iduser}`;
+    return {
+        ok: true,
+        projects: rows
+    }
+
+}
+
+export const getProject = async (project_name = "") => {
+    const session = await getSession()
+    if (!session) {
+        return {
+            ok: false,
+            message: 'You must be logged in to see your projects'
+        }
+    }
+    const {iduser} = session
+    const {rows} = await sql`SELECT * FROM projects WHERE projectname = ${project_name} AND iduser = ${iduser}`
+    return {
+        ok: true,
+        project: rows[0]
+    }
+}
+
+export const createProject = async (project) => {
+    const session = await getSession()
+    if (!session) {
+        return {
+            ok: false,
+            message: 'You must be logged in to create a project'
+        }
+    }
+    const { iduser } = session
+    const {project_name, project_description, isPublic, type_project, tags} = project
+    
+    const resp = await sql`INSERT INTO projects (projectname, projectdescription, isPublic, typeproject, tags, iduser) VALUES (${project_name}, ${project_description}, ${isPublic}, ${type_project}, ${tags}, ${iduser}) RETURNING *`
+    }
+
+export const updateProject = async (proyect) => {
+    const session = await getSession()
+    if (!session) {
+        return {
+            ok: false,
+            message: 'You must be logged in to update a project'
+        }
+    }
+    const {iduser} = session
+    const {project_name, project_description, isPublic, type_project, tags, idProject} = proyect
+    return await sql`UPDATE projects SET projectname = ${project_name}, projectdescription = ${project_description}, isPublic = ${isPublic}, typeproject = ${type_project}, tags = ${tags} WHERE idproject = ${idProject} AND iduser = ${iduser} RETURNING *`;
+}
+
+export const deleteProyect = async (idProject) => {
+    const session = await getSession()
+    if (!session) {
+        return {
+            ok: false,
+            message: 'You must be logged in to delete a project'
+        }
+    }
+    const {iduser} = session
+    return await sql`DELETE FROM projects WHERE idproject = ${idProject} AND iduser = ${iduser} RETURNING *`;
 }

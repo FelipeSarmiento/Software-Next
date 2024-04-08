@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown, faChevronUp, faFloppyDisk} from '@fortawesome/free-solid-svg-icons'
 import {DropMenu} from "./components/DropMenu";
 import {DashboardPreview} from "./DashboardPreview.jsx";
-import {fetchDataFromFirestore, saveDataToFirestore} from "../../settings/firebase/firebase";
+import {saveDataToFirestore} from "../../settings/firebase/firebase";
 import {
     IconClipboard,
     IconCopy,
@@ -18,7 +18,7 @@ import {
 import {Disclosure} from "@headlessui/react";
 import {Button, Drawer, Group, HoverCard, Popover, Text, Menu} from '@mantine/core';
 import Link from "next/link";
-import {getSession} from "@/data/page";
+import { getSession, getProject } from "@/data/page";
 
 export default function Dashboard() {
 
@@ -301,7 +301,7 @@ export default function Dashboard() {
                             Page</h2>
                     </div>
                     <div className="col-span-2 py-2 flex space-x-4 justify-center">
-                        <Link target="_blank" href={'/' + session?.user.id}>
+                        <Link target="_blank" href={'/' + session?.idUser}>
                         <button className="text-white text-nowrap flex items-center justify-center border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
                             Visit &nbsp;<IconExternalLink/>
                         </button>
@@ -649,8 +649,9 @@ export default function Dashboard() {
 
     async function getItemsDashboard() {
         try {
-            const itemsDashboardResp = await fetchDataFromFirestore(session?.userId);
-            if (!itemsDashboardResp) {
+            const itemsDashboardResp = await getProject();
+            console.log("itemsDashboardResp: ", itemsDashboardResp.projects)
+            if (!itemsDashboardResp.projects?.length > 0) {
                 setItemsDashboard({
                     pages:
                         {

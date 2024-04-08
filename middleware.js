@@ -9,7 +9,7 @@ export function middleware(req) {
             }
         }
         else {
-            if (req.nextUrl.pathname === '/Auth/Login' || req.nextUrl.pathname === '/Auth/Register') {
+            if (req.nextUrl.pathname === '/Auth/Login' || req.nextUrl.pathname === '/Auth/NewProject') {
                 return NextResponse.redirect(new URL('/', req.url))
             }
         }
@@ -17,5 +17,5 @@ export function middleware(req) {
 }
 
 export const config = {
-    matcher: ['/Dashboard', '/Auth/Login', '/Auth/Register'],
+    matcher: ['/Dashboard', '/Auth/Login', '/Auth/NewProject'],
 }
