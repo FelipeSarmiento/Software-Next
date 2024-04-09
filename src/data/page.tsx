@@ -113,7 +113,7 @@ export const getProjectsByUser = async () => {
 
 }
 
-export const getProject = async (project_name = "") => {
+export const getProject = async (project_name : string) => {
     const session = await getSession()
     if (!session) {
         return {
@@ -125,7 +125,7 @@ export const getProject = async (project_name = "") => {
     const {rows} = await sql`SELECT * FROM projects WHERE projectname = ${project_name} AND iduser = ${iduser}`
     return {
         ok: true,
-        project: rows[0]
+        project: rows
     }
 }
 

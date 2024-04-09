@@ -13,6 +13,7 @@ import React, {useEffect, useState} from "react";
 import {getProjectsByUser, createProject, updateProject} from "@/data/page";
 import Image from 'next/image'
 import emptyBox from '@/settings/assets/images/emptyBox.png'
+import Link from "next/link";
 
 
 export default function Home() {
@@ -68,10 +69,12 @@ export default function Home() {
                                             <IconExternalLink/>
                                             <span className="hidden md:block">Visit</span>
                                         </button>
-                                        <button className="flex space-x-2 hover:text-cyan-500">
-                                            <IconEdit/>
-                                            <span className="hidden md:block">Dashboard</span>
-                                        </button>
+                                        <Link href={"/MyProjects/Dashboard/" + project.projectname.replaceAll(" ", "&")}>
+                                            <button className="flex space-x-2 hover:text-cyan-500">
+                                                <IconEdit/>
+                                                <span className="hidden md:block">Dashboard</span>
+                                            </button>
+                                        </Link>
                                         <button
                                             onClick={() => {
                                                 setCurrentProject({
