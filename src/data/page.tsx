@@ -143,7 +143,8 @@ export const createProject = async (project) => {
     const resp = await sql`INSERT INTO projects (projectname, projectdescription, isPublic, typeproject, tags, iduser) VALUES (${project_name}, ${project_description}, ${isPublic}, ${type_project}, ${tags}, ${iduser}) RETURNING *`
     }
 
-export const updateProject = async (proyect) => {
+export const updateProject = async (project) => {
+    console.log("PROJECT: ", project)
     const session = await getSession()
     if (!session) {
         return {
@@ -152,7 +153,7 @@ export const updateProject = async (proyect) => {
         }
     }
     const {iduser} = session
-    const {project_name, project_description, isPublic, type_project, tags, idProject} = proyect
+    const {project_name, project_description, isPublic, type_project, tags, idProject} = project
     return await sql`UPDATE projects SET projectname = ${project_name}, projectdescription = ${project_description}, isPublic = ${isPublic}, typeproject = ${type_project}, tags = ${tags} WHERE idproject = ${idProject} AND iduser = ${iduser} RETURNING *`;
 }
 
