@@ -656,7 +656,7 @@ export default function Dashboard({params}) {
             await getProject(params.slug.replace("%26", " ")).then((itemsDashboardResp) => {
                 if (itemsDashboardResp.project[0] !== undefined) {
                     setProject(itemsDashboardResp?.project[0] ?? undefined);
-                    setItemsDashboard(itemsDashboardResp.project[0]?.items ?? {
+                    setItemsDashboard(JSON.parse(itemsDashboardResp.project[0]?.items) ?? {
                         pages:
                             {
                                 index: {
