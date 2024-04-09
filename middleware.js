@@ -2,7 +2,9 @@ import { NextResponse } from 'next/server'
 import {getSession} from "@/data/page";
 
 export function middleware(req) {
-    console.log("Pathname: ", req.nextUrl.pathname)
+    if (req.nextUrl.pathname === '/MyProjects/Dashboard') {
+        return NextResponse.redirect(new URL('/MyProjects/', req.url))
+    }
     return getSession().then((session) => {
         if (!session) {
             if (req.nextUrl.pathname === '/Dashboard') {
@@ -21,5 +23,5 @@ export function middleware(req) {
 }
 
 export const config = {
-    matcher: ['/Dashboard', '/Auth/Login', '/Auth/Register', '/MyProjects', '/MyProjects/Dashboard/:path'],
+    matcher: ['/Auth/Login', '/Auth/Register', '/MyProjects', '/MyProjects/Dashboard', '/MyProjects/Dashboard/:path'],
 }
