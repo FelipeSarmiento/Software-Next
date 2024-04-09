@@ -18,7 +18,7 @@ import {
 import {Disclosure} from "@headlessui/react";
 import {Button, Drawer, Group, HoverCard, Popover, Text, Menu} from '@mantine/core';
 import Link from "next/link";
-import { getSession, getProject } from "@/data/page";
+import { getSession, getProject, updateProject } from "@/data/page";
 
 export default function Dashboard({params}) {
     const [session, setSession] = useState()
@@ -54,7 +54,7 @@ export default function Dashboard({params}) {
     }, [session]);
 
     async function saveItemsDashboard(bodySet) {
-        const resp = await saveDataToFirestore(btoa(bodySet), session?.userId);
+        const resp = await updateProject(bodySet);
         setUnSaved(false)
     }
 
@@ -298,8 +298,15 @@ export default function Dashboard({params}) {
                                 </button>
                             </Link>
                             <button onClick={() => {
-                                console.log("btoa", btoa(JSON.stringify(itemsDashboard)))
-                                saveItemsDashboard(itemsDashboard)
+                                saveItemsDashboard({
+                                    idProject: project?.idproject,
+                                    project_name: project?.projectname,
+                                    project_description: project?.projectdescription,
+                                    isPublic: project?.isPublic,
+                                    type_project: project?.type,
+                                    tags: project?.tags,
+                                    items: itemsDashboard,
+                                })
                             }}
                                     className="text-white text-nowrap flex items-center justify-center border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
                                 Save &nbsp;<span className={unSaved ? 'text-red-500' : 'text-white'}>

@@ -144,7 +144,6 @@ export const createProject = async (project) => {
     }
 
 export const updateProject = async (project) => {
-    console.log("PROJECT: ", project)
     const session = await getSession()
     if (!session) {
         return {
@@ -153,8 +152,8 @@ export const updateProject = async (project) => {
         }
     }
     const {iduser} = session
-    const {project_name, project_description, isPublic, type_project, tags, idProject} = project
-    return await sql`UPDATE projects SET projectname = ${project_name}, projectdescription = ${project_description}, isPublic = ${isPublic}, typeproject = ${type_project}, tags = ${tags} WHERE idproject = ${idProject} AND iduser = ${iduser} RETURNING *`;
+    const {project_name, project_description, isPublic, type_project, tags, items, idProject} = project
+    return await sql`UPDATE projects SET projectname = ${project_name}, projectdescription = ${project_description}, isPublic = ${isPublic}, typeproject = ${type_project}, tags = ${tags}, items = ${items} WHERE idproject = ${idProject} AND iduser = ${iduser} RETURNING *`;
 }
 
 export const deleteProyect = async (idProject) => {
