@@ -170,7 +170,7 @@ const ModalContent = ({ close, project }) => {
     ]
 
     return (
-        <div className="fixed top-0 left-0 w-full pt-20 px-2 flex md:items-center justify-center h-screen  bg-stone-950/90">
+        <div className="fixed top-0 left-0 w-full py-20 px-2 flex md:items-center justify-center h-screen  bg-stone-950/90">
             <div className="relative px-3 py-2 md:py-3 md:px-6 w-full md:w-2/4 bg-black border-2 overflow-y-auto border-white text-white rounded-lg">
                 <h2 className="text-lg font-bold text-center">{ project ? 'Edit Project' : 'Create a new Project' }</h2>
                 <div className="">
