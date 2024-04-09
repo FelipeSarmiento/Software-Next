@@ -7,6 +7,9 @@ export function middleware(req) {
             if (req.nextUrl.pathname === '/Dashboard') {
                 return NextResponse.redirect(new URL('/Auth/Login', req.url))
             }
+            if (req.nextUrl.pathname === '/MyProjects') {
+                return NextResponse.redirect(new URL('/Auth/Login', req.url))
+            }
         }
         else {
             if (req.nextUrl.pathname === '/Auth/Login' || req.nextUrl.pathname === '/Auth/NewProject') {

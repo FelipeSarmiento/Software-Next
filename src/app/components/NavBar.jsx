@@ -12,7 +12,6 @@ const navigation = [
     {name: 'About', href: '/About', current: false},
     {name: 'Contact', href: '/Contact', current: false},
     {name: 'Projects', href: '/', current: false},
-    {name: 'Dashboard', href: '/Dashboard', current: false},
 ]
 
 function classNames(...classes) {
@@ -101,14 +100,11 @@ export function NavBar() {
                                                     <span className="px-1 flex h-auto">My Projects</span>
                                                 </Link>
                                                 <div className="border-[1px] border-white" />
-                                                <Disclosure.Button title="Log out" onClick={() => logout()}
-                                                        className="relative flex pb-1 h-8 px-2 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
+                                                <Disclosure.Button title="Log out" onClick={() => logout()} className="relative flex pb-1 h-8 px-2 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
                                                     <span className="absolute -inset-1.5"/>
-                                                    <span
-                                                        className="md:block px-1 flex h-auto">{ session }</span>
+                                                    <span className="md:block px-1 flex h-auto">{ session }</span>
                                                     <div>
-                                                        <FontAwesomeIcon icon={faRightToBracket}
-                                                                         className="text-sm px-1"/>
+                                                        <FontAwesomeIcon icon={faRightToBracket} className="text-sm px-1"/>
                                                     </div>
                                                 </Disclosure.Button>
                                             </div>
@@ -149,12 +145,10 @@ export function NavBar() {
                                         !session ? (
                                             <Menu as="div" className="relative">
                                                 <div>
-                                                    <Link href="/Auth/Login"
-                                                          className="relative flex pb-1 h-8 items-center justify-start px-0 text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
+                                                    <Link href="/Auth/Login" className="relative flex pb-1 h-8 items-center justify-start px-0 text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
                                                         <span className="absolute -inset-1.5"/>
                                                         <div>
-                                                            <FontAwesomeIcon icon={faRightToBracket}
-                                                                             className="text-sm px-1"/>
+                                                            <FontAwesomeIcon icon={faRightToBracket} className="text-sm px-1"/>
                                                         </div>
                                                         <span className="px-1 flex h-auto">Log in</span>
                                                     </Link>
@@ -162,14 +156,15 @@ export function NavBar() {
                                             </Menu>
                                         ) : (
                                             <Menu as="div" className="relative">
-                                                <div>
-                                                    <Disclosure.Button title="Log out" onClick={() => logout()}
-                                                                       className="relative flex pb-1 h-8 items-center px-1 text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
-                                                        <span
-                                                            className="md:block flex h-auto">{ session }</span>
+                                                <div className="">
+                                                    <Link href="/MyProjects" className="relative flex py-2 h-8 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
+                                                        <span className="absolute -inset-1.5"/>
+                                                        <span className="px-1 flex h-auto">My Projects</span>
+                                                    </Link>
+                                                    <Disclosure.Button title="Log out" onClick={() => logout()} className="relative flex pb-1 h-8 items-center px-1 text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
+                                                        <span className="md:block flex h-auto">{ session }</span>
                                                         <div>
-                                                            <FontAwesomeIcon icon={faRightToBracket}
-                                                                             className="text-sm px-1"/>
+                                                            <FontAwesomeIcon icon={faRightToBracket} className="text-sm px-1"/>
                                                         </div>
                                                     </Disclosure.Button>
                                                 </div>

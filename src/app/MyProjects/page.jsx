@@ -3,7 +3,7 @@ import {
     IconChevronLeft,
     IconChevronRight,
     IconEdit,
-    IconExternalLink, IconSettings,
+    IconExternalLink, IconMoodEmpty, IconSettings,
     IconSquareRoundedPlus,
     IconWorld, IconX
 } from "@tabler/icons-react";
@@ -11,6 +11,8 @@ import { useDisclosure } from '@mantine/hooks';
 import { Switch } from '@mantine/core';
 import React, {useEffect, useState} from "react";
 import {getProjectsByUser, createProject, updateProject} from "@/data/page";
+import Image from 'next/image'
+import emptyBox from '@/settings/assets/images/emptyBox.png'
 
 
 export default function Home() {
@@ -46,7 +48,7 @@ export default function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-2 md:w-max mx-auto gap-5">
                 {
                     projects.length > 0 ? projects.map((project, index) => (
-                            <div key={ project.idproject * index } className="w-full grid grid-cols-1 md:grid-cols-2 p-2 md:p-6 md:w-[40vw] h-full md:h-80 rounded-lg border-2 border-neutral-300">
+                            <div key={ project.idproject * index } className="w-full grid grid-cols-1 md:grid-cols-2 p-2 md:p-6 md:w-[40vw] h-full md:h-72 rounded-lg border-2 border-neutral-300">
                                 <div className="border-2 border-neutral-300 rounded-md h-40 md:h-full"></div>
                                 <div className="rounded-md h-52 flex flex-wrap md:h-full px-3 md:px-6 py-2 text-white">
                                     <div className="w-full relative h-1/5 flex flex-wrap items-center text-2xl font-bold py-1">
@@ -89,8 +91,13 @@ export default function Home() {
                                 </div>
                         </div>
                     )): (
-                        <div className="col-span-2 w-full h-full flex items-center justify-center">
-                            <span className="text-white">No projects found</span>
+                        <div className="col-span-2 w-full py-24 h-full flex flex-col items-center justify-center">
+                            <span className="text-white">
+                                <Image width={500} height={100} src={emptyBox} alt="Empty box" className="size-32 md:size-60"/>
+                            </span>
+                            <span className="text-white font-bold text-2xl md:text-4xl">
+                                No projects yet
+                            </span>
                         </div>
                     )
                 }
