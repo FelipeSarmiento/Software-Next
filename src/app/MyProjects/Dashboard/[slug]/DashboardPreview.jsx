@@ -1,7 +1,5 @@
-﻿import {ColorInput, ColorPicker} from "@mantine/core";
-import {useSelector} from "react-redux";
-
-export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueIdentifier}) => {
+﻿export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueIdentifier}) => {
+    console.log("components", components)
     const createContent = (section) => {
         const addSelectComponent = (obj) => {
             const newObj = structuredClone(obj)
@@ -113,7 +111,7 @@ export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueId
 
     return (
         <div className="h-auto w-auto">
-            {createContent(components.sections)}
+            {createContent(components?.sections)}
         </div>
     )
 }

@@ -1,5 +1,4 @@
 export const Project = ({ components, viewport }) => {
-    console.log(viewport)
     const createContent = (section) => {
         const addSelectComponent = (obj) => {
             const newObj = structuredClone(obj)
@@ -105,7 +104,7 @@ export const Project = ({ components, viewport }) => {
 
     return (
         <>
-            {createContent(components.sections)}
+            {createContent(components?.sections)}
         </>
     )
 }

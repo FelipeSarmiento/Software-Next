@@ -6,7 +6,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 
 export const metadata = {
-    title: "Software Next - Alpha version",
+    title: "Software Next - Beta version",
     description: "Software Next: The Next Generation of Software Development",
 };
 

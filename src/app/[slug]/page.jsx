@@ -1,7 +1,6 @@
 'use client'
-
-import "../../settings/assets/tailwindcss";
-import {fetchDataFromFirestore} from "@/settings/firebase/firebase";
+import "@/settings/assets/tailwindcss";
+import { getPublicProject } from '@/data/page'
 import {useEffect, useState} from "react";
 import {Project} from "./Project";
 export default function Home({params}){
@@ -14,7 +13,6 @@ export default function Home({params}){
 
     const [viewport, setViewport] = useState()
     let width = screen.width;
-    console.log("width: ", width)
     let viewportType;
 
     if (width <= 640) {
@@ -32,15 +30,12 @@ export default function Home({params}){
     if (width > 1280) {
         viewportType = "TV"
     }
-    console.log(viewportType)
-
-
 
     return (
         <body className="">
             {
                 (items && viewportType) ? (
-                    <Project components={items?.pages.index} viewport={viewportType} />
+                    <Project components={items?.pages?.index} viewport={viewportType} />
                 ) : ""
             }
         </body>
@@ -49,12 +44,10 @@ export default function Home({params}){
 
 async function getItemsDashboard() {
     try {
-        const itemsResp = await fetchDataFromFirestore(params.slug);
-        console.log('itemsResp:', itemsResp);
-        if (!itemsResp) {
-            return
-        }
-        setItems(itemsResp)
+        getPublicProject(params.slug).then(( resp ) => {
+            setItems(JSON.parse(resp.project[0]?.items))
+        });
+
     } catch (error) {
         console.error('Error fetching itemsDashboard:', error);
     }

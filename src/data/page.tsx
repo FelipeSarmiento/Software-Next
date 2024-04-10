@@ -29,7 +29,6 @@ export const login = async (User: any) => {
     }
     else {
         const match = compare(password, rows[0].password, process.env.REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#')
-        console.log("MATCH: ", match)
         if (match) {
             delete rows[0].password
             return {
@@ -113,7 +112,7 @@ export const getProjectsByUser = async () => {
 
 }
 
-export const getProject = async (project_name : string) => {
+export const getProject = async (project_public_id : string) => {
     const session = await getSession()
     if (!session) {
         return {
@@ -122,7 +121,14 @@ export const getProject = async (project_name : string) => {
         }
     }
     const {iduser} = session
-    const {rows} = await sql`SELECT * FROM projects WHERE projectname = ${project_name} AND iduser = ${iduser}`
+    const {rows} = await sql`SELECT * FROM projects WHERE projectpublicid = ${project_public_id} AND iduser = ${iduser}`
+    return {
+        ok: true,
+        project: rows
+    }
+}
+export const getPublicProject = async (project_public_id : string) => {
+    const {rows} = await sql`SELECT * FROM projects WHERE projectpublicid = ${project_public_id}`
     return {
         ok: true,
         project: rows
@@ -138,9 +144,20 @@ export const createProject = async (project) => {
         }
     }
     const { iduser } = session
-    const {project_name, project_description, isPublic, type_project, tags} = project
+    const {project_name, project_description, isPublic, type_project, tags, project_public_id} = project
+    const date_created = new Date()
+    const items = {
+        pages:
+            {
+                index: {
+                    sections: [],
+                    order: []
+                }
+            }
+    }
     
-    const resp = await sql`INSERT INTO projects (projectname, projectdescription, isPublic, typeproject, tags, iduser) VALUES (${project_name}, ${project_description}, ${isPublic}, ${type_project}, ${tags}, ${iduser}) RETURNING *`
+    // @ts-ignore
+    const resp = await sql`INSERT INTO projects (projectname, projectdescription, isPublic, typeproject, tags, iduser, items, projectpublicid, datecreated, dateupdated) VALUES (${project_name}, ${project_description}, ${isPublic}, ${type_project}, ${tags}, ${iduser}, ${items}, ${project_public_id}, ${date_created}, ${date_created}) RETURNING *`
     }
 
 export const updateProject = async (project) => {
@@ -153,7 +170,9 @@ export const updateProject = async (project) => {
     }
     const {iduser} = session
     const {project_name, project_description, isPublic, type_project, tags, items, idProject} = project
-    return await sql`UPDATE projects SET projectname = ${project_name}, projectdescription = ${project_description}, isPublic = ${isPublic}, typeproject = ${type_project}, tags = ${tags}, items = ${items} WHERE idproject = ${idProject} AND iduser = ${iduser} RETURNING *`;
+    const date_updated = new Date()
+    // @ts-ignore
+    return await sql`UPDATE projects SET projectname = ${project_name}, projectdescription = ${project_description}, isPublic = ${isPublic}, typeproject = ${type_project}, tags = ${tags}, items = ${items}, dateupdated = ${date_updated} WHERE idproject = ${idProject} AND iduser = ${iduser} RETURNING *`;
 }
 
 export const deleteProyect = async (idProject) => {

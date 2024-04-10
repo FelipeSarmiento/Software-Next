@@ -1,7 +1,7 @@
 import "../settings/assets/globals.css";
 
 export const metadata = {
-    title: "Software Next - Alpha version",
+    title: "Software Next - Beta version",
     favicon: "/favicon.ico",
     description: "Software Next: The Next Generation of Software Development",
 };

@@ -4,7 +4,6 @@ import {PopUpMain} from "@/app/components/PopUpMain";
 import { IconBinaryTree, IconSettings  } from '@tabler/icons-react';
 
 export const DropMenu = ({items, title, type, functions, modifyItemsDashboard, addSection, deleteItemDashboard, optionSelected, viewport, keepOptions, currentPage}) => {
-    console.log('DropMenu', items)
     useEffect(() => {
         setItemsPrimary(items)
     }, [items]);

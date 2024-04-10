@@ -1,10 +1,9 @@
 'use client'
 import React, {useEffect, useState} from 'react'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronDown, faChevronUp, faFloppyDisk} from '@fortawesome/free-solid-svg-icons'
+import {faFloppyDisk} from '@fortawesome/free-solid-svg-icons'
 import {DropMenu} from "../components/DropMenu";
 import {DashboardPreview} from "./DashboardPreview.jsx";
-import {saveDataToFirestore} from "@/settings/firebase/firebase";
 import {
     IconClipboard,
     IconCopy,
@@ -15,8 +14,7 @@ import {
     IconDeviceTv,
     IconComponents, IconX, IconCheck, IconBinaryTree, IconSettings, IconExternalLink, IconTrash
 } from '@tabler/icons-react';
-import {Disclosure} from "@headlessui/react";
-import {Button, Drawer, Group, HoverCard, Popover, Text, Menu} from '@mantine/core';
+import {Button, Drawer, Group, HoverCard, Text, Menu, Select} from '@mantine/core';
 import Link from "next/link";
 import { getSession, getProject, updateProject } from "@/data/page";
 
@@ -156,6 +154,22 @@ export default function Dashboard({params}) {
         setUnSaved(true)
         setOptionItem(undefined)
     };
+    const addPage = (page) => {
+        setItemsDashboard({
+            ...itemsDashboard,
+            pages: {
+                ...itemsDashboard.pages,
+                [page]: {
+                    sections: [],
+                    order: []
+                }
+            }
+        })
+    }
+
+    useEffect(() => {
+        console.log(actualPage)
+    }, [actualPage]);
 
     const addSection = (section, idItem) => {
         const setId = (obj) => {
@@ -234,6 +248,7 @@ export default function Dashboard({params}) {
     }
     const [openDrawerSettings, setOpenDrawerSettings] = useState(false)
     const [openDrawerTreeView, setOpenDrawerTreeView] = useState(false)
+    const [newPage, setNewPage] = useState()
 
     if (itemsDashboard) {
         return (
@@ -241,58 +256,33 @@ export default function Dashboard({params}) {
                 <header className=" shadow">
                     <div className="mx-auto relative grid grid-cols-2 ld:grid-cols-5 md:flex justify-between px-4 py-6 sm:px-6 lg:px-24">
                         <h1 className="col-span-2 flex items-center justify-around text-3xl font-bold tracking-tight text-white">
-                            Dashboard - <span class="text-cyan-500 px-2"> {project?.projectname}</span>
-                            <Disclosure as="div"
-                                        className="relative w-28 flex flex-col justify-center ml-4 border-white h-8">
-                                {({open}) => (
-                                    <>
-                                        <h3 className="flow-root">
-                                            <div
-                                                className={"border-2 rounded-md z-50 flex w-full items-center justify-between text-sm text-gray-400 hover:text-white px-2 " + (open ? "bg-black border-white" : "border-gray-500 bg-black")}>
-                                            <span
-                                                className="font-bold text-white">{actualPage.charAt(0).toUpperCase() + actualPage.slice(1)}</span>
-                                                <div className="relative">
-                                                    <Disclosure.Button className="p-2 ml-1">
-                                                    <span className="flex items-center">
-                                                      {open ? (
-                                                          <FontAwesomeIcon icon={faChevronUp}/>
-                                                      ) : (
-                                                          <FontAwesomeIcon icon={faChevronDown}/>
-                                                      )}
-                                                    </span>
-                                                    </Disclosure.Button>
-                                                </div>
-                                            </div>
-                                        </h3>
-                                        <Disclosure.Panel className="absolute border-2 border-white bg-black rounded-md z-50 top-10 w-full">
-                                            {
-                                                Object.keys(itemsDashboard?.pages).map((page, index) => {
-                                                    return (
-                                                        <Disclosure.Button
-                                                            key={index}
-                                                            onClick={() => {
-                                                                setActualPage(page)
-                                                                setOptionItem(undefined)
-                                                            }}
-                                                            className="w-full h-8 flex items-center">
-                                                            <p className="text-white text-left px-2 text-sm text-nowrap truncate">
-                                                                {page.charAt(0).toUpperCase() + page.slice(1)}
-                                                            </p>
-                                                        </Disclosure.Button>
-                                                    )
-                                                })
-                                            }
-                                        </Disclosure.Panel>
-                                    </>
-                                )}
-                            </Disclosure>
+                            Dashboard - <span class="text-cyan-500 px-2 font-extrabold"> {project?.projectname}</span>
                         </h1>
-                        <div className="col-span-2 lg:absolute lg:top-2/4 lg:left-2/4 lg:-translate-x-2/4 lg:-translate-y-2/4 flex items-center pt-5 pb-2 justify-center">
-                            <h2 className="text-lg font-bold text-white">"{actualPage.charAt(0).toUpperCase() + actualPage.slice(1)}"
-                                Page</h2>
+                        <div className="col-span-2 lg:absolute lg:top-2/4 lg:left-2/4 lg:-translate-x-2/4 lg:-translate-y-2/4 flex items-center justify-center">
+                            {/*<h2 className="text-lg font-bold text-white">"{actualPage.charAt(0).toUpperCase() + actualPage.slice(1)}" Page</h2>*/}
+                            <Select
+                                classNames={{
+                                    input: "bg-stone-950 text-white border-2 border-stone-800 rounded-md h-12 text-lg font-bold text-center",
+                                    dropdown: "bg-stone-950 text-white",
+                                    option: "hover:bg-stone-950 border-2 border-transparent hover:border-cyan-500 hover:text-cyan-500 text-white font-bold text-md"
+                                }}
+                                defaultValue={actualPage.charAt(0).toUpperCase() + actualPage.slice(1)}
+                                placeholder="Select a Page"
+                                data={Object.keys(itemsDashboard?.pages).map((page, index) => { return (page.charAt(0).toUpperCase() + page.slice(1)) })}
+                                onChange={(value) => {
+                                    setActualPage(value.toLowerCase())
+                                    setOptionItem(undefined)
+                                }}
+                                onSearchChange={ (value) => {
+                                    setNewPage(value.toLowerCase())
+                                }}
+                                searchable
+                                checkIconPosition="right"
+                                nothingFoundMessage={ <button onClick={ () => { addPage(newPage); setUnSaved(true); setNewPage(undefined) } } className="w-full h-full text-white">Add <span className="text-cyan-500 font-bold">{ newPage?.charAt(0).toUpperCase() + newPage?.slice(1)}</span> page</button> }
+                            />
                         </div>
                         <div className="col-span-2 py-2 flex space-x-4 justify-center">
-                            <Link target="_blank" href={'/' + session?.idUser}>
+                            <Link target="_blank" href={'/' + project.projectpublicid}>
                                 <button className="text-white text-nowrap flex items-center justify-center border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
                                     Visit &nbsp;<IconExternalLink/>
                                 </button>
@@ -651,9 +641,10 @@ export default function Dashboard({params}) {
         </div>
     );
 
+
     async function getItemsDashboard() {
         try {
-            await getProject(params.slug.replace("%26", " ")).then((itemsDashboardResp) => {
+            await getProject(params.slug).then((itemsDashboardResp) => {
                 if (itemsDashboardResp.project[0] !== undefined) {
                     setProject(itemsDashboardResp?.project[0] ?? undefined);
                     setItemsDashboard(JSON.parse(itemsDashboardResp.project[0]?.items) ?? {

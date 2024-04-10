@@ -1,11 +1,7 @@
-import {Inter} from "next/font/google";
-import {NavBar} from "@/app/components/NavBar";
 import '@mantine/core/styles.css';
 import "@/settings/assets/globals.css";
 import {config} from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
-import StoreProvider from "@/lib/redux/StoreProvider";
-import {BackgroundBeams} from "@/app/components/AceternityUI/background-beams";
 import { Analytics } from "@vercel/analytics/react"
 
 import {MantineProvider} from '@mantine/core';
