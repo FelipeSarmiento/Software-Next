@@ -94,7 +94,8 @@ export default function Home() {
                                                     tags: project.tags,
                                                     isPublic: project.ispublic,
                                                     typeproject: project.typeproject,
-                                                    projectpublicid: project.projectpublicid
+                                                    projectpublicid: project.projectpublicid,
+                                                    items: project.items
                                                 })
                                             }}
                                             className="flex space-x-2 hover:text-cyan-500">
@@ -137,16 +138,19 @@ const ModalContent = ({ close, project }) => {
                 project_description: project.project_description,
                 tags: project.tags,
                 isPublic: project.isPublic,
-                type_project: project.typeproject
+                type_project: project.typeproject,
+                items: project.items
             })
             setTags(project.tags)
         } else {
             setProjectForm({
+                idProject: '',
                 project_name: '',
                 project_description: '',
                 tags: [],
                 isPublic: false,
                 type_project: '',
+                items: ''
             })
         }
     }, []);
