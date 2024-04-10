@@ -2,10 +2,8 @@
 import {
     IconEdit,
     IconExternalLink, IconSettings,
-    IconSquareRoundedPlus,
     IconWorld
 } from "@tabler/icons-react";
-import { useDisclosure } from '@mantine/hooks';
 import React, {useEffect, useState} from "react";
 import {getProjects} from "@/data/page";
 import Image from 'next/image'
@@ -32,43 +30,40 @@ export default function Home() {
                         </h1>
                     </div>
                 </header>
-                <div className="grid grid-cols-1 md:grid-cols-2 md:w-max mx-auto gap-8">
-                {
-                    projects.length > 0 ? projects.map((project, index) => (
-                            <Link target="_blank" href={ "/" + project.projectpublicid }>
-                                <div key={ project.idproject * index } className="w-full grid grid-cols-1 md:grid-cols-2 p-2 md:p-6 md:w-[40vw] h-full md:h-72 max-h-72 rounded-lg border-2 border-neutral-300">
-                                    <div className="border-2 flex items-center justify-center select-none border-neutral-300 rounded-md h-40 md:h-full">
-                                        <Image src={ SoftwareNextLogo } alt="Software Next Logo" width={500} height={500} className="size-52 object-cover select-none rounded-md"/>
+                <div className="grid grid-cols-1 2xl:grid-cols-2 justify-center place-items-center xl:w-max mx-auto gap-8">
+                    {
+                        projects.length > 0 ? projects.map((project, index) => (
+                            <div key={ project.idproject * index } className="grid grid-cols-1 lg:grid-cols-2 p-2 w-full  md:p-6 md:w-[750px] lg:h-72 lg:max-h-72 rounded-lg border-2 border-neutral-300">
+                                <div className="border-2 flex items-center justify-center select-none border-neutral-300 rounded-md lg:h-full">
+                                    <Image src={ SoftwareNextLogo } alt="Software Next Logo" width={500} height={500} className="size-52 object-cover rounded-md"/>
+                                </div>
+                                <div className="rounded-md max-h-60 flex flex-wrap lg:h-full px-3 md:px-3 lg:px-3 py-2 text-white">
+                                    <div className="w-full relative h-1/5 flex flex-wrap items-center text-2xl font-bold ">
+                                        <h3 className="text-cyan-500 text-nowrap truncate pr-8">{ project.projectname }</h3>
                                     </div>
-                                    <div className="rounded-md h-52 flex flex-wrap md:h-full px-3 md:px-6 py-2 text-white">
-                                        <div className="w-full relative h-1/5 flex flex-wrap items-center text-2xl font-bold py-1">
-                                            <h3 className="text-cyan-500">{ project.projectname }</h3>
-                                            <span className={`absolute top-2/4 -translate-y-2/4 right-0 ${project.ispublic ? 'text-green-500' : 'text-red-500'}`} title={ project.ispublic ? 'Is public' : 'Is not public' }>
-                                            <IconWorld/>
-                                        </span>
+                                    <div className="w-full h-2/5 max-h-2/5 overflow-hidden py-2">
+                                        <div className="overflow-y-auto h-full">
+                                            <p className="text-sm md:text-base">{ project.projectdescription }</p>
                                         </div>
-                                        <div className="w-full h-2/5 py-1 overflow-hidden text-wrap">
-                                            <p className="text-ellipsis">{ project.projectdescription }</p>
-                                        </div>
-                                        <div className="w-2/4 md:w-full h-1/5 flex flex-wrap space-x-2 items-center justify-center md:justify-start">
-                                            { project.tags.map((tag, index) => (
-                                                <span className="bg-stone-900 rounded-lg p-1 text-xs md:text-sm">{tag}</span>
-                                            ))}
-                                        </div>
+                                    </div>
+                                    <div className="w-2/4 md:w-full h-1/5 flex overflow-x-auto items-center space-x-2 justify-start">
+                                        { project.tags.map((tag, index) => (
+                                            <span className="bg-stone-800 rounded-lg p-1 text-xs md:text-sm border-2 border-stone-900">{tag}</span>
+                                        ))}
                                     </div>
                                 </div>
-                            </Link>
-                    )): (
-                        <div className="col-span-2 w-full py-24 h-full flex flex-col items-center justify-center">
+                            </div>
+                        )): (
+                            <div className="col-span-2 w-full py-24 h-full flex flex-col items-center justify-center">
                             <span className="text-white">
                                 <Image width={500} height={100} src={emptyBox} alt="Empty box" className="size-32 md:size-60"/>
                             </span>
-                            <span className="text-white font-bold text-2xl md:text-4xl">
-                                No public projects yet
+                                <span className="text-white font-bold text-2xl md:text-4xl">
+                                No projects yet
                             </span>
-                        </div>
-                    )
-                }
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </>
