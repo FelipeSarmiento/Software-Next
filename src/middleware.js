@@ -1,3 +1,4 @@
+'use server'
 import { NextResponse } from 'next/server'
 import {getSession} from "@/data/page";
 
@@ -23,5 +24,5 @@ export function middleware(req) {
 }
 
 export const config = {
-    matcher: ['/Auth/Login', '/Auth/Register', '/MyProjects', '/MyProjects/Dashboard', '/MyProjects/Dashboard/:path'],
+    matcher: ['/Auth/Login', '/Auth/Register', '/MyProjects', '/MyProjects/Dashboard'],
 }
