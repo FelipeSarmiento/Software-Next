@@ -1,5 +1,4 @@
 ﻿export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueIdentifier}) => {
-    console.log("components", components)
     const createContent = (section) => {
         const addSelectComponent = (obj) => {
             const newObj = structuredClone(obj)

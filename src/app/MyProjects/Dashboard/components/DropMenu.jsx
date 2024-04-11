@@ -26,7 +26,7 @@ export const DropMenu = ({items, title, type, functions, modifyItemsDashboard, a
                 </ul>
                 <section className="overflow-auto h-[calc(100%_-_48px)] snap-x span-end">
                     {
-                        type === 'options' ? <Options pages={pages} viewport={viewport} keepOptions={keepOptions} options={itemsPrimary} modifyItemsDashboard={modifyItemsDashboard}/> : <Menu deleteItemDashboard={deleteItemDashboard} currentPage={currentPage} addSection={addSection} items={itemsPrimary.sections} functions={functions} optionSelected={optionSelected}/>
+                        type === 'options' ? <Options pages={pages} viewport={viewport} keepOptions={keepOptions} options={itemsPrimary} modifyItemsDashboard={modifyItemsDashboard}/> : <Menu viewport={viewport} deleteItemDashboard={deleteItemDashboard} currentPage={currentPage} addSection={addSection} items={itemsPrimary.sections} functions={functions} optionSelected={optionSelected}/>
                     }
                 </section>
             </div>

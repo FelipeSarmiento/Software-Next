@@ -16,10 +16,10 @@ import {
     IconLayoutSidebar,
     IconLink,
     IconForms,
-    IconPackages, IconRowInsertBottom
+    IconPackages, IconRowInsertBottom, IconEyeOff
 } from '@tabler/icons-react';
 
-export const Menu = ({items, functions, deleteItemDashboard, addSection, optionSelected, currentPage}) => {
+export const Menu = ({items, functions, deleteItemDashboard, addSection, optionSelected, currentPage, viewport}) => {
     const selectItem = (value) => {
         functions(value)
     }
@@ -63,6 +63,13 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                         {section.type === "form" ? (
                                             <IconForms stroke={2}/>) : ""}
                                         <span className="pl-1">{section.label}</span>
+                                        {
+                                            section['settings' + viewport.type]?.display === 'hidden' ? (
+                                                <span className="pl-2 text-[1px] text-red-500">
+                                                    <IconEyeOff className="size-5"/>
+                                                </span>
+                                            ) : ''
+                                        }
                                     </span>
                                     <div className="relative">
                                         {

@@ -37,7 +37,7 @@ export default function Home({params}){
             <body>
             {
                 (items && viewportType) ? (
-                    <Project components={items?.pages?.index} viewport={viewportType} />
+                    <Project components={items?.pages?.index} path={params.slug} viewport={viewportType} />
                 ) : ""
             }
             </body>

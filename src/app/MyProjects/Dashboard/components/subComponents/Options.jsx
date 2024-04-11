@@ -31,12 +31,14 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
 
     const onChangeInput = ({target}) => {
         let option = optionItem;
+        console.log("target", target)
         switch (target.id) {
             case 'valueInput':
                 option = {
                     ...optionItem,
                     [target.name]: target.value
                 }
+                console.log("option", option)
                 setOptionItem(option)
                 modifyItemsDashboard(option.idUniqueIdentifier, option)
                 break
@@ -233,6 +235,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
         src: "",
         alt: "",
         href: "",
+        hrefType: "",
         target: "",
     })
     const [borderWidth, setBorderWidth] = useState({
@@ -344,17 +347,20 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                     placeholder="Redirect to..."
                                     data={pages}
                                     onChange={(value) => {
-                                        setSpecificAttributes({
-                                            ...specificAttributes,
-                                            href: value
-                                        })
-                                        onChangeInput({
-                                            target: {
-                                                id: "valueInput",
-                                                name: "href",
-                                                value: value
-                                            }
-                                        })
+                                        if (value) {
+                                            setSpecificAttributes({
+                                                ...specificAttributes,
+                                                href: "" + value,
+                                                hrefType: "internal"
+                                            })
+                                            onChangeInput({
+                                                target: {
+                                                    id: "valueInput",
+                                                    name: "href",
+                                                    value: "internal|/" + value?.toLowerCase()
+                                                }
+                                            })
+                                        }
                                     }}
                                     onSearchChange={ setExternalLink }
                                     searchable
@@ -363,13 +369,14 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                     nothingFoundMessage={ <button onClick={ () => {
                                         setSpecificAttributes({
                                             ...specificAttributes,
-                                            href: externalLink
+                                            href: externalLink,
+                                            hrefType: "external"
                                         })
                                         onChangeInput({
                                             target: {
                                                 id: "valueInput",
                                                 name: "href",
-                                                value: externalLink
+                                                value: "external|" + externalLink
                                             }
                                         })
                                     }} className="w-full h-full text-white">External Link</button> }

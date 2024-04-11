@@ -31,6 +31,7 @@ export default function Home({params}){
     if (width > 1280) {
         viewportType = "TV"
     }
+    console.log(params)
 
     return (
         <>
@@ -40,7 +41,7 @@ export default function Home({params}){
             <body className="">
             {
                 (items && viewportType) ? (
-                    <Project components={items?.pages[params.page]} viewport={viewportType} />
+                    <Project components={items?.pages[params.page]} path={params.slug} viewport={viewportType} />
                 ) : ""
             }
             </body>

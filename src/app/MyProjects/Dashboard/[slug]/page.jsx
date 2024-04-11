@@ -108,6 +108,9 @@ export default function Dashboard({params}) {
                     if (newObj.hasOwnProperty('text')) {
                         newObj.text = nuevoValor.text;
                     }
+                    if (newObj.hasOwnProperty('href')) {
+                        newObj.href = nuevoValor.href;
+                    }
                     if (newObj.hasOwnProperty('src')) {
                         newObj.src = nuevoValor.src;
                     }
@@ -393,10 +396,11 @@ export default function Dashboard({params}) {
                                                 MOBILE TREE VIEW
                                                 MOBILE TREE VIEW
                                                 */}
-                                                    <div className="absolute lg:hidden top-2/4 left-0 -translate-y-2/4">
+                                                    <div className="absolute lg:hidden lg:invisible top-2/4 left-0 -translate-y-2/4">
                                                         <div className="relative">
                                                             <Drawer
                                                                 classNames={{
+                                                                    root: "block lg:hidden",
                                                                     body: "bg-stone-950",
                                                                     content: "bg-stone-950",
                                                                     header: "bg-stone-950"
@@ -537,9 +541,10 @@ export default function Dashboard({params}) {
                                                 MOBILE SETTINGS
                                                 MOBILE SETTINGS
                                                 */}
-                                                    <div className="absolute lg:hidden top-2/4 right-0 -translate-y-2/4">
+                                                    <div className="absolute lg:hidden lg:invisible top-2/4 right-0 -translate-y-2/4">
                                                         <Drawer
                                                             classNames={{
+                                                                root: "block lg:hidden",
                                                                 body: "bg-stone-950",
                                                                 content: "bg-stone-950",
                                                                 header: "bg-stone-950"
@@ -553,7 +558,7 @@ export default function Dashboard({params}) {
                                                                 <span>Keep Settings</span>
                                                                 <IconComponents/>
                                                             </button>
-                                                            <DropMenu items={optionItem} viewport={viewport} keepOptions={keepOptions}
+                                                            <DropMenu pages={Object.keys(itemsDashboard?.pages).map((page, index) => { return (page.charAt(0).toUpperCase() + page.slice(1)) })} items={optionItem} viewport={viewport} keepOptions={keepOptions}
                                                                       modifyItemsDashboard={modifyItemsDashboard}
                                                                       title={optionItem !== undefined ? "Settings for " + optionItem.label : "Settings"}
                                                                       type="options"/>
@@ -600,7 +605,7 @@ export default function Dashboard({params}) {
                                                 </div>
                                             </div>
                                             <div className="hidden lg:block lg:cols-span-1">
-                                                <DropMenu currentPage={actualPage} items={itemsDashboard?.pages[actualPage]}
+                                                <DropMenu viewport={viewport} currentPage={actualPage} items={itemsDashboard?.pages[actualPage]}
                                                           optionSelected={optionItem}
                                                           title="Tree View"
                                                           type="tree-view"
