@@ -3,15 +3,13 @@ import "@/settings/assets/tailwindcss";
 import { getPublicProject } from '@/data/page'
 import {useEffect, useState} from "react";
 import {Project} from "./Project";
-import "./globals.css";
-import setGlobalCSS from './config'
 export default function Home({params}){
 
     const [items, setItems] = useState()
     const [title, setTitle] = useState()
 
     useEffect(() => {
-        getItemsDashboard()
+        getProject()
     }, []);
     let width = screen.width;
     let viewportType;
@@ -31,13 +29,6 @@ export default function Home({params}){
     if (width > 1280) {
         viewportType = "TV"
     }
-
-    useEffect(() => {
-        if (items) {
-            setGlobalCSS(items?.pages?.index.sections, viewportType, title+params.slug)
-        }
-    }, [items]);
-
     return (
         <>
             <head>
@@ -53,7 +44,7 @@ export default function Home({params}){
         </>
     )
 
-async function getItemsDashboard() {
+async function getProject() {
     try {
         getPublicProject(params.slug).then(( resp ) => {
             setTitle(resp.project[0]?.projectname)

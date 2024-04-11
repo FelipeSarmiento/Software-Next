@@ -1,18 +1,11 @@
 export const Project = ({ components, viewport }) => {
-    const CSSElements = document.createElement("style");
-    document.head.appendChild(CSSElements);
-    let CSS = '@tailwind base;@tailwind components;@tailwind utilities;'
     const createContent = (section) => {
         const addSelectComponent = (obj) => {
             const newObj = structuredClone(obj)
-            return newObj.map((component, index) => {
-                CSS =+ `.${component.id}{
-                    @apply ${component["settings" + viewport]?.className};
-                }`
+            return newObj.map((component) => {
                 if (component !== undefined) {
-                    // let className = `${component["settings" + viewport]?.className}`
-                    //                     // className = className.replaceAll("sm:", "").replaceAll("md:", "").replaceAll("lg:", "").replaceAll("xl:", "");
-                    let className = component.id
+                    let className = `${component["settings" + viewport]?.className}`
+                    className = className.replaceAll("sm:", "").replaceAll("md:", "").replaceAll("lg:", "").replaceAll("xl:", "");
                     switch (component.group) {
                         case "element":
                             switch (component.type) {
@@ -27,6 +20,7 @@ export const Project = ({ components, viewport }) => {
                                         <img src={ component.src } className={className} key={component.idUniqueIdentifier}  alt={ component.alt }/>
                                     )
                             }
+                            break;
                         case "container":
                             switch (component.type) {
                                 case "container":
