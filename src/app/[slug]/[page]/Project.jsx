@@ -1,18 +1,11 @@
 export const Project = ({ components, viewport }) => {
-    const CSSElements = document.createElement("style");
-    document.head.appendChild(CSSElements);
-    let CSS = '@tailwind base;@tailwind components;@tailwind utilities;'
     const createContent = (section) => {
         const addSelectComponent = (obj) => {
             const newObj = structuredClone(obj)
             return newObj.map((component, index) => {
-                CSS =+ `.${component.id}{
-                    @apply ${component["settings" + viewport]?.className};
-                }`
                 if (component !== undefined) {
-                    // let className = `${component["settings" + viewport]?.className}`
-                    //                     // className = className.replaceAll("sm:", "").replaceAll("md:", "").replaceAll("lg:", "").replaceAll("xl:", "");
-                    let className = component.id
+                    let className = `${component["settings" + viewport]?.className}`
+                    className = className.replaceAll("sm:", "").replaceAll("md:", "").replaceAll("lg:", "").replaceAll("xl:", "");
                     switch (component.group) {
                         case "element":
                             switch (component.type) {
@@ -37,7 +30,7 @@ export const Project = ({ components, viewport }) => {
                                     )
                                 case "link":
                                     return (
-                                        <a key={component.idUniqueIdentifier} href={ component.href } target={ component.target } className={className}>
+                                        <a key={component.idUniqueIdentifier}  className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </a>
                                     )
@@ -108,7 +101,6 @@ export const Project = ({ components, viewport }) => {
         };
         return addSelectComponent(section)
     }
-    // CSSElements.textContent = CSS;
 
     return (
         <>

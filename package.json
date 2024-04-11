@@ -53,6 +53,7 @@
     "n-krypta": "^1.0.6",
     "next": "14.1.1",
     "next-auth": "^4.24.7",
+    "next-seo": "^6.5.0",
     "next-utils": "^0.2.1",
     "pako": "^2.1.0",
     "react": "^18",

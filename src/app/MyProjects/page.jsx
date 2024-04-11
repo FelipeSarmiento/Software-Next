@@ -4,13 +4,13 @@ import {
     IconChevronRight,
     IconEdit,
     IconExternalLink, IconSettings,
-    IconSquareRoundedPlus,
+    IconSquareRoundedPlus, IconTrash,
     IconWorld, IconX
 } from "@tabler/icons-react";
 import { useDisclosure } from '@mantine/hooks';
 import {Select, Switch, TagsInput} from '@mantine/core';
 import React, {useEffect, useState} from "react";
-import {getProjectsByUser, createProject, updateProject} from "@/data/page";
+import {getProjectsByUser, createProject, updateProject, deleteProject} from "@/data/page";
 import Image from 'next/image'
 import emptyBox from '@/settings/assets/images/emptyBox.png'
 import SoftwareNextLogo from '@/settings/assets/images/software-next-logo.png'
@@ -164,7 +164,7 @@ const ModalContent = ({ close, project }) => {
             return
         }
         // Create project
-        await createProject({...projectForm, tags: tags, project_public_id: projectForm.project_name.replaceAll(" ", "-") + "-" + window.crypto.randomUUID()}).then(() => {
+        await createProject({...projectForm, tags: tags, project_public_id: projectForm.project_name.replaceAll(" ", "-") + "-" + window.crypto.randomUUID().split("-")[0]}).then(() => {
             close()
         })
     }
@@ -287,10 +287,25 @@ const ModalContent = ({ close, project }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-span-2 w-full flex items-center justify-center py-3 mt-5">
+                            <div className="relative col-span-2 w-full flex items-center justify-center py-3 mt-5">
                                 <button type="submit" className="w-28 rounded-md py-3 border-2 border-stone-800 font-bold">
                                     { project ? 'Update' : 'Create' }
                                 </button>
+                                {
+                                    project ? (
+                                        <button onClick={ () => { deleteProject(project.idproject).then( () => { setProjectForm({
+                                            idProject: '',
+                                            project_name: '',
+                                            project_description: '',
+                                            tags: [],
+                                            isPublic: false,
+                                            type_project: '',
+                                            items: ''
+                                        }); close() } ) } } className="absolute right-5 text-red-500 p-5">
+                                            <IconTrash/>
+                                        </button>
+                                    ) : ''
+                                }
                             </div>
                         </div>
                     </form>

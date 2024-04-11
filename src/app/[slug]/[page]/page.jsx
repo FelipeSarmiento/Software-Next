@@ -3,16 +3,16 @@ import "@/settings/assets/tailwindcss";
 import { getPublicProject } from '@/data/page'
 import {useEffect, useState} from "react";
 import {Project} from "./Project";
-import "./globals.css";
-import setGlobalCSS from './config'
+import { NextSeo } from 'next-seo'
 export default function Home({params}){
-
     const [items, setItems] = useState()
     const [title, setTitle] = useState()
 
     useEffect(() => {
         getItemsDashboard()
     }, []);
+
+    const [viewport, setViewport] = useState()
     let width = screen.width;
     let viewportType;
 
@@ -32,26 +32,21 @@ export default function Home({params}){
         viewportType = "TV"
     }
 
-    useEffect(() => {
-        if (items) {
-            setGlobalCSS(items?.pages?.index.sections, viewportType, title+params.slug)
-        }
-    }, [items]);
-
     return (
         <>
             <head>
                 <title>{ title }</title>
             </head>
-            <body>
+            <body className="">
             {
                 (items && viewportType) ? (
-                    <Project components={items?.pages?.index} viewport={viewportType} />
+                    <Project components={items?.pages[params.page]} viewport={viewportType} />
                 ) : ""
             }
             </body>
         </>
     )
+
 
 async function getItemsDashboard() {
     try {

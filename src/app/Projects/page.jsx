@@ -33,8 +33,8 @@ export default function Home() {
                 <div className="grid grid-cols-1 2xl:grid-cols-2 justify-center place-items-center xl:w-max mx-auto gap-8">
                     {
                         projects.length > 0 ? projects.map((project, index) => (
-                            <Link target="_blank" href={ "/" + project.projectpublicid }>
-                                <div key={ project.idproject * index } className="grid grid-cols-1 lg:grid-cols-2 p-2 w-full  md:p-6 md:w-[750px] lg:h-72 lg:max-h-72 rounded-lg border-2 border-neutral-300">
+                            <Link key={ project.idproject * index } target="_blank" href={ "/" + project.projectpublicid }>
+                                <div className="relative grid grid-cols-1 lg:grid-cols-2 p-2 w-full  md:p-6 md:w-[750px] lg:h-72 lg:max-h-72 rounded-lg border-2 border-neutral-300">
                                     <div className="border-2 flex items-center justify-center select-none border-neutral-300 rounded-md lg:h-full">
                                         <Image src={ SoftwareNextLogo } alt="Software Next Logo" width={500} height={500} className="size-52 object-cover rounded-md"/>
                                     </div>
@@ -49,10 +49,13 @@ export default function Home() {
                                         </div>
                                         <div className="w-2/4 md:w-full h-1/5 flex overflow-x-auto items-center space-x-2 justify-start">
                                             { project.tags.map((tag, index) => (
-                                                <span className="bg-stone-800 rounded-lg p-1 text-xs md:text-sm border-2 border-stone-900">{tag}</span>
+                                                <span key={tag + index} className="bg-stone-800 rounded-lg p-1 text-xs md:text-sm border-2 border-stone-900">{tag}</span>
                                             ))}
                                         </div>
                                     </div>
+                                    <span className="absolute bottom-2 right-2 text-white font-extrabold flex items-center justify-center space-x-2 p-2">
+                                        by <span className="text-cyan-500 px-1">{ project.user.username }</span>
+                                    </span>
                                 </div>
                             </Link>
                         )): (
@@ -72,6 +75,9 @@ export default function Home() {
     )
 
      async function getAllProjects(){
-        setProjects(await getProjects().then((response) => {return response.projects}))
+        setProjects(await getProjects().then((response) => {
+            console.log("response: ", response)
+            return response.projects
+        }))
     }
 }

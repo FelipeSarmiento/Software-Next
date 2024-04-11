@@ -6,7 +6,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import Image from "next/image";
-import {Tabs} from "./AceternityUI/tabs";
 import {useRef, useState} from "react";
 import {
     IconPhoto,
@@ -44,7 +43,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
             type: "link",
             group: "container",
             description: "Represents a hyperlink.",
-            specificAttributes: {href: "", target: ""},
+            specificAttributes: {href: "", target: "_blank"},
             specificSettings: {
                 height: "h-[]",
                 width: "w-[]",
@@ -91,8 +90,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
             textSize: "text-[16px]",
             textWeight: "font-bold",
             textAlign: "text-center",
-            textSpacing: "spacing-3",
-            textDecoration: "text-underline",
+            textDecoration: "underline",
             decorationColor: "decoration-[rgba(255,255,255,1)]",
             backgroundColor: "bg-[rgba(0,0,0,0)]",
             borderWidth: "",
@@ -124,7 +122,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
             borderLeft: "border-l-[1px]",
             borderTop: "border-t-[1px]",
             borderBottom: "border-b-[1px]",
-            opacity: "opacity-2",
+            opacity: "opacity-100",
             top: "top-[0px]",
             left: "left-[0px]",
             right: "right-[0px]",

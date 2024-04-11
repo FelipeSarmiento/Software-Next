@@ -1,7 +1,7 @@
 ﻿import {Disclosure} from "@headlessui/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronUp, faChevronDown, faTrash} from '@fortawesome/free-solid-svg-icons'
-import {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {
     IconArrowsVertical,
     IconArrowsHorizontal,
@@ -22,12 +22,11 @@ import {
     IconPhoto,
     IconArrowsUpDown,
     IconTextWrap,
-    IconTextWrapDisabled, IconAlignLeft, IconAlignCenter, IconAlignRight, IconAlignJustified
+    IconTextWrapDisabled, IconAlignLeft, IconAlignCenter, IconAlignRight, IconAlignJustified, IconLink
 } from '@tabler/icons-react';
 import {ColorInput, ColorPicker, NumberInput, Select} from "@mantine/core";
-import {useSelector} from "react-redux";
 
-export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) => {
+export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, pages}) => {
     const units = ['auto', 'px', 'rem', 'vw', 'vh', '%'];
 
     const onChangeInput = ({target}) => {
@@ -228,9 +227,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
     }, [options]);
 
     const [optionItem, setOptionItem] = useState(options);
-    const [colorOptions, setColorOptions] = useState(
-        {}
-    )
+    const [colorOptions, setColorOptions] = useState({})
     const [specificAttributes, setSpecificAttributes] = useState({
         text: "",
         src: "",
@@ -298,6 +295,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
     const [flexWrap, setFlexWrap] = useState()
     const [gaps, setGaps] = useState({})
     const [gridTemplate, setGridTemplate] = useState({})
+    const [externalLink, setExternalLink] = useState()
 
         return (optionItem !== undefined ? (
                 <div className="py-2 pr-2 text-white">
@@ -327,6 +325,74 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions}) 
                                     min={0}
                                     type="text"
                                     className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                            </div>
+                        </div>
+                    ) : ""}
+                    {optionItem.hasOwnProperty("href") ? (
+                        <div className="py-2 flex items-center relative h-max">
+                            <div className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                <div className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
+                                    <IconLink/>
+                                    <span className="text-xs font-bold">Href</span>
+                                </div>
+                                <Select
+                                    classNames={{
+                                        input: "bg-stone-950 text-white border-2 border-stone-800 rounded-md h-full text-md font-bold text-center",
+                                        dropdown: "bg-stone-950 text-white",
+                                        option: "hover:bg-stone-950 border-2 border-transparent hover:border-cyan-500 hover:text-cyan-500 text-white font-bold text-md"
+                                    }}
+                                    placeholder="Redirect to..."
+                                    data={pages}
+                                    onChange={(value) => {
+                                        setSpecificAttributes({
+                                            ...specificAttributes,
+                                            href: value
+                                        })
+                                        onChangeInput({
+                                            target: {
+                                                id: "valueInput",
+                                                name: "href",
+                                                value: value
+                                            }
+                                        })
+                                    }}
+                                    onSearchChange={ setExternalLink }
+                                    searchable
+                                    defaultValue={ specificAttributes.href }
+                                    checkIconPosition="right"
+                                    nothingFoundMessage={ <button onClick={ () => {
+                                        setSpecificAttributes({
+                                            ...specificAttributes,
+                                            href: externalLink
+                                        })
+                                        onChangeInput({
+                                            target: {
+                                                id: "valueInput",
+                                                name: "href",
+                                                value: externalLink
+                                            }
+                                        })
+                                    }} className="w-full h-full text-white">External Link</button> }
+                                />
+                                {/*<input*/}
+                                {/*    onChange={({target}) => {*/}
+                                {/*        setSpecificAttributes({*/}
+                                {/*            ...specificAttributes,*/}
+                                {/*            text: target.value*/}
+                                {/*        })*/}
+                                {/*        onChangeInput({*/}
+                                {/*            target: {*/}
+                                {/*                id: "valueInput",*/}
+                                {/*                name: "text",*/}
+                                {/*                value: target.value*/}
+                                {/*            }*/}
+                                {/*        })*/}
+                                {/*    }}*/}
+                                {/*    name="text"*/}
+                                {/*    value={specificAttributes.text}*/}
+                                {/*    min={0}*/}
+                                {/*    type="text"*/}
+                                {/*    className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>*/}
                             </div>
                         </div>
                     ) : ""}

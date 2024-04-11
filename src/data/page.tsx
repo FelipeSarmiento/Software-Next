@@ -15,7 +15,7 @@ import { cookies } from 'next/headers';
 export const registerUser = async (users) => {
     const {username, password, email, firstName, lastName, phoneNumber} = users
     let passwordEncrypted = encrypt(password, process.env.REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#');
-    return await sql`INSERT INTO users (first_name, last_name, username, email, phone_number, password) VALUES (${firstName}, ${lastName}, ${username}, ${email}, ${phoneNumber}, ${passwordEncrypted}) RETURNING *`;
+    return await sql`INSERT INTO users (first_name, last_name, username, email, phone_number, password, role) VALUES (${firstName}, ${lastName}, ${username}, ${email}, ${phoneNumber}, ${passwordEncrypted}, 'user') RETURNING *`;
 }
 export const login = async (User: any) => {
     const {password, user} = User
@@ -86,13 +86,21 @@ export const getUser = async (idUser) => {
 */
 
 export const getProjects = async () => {
-    const {rows} = await sql`SELECT * FROM projects WHERE ispublic = true`;
+    let {rows} = await sql`SELECT * FROM projects WHERE ispublic = true`;
+
+    const enhancedProjects = await Promise.all(rows.map(async (project) => {
+        const user = await getUser(project.iduser);
+        return {
+            ...project,
+            user: user
+        };
+    }));
     return {
         ok: true,
-        projects: rows
-    }
+        projects: enhancedProjects
+    };
+};
 
-}
 
 export const getProjectsByUser = async () => {
 
@@ -175,7 +183,7 @@ export const updateProject = async (project) => {
     return await sql`UPDATE projects SET projectname = ${project_name}, projectdescription = ${project_description}, isPublic = ${isPublic}, typeproject = ${type_project}, tags = ${tags}, items = ${items}, dateupdated = ${date_updated} WHERE idproject = ${idProject} AND iduser = ${iduser} RETURNING *`;
 }
 
-export const deleteProyect = async (idProject) => {
+export const deleteProject = async (idProject) => {
     const session = await getSession()
     if (!session) {
         return {
