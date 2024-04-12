@@ -257,14 +257,15 @@ export default function Dashboard({params}) {
         return (
             <div className="min-h-full bg-black text-white lg:bg-transparent pt-4">
                 <header className=" shadow">
-                    <div className="mx-auto relative grid grid-cols-2 ld:grid-cols-5 md:flex justify-between px-4 py-6 sm:px-6 lg:px-24">
-                        <h1 className="col-span-2 flex items-center justify-around text-3xl font-bold tracking-tight text-white">
-                            Dashboard - <span class="text-cyan-500 px-2 font-extrabold"> {project?.projectname}</span>
+                    <div className="mx-auto relative grid grid-cols-2 lg:grid-cols-5 lg:flex justify-between px-4 py-3 sm:px-6 lg:px-24">
+                        <h1 className="col-span-2 flex flex-col md:flex-row items-center justify-center lg:justify-around text-3xl font-bold tracking-tight text-white">
+                            Dashboard <span className="hidden md:flex px-3">-</span><span className="text-cyan-500 py-2 lg:py-0 font-extrabold"> {project?.projectname}</span>
                         </h1>
                         <div className="col-span-2 lg:absolute lg:top-2/4 lg:left-2/4 lg:-translate-x-2/4 lg:-translate-y-2/4 flex items-center justify-center">
                             {/*<h2 className="text-lg font-bold text-white">"{actualPage.charAt(0).toUpperCase() + actualPage.slice(1)}" Page</h2>*/}
                             <Select
                                 classNames={{
+                                    root: "py-2 lg:py-0",
                                     input: "bg-stone-950 text-white border-2 border-stone-800 rounded-md h-12 text-lg font-bold text-center",
                                     dropdown: "bg-stone-950 text-white",
                                     option: "hover:bg-stone-950 border-2 border-transparent hover:border-cyan-500 hover:text-cyan-500 text-white font-bold text-md"
@@ -476,7 +477,7 @@ export default function Dashboard({params}) {
                                                                             </> : ""
                                                                     }
                                                                 </div>
-                                                                <DropMenu currentPage={actualPage} items={itemsDashboard?.pages[actualPage]}
+                                                                <DropMenu viewport={viewport} currentPage={actualPage} items={itemsDashboard?.pages[actualPage]}
                                                                           optionSelected={optionItem}
                                                                           title="Tree View"
                                                                           type="tree-view"

@@ -55,24 +55,24 @@ export default function Home() {
                                 <div className="border-2 flex items-center justify-center select-none border-neutral-300 rounded-md lg:h-full">
                                     <Image src={ SoftwareNextLogo } alt="Software Next Logo" width={500} height={500} className="size-52 object-cover rounded-md"/>
                                 </div>
-                                <div className="rounded-md max-h-60 flex flex-wrap lg:h-full px-3 md:px-3 lg:px-3 py-2 text-white">
-                                    <div className="w-full relative h-1/5 flex flex-wrap items-center text-2xl font-bold ">
+                                <div className="rounded-md max-h-64 flex flex-wrap lg:h-full px-3 md:px-3 lg:px-3 py-2 text-white">
+                                    <div className="w-full relative min-h-1/5 flex flex-wrap items-center text-2xl font-bold ">
                                         <h3 className="text-cyan-500 text-nowrap truncate pr-8">{ project.projectname }</h3>
                                         <span className={`absolute top-2/4 -translate-y-2/4 right-0 ${project.ispublic ? 'text-green-500' : 'text-red-500'}`} title={ project.ispublic ? 'Is public' : 'Is not public' }>
                                             <IconWorld/>
                                         </span>
                                     </div>
-                                    <div className="w-full h-2/5 max-h-2/5 overflow-hidden py-2">
+                                    <div className="w-full h-2/5 overflow-hidden py-2">
                                         <div className="overflow-y-auto h-full">
                                             <p className="text-sm md:text-base">{ project.projectdescription }</p>
                                         </div>
                                     </div>
-                                    <div className="w-2/4 md:w-full h-1/5 flex overflow-x-auto items-center space-x-2 justify-start">
+                                    <div className="w-2/4 lg:w-full min-h-1/5 flex overflow-y-hidden py-1 overflow-x-auto items-center space-x-2 justify-start">
                                         { project.tags.map((tag, index) => (
-                                            <span className="bg-stone-800 rounded-lg p-1 text-xs md:text-sm border-2 border-stone-900">{tag}</span>
+                                            <span className="bg-stone-800 rounded-lg p-1 text-xs md:text-sm border-stone-900">{tag}</span>
                                         ))}
                                     </div>
-                                    <div className="w-2/4 md:w-full h-1/5 flex items-center md:items-end space-x-5 px-2">
+                                    <div className="w-2/4 lg:w-full min-h-1/5 flex py-1 lg:py-0 items-center lg:items-end justify-end lg:justify-center space-x-5 px-2">
                                         <Link target="_blank" href={"/" + project.projectpublicid}>
                                             <button className="flex space-x-2 hover:text-cyan-500">
                                                 <IconExternalLink/>
