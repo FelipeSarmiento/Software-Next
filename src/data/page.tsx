@@ -194,3 +194,123 @@ export const deleteProject = async (idProject) => {
     const {iduser} = session
     return await sql`DELETE FROM projects WHERE idproject = ${idProject} AND iduser = ${iduser} RETURNING *`;
 }
+
+/*
+*  TEMPLATES
+*  TEMPLATES
+*  TEMPLATES
+*  TEMPLATES
+*  TEMPLATES
+*  TEMPLATES
+*  TEMPLATES
+*/
+
+export const getTemplates = async () => {
+    let {rows} = await sql`SELECT * FROM templates WHERE ispublic = true`;
+
+    const enhancedTemplate = await Promise.all(rows.map(async (template) => {
+        const user = await getUser(template.iduser);
+        return {
+            ...template,
+            user: user
+        };
+    }));
+    return {
+        ok: true,
+        templates: enhancedTemplate
+    };
+};
+
+
+export const getTemplatesByUser = async () => {
+
+    const session = await getSession()
+    if (!session) {
+        return {
+            ok: false,
+            message: 'You must be logged in to see your templates'
+        }
+    }
+    const {iduser} = session
+    const {rows} = await sql`SELECT * FROM templates WHERE iduser = ${iduser}`;
+    return {
+        ok: true,
+        templates: rows
+    }
+
+}
+
+export const getTemplate = async (template_public_id : string) => {
+    const session = await getSession()
+    if (!session) {
+        return {
+            ok: false,
+            message: 'You must be logged in to see your templates'
+        }
+    }
+    const {iduser} = session
+    const {rows} = await sql`SELECT * FROM templates WHERE templatepublicid = ${template_public_id} AND iduser = ${iduser}`
+    return {
+        ok: true,
+        template: rows
+    }
+}
+export const getPublicTemplate = async (template_public_id : string) => {
+    const {rows} = await sql`SELECT * FROM templates WHERE templatepublicid = ${template_public_id}`
+    return {
+        ok: true,
+        templates: rows
+    }
+}
+
+export const createTemplate = async (template) => {
+    const session = await getSession()
+    if (!session) {
+        return {
+            ok: false,
+            message: 'You must be logged in to create a template'
+        }
+    }
+    const { iduser } = session
+    const {template_name, template_description, isPublic, type_template, tags, template_public_id} = template
+    const date_created = new Date()
+    const items = {
+        pages:
+            {
+                index: {
+                    sections: [],
+                    order: []
+                }
+            }
+    }
+
+    // @ts-ignore
+    const resp = await sql`INSERT INTO templates (templatename, templatedescription, isPublic, typetemplate, tags, iduser, items, templatepublicid, datecreated, dateupdated) VALUES (${template_name}, ${template_description}, ${isPublic}, ${type_template}, ${tags}, ${iduser}, ${items}, ${template_public_id}, ${date_created}, ${date_created}) RETURNING *`
+    }
+
+export const updateTemplate = async (template) => {
+    const session = await getSession()
+    if (!session) {
+        return {
+            ok: false,
+            message: 'You must be logged in to update a project'
+        }
+    }
+    const {iduser} = session
+    const {template_name, template_description, isPublic, type_template, tags, items, idTemplate} = template
+    const date_updated = new Date()
+    // @ts-ignore
+    return await sql`UPDATE templates SET templatename = ${template_name}, templatedescription = ${template_description}, isPublic = ${isPublic}, typetemplate = ${type_template}, tags = ${tags}, items = ${items}, dateupdated = ${date_updated} WHERE idtemplate = ${idTemplate} AND iduser = ${iduser} RETURNING *`;
+}
+
+export const deleteTemplate = async (idTemplate) => {
+    const session = await getSession()
+    if (!session) {
+        return {
+            ok: false,
+            message: 'You must be logged in to delete a template'
+        }
+    }
+    const {iduser} = session
+    return await sql`DELETE FROM template WHERE idtemplate = ${idTemplate} AND iduser = ${iduser} RETURNING *`;
+}

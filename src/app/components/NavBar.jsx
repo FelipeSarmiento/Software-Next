@@ -100,6 +100,11 @@ export function NavBar() {
                                                     <span className="px-1 flex h-auto">My Projects</span>
                                                 </Link>
                                                 <div className="border-[1px] border-white" />
+                                                <Link href="/MyTemplates" className="relative flex px-2 pb-1 h-8 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
+                                                    <span className="absolute -inset-1.5"/>
+                                                    <span className="px-1 flex h-auto">My Templates</span>
+                                                </Link>
+                                                <div className="border-[1px] border-white" />
                                                 <Disclosure.Button title="Log out" onClick={() => logout()} className="relative flex pb-1 h-8 px-2 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
                                                     <span className="absolute -inset-1.5"/>
                                                     <span className="md:block px-1 flex h-auto">{ session }</span>
@@ -160,6 +165,10 @@ export function NavBar() {
                                                     <Link href="/MyProjects" className={ 'text-gray-300 hover:bg-stone-800 hover:text-white block rounded-md px-3 py-2 text-base font-medium'}>
                                                         <span className="absolute -inset-1.5"/>
                                                         <span className="">My Projects</span>
+                                                    </Link>
+                                                    <Link href="/MyTemplates" className={ 'text-gray-300 hover:bg-stone-800 hover:text-white block rounded-md px-3 py-2 text-base font-medium'}>
+                                                        <span className="absolute -inset-1.5"/>
+                                                        <span className="">My Templates</span>
                                                     </Link>
                                                     <Disclosure.Button title="Log out" onClick={() => logout()} className={ 'text-gray-300 flex hover:bg-stone-800 hover:text-white block rounded-md px-3 py-2 text-base font-medium'}>
                                                         <span className="md:block flex h-auto">{ session }</span>

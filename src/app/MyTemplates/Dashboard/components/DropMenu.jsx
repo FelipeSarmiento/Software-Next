@@ -9,6 +9,7 @@ export const DropMenu = ({items, title, type, functions, modifyItemsDashboard, a
     }, [items]);
     const [itemsPrimary, setItemsPrimary] = useState(items ?? undefined)
 
+
     return (
         <>
             <div className="h-full lg:block lg:h-[60vh] relative w-full bg-stone-950 border-2 border-stone-800 rounded-md p-1">

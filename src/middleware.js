@@ -7,12 +7,21 @@ export function middleware(req) {
     if (req.nextUrl.pathname === '/MyProjects/Dashboard') {
         return NextResponse.redirect(new URL('/MyProjects/', req.url))
     }
+    if (req.nextUrl.pathname === '/MyTemplates/Dashboard') {
+        return NextResponse.redirect(new URL('/MyTemplates/', req.url))
+    }
     return getSession().then((session) => {
         if (!session) {
             if (req.nextUrl.pathname.includes('/MyProjects/Dashboard/')) {
                 return NextResponse.redirect(new URL('/Auth/Login', req.url))
             }
             if (req.nextUrl.pathname.includes('/MyProjects')) {
+                return NextResponse.redirect(new URL('/Auth/Login', req.url))
+            }
+            if (req.nextUrl.pathname.includes('/MyTemplates/Dashboard/')) {
+                return NextResponse.redirect(new URL('/Auth/Login', req.url))
+            }
+            if (req.nextUrl.pathname.includes('/MyTemplates')) {
                 return NextResponse.redirect(new URL('/Auth/Login', req.url))
             }
         }
@@ -25,5 +34,5 @@ export function middleware(req) {
 }
 
 export const config = {
-    matcher: ['/Auth/Login', '/Auth/Register', '/MyProjects', '/MyProjects/Dashboard', '/MyProjects/Dashboard/:path*'],
+    matcher: ['/Auth/Login', '/Auth/Register', '/MyProjects', '/MyTemplates', '/MyProjects/Dashboard', '/MyProjects/Dashboard/:path*', '/MyTemplates/Dashboard', '/MyTemplates/Dashboard/:path*'],
 }

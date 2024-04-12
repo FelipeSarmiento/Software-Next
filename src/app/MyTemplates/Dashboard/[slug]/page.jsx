@@ -14,9 +14,9 @@ import {
     IconDeviceTv,
     IconComponents, IconX, IconCheck, IconBinaryTree, IconSettings, IconExternalLink, IconTrash, IconQuestionMark
 } from '@tabler/icons-react';
-import {Button, Drawer, Group, HoverCard, Text, Menu, Select, Tooltip} from '@mantine/core';
+import {Button, Drawer, Group, HoverCard, Text, Menu, Select} from '@mantine/core';
 import Link from "next/link";
-import { getSession, getProject, updateProject } from "@/data/page";
+import { getSession, getTemplate, updateTemplate } from "@/data/page";
 
 export default function Dashboard({params}) {
     const [session, setSession] = useState()
@@ -33,7 +33,7 @@ export default function Dashboard({params}) {
     ]
 
     const [itemsDashboard, setItemsDashboard] = useState();
-    const [project, setProject] = useState()
+    const [template, setTemplate] = useState()
     const [actualPage, setActualPage] = useState("")
     const [itemCopied, setItemCopied] = useState()
     const [optionItem, setOptionItem] = useState();
@@ -52,7 +52,7 @@ export default function Dashboard({params}) {
     }, [session]);
 
     async function saveItemsDashboard(bodySet) {
-        const resp = await updateProject(bodySet);
+        const resp = await updateTemplate(bodySet);
         setUnSaved(false)
     }
 
@@ -124,7 +124,6 @@ export default function Dashboard({params}) {
         setItemsDashboard({...modify(itemsDashboard)});
         setUnSaved(true)
     };
-
     const deletePage = (page) => {
         const newObj = structuredClone(itemsDashboard);
         delete newObj.pages[page];
@@ -257,6 +256,7 @@ export default function Dashboard({params}) {
     }
     const [openDrawerSettings, setOpenDrawerSettings] = useState(false)
     const [openDrawerTreeView, setOpenDrawerTreeView] = useState(false)
+    const [newPage, setNewPage] = useState()
     const [pages, setPages] = useState()
 
     useEffect(() => {
@@ -265,15 +265,13 @@ export default function Dashboard({params}) {
         }
     }, [itemsDashboard]);
 
-    const [newPage, setNewPage] = useState()
-
     if (itemsDashboard) {
         return (
             <div className="min-h-full bg-black text-white lg:bg-transparent pt-4">
                 <header className=" shadow">
                     <div className="mx-auto relative grid grid-cols-2 lg:grid-cols-5 lg:flex justify-between px-4 py-3 sm:px-6 lg:px-24">
                         <h1 className="col-span-2 flex flex-col md:flex-row items-center justify-center lg:justify-around text-3xl font-bold tracking-tight text-white">
-                            Dashboard <span className="hidden md:flex px-3">-</span><span className="text-cyan-500 py-2 lg:py-0 font-extrabold"> {project?.projectname}</span>
+                            Dashboard <span className="hidden md:flex px-3">-</span><span className="text-cyan-500 py-2 lg:py-0 font-extrabold"> {template?.templatename}</span>
                         </h1>
                         <div className="col-span-2 lg:absolute lg:top-2/4 lg:left-2/4 lg:-translate-x-2/4 lg:-translate-y-2/4 flex items-center justify-center">
                             <div className="size-10 flex items-center justify-center">
@@ -373,19 +371,19 @@ export default function Dashboard({params}) {
                             </div>
                         </div>
                         <div className="col-span-2 py-2 flex space-x-4 justify-center">
-                            <Link target="_blank" href={'/' + project.projectpublicid}>
+                            <Link target="_blank" href={'/' + template.projectpublicid}>
                                 <button className="text-white text-nowrap flex items-center justify-center border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
                                     Visit &nbsp;<IconExternalLink/>
                                 </button>
                             </Link>
                             <button onClick={() => {
                                 saveItemsDashboard({
-                                    idProject: project?.idproject,
-                                    project_name: project?.projectname,
-                                    project_description: project?.projectdescription,
-                                    isPublic: project?.isPublic,
-                                    type_project: project?.type,
-                                    tags: project?.tags,
+                                    idTemplate: template?.idtemplate,
+                                    template_name: template?.templatename,
+                                    template_description: template?.templatedescription,
+                                    isPublic: template?.isPublic,
+                                    type_template: template?.type,
+                                    tags: template?.tags,
                                     items: itemsDashboard,
                                 })
                             }}
@@ -662,8 +660,8 @@ export default function Dashboard({params}) {
                                                         </Button>
                                                     </div>
                                                 </div>
-                                                <div className="col-span-1 hidden lg:flex items-center justify-end relative order-3">
-                                                    <div className="absolute">
+                                                <div className="col-span-1 hidden lg:block relative order-3">
+                                                    <div className="absolute top-2/4 left-0 -translate-y-2/4">
                                                         <Group justify="center">
                                                             <HoverCard shadow="md" closeDelay={0}>
                                                                 <HoverCard.Target>
@@ -732,10 +730,10 @@ export default function Dashboard({params}) {
 
     async function getItemsDashboard() {
         try {
-            await getProject(params.slug).then((itemsDashboardResp) => {
-                if (itemsDashboardResp.project[0] !== undefined) {
-                    setProject(itemsDashboardResp?.project[0] ?? undefined);
-                    setItemsDashboard(JSON.parse(itemsDashboardResp.project[0]?.items) ?? {
+            await getTemplate(params.slug).then((itemsDashboardResp) => {
+                if (itemsDashboardResp.template[0] !== undefined) {
+                    setTemplate(itemsDashboardResp?.template[0] ?? undefined);
+                    setItemsDashboard(JSON.parse(itemsDashboardResp.template[0]?.items) ?? {
                         pages:
                             {
                                 index: {
@@ -744,10 +742,9 @@ export default function Dashboard({params}) {
                                 }
                             }
                     });
-                    //setPages(Object.keys(itemsDashboardResp?.project[0]?.items?.pages).map((page, index) => { return (page.charAt(0).toUpperCase() + page.slice(1)) }))
                     setActualPage("index")
                 } else {
-                    window.location.href = "/MyProjects"
+                    window.location.href = "/MyTemplates"
                 }
             })
         } catch (error) {
