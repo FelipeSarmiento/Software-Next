@@ -18,7 +18,7 @@ export function SignInForm() {
         setErrorMessage('')
         try {
             let result = await login(formState)
-            console.log("RESULT", result)
+
             if (result.ok) {
                 await setSession(result.user).then(() => { window.location.href = '/MyProfile'})
             }

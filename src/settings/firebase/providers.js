@@ -45,7 +45,6 @@ export const signInWithEmail = async (_email, password) => {
                 errorMessage: (error.code === 'auth/invalid-credential' ? 'Invalid credentials' : error.code)
             };
         });
-        console.log(result)
         return result;
     } catch (error) {
         console.error('error: ' + error)

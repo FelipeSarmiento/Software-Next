@@ -31,7 +31,6 @@ export default function Home({params}){
     if (width > 1280) {
         viewportType = "TV"
     }
-    console.log(params)
 
     return (
         <>

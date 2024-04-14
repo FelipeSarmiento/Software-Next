@@ -54,7 +54,6 @@ export const login = async (User: any) => {
             }
         }
     }
-    console.log(objectResp)
     return objectResp
 }
 
@@ -73,10 +72,8 @@ export const logout = async () => {
 }
 
 export const getSession = async () => {
-    console.log("GET SESSION")
     const session = cookies().get('userSession')?.value;
     if (!session) {
-        console.log("NO SESSION")
         return null;
     }
 
@@ -226,8 +223,6 @@ export const createProject = async (project) => {
     }
 
     const _idtemplate = idtemplate ? idtemplate : null
-    
-    console.log(project)
 
     // @ts-ignore
     const resp = await sql`INSERT INTO projects (projectname, projectdescription, isPublic, typeproject, tags, iduser, items, projectpublicid, datecreated, dateupdated, idtemplate) VALUES (${project_name}, ${project_description}, ${isPublic}, ${type_project}, ${tags}, ${iduser}, ${_items}, ${project_public_id}, ${date_created}, ${date_created}, ${_idtemplate}) RETURNING *`
@@ -314,7 +309,6 @@ export const getTemplatesByUser = async () => {
     // @ts-ignore
     const {iduser} = session
     const {rows} = await sql`SELECT * FROM templates WHERE iduser = ${iduser}`;
-    console.log("ROWS", rows)
     return {
         ok: true,
         templates: rows

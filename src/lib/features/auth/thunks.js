@@ -36,7 +36,6 @@ export const startEmailSignUp = (email, password, name) => {
         dispatch(checkingCredentials())
 
         const result = await signUpWithEmail(email, password);
-        console.log(result)
         if (!result.ok) {
             return dispatch(logout())
         }

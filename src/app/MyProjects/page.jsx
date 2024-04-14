@@ -171,18 +171,23 @@ const ModalContent = ({close, project}) => {
             getTemplatesApproved().then((response) => {
                 setTemplatesApproved(response?.templates)
                 response.templates.map((template) => {
+                    const data = dataTemplate
                     const objToFind = {
                         value: template?.idtemplate.toString(),
-                        label: template?.templatename
                     }
                     const found = dataMyTemplates.some(obj => (
-                        obj.value === objToFind.value && obj.label === objToFind.label
+                        obj.value === objToFind.value
                     ));
 
-                    found ? '' : setDataMyTemplates([...dataMyTemplates, {
+                    const found2 = data.some(obj => (
+                        obj.value === objToFind.value
+                    ));
+
+                    found ? '' : found2 ? '' : data.push({
                         value: template?.idtemplate.toString(),
                         label: template?.templatename
-                    }])
+                    })
+                    setDataTemplate(data)
                 })
             })
         }
@@ -268,14 +273,13 @@ const ModalContent = ({close, project}) => {
             className="fixed top-0 left-0 w-full py-20 px-2 flex items-center justify-center h-screen  bg-stone-950/90">
             <div
                 className="relative h-max px-3 py-2 md:py-3 lg:px-6 mt-10 w-full md:w-4/6 2xl:w-2/6 bg-black border-2 overflow-y-auto border-stone-500 text-white rounded-lg">
-                <h2 className="text-lg font-bold text-center">{project ? 'Edit Template' : 'Create a new Template'}</h2>
+                <h2 className="text-lg font-bold text-center">{project ? 'Edit Projects' : 'Create a new Project'}</h2>
                 <div className="">
                     <form onSubmit={handleProjectForm}>
                         <div className="flex flex-wrap md:grid grid-cols-2 gap-x-8 w-full">
                             <div className="col-span-2 w-full">
                                 <div className="mt-4">
-                                    <label htmlFor="project-name" className="block text-sm font-bold py-1">Template
-                                        Name</label>
+                                    <label htmlFor="project-name" className="block text-sm font-bold py-1">Project Name</label>
                                     <input onChange={(event) => {
                                         setProjectForm({...projectForm, project_name: event.target.value})
                                     }} type="text" name="project_name" id="project_name"
@@ -328,12 +332,12 @@ const ModalContent = ({close, project}) => {
                                                 dropdown: "bg-stone-950 border-stone-800 text-white",
                                                 option: "hover:bg-stone-950 border-2 border-transparent hover:border-cyan-500 hover:text-cyan-500 text-white font-bold text-md"
                                             }}
-                                            label="Type of Template"
+                                            label="Type of Project"
                                             value={projectForm?.type_project}
                                             onChange={(value) => {
                                                 setProjectForm({...projectForm, type_project: value})
                                             }}
-                                            placeholder="Type of Template"
+                                            placeholder="Type of Project"
                                             data={['Ecommerce', 'Blog', 'Portfolio', 'Landing Page']}
                                             checkIconPosition="right"
                                         />
@@ -352,7 +356,6 @@ const ModalContent = ({close, project}) => {
                                             }}
                                             value={projectForm?.idtemplate?.toString()}
                                             onChange={(value) => {
-                                                console.log(value)
                                                 if (value.includes('none')) {
                                                     setProjectForm({
                                                         ...projectForm,
@@ -361,10 +364,19 @@ const ModalContent = ({close, project}) => {
                                                     })
                                                     return
                                                 }
-                                                setProjectForm({
-                                                    ...projectForm,
-                                                    idtemplate: value,
-                                                    items: templatesApproved?.filter((template) => template?.idtemplate === value ? template : 'none')[0]?.items
+                                                myTemplates?.forEach((template) => {
+                                                    template?.idtemplate.toString() === value ? setProjectForm({
+                                                        ...projectForm,
+                                                        idtemplate: value,
+                                                        items: template.items
+                                                    }) : ''
+                                                })
+                                                templatesApproved?.forEach((template) => {
+                                                    template?.idtemplate.toString() === value ? setProjectForm({
+                                                        ...projectForm,
+                                                        idtemplate: value,
+                                                        items: template.items
+                                                    }) : ''
                                                 })
                                             }}
                                             label="Template"

@@ -76,7 +76,6 @@ export default function Home() {
 
      async function getAllProjects(){
         setProjects(await getProjects().then((response) => {
-            console.log("response: ", response)
             return response.projects
         }))
     }
