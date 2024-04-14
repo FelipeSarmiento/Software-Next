@@ -225,8 +225,12 @@ export const createProject = async (project) => {
             }
     }
 
+    const _idtemplate = idtemplate ? idtemplate : null
+    
+    console.log(project)
+
     // @ts-ignore
-    const resp = await sql`INSERT INTO projects (projectname, projectdescription, isPublic, typeproject, tags, iduser, items, projectpublicid, datecreated, dateupdated, idtemplate) VALUES (${project_name}, ${project_description}, ${isPublic}, ${type_project}, ${tags}, ${iduser}, ${_items}, ${project_public_id}, ${date_created}, ${date_created}, ${idtemplate}) RETURNING *`
+    const resp = await sql`INSERT INTO projects (projectname, projectdescription, isPublic, typeproject, tags, iduser, items, projectpublicid, datecreated, dateupdated, idtemplate) VALUES (${project_name}, ${project_description}, ${isPublic}, ${type_project}, ${tags}, ${iduser}, ${_items}, ${project_public_id}, ${date_created}, ${date_created}, ${_idtemplate}) RETURNING *`
 }
 
 export const updateProject = async (project) => {
