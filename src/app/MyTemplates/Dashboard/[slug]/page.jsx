@@ -372,7 +372,7 @@ export default function Dashboard({params}) {
                             </div>
                         </div>
                         <div className="col-span-2 py-2 flex space-x-4 justify-center">
-                            <Link target="_blank" href={'/' + template.projectpublicid}>
+                            <Link target="_blank" href={'/Template/' + template.templatepublicid}>
                                 <button className="text-white text-nowrap flex items-center justify-center border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
                                     Visit &nbsp;<IconExternalLink/>
                                 </button>

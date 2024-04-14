@@ -56,7 +56,7 @@ export default function Home() {
                                 setCurrentProject(null)
                                 open()
                             }}>
-                            <span>New Project</span>
+                            <span>New Template</span>
                             <IconSquareRoundedPlus/>
                         </button>
                     </div>
@@ -268,13 +268,13 @@ const ModalContent = ({close, project}) => {
             className="fixed top-0 left-0 w-full py-20 px-2 flex items-center justify-center h-screen  bg-stone-950/90">
             <div
                 className="relative h-max px-3 py-2 md:py-3 lg:px-6 mt-10 w-full md:w-4/6 2xl:w-2/6 bg-black border-2 overflow-y-auto border-stone-500 text-white rounded-lg">
-                <h2 className="text-lg font-bold text-center">{project ? 'Edit Project' : 'Create a new Project'}</h2>
+                <h2 className="text-lg font-bold text-center">{project ? 'Edit Template' : 'Create a new Template'}</h2>
                 <div className="">
                     <form onSubmit={handleProjectForm}>
                         <div className="flex flex-wrap md:grid grid-cols-2 gap-x-8 w-full">
                             <div className="col-span-2 w-full">
                                 <div className="mt-4">
-                                    <label htmlFor="project-name" className="block text-sm font-bold py-1">Project
+                                    <label htmlFor="project-name" className="block text-sm font-bold py-1">Template
                                         Name</label>
                                     <input onChange={(event) => {
                                         setProjectForm({...projectForm, project_name: event.target.value})
@@ -328,12 +328,12 @@ const ModalContent = ({close, project}) => {
                                                 dropdown: "bg-stone-950 border-stone-800 text-white",
                                                 option: "hover:bg-stone-950 border-2 border-transparent hover:border-cyan-500 hover:text-cyan-500 text-white font-bold text-md"
                                             }}
-                                            label="Type of Project"
+                                            label="Type of Template"
                                             value={projectForm?.type_project}
                                             onChange={(value) => {
                                                 setProjectForm({...projectForm, type_project: value})
                                             }}
-                                            placeholder="Type of Project"
+                                            placeholder="Type of Template"
                                             data={['Ecommerce', 'Blog', 'Portfolio', 'Landing Page']}
                                             checkIconPosition="right"
                                         />
