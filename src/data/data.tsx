@@ -81,8 +81,8 @@ export const getSession = async () => {
     }
 
     // Verifica si los valores de las variables de entorno están definidos
-    const secretKey64 = process.env.NEXT_PUBLIC_REACT_APP_SECRET_KEY64;
-    const secretKey16 = process.env.NEXT_PUBLIC_REACT_APP_SECRET_KEY16;
+    const secretKey64 = process.env.NEXT_PUBLIC_REACT_APP_SECRET_KEY64 ?? "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
+    const secretKey16 = process.env.NEXT_PUBLIC_REACT_APP_SECRET_KEY16 ?? "abcdef9876543210abcdef9876543210";
     if (!secretKey64 || !secretKey16) {
         throw new Error("Las variables de entorno para la clave y el IV no están definidas.");
     }
@@ -107,9 +107,9 @@ export const setSession = async (session: any) => {
     }
 
     // @ts-ignore
-    const key = Buffer.from(process.env.NEXT_PUBLIC_REACT_APP_SECRET_KEY64, 'hex');
+    const key = Buffer.from(process.env.NEXT_PUBLIC_REACT_APP_SECRET_KEY64 ?? "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", 'hex');
     // @ts-ignore
-    const iv = Buffer.from(process.env.NEXT_PUBLIC_REACT_APP_SECRET_KEY16, 'hex');
+    const iv = Buffer.from(process.env.NEXT_PUBLIC_REACT_APP_SECRET_KEY16 ?? "abcdef9876543210abcdef9876543210", 'hex');
 
 // Encriptar
     const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
