@@ -16,7 +16,7 @@ import {
 } from '@tabler/icons-react';
 import {Button, Drawer, Group, HoverCard, Text, Menu, Select} from '@mantine/core';
 import Link from "next/link";
-import { getSession, getTemplate, updateTemplate } from "@/data/page";
+import { getSession, getTemplate, updateTemplate } from "@/data/data";
 
 export default function Dashboard({params}) {
     const [session, setSession] = useState()
@@ -167,6 +167,7 @@ export default function Dashboard({params}) {
         setOptionItem(undefined)
     };
     const addPage = (page) => {
+        page = page.replace(" ", "-")
         setItemsDashboard({
             ...itemsDashboard,
             pages: {
@@ -271,7 +272,7 @@ export default function Dashboard({params}) {
                 <header className=" shadow">
                     <div className="mx-auto relative grid grid-cols-2 lg:grid-cols-5 lg:flex justify-between px-4 py-3 sm:px-6 lg:px-24">
                         <h1 className="col-span-2 flex flex-col md:flex-row items-center justify-center lg:justify-around text-3xl font-bold tracking-tight text-white">
-                            Dashboard <span className="hidden md:flex px-3">-</span><span className="text-cyan-500 py-2 lg:py-0 font-extrabold"> {template?.templatename}</span>
+                            Template <span className="hidden md:flex px-3">-</span><span className="text-cyan-500 py-2 lg:py-0 font-extrabold"> {template?.templatename}</span>
                         </h1>
                         <div className="col-span-2 lg:absolute lg:top-2/4 lg:left-2/4 lg:-translate-x-2/4 lg:-translate-y-2/4 flex items-center justify-center">
                             <div className="size-10 flex items-center justify-center">
@@ -279,7 +280,7 @@ export default function Dashboard({params}) {
                                     <HoverCard width={300} shadow="md">
                                         <HoverCard.Target>
                                             <Button classNames={{
-                                                root: "h-full m-0 px-1 hover:bg-transparent hover:text-cyan-500",
+                                                root: "h-full m-0 px-1 bg-transparent hover:bg-transparent hover:text-cyan-500",
                                             }}>
                                                 <IconQuestionMark/>
                                             </Button>
@@ -660,8 +661,8 @@ export default function Dashboard({params}) {
                                                         </Button>
                                                     </div>
                                                 </div>
-                                                <div className="col-span-1 hidden lg:block relative order-3">
-                                                    <div className="absolute top-2/4 left-0 -translate-y-2/4">
+                                                <div className="col-span-1 hidden lg:flex items-center justify-end relative order-3">
+                                                    <div className="absolute">
                                                         <Group justify="center">
                                                             <HoverCard shadow="md" closeDelay={0}>
                                                                 <HoverCard.Target>

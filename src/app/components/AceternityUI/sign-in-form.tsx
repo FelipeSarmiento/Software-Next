@@ -4,9 +4,9 @@ import {Input} from "./input";
 import {cn} from "../../../settings/utils/cn";
 import {useForm} from "../../../lib/hooks/useForm";
 import Link from "next/link";
-import { login } from "@/data/page";
+import { login } from "@/data/data";
 import {useState} from "react";
-import { setSession } from "@/data/page";
+import { setSession } from "@/data/data";
 
 export function SignInForm() {
 
@@ -18,8 +18,9 @@ export function SignInForm() {
         setErrorMessage('')
         try {
             let result = await login(formState)
+            console.log("RESULT", result)
             if (result.ok) {
-                await setSession(result.user).then(() => { window.location.href = '/MyProjects'})
+                await setSession(result.user).then(() => { window.location.href = '/MyProfile'})
             }
             setErrorMessage(result.message)
         } catch (e) {

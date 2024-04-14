@@ -31,14 +31,12 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
 
     const onChangeInput = ({target}) => {
         let option = optionItem;
-        console.log("target", target)
         switch (target.id) {
             case 'valueInput':
                 option = {
                     ...optionItem,
                     [target.name]: target.value
                 }
-                console.log("option", option)
                 setOptionItem(option)
                 modifyItemsDashboard(option.idUniqueIdentifier, option)
                 break
@@ -292,6 +290,22 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
             unit: ""
         }
     })
+
+    function hexToRgba(hex) {
+        if (hex.includes("#")) {
+            hex = hex.replace('#', '');
+
+            // Divide el valor hexadecimal en los componentes R, G y B
+            let r = parseInt(hex.substring(0, 2), 16);
+            let g = parseInt(hex.substring(2, 4), 16);
+            let b = parseInt(hex.substring(4, 6), 16);
+
+            // Devuelve el color en formato RGBA
+            return `rgba(${r},${g},${b},1)`;
+        }
+        return hex
+    }
+
     const [colorsUsed, setColorsUsed] = useState([])
     const [display, setDisplay] = useState()
     const [flexDirection, setFlexDirection] = useState()
@@ -302,14 +316,22 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
 
         return (optionItem !== undefined ? (
                 <div className="py-2 pr-2 text-white">
+
+                    {/*
+                        TEXT
+                        TEXT
+                        TEXT
+                        TEXT
+                    */}
+
                     {optionItem.hasOwnProperty("text") ? (
                         <div className="py-2 flex items-center relative h-max">
-                            <div className="relative flex rounded-md border-[1px] border-white h-10 w-full">
-                                <div className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
+                            <div className="relative flex flex-col rounded-md border-[1px] border-white min-h-28 w-full">
+                                <div className="w-full flex items-center justify-center border-b-[1px] h-10">
                                     <IconCursorText/>
                                     <span className="text-xs font-bold">Text</span>
                                 </div>
-                                <input
+                                <textarea
                                     onChange={({target}) => {
                                         setSpecificAttributes({
                                             ...specificAttributes,
@@ -327,10 +349,18 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                     value={specificAttributes.text}
                                     min={0}
                                     type="text"
-                                    className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                    className="w-full max-h-28 rounded-md appearance-none focus:outline-none bg-black p-1"/>
                             </div>
                         </div>
                     ) : ""}
+
+                    {/*
+                        HREF
+                        HREF
+                        HREF
+                        HREF
+                    */}
+
                     {optionItem.hasOwnProperty("href") ? (
                         <div className="py-2 flex items-center relative h-max">
                             <div className="relative flex rounded-md border-[1px] border-white h-10 w-full">
@@ -381,28 +411,16 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                         })
                                     }} className="w-full h-full text-white">External Link</button> }
                                 />
-                                {/*<input*/}
-                                {/*    onChange={({target}) => {*/}
-                                {/*        setSpecificAttributes({*/}
-                                {/*            ...specificAttributes,*/}
-                                {/*            text: target.value*/}
-                                {/*        })*/}
-                                {/*        onChangeInput({*/}
-                                {/*            target: {*/}
-                                {/*                id: "valueInput",*/}
-                                {/*                name: "text",*/}
-                                {/*                value: target.value*/}
-                                {/*            }*/}
-                                {/*        })*/}
-                                {/*    }}*/}
-                                {/*    name="text"*/}
-                                {/*    value={specificAttributes.text}*/}
-                                {/*    min={0}*/}
-                                {/*    type="text"*/}
-                                {/*    className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>*/}
                             </div>
                         </div>
                     ) : ""}
+
+                    {/*
+                        SRC
+                        SRC
+                        SRC
+                        SRC
+                    */}
 
                     {optionItem.hasOwnProperty("src") ? (
                         <>
@@ -419,7 +437,6 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                         <input
                                             onChange={(e) => {
                                                 e.preventDefault()
-                                                console.log(e.target.files[0])
                                                 let reader = new FileReader();
                                                 reader.readAsDataURL(e.target?.files[0])
                                                 reader.onload = function () {
@@ -462,6 +479,14 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                             }
                         </>
                     ) : ""}
+
+                    {/*
+                        ALT
+                        ALT
+                        ALT
+                        ALT
+                    */}
+
                     {optionItem.hasOwnProperty("alt") ? (
                         <div className="py-2 flex items-center relative h-max">
                             <div
@@ -492,6 +517,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                             </div>
                         </div>
                     ) : ""}
+
+
                     {optionItem.hasOwnProperty("settings" + viewport.type) ? (
                         <>
                             <Disclosure as="div" className="border-white pt-2">
@@ -576,6 +603,30 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     <div className="text-white py-2 flex justify-center">
                                                         <h4>Font color</h4>
                                                     </div>
+                                                    <div className="flex items-center my-3 px-5 h-10 justify-center">
+                                                        <input
+                                                            onChange={
+                                                                ({target}) => {
+                                                                    setColorOptions({
+                                                                        ...colorOptions,
+                                                                        textColor: target.value
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "textColor",
+                                                                            name: "textColor",
+                                                                            value: "text-[" + target.value + "]"
+                                                                        }
+                                                                    })
+                                                                }
+                                                            }
+                                                            value={ colorOptions.textColor }
+                                                            min={0}
+                                                            type="text"
+                                                            placeholder="Type a Hex or RGBA Color"
+                                                            className="w-full rounded-md h-full appearance-none border-2 text-center focus:outline-none bg-black text-nowrap truncate"/>
+
+                                                    </div>
                                                     <ColorPicker
                                                         fullWidth
                                                         onChange={(value) => {
@@ -596,7 +647,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             colorsUsed.includes(value) ? null : setColorsUsed([...colorsUsed, value])
                                                         }}
                                                         swatches={colorsUsed}
-                                                        defaultValue={colorOptions.textColor}
+                                                        value={hexToRgba(colorOptions.textColor)}
                                                         classNames={{
                                                             input: "bg-black text-white "
                                                         }}
@@ -725,6 +776,30 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     <div className="text-white pb-2 flex justify-center">
                                                         <h4>Background color</h4>
                                                     </div>
+                                                    <div className="flex items-center my-3 px-5 h-10 justify-center">
+                                                        <input
+                                                            onChange={
+                                                                ({target}) => {
+                                                                    setColorOptions({
+                                                                        ...colorOptions,
+                                                                        backgroundColor: target.value
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "backgroundColor",
+                                                                            name: "backgroundColor",
+                                                                            value: "bg-[" + target.value + "]"
+                                                                        }
+                                                                    })
+                                                                }
+                                                            }
+                                                            value={ colorOptions.backgroundColor }
+                                                            min={0}
+                                                            type="text"
+                                                            placeholder="Type a Hex or RGBA Color"
+                                                            className="w-full rounded-md h-full appearance-none border-2 text-center focus:outline-none bg-black text-nowrap truncate"/>
+
+                                                    </div>
                                                     <ColorPicker
                                                         fullWidth
                                                         onChange={(value) => {
@@ -745,7 +820,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         }}
                                                         format="rgba"
                                                         swatches={colorsUsed}
-                                                        defaultValue={colorOptions.backgroundColor}
+                                                        value={hexToRgba(colorOptions.backgroundColor)}
                                                         classNames={{
                                                             input: "bg-black text-white "
                                                         }}
@@ -1082,6 +1157,30 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     <div className="text-white py-2 flex justify-center">
                                                         <h4>Border color</h4>
                                                     </div>
+                                                    <div className="flex items-center my-3 px-5 h-10 justify-center">
+                                                        <input
+                                                            onChange={
+                                                                ({target}) => {
+                                                                    setColorOptions({
+                                                                        ...colorOptions,
+                                                                        borderColor: target.value
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "borderColor",
+                                                                            name: "borderColor",
+                                                                            value: "border-[" + target.value + "]"
+                                                                        }
+                                                                    })
+                                                                }
+                                                            }
+                                                            value={ colorOptions.borderColor }
+                                                            min={0}
+                                                            type="text"
+                                                            placeholder="Type a Hex or RGBA Color"
+                                                            className="w-full rounded-md h-full appearance-none border-2 text-center focus:outline-none bg-black text-nowrap truncate"/>
+
+                                                    </div>
                                                     <ColorPicker
                                                         fullWidth
                                                         onChange={(value) => {
@@ -1102,7 +1201,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             colorsUsed.includes(value) ? null : setColorsUsed([...colorsUsed, value])
                                                         }}
                                                         swatches={colorsUsed}
-                                                        defaultValue={colorOptions.borderColor}
+                                                        value={hexToRgba(colorOptions.borderColor)}
                                                         classNames={{
                                                             input: "bg-black text-white "
                                                         }}

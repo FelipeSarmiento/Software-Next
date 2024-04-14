@@ -1,14 +1,14 @@
 'use client'
 import {
     IconEdit,
-    IconExternalLink, IconSettings,
+    IconSettings, IconSquareCheck,
     IconSquareRoundedPlus, IconTrash,
     IconWorld, IconX
 } from "@tabler/icons-react";
 import { useDisclosure } from '@mantine/hooks';
 import {Select, Switch, TagsInput} from '@mantine/core';
 import React, {useEffect, useState} from "react";
-import {getTemplatesByUser, createTemplate, updateTemplate, deleteTemplate} from "@/data/page";
+import {getTemplatesByUser, createTemplate, updateTemplate, deleteTemplate} from "@/data/data";
 import Image from 'next/image'
 import emptyBox from '@/settings/assets/images/emptyBox.png'
 import SoftwareNextLogo from '@/settings/assets/images/software-next-logo.png'
@@ -64,6 +64,9 @@ export default function Home() {
                                         <h3 className="text-cyan-500 text-nowrap truncate pr-8">{ template?.templatename }</h3>
                                         <span className={`absolute top-2/4 -translate-y-2/4 right-0 ${template?.ispublic ? 'text-green-500' : 'text-red-500'}`} title={ template?.ispublic ? 'Is public' : 'Is not public' }>
                                             <IconWorld/>
+                                        </span>
+                                        <span className={`absolute top-2/4 -translate-y-2/4 right-8 ${template?.approved ? 'text-green-500' : 'text-red-500'}`} title={ template?.approved ? 'Approved' : 'Is not Approved' }>
+                                            <IconSquareCheck/>
                                         </span>
                                     </div>
                                     <div className="w-full h-2/5 overflow-hidden py-2">

@@ -16,7 +16,7 @@ import {
     IconLayoutSidebar,
     IconLink,
     IconForms,
-    IconPackages, IconRowInsertBottom, IconEyeOff
+    IconPackages, IconRowInsertBottom, IconEyeOff, IconMenu2
 } from '@tabler/icons-react';
 
 export const Menu = ({items, functions, deleteItemDashboard, addSection, optionSelected, currentPage, viewport}) => {
@@ -62,6 +62,8 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                             <IconLink stroke={2}/>) : ""}
                                         {section.type === "form" ? (
                                             <IconForms stroke={2}/>) : ""}
+                                        {section.type === "menu" ? (
+                                            <IconMenu2 stroke={2}/>) : ""}
                                         <span className="pl-1">{section.label}</span>
                                         {
                                             section['settings' + viewport.type]?.display === 'hidden' ? (
@@ -156,6 +158,8 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                                                         <IconLink stroke={2}/>) : ""}
                                                                     {option.type === "form" ? (
                                                                         <IconForms stroke={2}/>) : ""}
+                                                                    {option.type === "menu" ? (
+                                                                        <IconMenu2 stroke={2}/>) : ""}
                                                                     <span className="pl-1">
                                                                         { option.type === "text" ? option.text !== "" ? option.text : option.label : "" }
                                                                         { option.type === "image" ? "Image" : "" }
@@ -183,7 +187,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                     <h3 className="relative flow-root w-full">
                         <div
                             onClick={ () => selectItem()}
-                             className={`relative focus:border-stone-800 border-2 border-cyan-500 rounded-md mt-1 h-10 z-50 flex w-full items-center justify-between text-sm  px-2 bg-black`}>
+                            className={`relative focus:border-stone-800 border-2 border-cyan-500 rounded-md mt-1 h-10 z-50 flex w-full items-center justify-between text-sm  px-2 bg-black`}>
                                     <span className={`font-medium flex items-center text-cyan-500 text-nowrap truncate`}>
                                         <IconPackages stroke={2}/>
                                         <span className="pl-1">{currentPage.charAt(0).toUpperCase() + currentPage.slice(1) } Page</span>

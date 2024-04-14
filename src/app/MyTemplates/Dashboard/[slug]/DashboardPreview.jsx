@@ -1,4 +1,7 @@
-﻿export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueIdentifier}) => {
+﻿import { Disclosure } from '@headlessui/react'
+import {IconMenu2} from "@tabler/icons-react";
+
+export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueIdentifier}) => {
     const createContent = (section) => {
         const addSelectComponent = (obj) => {
             const newObj = structuredClone(obj)
@@ -95,6 +98,17 @@
                                         <form key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </form>
+                                    )
+                                case "menu":
+                                    return (
+                                        <Disclosure as="div" className={ className } key={component.idUniqueIdentifier}>
+                                            <Disclosure.Button>
+                                                <IconMenu2/>
+                                            </Disclosure.Button>
+                                            <Disclosure.Panel>
+                                                {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
+                                            </Disclosure.Panel>
+                                        </Disclosure>
                                     )
                                 default:
                                     return <div key={component.idUniqueIdentifier}>Component not found</div>

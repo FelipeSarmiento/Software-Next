@@ -21,9 +21,9 @@ import {
     IconLayoutNavbarCollapse,
     IconLayoutBottombar,
     IconLayoutSidebar,
-    IconRowInsertBottom
+    IconRowInsertBottom,
+    IconMenu2
 } from '@tabler/icons-react';
-import {useSelector} from "react-redux";
 
 export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
 
@@ -60,10 +60,10 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                 width: "w-[]",
                 minHeight: "min-h-[]",
                 minWidth: "min-w-[]",
-                borderRight: "border-r-[1]",
-                borderLeft: "border-l-[1]",
-                borderBottom: "border-b-[1]",
-                borderTop: "border-t-[1]",
+                borderRight: "border-r-[0px]",
+                borderLeft: "border-l-[0px]",
+                borderBottom: "border-b-[0px]",
+                borderTop: "border-t-[0px]",
             }, description: "Represents text content."},
         {label: "Image", type: "image", group: "element", specificAttributes: {src: "", alt: ""}, specificSettings: {
                 height: "h-[]",
@@ -74,11 +74,20 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                 borderLeft: "border-l-[1]",
                 borderBottom: "border-b-[1]",
                 borderTop: "border-t-[1]",
-            }, description: "Represents an image content."}
+            }, description: "Represents an image content."},
+        {label: "Menu", type: "menu", group: "container", specificSettings: {
+                height: "h-[]",
+                width: "w-[]",
+                minHeight: "min-h-[]",
+                minWidth: "min-w-[]",
+                borderRight: "border-r-[1]",
+                borderLeft: "border-l-[1]",
+                borderBottom: "border-b-[1]",
+                borderTop: "border-t-[1]",
+                flexDirection: "flex-col"
+            }, description: "Dropdown menu."}
     ]
 
-
-    const viewPort = useSelector((state) => state.itemsDashboard.mediaQuery);
 
     const buildSection = ({label: section, type, group, specificAttributes, specificSettings}) => {
         let id = window.crypto.randomUUID() + section;
@@ -90,8 +99,6 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
             textSize: "text-[16px]",
             textWeight: "font-bold",
             textAlign: "text-center",
-            textDecoration: "underline",
-            decorationColor: "decoration-[rgba(255,255,255,1)]",
             backgroundColor: "bg-[rgba(0,0,0,0)]",
             borderWidth: "",
             borderRadius: "rounded-[0px]",
@@ -285,6 +292,8 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                                                             <IconForms stroke={2} className="size-16"/>) : ""}
                                                         {item.type === "button" ? (
                                                             <IconRowInsertBottom stroke={2} className="size-16"/>) : ""}
+                                                        {item.type === "menu" ? (
+                                                            <IconMenu2 stroke={2} className="size-16"/>) : ""}
                                                     </div>
                                                     <div className="w-4/6 flex flex-col items-start">
                                                         <span className="text-sm font-bold">

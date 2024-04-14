@@ -1,6 +1,6 @@
 'use client'
 import "@/settings/assets/tailwindcss";
-import { getPublicProject } from '@/data/page'
+import { getPublicProject } from '@/data/data'
 import {useEffect, useState} from "react";
 import {Project} from "./Project";
 export default function Home({params}){

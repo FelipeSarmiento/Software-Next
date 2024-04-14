@@ -16,7 +16,7 @@ import {
 } from '@tabler/icons-react';
 import {Button, Drawer, Group, HoverCard, Text, Menu, Select, Tooltip} from '@mantine/core';
 import Link from "next/link";
-import { getSession, getProject, updateProject } from "@/data/page";
+import { getSession, getProject, updateProject } from "@/data/data";
 
 export default function Dashboard({params}) {
     const [session, setSession] = useState()
@@ -168,6 +168,7 @@ export default function Dashboard({params}) {
         setOptionItem(undefined)
     };
     const addPage = (page) => {
+        page = page.replace(" ", "-")
         setItemsDashboard({
             ...itemsDashboard,
             pages: {
@@ -273,7 +274,7 @@ export default function Dashboard({params}) {
                 <header className=" shadow">
                     <div className="mx-auto relative grid grid-cols-2 lg:grid-cols-5 lg:flex justify-between px-4 py-3 sm:px-6 lg:px-24">
                         <h1 className="col-span-2 flex flex-col md:flex-row items-center justify-center lg:justify-around text-3xl font-bold tracking-tight text-white">
-                            Dashboard <span className="hidden md:flex px-3">-</span><span className="text-cyan-500 py-2 lg:py-0 font-extrabold"> {project?.projectname}</span>
+                            Project <span className="hidden md:flex px-3">-</span><span className="text-cyan-500 py-2 lg:py-0 font-extrabold"> {project?.projectname}</span>
                         </h1>
                         <div className="col-span-2 lg:absolute lg:top-2/4 lg:left-2/4 lg:-translate-x-2/4 lg:-translate-y-2/4 flex items-center justify-center">
                             <div className="size-10 flex items-center justify-center">
@@ -281,7 +282,7 @@ export default function Dashboard({params}) {
                                     <HoverCard width={300} shadow="md">
                                         <HoverCard.Target>
                                             <Button classNames={{
-                                                root: "h-full m-0 px-1 hover:bg-transparent hover:text-cyan-500",
+                                                root: "h-full m-0 px-1 bg-transparent hover:bg-transparent hover:text-cyan-500",
                                             }}>
                                                 <IconQuestionMark/>
                                             </Button>

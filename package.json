@@ -44,7 +44,11 @@
     "@types/crypto-js": "^4.2.2",
     "@vercel/analytics": "^1.2.2",
     "@vercel/postgres": "^0.7.2",
+    "atob": "^2.1.2",
+    "btoa": "^1.2.1",
+    "cloudinary": "^2.1.0",
     "clsx": "^2.1.0",
+    "crypto": "^1.0.1",
     "dayjs": "^1.11.10",
     "firebase": "^10.8.1",
     "flowbite-react": "^0.7.2",
@@ -56,6 +60,7 @@
     "next-seo": "^6.5.0",
     "next-utils": "^0.2.1",
     "pako": "^2.1.0",
+    "puppeteer": "^22.6.4",
     "react": "^18",
     "react-dom": "^18",
     "react-redux": "^9.1.0",
@@ -64,7 +69,9 @@
     "recharts": "^2.12.2",
     "simplex-noise": "^4.0.1",
     "tailwind-merge": "^2.2.2",
-    "three": "^0.163.0"
+    "three": "^0.163.0",
+    "thum.io": "^1.0.9",
+    "window": "^4.2.7"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",

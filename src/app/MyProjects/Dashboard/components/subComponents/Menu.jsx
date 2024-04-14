@@ -16,7 +16,7 @@ import {
     IconLayoutSidebar,
     IconLink,
     IconForms,
-    IconPackages, IconRowInsertBottom, IconEyeOff
+    IconPackages, IconRowInsertBottom, IconEyeOff, IconMenu2
 } from '@tabler/icons-react';
 
 export const Menu = ({items, functions, deleteItemDashboard, addSection, optionSelected, currentPage, viewport}) => {
@@ -62,6 +62,8 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                             <IconLink stroke={2}/>) : ""}
                                         {section.type === "form" ? (
                                             <IconForms stroke={2}/>) : ""}
+                                        {section.type === "menu" ? (
+                                            <IconMenu2 stroke={2}/>) : ""}
                                         <span className="pl-1">{section.label}</span>
                                         {
                                             section['settings' + viewport.type]?.display === 'hidden' ? (
@@ -156,6 +158,8 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                                                         <IconLink stroke={2}/>) : ""}
                                                                     {option.type === "form" ? (
                                                                         <IconForms stroke={2}/>) : ""}
+                                                                    {option.type === "menu" ? (
+                                                                        <IconMenu2 stroke={2}/>) : ""}
                                                                     <span className="pl-1">
                                                                         { option.type === "text" ? option.text !== "" ? option.text : option.label : "" }
                                                                         { option.type === "image" ? "Image" : "" }

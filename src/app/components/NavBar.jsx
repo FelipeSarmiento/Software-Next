@@ -5,7 +5,7 @@ import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faRightToBracket} from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
-import { getSession, logout as logOut } from '@/./data/page';
+import { getSession, logout as logOut } from '@/data/data';
 
 const navigation = [
     {name: 'How to use?', href: '/HowToUse', current: false},
@@ -37,7 +37,7 @@ export function NavBar() {
         <Disclosure as="nav" className="border-b-4 border-cyan-500 sticky bg-black top-0 z-50">
             {({open}) => (
                 <>
-                    <div className="relative mx-auto px-3 sm:px-6 lg:px-24">
+                    <div className="relative mx-auto px-3 xl:px-24">
                         <div className="relative flex h-16 py-4 items-center justify-between">
                             <div className="absolute inset-y-0 left-0 flex items-center lg:hidden">
                                 {/* Mobile menu button*/}
@@ -56,14 +56,14 @@ export function NavBar() {
                                 <div className="lg:ml-12 md:block">
                                     <div className="flex space-x-4 items-center">
                                         <a href="/"><p
-                                            className="rounded-md py-2 text-xl bg-gradient-to-r text-white font-bold ">Software
+                                            className="rounded-md text-nowrap py-2 text-xl bg-gradient-to-r text-white font-bold ">Software
                                             Next <span className="text-xs text-cyan-500">beta</span></p></a>
-                                        <div className="hidden lg:block">
+                                        <div className="hidden lg:flex flex-nowrap">
                                             {navigation.map((item) => (
                                                 <Link
                                                     key={item.name}
                                                     className={classNames(
-                                                        item.current ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gradient-to-r from-black via-zinc-700 to-black hover:text-white',
+                                                        item.current ? 'bg-gray-700 text-white' : 'text-gray-300 text-nowrap hover:bg-gradient-to-r from-black via-zinc-700 to-black hover:text-white',
                                                         'rounded-md px-3 py-2 text-sm font-medium'
                                                     )}
                                                     aria-current={item.current ? 'page' : undefined}
@@ -97,17 +97,21 @@ export function NavBar() {
                                             <div className="flex">
                                                 <Link href="/MyProjects" className="relative flex px-2 pb-1 h-8 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
                                                     <span className="absolute -inset-1.5"/>
-                                                    <span className="px-1 flex h-auto">My Projects</span>
+                                                    <span className="px-1 flex h-auto text-nowrap">My Projects</span>
                                                 </Link>
                                                 <div className="border-[1px] border-white" />
                                                 <Link href="/MyTemplates" className="relative flex px-2 pb-1 h-8 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
                                                     <span className="absolute -inset-1.5"/>
-                                                    <span className="px-1 flex h-auto">My Templates</span>
+                                                    <span className="px-1 flex h-auto text-nowrap">My Templates</span>
+                                                </Link>
+                                                <div title="My Profile" className="border-[1px] border-white" /><Link href="/MyProfile" className="relative flex px-2 pb-1 h-8 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
+                                                    <span className="absolute -inset-1.5"/>
+                                                    <span className="px-1 flex h-auto text-nowrap">My Profile</span>
                                                 </Link>
                                                 <div className="border-[1px] border-white" />
                                                 <Disclosure.Button title="Log out" onClick={() => logout()} className="relative flex pb-1 h-8 px-2 items-center text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
                                                     <span className="absolute -inset-1.5"/>
-                                                    <span className="md:block px-1 flex h-auto">{ session }</span>
+                                                    <span className="md:block px-1 flex h-auto text-nowrap">Log out</span>
                                                     <div>
                                                         <FontAwesomeIcon icon={faRightToBracket} className="text-sm px-1"/>
                                                     </div>
@@ -170,8 +174,12 @@ export function NavBar() {
                                                         <span className="absolute -inset-1.5"/>
                                                         <span className="">My Templates</span>
                                                     </Link>
+                                                    <Link title="My Profile" href="/MyProfile" className={ 'text-gray-300 hover:bg-stone-800 hover:text-white block rounded-md px-3 py-2 text-base font-medium'}>
+                                                        <span className="absolute -inset-1.5"/>
+                                                        <span className="">My Profile</span>
+                                                    </Link>
                                                     <Disclosure.Button title="Log out" onClick={() => logout()} className={ 'text-gray-300 flex hover:bg-stone-800 hover:text-white block rounded-md px-3 py-2 text-base font-medium'}>
-                                                        <span className="md:block flex h-auto">{ session }</span>
+                                                        <span className="md:block flex h-auto">Log out</span>
                                                         <div>
                                                             <FontAwesomeIcon icon={faRightToBracket} className="text-sm px-1"/>
                                                         </div>

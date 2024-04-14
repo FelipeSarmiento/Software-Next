@@ -1,3 +1,6 @@
+import {Disclosure} from "@headlessui/react";
+import {IconMenu2} from "@tabler/icons-react";
+
 export const Project = ({ components, viewport, path }) => {
     const createContent = (section) => {
         const addSelectComponent = (obj) => {
@@ -94,6 +97,17 @@ export const Project = ({ components, viewport, path }) => {
                                         <form key={component.idUniqueIdentifier}  className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </form>
+                                    )
+                                case "menu":
+                                    return (
+                                        <Disclosure as="div" className={ className } key={component.idUniqueIdentifier}>
+                                            <Disclosure.Button>
+                                                <IconMenu2/>
+                                            </Disclosure.Button>
+                                            <Disclosure.Panel>
+                                                {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
+                                            </Disclosure.Panel>
+                                        </Disclosure>
                                     )
                             }
                     }

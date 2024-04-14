@@ -5,7 +5,7 @@ import {
     IconWorld
 } from "@tabler/icons-react";
 import React, {useEffect, useState} from "react";
-import {getProjects} from "@/data/page";
+import {getProjects} from "@/data/data";
 import Image from 'next/image'
 import emptyBox from '@/settings/assets/images/emptyBox.png'
 import SoftwareNextLogo from '@/settings/assets/images/software-next-logo.png'

@@ -18,8 +18,12 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'aceternity.com',
             },
+            {
+                protocol: 'https',
+                hostname: 'image.thum.io',
+            },
         ],
-    },
+    }
 };
 
 export default nextConfig;

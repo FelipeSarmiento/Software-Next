@@ -4,7 +4,7 @@ import {Input} from "./input";
 import {cn} from "../../../settings/utils/cn";
 import {useForm} from "../../../lib/hooks/useForm";
 import Link from "next/link";
-import { registerUser } from '@/./data/page'
+import { registerUser } from '@/data/data'
 import {useState} from "react";
 
 export function SignUpForm() {

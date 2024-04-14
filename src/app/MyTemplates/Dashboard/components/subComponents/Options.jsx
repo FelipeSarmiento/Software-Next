@@ -31,14 +31,12 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
 
     const onChangeInput = ({target}) => {
         let option = optionItem;
-        console.log("target", target)
         switch (target.id) {
             case 'valueInput':
                 option = {
                     ...optionItem,
                     [target.name]: target.value
                 }
-                console.log("option", option)
                 setOptionItem(option)
                 modifyItemsDashboard(option.idUniqueIdentifier, option)
                 break
@@ -292,6 +290,22 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
             unit: ""
         }
     })
+
+    function hexToRgba(hex) {
+        if (hex?.includes("#")) {
+            hex = hex.replace('#', '');
+
+            // Divide el valor hexadecimal en los componentes R, G y B
+            let r = parseInt(hex.substring(0, 2), 16);
+            let g = parseInt(hex.substring(2, 4), 16);
+            let b = parseInt(hex.substring(4, 6), 16);
+
+            // Devuelve el color en formato RGBA
+            return `rgba(${r},${g},${b},1)`;
+        }
+        return hex
+    }
+
     const [colorsUsed, setColorsUsed] = useState([])
     const [display, setDisplay] = useState()
     const [flexDirection, setFlexDirection] = useState()
@@ -304,12 +318,12 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 <div className="py-2 pr-2 text-white">
                     {optionItem.hasOwnProperty("text") ? (
                         <div className="py-2 flex items-center relative h-max">
-                            <div className="relative flex rounded-md border-[1px] border-white h-10 w-full">
-                                <div className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
+                            <div className="relative flex flex-col rounded-md border-[1px] border-white w-full">
+                                <div className="w-full flex items-center justify-center border-b-[1px] h-10">
                                     <IconCursorText/>
                                     <span className="text-xs font-bold">Text</span>
                                 </div>
-                                <input
+                                <textarea
                                     onChange={({target}) => {
                                         setSpecificAttributes({
                                             ...specificAttributes,
@@ -327,7 +341,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                     value={specificAttributes.text}
                                     min={0}
                                     type="text"
-                                    className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                    className="w-full min-h-20 max-h-28 rounded-md appearance-none focus:outline-none bg-black p-1"/>
                             </div>
                         </div>
                     ) : ""}
@@ -419,7 +433,6 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                         <input
                                             onChange={(e) => {
                                                 e.preventDefault()
-                                                console.log(e.target.files[0])
                                                 let reader = new FileReader();
                                                 reader.readAsDataURL(e.target?.files[0])
                                                 reader.onload = function () {
@@ -576,6 +589,30 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     <div className="text-white py-2 flex justify-center">
                                                         <h4>Font color</h4>
                                                     </div>
+                                                    <div className="flex items-center my-3 px-5 h-10 justify-center">
+                                                        <input
+                                                            onChange={
+                                                                ({target}) => {
+                                                                    setColorOptions({
+                                                                        ...colorOptions,
+                                                                        textColor: target.value
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "textColor",
+                                                                            name: "textColor",
+                                                                            value: "text-[" + target.value + "]"
+                                                                        }
+                                                                    })
+                                                                }
+                                                            }
+                                                            value={ colorOptions.textColor }
+                                                            min={0}
+                                                            type="text"
+                                                            placeholder="Type a Hex or RGBA Color"
+                                                            className="w-full rounded-md h-full appearance-none border-2 text-center focus:outline-none bg-black text-nowrap truncate"/>
+
+                                                    </div>
                                                     <ColorPicker
                                                         fullWidth
                                                         onChange={(value) => {
@@ -596,7 +633,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             colorsUsed.includes(value) ? null : setColorsUsed([...colorsUsed, value])
                                                         }}
                                                         swatches={colorsUsed}
-                                                        defaultValue={colorOptions.textColor}
+                                                        value={hexToRgba(colorOptions.textColor)}
                                                         classNames={{
                                                             input: "bg-black text-white "
                                                         }}
@@ -625,7 +662,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "textAlign",
                                                                             name: "textAlign",
                                                                             value: "text-left"
                                                                         }
@@ -639,7 +676,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "textAlign",
                                                                             name: "textAlign",
                                                                             value: "text-center"
                                                                         }
@@ -653,7 +690,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "textAlign",
                                                                             name: "textAlign",
                                                                             value: "text-right"
                                                                         }
@@ -667,7 +704,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "textAlign",
                                                                             name: "textAlign",
                                                                             value: "text-justify"
                                                                         }
@@ -681,7 +718,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "textAlign",
                                                                             name: "textAlign",
                                                                             value: ""
                                                                         }
@@ -725,6 +762,30 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     <div className="text-white pb-2 flex justify-center">
                                                         <h4>Background color</h4>
                                                     </div>
+                                                    <div className="flex items-center my-3 px-5 h-10 justify-center">
+                                                        <input
+                                                            onChange={
+                                                                ({target}) => {
+                                                                    setColorOptions({
+                                                                        ...colorOptions,
+                                                                        backgroundColor: target.value
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "backgroundColor",
+                                                                            name: "backgroundColor",
+                                                                            value: "bg-[" + target.value + "]"
+                                                                        }
+                                                                    })
+                                                                }
+                                                            }
+                                                            value={ colorOptions.backgroundColor }
+                                                            min={0}
+                                                            type="text"
+                                                            placeholder="Type a Hex or RGBA Color"
+                                                            className="w-full rounded-md h-full appearance-none border-2 text-center focus:outline-none bg-black text-nowrap truncate"/>
+
+                                                    </div>
                                                     <ColorPicker
                                                         fullWidth
                                                         onChange={(value) => {
@@ -745,7 +806,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         }}
                                                         format="rgba"
                                                         swatches={colorsUsed}
-                                                        defaultValue={colorOptions.backgroundColor}
+                                                        value={hexToRgba(colorOptions.backgroundColor)}
                                                         classNames={{
                                                             input: "bg-black text-white "
                                                         }}
@@ -1082,6 +1143,30 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     <div className="text-white py-2 flex justify-center">
                                                         <h4>Border color</h4>
                                                     </div>
+                                                    <div className="flex items-center my-3 px-5 h-10 justify-center">
+                                                        <input
+                                                            onChange={
+                                                                ({target}) => {
+                                                                    setColorOptions({
+                                                                        ...colorOptions,
+                                                                        borderColor: target.value
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "borderColor",
+                                                                            name: "borderColor",
+                                                                            value: "border-[" + target.value + "]"
+                                                                        }
+                                                                    })
+                                                                }
+                                                            }
+                                                            value={ colorOptions.borderColor }
+                                                            min={0}
+                                                            type="text"
+                                                            placeholder="Type a Hex or RGBA Color"
+                                                            className="w-full rounded-md h-full appearance-none border-2 text-center focus:outline-none bg-black text-nowrap truncate"/>
+
+                                                    </div>
                                                     <ColorPicker
                                                         fullWidth
                                                         onChange={(value) => {
@@ -1102,7 +1187,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             colorsUsed.includes(value) ? null : setColorsUsed([...colorsUsed, value])
                                                         }}
                                                         swatches={colorsUsed}
-                                                        defaultValue={colorOptions.borderColor}
+                                                        value={hexToRgba(colorOptions.borderColor)}
                                                         classNames={{
                                                             input: "bg-black text-white "
                                                         }}
@@ -1912,7 +1997,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 setDisplay("hidden")
                                                                 onChangeInput({
                                                                     target: {
-                                                                        id: "position",
+                                                                        id: "display",
                                                                         name: "display",
                                                                         value: "hidden"
                                                                     }
@@ -1927,7 +2012,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 setDisplay("flex")
                                                                 onChangeInput({
                                                                     target: {
-                                                                        id: "position",
+                                                                        id: "display",
                                                                         name: "display",
                                                                         value: "flex"
                                                                     }
@@ -1942,7 +2027,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 setDisplay("grid")
                                                                 onChangeInput({
                                                                     target: {
-                                                                        id: "position",
+                                                                        id: "display",
                                                                         name: "display",
                                                                         value: "grid"
                                                                     }
@@ -2223,7 +2308,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "itemsAlign",
                                                                             name: "itemsAlign",
                                                                             value: "items-start"
                                                                         }
@@ -2237,7 +2322,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "itemsAlign",
                                                                             name: "itemsAlign",
                                                                             value: "items-center"
                                                                         }
@@ -2251,7 +2336,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "itemsAlign",
                                                                             name: "itemsAlign",
                                                                             value: "items-end"
                                                                         }
@@ -2265,7 +2350,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "itemsAlign",
                                                                             name: "itemsAlign",
                                                                             value: "items-stretch"
                                                                         }
@@ -2279,7 +2364,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "itemsAlign",
                                                                             name: "itemsAlign",
                                                                             value: "items-baseline"
                                                                         }
@@ -2294,7 +2379,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "itemsAlign",
                                                                             name: "itemsAlign",
                                                                             value: ""
                                                                         }
@@ -2317,7 +2402,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "justifyContent",
                                                                             name: "justifyContent",
                                                                             value: "justify-start"
                                                                         }
@@ -2331,7 +2416,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "justifyContent",
                                                                             name: "justifyContent",
                                                                             value: "justify-center"
                                                                         }
@@ -2345,7 +2430,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "justifyContent",
                                                                             name: "justifyContent",
                                                                             value: "justify-end"
                                                                         }
@@ -2359,7 +2444,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "justifyContent",
                                                                             name: "justifyContent",
                                                                             value: "justify-around"
                                                                         }
@@ -2373,7 +2458,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "justifyContent",
                                                                             name: "justifyContent",
                                                                             value: "justify-between"
                                                                         }
@@ -2387,7 +2472,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "justifyContent",
                                                                             name: "justifyContent",
                                                                             value: "justify-evenly"
                                                                         }
@@ -2401,7 +2486,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 onClick={() => {
                                                                     onChangeInput({
                                                                         target: {
-                                                                            id: "position",
+                                                                            id: "justifyContent",
                                                                             name: "justifyContent",
                                                                             value: ""
                                                                         }
@@ -2423,7 +2508,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     POSITION
                                                     */}
                                                     <h3 className="text-sm text-center font-bold">Position</h3>
-                                                    <div className="w-full p-3 flex justify-center space-x-3">
+                                                    <div className="w-full p-3 grid grid-cols-2 justify-center gap-2">
                                                         <button
                                                             onClick={() => {
                                                                 onChangeInput({
@@ -2434,7 +2519,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-2/4 flex items-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'relative' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'relative' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2">Relative</span>
                                                         </button>
                                                         <button
@@ -2447,8 +2532,34 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-2/4 flex items-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'absolute' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'absolute' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2">Absolute</span>
+                                                        </button>
+                                                        <button
+                                                            onClick={() => {
+                                                                onChangeInput({
+                                                                    target: {
+                                                                        id: "position",
+                                                                        name: "position",
+                                                                        value: "sticky"
+                                                                    }
+                                                                })
+                                                            }}
+                                                            className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'sticky' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            <span className="px-2">Sticky</span>
+                                                        </button>
+                                                        <button
+                                                            onClick={() => {
+                                                                onChangeInput({
+                                                                    target: {
+                                                                        id: "position",
+                                                                        name: "position",
+                                                                        value: "fixed"
+                                                                    }
+                                                                })
+                                                            }}
+                                                            className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'fixed' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            <span className="px-2">fixed</span>
                                                         </button>
                                                     </div>
                                                     {/*
