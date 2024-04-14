@@ -350,7 +350,7 @@ const ModalContent = ({close, project}) => {
                                                 description: "text-yellow-400 font-bold",
                                                 option: "hover:bg-stone-950 border-2 border-transparent hover:border-cyan-500 hover:text-cyan-500 text-white font-bold text-md"
                                             }}
-                                            value={projectForm?.idtemplate.toString()}
+                                            value={projectForm?.idtemplate?.toString()}
                                             onChange={(value) => {
                                                 console.log(value)
                                                 if (value.includes('none')) {
