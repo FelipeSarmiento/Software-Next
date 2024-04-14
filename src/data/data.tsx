@@ -16,7 +16,7 @@ import {cookies} from 'next/headers';
 export const registerUser = async (users) => {
     const {username, password, email, firstName, lastName, phoneNumber} = users
     const date_created = new Date()
-    let passwordEncrypted = encrypt(password, process.env.REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#');
+    let passwordEncrypted = encrypt(password, process.env.NEXT_PUBLIC_REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#');
     // @ts-ignore
     return await sql`INSERT INTO users (first_name, last_name, username, email, phone_number, password, role, datecreated, dateupdated) VALUES (${firstName}, ${lastName}, ${username}, ${email}, ${phoneNumber}, ${passwordEncrypted}, 'user', ${date_created}, ${date_created}) RETURNING *`;
 }
@@ -35,7 +35,7 @@ export const login = async (User: any) => {
             message: 'Invalid email or username'
         }
     } else {
-        const match = compare(password, rows[0].password, process.env.REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#')
+        const match = compare(password, rows[0].password, process.env.NEXT_PUBLIC_REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#')
         if (match) {
             delete rows[0].password
             objectResp = {
@@ -81,8 +81,8 @@ export const getSession = async () => {
     }
 
     // Verifica si los valores de las variables de entorno están definidos
-    const secretKey64 = process.env.REACT_APP_SECRET_KEY64;
-    const secretKey16 = process.env.REACT_APP_SECRET_KEY16;
+    const secretKey64 = process.env.NEXT_PUBLIC_REACT_APP_SECRET_KEY64;
+    const secretKey16 = process.env.NEXT_PUBLIC_REACT_APP_SECRET_KEY16;
     if (!secretKey64 || !secretKey16) {
         throw new Error("Las variables de entorno para la clave y el IV no están definidas.");
     }
@@ -107,9 +107,9 @@ export const setSession = async (session: any) => {
     }
 
     // @ts-ignore
-    const key = Buffer.from(process.env.REACT_APP_SECRET_KEY64, 'hex');
+    const key = Buffer.from(process.env.NEXT_PUBLIC_REACT_APP_SECRET_KEY64, 'hex');
     // @ts-ignore
-    const iv = Buffer.from(process.env.REACT_APP_SECRET_KEY16, 'hex');
+    const iv = Buffer.from(process.env.NEXT_PUBLIC_REACT_APP_SECRET_KEY16, 'hex');
 
 // Encriptar
     const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
@@ -119,7 +119,7 @@ export const setSession = async (session: any) => {
     try {
         cookies().set('userSession', encrypted, {
             httpOnly: false,
-            secure: process.env.NODE_ENV === 'production',
+            secure: process.env.NEXT_PUBLIC_NODE_ENV === 'production',
             maxAge: 60 * 60 * 24 * 7,
             path: '/'
         })
