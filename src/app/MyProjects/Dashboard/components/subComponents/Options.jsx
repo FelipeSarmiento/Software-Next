@@ -76,36 +76,12 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 backgroundColor: options['settings' + viewport.type].backgroundColor?.split("-")[1].replace("[", "").replace("]", ""),
                 decorationColor: options['settings' + viewport.type].decorationColor?.split("-")[1].replace("[", "").replace("]", ""),
             })
-            if (options.hasOwnProperty("text")) {
-                setSpecificAttributes({
-                    ...specificAttributes,
-                    text: options.text
-                })
-            }
-            if (options.hasOwnProperty("src")) {
-                setSpecificAttributes({
-                    ...specificAttributes,
-                    src: options.src
-                })
-            }
-            if (options.hasOwnProperty("href")) {
-                setSpecificAttributes({
-                    ...specificAttributes,
-                    href: options.href
-                })
-            }
-            if (options.hasOwnProperty("alt")) {
-                setSpecificAttributes({
-                    ...specificAttributes,
-                    alt: options.alt
-                })
-            }
-            if (options.hasOwnProperty("target")) {
-                setSpecificAttributes({
-                    ...specificAttributes,
-                    target: options.target
-                })
-            }
+            setSpecificAttributes({
+                text: options?.text,
+                src: options?.src,
+                alt: options?.alt,
+                href: options?.href
+            })
 
             setBorderWidth({
                 borderRight: {
@@ -3054,6 +3030,280 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                 </>
                             )}
                         </Disclosure>
+                        {/*
+                        IMAGE
+                        IMAGE
+                        IMAGE
+                        IMAGE
+                        IMAGE
+                        IMAGE
+                        IMAGE
+                        */}
+                        {optionItem.hasOwnProperty("src") ? (
+                            <Disclosure as="div" className="border-white pt-2">
+                                {({open}) => (
+                                    <>
+                                        <h3 className="flow-root">
+                                            <div
+                                                className={"border-2 rounded-md py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
+                                                <span className="font-bold text-white">Image</span>
+                                                <div className="relative">
+                                                    <Disclosure.Button className="p-2 ml-1">
+                                                            <span className="flex items-center">
+                                                              {open ? (
+                                                                  <FontAwesomeIcon icon={faChevronUp}/>
+                                                              ) : (
+                                                                  <FontAwesomeIcon icon={faChevronDown}/>
+                                                              )}
+                                                            </span>
+                                                    </Disclosure.Button>
+                                                </div>
+                                            </div>
+                                        </h3>
+                                        <Disclosure.Panel className="pl-2 w-full py-1">
+                                            <div className="relative flex flex-wrap items-start w-full">
+                                                <div className="border-l-2 w-full pl-1 pt-2">
+                                                    {/*
+                                                    OBJECT FIT
+                                                    OBJECT FIT
+                                                    OBJECT FIT
+                                                    OBJECT FIT
+                                                    OBJECT FIT
+                                                    OBJECT FIT
+                                                    OBJECT FIT
+                                                    */}
+                                                    <h3 className="text-sm text-center font-bold">Object Fit</h3>
+                                                    <div className="w-full p-3 flex flex-wrap">
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "objectFit",
+                                                                            name: "objectFit",
+                                                                            value: "object-none"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ (optionItem['settings'+ viewport.type]?.objectFit === undefined || optionItem['settings'+ viewport.type]?.objectFit === 'object-none' ) ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">None</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "objectFit",
+                                                                            name: "objectFit",
+                                                                            value: "object-cover"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectFit === 'object-cover' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Cover</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "objectFit",
+                                                                            name: "objectFit",
+                                                                            value: "object-contain"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectFit === 'object-contain' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Contain</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "objectFit",
+                                                                            name: "objectFit",
+                                                                            value: "object-fill"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectFit === 'object-fill' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Fill</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    {/*
+                                                    OBJECT POSITION
+                                                    OBJECT POSITION
+                                                    OBJECT POSITION
+                                                    OBJECT POSITION
+                                                    OBJECT POSITION
+                                                    OBJECT POSITION
+                                                    OBJECT POSITION
+                                                    */}
+                                                    <h3 className="text-sm text-center font-bold">Object Position</h3>
+                                                    <div className="w-full p-3 flex flex-wrap">
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "objectPosition",
+                                                                            name: "objectPosition",
+                                                                            value: ""
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ (optionItem['settings'+ viewport.type]?.objectPosition === undefined || optionItem['settings'+ viewport.type]?.objectPosition === '' ) ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">None</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "objectPosition",
+                                                                            name: "objectPosition",
+                                                                            value: "object-top"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Top</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "objectPosition",
+                                                                            name: "objectPosition",
+                                                                            value: "object-bottom"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Bottom</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "objectPosition",
+                                                                            name: "objectPosition",
+                                                                            value: "object-right"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-right' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Right</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "objectPosition",
+                                                                            name: "objectPosition",
+                                                                            value: "object-left"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-left' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Left</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "objectPosition",
+                                                                            name: "objectPosition",
+                                                                            value: "object-center"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-center' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Center</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "objectPosition",
+                                                                            name: "objectPosition",
+                                                                            value: "object-left-top"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-left-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Left Top</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "objectPosition",
+                                                                            name: "objectPosition",
+                                                                            value: "object-left-bottom"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-left-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Left Bottom</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "objectPosition",
+                                                                            name: "objectPosition",
+                                                                            value: "object-right-top"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-right-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Right Top</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "objectPosition",
+                                                                            name: "objectPosition",
+                                                                            value: "object-right-bottom"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-right-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Right Bottom</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Disclosure.Panel>
+                                    </>
+                                )}
+                            </Disclosure>
+                        ) : ''}
                     </>
                 ) : ""
                 }
