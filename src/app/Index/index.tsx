@@ -17,7 +17,7 @@ Are you looking to build a stunning website without the hassle of coding? Look n
         <>
             <div className="h-[calc(100vh_-_80px)] w-full flex flex-col py-4 md:py-0 justify-center items-center overflow-hidden rounded-md">
                 <h1 className="md:text-6xl text-5xl 2xl:text-8xl font-bold text-center text-white relative z-20">
-                    <span className="text-cyan-500">Software Next</span>
+                    <span translate="no" className="text-cyan-500">Software Next</span>
                 </h1>
                 <div className="w-full md:w-[40rem] flex flex-col items-center h-96 md:h-40 relative">
                     {/* Gradients */}
@@ -102,7 +102,7 @@ Are you looking to build a stunning website without the hassle of coding? Look n
                     </p>
                     <p className="text-lg md:text-4xl mix mix-blend-multiply mt-5 text-white font-bold inter-var text-center">
                         Ready to get started? Sign up now and unlock the power of online creativity with <br/><span
-                        className="text-cyan-400 font-extrabold py-5">Software Next</span>!
+                        className="text-cyan-400 font-extrabold py-5" translate="no">Software Next</span>!
                     </p>
                     <Link href="/Auth/Register">
                         <button

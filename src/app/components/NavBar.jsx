@@ -55,7 +55,7 @@ export function NavBar() {
                             <div className="flex flex-1 items-center justify-center sm:items-stretch lg:justify-start">
                                 <div className="lg:ml-12 md:block">
                                     <div className="flex space-x-4 items-center">
-                                        <a href="/"><p
+                                        <a href="/" translate="no"><p
                                             className="rounded-md text-nowrap py-2 text-xl bg-gradient-to-r text-white font-bold ">Software
                                             Next <span className="text-xs text-cyan-500">beta</span></p></a>
                                         <div className="hidden lg:flex flex-nowrap">

@@ -105,7 +105,7 @@ export const Header = () => {
     return (
         <div className="max-w-7xl relative mx-auto py-10 md:py-20 px-4 w-full  left-0 top-0">
             <h1 className="text-2xl md:text-5xl font-bold text-white">
-                <span className="text-6xl md:text-7xl text-cyan-500">
+                <span translate="no" className="text-6xl md:text-7xl text-cyan-500">
                     Software Next
                 </span>
                 <br />

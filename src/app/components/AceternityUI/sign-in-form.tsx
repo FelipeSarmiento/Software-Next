@@ -32,7 +32,7 @@ export function SignInForm() {
         <div
             className="w-full rounded-3xl p-4 px-5 md:p-8 shadow-input bg-black border-gray-600 border-2">
             <h2 className="font-bold text-2xl text-center text-neutral-200">
-                Welcome to<br/><span className="text-cyan-500 text-3xl">Software Next</span>
+                Welcome to<br/><span translate="no" className="text-cyan-500 text-3xl">Software Next</span>
             </h2>
             <p className="text-sm mt-2 text-center text-neutral-300">
                 Login to start designing your web site
