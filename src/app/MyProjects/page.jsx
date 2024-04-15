@@ -56,7 +56,7 @@ export default function Home() {
                                 setCurrentProject(null)
                                 open()
                             }}>
-                            <span>New Template</span>
+                            <span>New Project</span>
                             <IconSquareRoundedPlus/>
                         </button>
                     </div>
@@ -69,8 +69,8 @@ export default function Home() {
                                  className="grid grid-cols-1 lg:grid-cols-2 p-2 w-full  md:p-6 md:w-[750px] lg:h-72 lg:max-h-72 rounded-lg border-2 border-neutral-300">
                                 <div
                                     className="border-2 flex overflow-hidden justify-center select-none border-neutral-300 rounded-md lg:h-full">
-                                    <Image src="" alt={ project.projectname } width={500} height={100}
-                                           className="object-fit object-top rounded-md"/>
+                                    <Image src={ SoftwareNextLogo } alt={ project.projectname } width={500} height={500}
+                                           className="size-52 object-cover rounded-md"/>
                                 </div>
                                 <div
                                     className="rounded-md max-h-64 flex flex-wrap lg:h-full px-3 md:px-3 lg:px-3 py-2 text-white">

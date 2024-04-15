@@ -27,7 +27,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
     const createContent = (section) => {
         return section.map((section, sectionIndex) => (
             section !== undefined ? (
-                <Disclosure as="div" key={section.idUniqueIdentifier} className="span-end">
+                <Disclosure defaultOpen={true} as="div" key={section.idUniqueIdentifier} className="span-end">
                     {({open}) => (
                         <>
                             <h3 className="relative flow-root">
@@ -181,7 +181,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
         ))
     }
     return (
-        <Disclosure as="div" className="w-full span-end">
+        <Disclosure defaultOpen={true} as="div" className="w-full span-end">
             {({open}) => (
                 <>
                     <h3 className="relative flow-root w-full">
