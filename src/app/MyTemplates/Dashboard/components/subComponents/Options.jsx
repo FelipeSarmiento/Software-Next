@@ -222,6 +222,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 gridCols: options['settings' + viewport.type].gridCols?.match(/\d+/g) ? options['settings' + viewport.type].gridCols?.match(/\d+/g).map(Number)[0] : "",
                 gridRows: options['settings' + viewport.type].gridRows?.match(/\d+/g) ? options['settings' + viewport.type].gridRows?.match(/\d+/g).map(Number)[0] : ""
             })
+            setZIndex(options['settings' + viewport.type]?.zIndex?.match(/\d+/g)  ? options['settings' + viewport.type].zIndex?.match(/\d+/g).map(Number)[0] : "")
 
         }
     }, [options]);
@@ -313,12 +314,21 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
     const [gaps, setGaps] = useState({})
     const [gridTemplate, setGridTemplate] = useState({})
     const [externalLink, setExternalLink] = useState()
+    const [zIndex, setZIndex] = useState()
 
         return (optionItem !== undefined ? (
                 <div className="py-2 pr-2 text-white">
+
+                    {/*
+                        TEXT
+                        TEXT
+                        TEXT
+                        TEXT
+                    */}
+
                     {optionItem.hasOwnProperty("text") ? (
                         <div className="py-2 flex items-center relative h-max">
-                            <div className="relative flex flex-col rounded-md border-[1px] border-white w-full">
+                            <div className="relative flex flex-col rounded-md border-[1px] border-white min-h-28 w-full">
                                 <div className="w-full flex items-center justify-center border-b-[1px] h-10">
                                     <IconCursorText/>
                                     <span className="text-xs font-bold">Text</span>
@@ -345,6 +355,14 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                             </div>
                         </div>
                     ) : ""}
+
+                    {/*
+                        HREF
+                        HREF
+                        HREF
+                        HREF
+                    */}
+
                     {optionItem.hasOwnProperty("href") ? (
                         <div className="py-2 flex items-center relative h-max">
                             <div className="relative flex rounded-md border-[1px] border-white h-10 w-full">
@@ -395,28 +413,16 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                         })
                                     }} className="w-full h-full text-white">External Link</button> }
                                 />
-                                {/*<input*/}
-                                {/*    onChange={({target}) => {*/}
-                                {/*        setSpecificAttributes({*/}
-                                {/*            ...specificAttributes,*/}
-                                {/*            text: target.value*/}
-                                {/*        })*/}
-                                {/*        onChangeInput({*/}
-                                {/*            target: {*/}
-                                {/*                id: "valueInput",*/}
-                                {/*                name: "text",*/}
-                                {/*                value: target.value*/}
-                                {/*            }*/}
-                                {/*        })*/}
-                                {/*    }}*/}
-                                {/*    name="text"*/}
-                                {/*    value={specificAttributes.text}*/}
-                                {/*    min={0}*/}
-                                {/*    type="text"*/}
-                                {/*    className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>*/}
                             </div>
                         </div>
                     ) : ""}
+
+                    {/*
+                        SRC
+                        SRC
+                        SRC
+                        SRC
+                    */}
 
                     {optionItem.hasOwnProperty("src") ? (
                         <>
@@ -475,6 +481,14 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                             }
                         </>
                     ) : ""}
+
+                    {/*
+                        ALT
+                        ALT
+                        ALT
+                        ALT
+                    */}
+
                     {optionItem.hasOwnProperty("alt") ? (
                         <div className="py-2 flex items-center relative h-max">
                             <div
@@ -505,8 +519,19 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                             </div>
                         </div>
                     ) : ""}
+
+
                     {optionItem.hasOwnProperty("settings" + viewport.type) ? (
                         <>
+                            {/*
+                        TEXT SETTINGS
+                        TEXT SETTINGS
+                        TEXT SETTINGS
+                        TEXT SETTINGS
+                        TEXT SETTINGS
+                        TEXT SETTINGS
+                        TEXT SETTINGS
+                        */}
                             <Disclosure as="div" className="border-white pt-2">
                                 {({open}) => (
                                     <>
@@ -638,7 +663,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             input: "bg-black text-white "
                                                         }}
                                                     />
-                                                    <label className="text-white" htmlFor="FontWeight">Font Weight</label>
+                                                    <span className="text-white">Font Weight</span>
                                                     <select onChange={onChangeInput}
                                                             value={optionItem['settings' + viewport.type].textWeight}
                                                             id="FontWeight" name="textWeight"
@@ -650,8 +675,103 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         <option value="font-bold">Bold</option>
                                                         <option value="font-extrabold">Extrabold</option>
                                                     </select>
+                                                    <hr/>
+                                                    <div className="w-full p-3 flex flex-wrap">
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "textDecoration",
+                                                                            name: "textDecoration",
+                                                                            value: "no-underline"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ (optionItem['settings'+ viewport.type]?.textDecoration === undefined || optionItem['settings'+ viewport.type]?.textDecoration === 'no-underline' ) ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">No underline</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "textDecoration",
+                                                                            name: "textDecoration",
+                                                                            value: "underline"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings'+ viewport.type]?.textDecoration === 'underline' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2 underline">Underline</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "textDecoration",
+                                                                            name: "textDecoration",
+                                                                            value: "overline"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings'+ viewport.type]?.textDecoration === 'overline' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2 overline">Overline</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "textDecoration",
+                                                                            name: "textDecoration",
+                                                                            value: "line-through"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings'+ viewport.type]?.textDecoration === 'line-through' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2 line-through">Line Through</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div className="w-full p-3 flex justify-center space-x-3">
+                                                        <button
+                                                            onClick={() => {
+                                                                onChangeInput({
+                                                                    target: {
+                                                                        id: "textWrap",
+                                                                        name: "textWrap",
+                                                                        value: "text-wrap"
+                                                                    }
+                                                                })
+                                                            }}
+                                                            className={`w-3/6 flex items-center px-2 text-xs rounded-md border-2 py-1 ${(optionItem['settings'+ viewport.type]?.textWrap === 'text-wrap' || optionItem['settings'+ viewport.type]?.textWrap === undefined ) ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            <IconTextWrap/>
+                                                            <span className="px-2">Text Wrap</span>
+                                                        </button>
+                                                        <button
+                                                            onClick={() => {
+                                                                onChangeInput({
+                                                                    target: {
+                                                                        id: "textWrap",
+                                                                        name: "textWrap",
+                                                                        value: "text-nowrap"
+                                                                    }
+                                                                })
+                                                            }}
+                                                            className={`w-3/6 flex items-center px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings'+ viewport.type]?.textWrap === 'text-nowrap' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                        <span>
+                                                                            <IconTextWrapDisabled/>
+                                                                        </span>
+                                                            <span className="px-2">Text No wrap</span>
+                                                        </button>
+                                                    </div>
 
-                                                    <div className="relative my-2 flex h-10 w-full">
+                                                    <div className="relative my-1 flex h-10 w-full">
                                                         <div
                                                             className="w-[35%] flex items-center text-xs justify-start px-2 border-r-[1px] h-full">
                                                             <span className="rotate-90"><IconSpacingVertical/></span>
@@ -736,6 +856,15 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                     </>
                                 )}
                             </Disclosure>
+                            {/*
+                        BACKGROUND SETTINGS
+                        BACKGROUND SETTINGS
+                        BACKGROUND SETTINGS
+                        BACKGROUND SETTINGS
+                        BACKGROUND SETTINGS
+                        BACKGROUND SETTINGS
+                        BACKGROUND SETTINGS
+                            */}
                             <Disclosure as="div" className="border-white pt-2">
                                 {({open}) => (
                                     <>
@@ -2103,9 +2232,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                             })
                                                                         }}
                                                                         className={`w-3/6 flex items-center px-2 rounded-md border-2 py-1 ${flexWrap === 'flex-nowrap' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
-                                                                <span>
-                                                                    <IconTextWrapDisabled/>
-                                                                </span>
+                                                                        <span>
+                                                                            <IconTextWrapDisabled/>
+                                                                        </span>
                                                                         <span className="px-2">No wrap</span>
                                                                     </button>
                                                                 </div>
@@ -2498,6 +2627,82 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             </button>
                                                         </div>
                                                     </div>
+
+                                                    {/*
+                                                    OVERFLOW
+                                                    OVERFLOW
+                                                    OVERFLOW
+                                                    OVERFLOW
+                                                    OVERFLOW
+                                                    OVERFLOW
+                                                    OVERFLOW
+                                                    */}
+
+
+                                                    <h3 className="text-sm text-center font-bold">Overflow</h3>
+                                                    <div className="w-full p-3 flex flex-wrap">
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "overflow",
+                                                                            name: "overflow",
+                                                                            value: "overflow-auto"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ (optionItem['settings'+ viewport.type]?.overflow === undefined || optionItem['settings'+ viewport.type]?.overflow === 'overflow-auto' ) ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Auto</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "overflow",
+                                                                            name: "overflow",
+                                                                            value: "overflow-hidden"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings'+ viewport.type]?.overflow === 'overflow-hidden' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Hidden</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "overflow",
+                                                                            name: "overflow",
+                                                                            value: "overflow-visible"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings'+ viewport.type]?.overflow === 'overflow-visible' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Visible</span>
+                                                            </button>
+                                                        </div>
+                                                        <div className="w-2/4 p-1">
+                                                            <button
+                                                                onClick={() => {
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "overflow",
+                                                                            name: "overflow",
+                                                                            value: "overflow-scroll"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings'+ viewport.type]?.overflow === 'overflow-scroll' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                <span className="px-2">Scroll</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
                                                     {/*
                                                     POSITION
                                                     POSITION
@@ -2559,7 +2764,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 })
                                                             }}
                                                             className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'static' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
-                                                            <span className="px-2">static</span>
+                                                            <span className="px-2">Static</span>
                                                         </button>
                                                     </div>
                                                     {/*
@@ -2807,6 +3012,40 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     })
                                                                 }
                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                    {/*
+                                                        Z INDEX
+                                                        Z INDEX
+                                                        Z INDEX
+                                                        Z INDEX
+                                                        Z INDEX
+                                                        Z INDEX
+                                                        Z INDEX
+                                                        */}
+                                                    <div className="grid grid-cols-1 gap-2 my-2">
+                                                        <div className="relative flex rounded-md border-[1px] border-white h-10">
+                                                            <div
+                                                                className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
+                                                                <span className="text-[12px] font-bold">Z Index</span>
+                                                            </div>
+                                                            <input
+                                                                onChange={
+                                                                    ({target}) => {
+                                                                        setZIndex(target.value)
+                                                                        onChangeInput({
+                                                                            target: {
+                                                                                id: "zIndex",
+                                                                                name: "zIndex",
+                                                                                value: "z-[" + target.value + "]"
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                }
+                                                                value={zIndex}
+                                                                min={0}
+                                                                type="number"
+                                                                className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 text-nowrap truncate"/>
                                                         </div>
                                                     </div>
                                                 </div>

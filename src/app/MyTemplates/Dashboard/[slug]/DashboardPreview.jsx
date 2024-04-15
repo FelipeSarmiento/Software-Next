@@ -123,7 +123,7 @@ export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueId
     }
 
     return (
-        <div className="relative overflow-hidden h-auto w-auto">
+        <div className="relative h-auto w-auto">
             {createContent(components?.sections)}
         </div>
     )
