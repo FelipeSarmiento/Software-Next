@@ -24,7 +24,7 @@ export function NavBar() {
 
     const logout = () => {
         setSession('')
-        logOut().then(() => { window.location.reload() })
+        logOut().then(() => { window.location.href = '/Auth/Login' })
     }
 
     useEffect(() => {
