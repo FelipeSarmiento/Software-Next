@@ -2,6 +2,12 @@ import React from "react";
 import "@/settings/assets/globals.css";
 import {SparklesCore} from "@/../src/app/components/AceternityUI/sparkles";
 import {TextGenerateEffect} from "../components/AceternityUI/text-generate-effect";
+import Image from "next/image";
+
+import login from '@/settings/assets/images/login.png'
+import createProject from '@/settings/assets/images/createProject.png'
+import dashboard from '@/settings/assets/images/dashboard.png'
+import preview from '@/settings/assets/images/preview.png'
 export default function Home() {
     const words = `Welcome to our platform! Here's a guide on how to use our website builder`
 
@@ -42,13 +48,13 @@ export default function Home() {
                     <span className="text-lg font-bold">Start by creating an account or logging in if you already have one.</span>
                 </div>
                 <div className="w-full h-72 flex flex-col items-center order-2 md:order-2 justify-center border-green-500 shadow-lg shadow-cyan-500 rounded-md">
-1
+                    <Image width={500} height={100} className="object-contain h-5/6" src={login} alt=""/>
                 </div>
                 <div className="w-full h-72 flex order-4 flex-col items-center md:order-4 justify-center border-green-500 shadow-lg shadow-cyan-500 rounded-md">
-2
+                    <Image width={500} height={100} className="object-contain h-5/6" src={createProject} alt=""/>
                 </div>
                 <div className="w-full h-72 flex flex-col order-3 items-center md:order-5 justify-center px-6 text-center shadow-lg shadow-cyan-100 rounded-md">
-                    <span className="text-2xl font-extrabold">Choose a Template</span>
+                    <span className="text-2xl font-extrabold">Create a project</span>
                     <span className="text-lg font-extrabold">Browse through our selection of pre-designed templates and choose the one that best fits your needs.</span>
                 </div>
                 <div className="w-full h-72 flex flex-col order-5 items-center md:order-6 justify-center px-6 text-center shadow-lg shadow-cyan-100 rounded-md">
@@ -56,10 +62,10 @@ export default function Home() {
                     <span className="text-lg font-extrabold">Add components or predefined sections to your website. You can also edit styles and configurations to match your preferences.</span>
                 </div>
                 <div className="w-full h-72 flex flex-col order-6 items-center md:order-7 justify-center border-green-500 shadow-lg shadow-cyan-500 rounded-md">
-3
+                    <Image width={500} height={100} className="object-contain h-5/6" src={dashboard} alt=""/>
                 </div>
                 <div className="w-full h-72 flex flex-col items-center order-8 md:order-8 justify-center border-green-500 shadow-lg shadow-cyan-500 rounded-md">
-4
+                    <Image width={500} height={100} className="object-contain h-5/6" src={preview} alt=""/>
                 </div>
                 <div className="w-full h-72 flex flex-col items-center order-7 md:order-9 justify-center px-6 text-center shadow-lg shadow-cyan-100 rounded-md">
                     <span className="text-2xl font-extrabold">Preview and Publish</span>

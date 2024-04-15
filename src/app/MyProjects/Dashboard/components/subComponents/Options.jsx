@@ -2549,6 +2549,32 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             className={`w-2/4 flex items-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'absolute' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2">Absolute</span>
                                                         </button>
+                                                        <button
+                                                            onClick={() => {
+                                                                onChangeInput({
+                                                                    target: {
+                                                                        id: "position",
+                                                                        name: "position",
+                                                                        value: "sticky"
+                                                                    }
+                                                                })
+                                                            }}
+                                                            className={`w-2/4 flex items-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'sticky' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            <span className="px-2">Sticky</span>
+                                                        </button>
+                                                        <button
+                                                            onClick={() => {
+                                                                onChangeInput({
+                                                                    target: {
+                                                                        id: "position",
+                                                                        name: "position",
+                                                                        value: "static"
+                                                                    }
+                                                                })
+                                                            }}
+                                                            className={`w-2/4 flex items-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'static' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            <span className="px-2">Static</span>
+                                                        </button>
                                                     </div>
                                                     {/*
                                                         POSITIONS TOP BOTTOM LEFT RIGHT

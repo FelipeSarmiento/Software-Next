@@ -700,7 +700,7 @@ export default function Dashboard({params}) {
                                                           deleteItemDashboard={deleteItemDashboard}/>
                                             </div>
                                             <div className="lg:col-span-3 bg-stone-950 overflow-x-auto  border-dotted border-2 flex justify-start rounded-md border-stone-800 h-[60vh] shrink-0 p-1">
-                                                <div className={`outline outline-offset-2 outline-1 mx-auto outline-white overflow-x-auto rounded-md h-full p-1`} style={{"width": viewport.value, "min-width": viewport.value}}>
+                                                <div className={`outline outline-offset-2 relative outline-1 mx-auto outline-white overflow-x-auto rounded-md h-full p-1`} style={{"width": viewport.value, "min-width": viewport.value}}>
                                                     <DashboardPreview idUniqueIdentifier={optionItem?.idUniqueIdentifier}
                                                                       viewport={viewport} onSelectItem={onSelectItem}
                                                                       components={itemsDashboard?.pages[actualPage]}/>

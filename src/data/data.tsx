@@ -14,11 +14,11 @@ import {cookies} from 'next/headers';
 */
 
 export const registerUser = async (users) => {
-    const {username, password, email, firstName, lastName, phoneNumber} = users
+    const {username, password, email, firstName, lastName, phoneNumber, terms} = users
     const date_created = new Date()
     let passwordEncrypted = encrypt(password, process.env.NEXT_PUBLIC_REACT_APP_SECRET_KEY ?? 'S0FtW@r3N3xT!@#');
     // @ts-ignore
-    return await sql`INSERT INTO users (first_name, last_name, username, email, phone_number, password, role, datecreated, dateupdated) VALUES (${firstName}, ${lastName}, ${username}, ${email}, ${phoneNumber}, ${passwordEncrypted}, 'user', ${date_created}, ${date_created}) RETURNING *`;
+    return await sql`INSERT INTO users (first_name, last_name, username, email, phone_number, password, role, datecreated, dateupdated, terms) VALUES (${firstName}, ${lastName}, ${username}, ${email}, ${phoneNumber}, ${passwordEncrypted}, 'user', ${date_created}, ${date_created}, ${terms}) RETURNING *`;
 }
 export const login = async (User: any) => {
     const {password, user} = User

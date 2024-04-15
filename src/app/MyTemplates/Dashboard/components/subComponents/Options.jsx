@@ -2554,12 +2554,12 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     target: {
                                                                         id: "position",
                                                                         name: "position",
-                                                                        value: "fixed"
+                                                                        value: "static"
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'fixed' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
-                                                            <span className="px-2">fixed</span>
+                                                            className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'static' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            <span className="px-2">static</span>
                                                         </button>
                                                     </div>
                                                     {/*
