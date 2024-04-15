@@ -76,36 +76,12 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 backgroundColor: options['settings' + viewport.type].backgroundColor?.split("-")[1].replace("[", "").replace("]", ""),
                 decorationColor: options['settings' + viewport.type].decorationColor?.split("-")[1].replace("[", "").replace("]", ""),
             })
-            if (options.hasOwnProperty("text")) {
-                setSpecificAttributes({
-                    ...specificAttributes,
-                    text: options.text
-                })
-            }
-            if (options.hasOwnProperty("src")) {
-                setSpecificAttributes({
-                    ...specificAttributes,
-                    src: options.src
-                })
-            }
-            if (options.hasOwnProperty("href")) {
-                setSpecificAttributes({
-                    ...specificAttributes,
-                    href: options.href
-                })
-            }
-            if (options.hasOwnProperty("alt")) {
-                setSpecificAttributes({
-                    ...specificAttributes,
-                    alt: options.alt
-                })
-            }
-            if (options.hasOwnProperty("target")) {
-                setSpecificAttributes({
-                    ...specificAttributes,
-                    target: options.target
-                })
-            }
+            setSpecificAttributes({
+                text: options?.text,
+                src: options?.src,
+                alt: options?.alt,
+                href: options?.href
+            })
 
             setBorderWidth({
                 borderRight: {
@@ -225,7 +201,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
             setZIndex(options['settings' + viewport.type]?.zIndex?.match(/\d+/g)  ? options['settings' + viewport.type].zIndex?.match(/\d+/g).map(Number)[0] : "")
 
         }
-    }, [options]);
+    }, [options, viewport]);
 
     const [optionItem, setOptionItem] = useState(options);
     const [colorOptions, setColorOptions] = useState({})
