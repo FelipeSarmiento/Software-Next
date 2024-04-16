@@ -85,56 +85,56 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
 
             setBorderWidth({
                 borderRight: {
-                    value: options['settings' + viewport.type].borderRight.match(/\d+/g) ? options['settings' + viewport.type].borderRight.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].borderRight.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: options['settings' + viewport.type].borderRight?.match(/\d+/g) ? options['settings' + viewport.type].borderRight.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].borderRight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 },
                 borderLeft: {
-                    value: options['settings' + viewport.type].borderLeft.match(/\d+/g) ? options['settings' + viewport.type].borderLeft.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].borderLeft.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: options['settings' + viewport.type].borderLeft?.match(/\d+/g) ? options['settings' + viewport.type].borderLeft.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].borderLeft?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 },
                 borderTop: {
-                    value: options['settings' + viewport.type].borderTop.match(/\d+/g) ? options['settings' + viewport.type].borderTop.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].borderTop.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: options['settings' + viewport.type].borderTop?.match(/\d+/g) ? options['settings' + viewport.type].borderTop.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].borderTop?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 },
                 borderBottom: {
-                    value: options['settings' + viewport.type].borderBottom.match(/\d+/g) ? options['settings' + viewport.type].borderBottom.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].borderBottom.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: options['settings' + viewport.type].borderBottom?.match(/\d+/g) ? options['settings' + viewport.type].borderBottom.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].borderBottom?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 }
             })
             setPaddings({
                 paddingRight: {
-                    value: options['settings' + viewport.type].paddingRight.match(/\d+/g) ? options['settings' + viewport.type].paddingRight.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].paddingRight.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: options['settings' + viewport.type].paddingRight?.match(/\d+/g) ? options['settings' + viewport.type].paddingRight.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].paddingRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 },
                 paddingLeft: {
-                    value: options['settings' + viewport.type].paddingLeft.match(/\d+/g) ? options['settings' + viewport.type].paddingLeft.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].paddingLeft.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: options['settings' + viewport.type].paddingLeft?.match(/\d+/g) ? options['settings' + viewport.type].paddingLeft.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].paddingLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 },
                 paddingTop: {
-                    value: options['settings' + viewport.type].paddingTop.match(/\d+/g) ? options['settings' + viewport.type].paddingTop.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].paddingTop.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: options['settings' + viewport.type].paddingTop?.match(/\d+/g) ? options['settings' + viewport.type].paddingTop.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].paddingTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 },
                 paddingBottom: {
-                    value: options['settings' + viewport.type].paddingBottom.match(/\d+/g) ? options['settings' + viewport.type].paddingBottom.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].paddingBottom.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: options['settings' + viewport.type].paddingBottom?.match(/\d+/g) ? options['settings' + viewport.type].paddingBottom.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].paddingBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 }
             })
             setMargins({
                 marginRight: {
-                    value: options['settings' + viewport.type].marginRight.match(/\d+/g) ? options['settings' + viewport.type].marginRight.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].marginRight.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: options['settings' + viewport.type].marginRight?.match(/\d+/g) ? options['settings' + viewport.type].marginRight.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].marginRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 },
                 marginLeft: {
-                    value: options['settings' + viewport.type].marginLeft.match(/\d+/g) ? options['settings' + viewport.type].marginLeft.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].marginLeft.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: options['settings' + viewport.type].marginLeft?.match(/\d+/g) ? options['settings' + viewport.type].marginLeft.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].marginLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 },
                 marginTop: {
-                    value: options['settings' + viewport.type].marginTop.match(/\d+/g) ? options['settings' + viewport.type].marginTop.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].marginTop.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: options['settings' + viewport.type].marginTop?.match(/\d+/g) ? options['settings' + viewport.type].marginTop.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].marginTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 },
                 marginBottom: {
-                    value: options['settings' + viewport.type].marginBottom.match(/\d+/g) ? options['settings' + viewport.type].marginBottom.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].marginBottom.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: options['settings' + viewport.type].marginBottom?.match(/\d+/g) ? options['settings' + viewport.type].marginBottom.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].marginBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 }
             })
             setSize({
@@ -147,8 +147,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                     unit: options['settings' + viewport.type].minWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 },
                 height: {
-                    value: options['settings' + viewport.type].height.match(/\d+/g) ? options['settings' + viewport.type].height.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].height.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: options['settings' + viewport.type].height?.match(/\d+/g) ? options['settings' + viewport.type].height.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].height?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 },
                 minHeight: {
                     value: options['settings' + viewport.type].minHeight?.match(/\d+/g) ? options['settings' + viewport.type].minHeight.match(/\d+/g).map(Number)[0] : "",
@@ -156,16 +156,16 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 },
             })
             setRounded({
-                value: options['settings' + viewport.type].borderRadius.match(/\d+/g) ? options['settings' + viewport.type].borderRadius.match(/\d+/g).map(Number)[0] : "",
-                unit: options['settings' + viewport.type].borderRadius.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                value: options['settings' + viewport.type].borderRadius?.match(/\d+/g) ? options['settings' + viewport.type].borderRadius.match(/\d+/g).map(Number)[0] : "",
+                unit: options['settings' + viewport.type].borderRadius?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
             })
             setFontSize({
-                value: options['settings' + viewport.type].textSize.match(/\d+/g) ? options['settings' + viewport.type].textSize.match(/\d+/g).map(Number)[0] : "",
-                unit: options['settings' + viewport.type].textSize.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                value: options['settings' + viewport.type]?.textSize?.match(/\d+/g) ? options['settings' + viewport.type].textSize.match(/\d+/g).map(Number)[0] : "",
+                unit: options['settings' + viewport.type]?.textSize?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
             })
-            setDisplay(options['settings' + viewport.type].display)
-            setFlexDirection(options['settings' + viewport.type].flexDirection)
-            setFlexWrap(options['settings' + viewport.type].flexWrap)
+            setDisplay(options['settings' + viewport.type]?.display)
+            setFlexDirection(options['settings' + viewport.type]?.flexDirection)
+            setFlexWrap(options['settings' + viewport.type]?.flexWrap)
             setPositions({
                 top: {
                     value: options['settings' + viewport.type].top?.match(/\d+/g) ? options['settings' + viewport.type].top.match(/\d+/g).map(Number)[0] : "",
