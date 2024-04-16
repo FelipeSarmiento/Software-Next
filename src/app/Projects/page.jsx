@@ -30,24 +30,24 @@ export default function Home() {
                         </h1>
                     </div>
                 </header>
-                <div className="grid grid-cols-1 2xl:grid-cols-2 justify-center place-items-center xl:w-max mx-auto gap-8">
+                <div className="grid grid-cols-1 2xl:grid-cols-2 justify-center md:place-items-center xl:w-max mx-auto gap-8">
                     {
                         projects.length > 0 ? projects.map((project, index) => (
                             <Link key={ project.idproject * index } target="_blank" href={ "/" + project.projectpublicid }>
-                                <div className="relative grid grid-cols-1 lg:grid-cols-2 p-2 w-full  md:p-6 md:w-[750px] lg:h-72 lg:max-h-72 rounded-lg border-2 border-neutral-300">
-                                    <div className="border-2 flex items-center justify-center select-none border-neutral-300 rounded-md lg:h-full">
+                                <div className="relative grid grid-cols-1 md:grid-cols-2 p-2 w-full  md:p-6 md:w-[750px] md:h-72 md:max-h-72 rounded-lg border-2 border-neutral-300">
+                                    <div className="border-2 flex items-center justify-center select-none border-neutral-300 rounded-md md:h-full">
                                         <Image src={ SoftwareNextLogo } alt="Software Next Logo" width={500} height={500} className="size-52 object-cover rounded-md"/>
                                     </div>
-                                    <div className="rounded-md max-h-60 flex flex-wrap lg:h-full px-3 md:px-3 lg:px-3 py-2 text-white">
+                                    <div className="rounded-md max-h-60 flex flex-wrap md:h-full px-3 py-2 text-white">
                                         <div className="w-full relative h-1/5 flex flex-wrap items-center text-2xl font-bold ">
                                             <h3 className="text-cyan-500 text-nowrap truncate pr-8">{ project.projectname }</h3>
                                         </div>
-                                        <div className="w-full h-2/5 max-h-2/5 overflow-hidden py-2">
+                                        <div className="w-full h-20 md:h-2/5 max-h-2/5 overflow-hidden py-2">
                                             <div className="overflow-y-auto h-full">
                                                 <p className="text-sm md:text-base">{ project.projectdescription }</p>
                                             </div>
                                         </div>
-                                        <div className="w-2/4 md:w-full h-1/5 flex overflow-x-auto items-center space-x-2 justify-start">
+                                        <div className="w-2/4 md:w-full h-10 md:h-1/5 flex overflow-x-auto items-center space-x-2 justify-start">
                                             { project.tags.map((tag, index) => (
                                                 <span key={tag + index} className="bg-stone-800 rounded-lg p-1 text-xs md:text-sm border-2 border-stone-900">{tag}</span>
                                             ))}

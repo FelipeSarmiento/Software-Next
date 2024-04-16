@@ -154,7 +154,7 @@ export function NavBar() {
                                         !session ? (
                                             <Menu as="div" className="relative">
                                                 <div>
-                                                    <Link href="/Auth/Login" className="relative flex pb-1 border-2 h-8 items-center justify-start px-0 text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
+                                                    <Link href="/Auth/Login" className="relative flex pb-1 h-8 items-center justify-start px-0 text-white hover:bg-gradient-to-r from-black via-zinc-700 to-black">
                                                         <span className="absolute -inset-1.5"/>
                                                         <div>
                                                             <FontAwesomeIcon icon={faRightToBracket} className="text-sm px-1"/>

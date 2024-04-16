@@ -87,9 +87,9 @@ export default function Home() {
     return (
         <>
             <div className="h-[calc(100vh_-_84px)] px-4 py-5">
-                <header className="h-32 md:px-12 mb-5 shadow">
-                    <div className="mx-auto h-full flex items-center justify-between">
-                        <h1 className="flex items-center justify-start text-2xl md:text-4xl font-bold tracking-tight text-white">
+                <header className="h-16 md:h-32 md:px-12 mb:mb-5 shadow">
+                    <div className="mx-auto h-full flex items-center mjustify-center md:justify-start">
+                        <h1 className="flex items-center justify-center md:justify-start text-2xl md:text-4xl font-bold tracking-tight text-white">
                             My Profile
                         </h1>
                     </div>
@@ -319,7 +319,7 @@ export default function Home() {
                     <div className="lg:col-span-2 border-4 rounded-3xl border-stone-800 w-full h-full">
                         <div className="lg:h-5/6 overflow-y-auto p-5">
                             <div
-                                className="grid grid-cols-1 2xl:grid-cols-2 justify-center place-items-center xl:w-max mx-auto gap-8">
+                                className="grid grid-cols-1 2xl:grid-cols-2 justify-center md:place-items-center xl:w-max mx-auto">
                                 {
                                     projects.length > 0 ? projects.map((project, index) => (
                                         <Link key={project.idproject * index} href={"/" + project.projectpublicid}>
@@ -333,17 +333,17 @@ export default function Home() {
                                                 <div
                                                     className="rounded-md max-h-60 flex flex-wrap px-3 md:px-3 lg:px-0 text-white">
                                                     <div
-                                                        className="w-full relative h-1/5 flex flex-wrap items-center text-2xl font-bold ">
+                                                        className="w-full relative h-10 md:h-1/5 flex flex-wrap items-center text-2xl font-bold ">
                                                         <h3 className="text-cyan-500 text-nowrap truncate pr-8">{project.projectname}</h3>
                                                     </div>
-                                                    <div className="w-full h-2/5 max-h-3/5">
+                                                    <div className="w-full md:h-2/5 max-h-3/5">
                                                         <div className="h-20 max-h-full overflow-y-auto">
                                                             <span
                                                                 className="max-h-10 text-sm md:text-base">{project.projectdescription}</span>
                                                         </div>
                                                     </div>
                                                     <div
-                                                        className="w-2/4 md:w-full h-1/5 flex overflow-x-auto items-center space-x-2 justify-start">
+                                                        className="w-full md:w-full h-10 md:h-1/5 flex overflow-x-auto items-center space-x-2 justify-start">
                                                         {project.tags.map((tag, index) => (
                                                             <span key={tag + index}
                                                                   className="bg-stone-800 rounded-lg p-1 text-xs md:text-sm border-2 border-stone-900">{tag}</span>

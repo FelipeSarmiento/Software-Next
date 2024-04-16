@@ -270,9 +270,8 @@ const ModalContent = ({close, project}) => {
 
     return (
         <div
-            className="fixed top-0 left-0 w-full py-20 px-2 flex items-center justify-center h-screen  bg-stone-950/90">
-            <div
-                className="relative h-max px-3 py-2 md:py-3 lg:px-6 mt-10 w-full md:w-4/6 2xl:w-2/6 bg-black border-2 overflow-y-auto border-stone-500 text-white rounded-lg">
+            className="fixed top-0 left-0 w-full px-2 py-24 flex items-center overflow-y-auto justify-center h-screen  bg-stone-950/90">
+            <div className="relative px-3 py-2 md:py-3 lg:px-6 mt-28 w-full md:w-4/6 2xl:w-2/6 bg-black border-2 overflow-y-auto border-stone-500 text-white rounded-lg">
                 <h2 className="text-lg font-bold text-center">{project ? 'Edit Projects' : 'Create a new Project'}</h2>
                 <div className="">
                     <form onSubmit={handleProjectForm}>
@@ -327,7 +326,7 @@ const ModalContent = ({close, project}) => {
                                     <div className="flex items-center justify-center">
                                         <Select
                                             classNames={{
-                                                root: 'w-3/4 mx-auto',
+                                                root: 'w-full md:w-3/4 mx-auto',
                                                 input: "bg-stone-950 text-white border-2 border-stone-800 rounded-md h-10 text-md font-bold text-center",
                                                 dropdown: "bg-stone-950 border-stone-800 text-white",
                                                 option: "hover:bg-stone-950 border-2 border-transparent hover:border-cyan-500 hover:text-cyan-500 text-white font-bold text-md"
@@ -348,7 +347,7 @@ const ModalContent = ({close, project}) => {
                                         <Select
                                             allowDeselect={false}
                                             classNames={{
-                                                root: 'w-3/4 mx-auto',
+                                                root: 'w-full md:w-3/4 mx-auto',
                                                 input: "bg-stone-950 text-white border-2 border-stone-800 rounded-md h-10 text-md font-bold text-center",
                                                 dropdown: "bg-stone-950 border-stone-800 text-white",
                                                 description: "text-yellow-400 font-bold",
