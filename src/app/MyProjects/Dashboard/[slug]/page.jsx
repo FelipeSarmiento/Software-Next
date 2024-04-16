@@ -21,7 +21,7 @@ import { getSession, getProject, updateProject } from "@/data/data";
 export default function Dashboard({params}) {
     const [session, setSession] = useState()
     useEffect(() => {
-        getSession().then((session) => setSession(session))
+        getSession().then((session) => setSession(session.username))
     }, []);
 
     const viewports = [
@@ -384,7 +384,7 @@ export default function Dashboard({params}) {
                                     idProject: project?.idproject,
                                     project_name: project?.projectname,
                                     project_description: project?.projectdescription,
-                                    isPublic: project?.isPublic,
+                                    isPublic: project?.ispublic,
                                     type_project: project?.type,
                                     tags: project?.tags,
                                     items: itemsDashboard,

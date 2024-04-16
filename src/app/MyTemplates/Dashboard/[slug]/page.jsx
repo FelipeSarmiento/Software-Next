@@ -21,7 +21,7 @@ import { getSession, getTemplate, updateTemplate } from "@/data/data";
 export default function Dashboard({params}) {
     const [session, setSession] = useState()
     useEffect(() => {
-        getSession().then((session) => setSession(session))
+        getSession().then((session) => setSession(session.username))
     }, []);
 
     const viewports = [
@@ -382,7 +382,7 @@ export default function Dashboard({params}) {
                                     idTemplate: template?.idtemplate,
                                     template_name: template?.templatename,
                                     template_description: template?.templatedescription,
-                                    isPublic: template?.isPublic,
+                                    isPublic: template?.ispublic,
                                     type_template: template?.type,
                                     tags: template?.tags,
                                     items: itemsDashboard,
