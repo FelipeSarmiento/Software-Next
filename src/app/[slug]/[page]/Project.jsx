@@ -33,7 +33,7 @@ export const Project = ({ components, viewport, path }) => {
                                     )
                                 case "link":
                                     return (
-                                        <a key={component.idUniqueIdentifier} href={ component.href.split("|")[0] === 'internal' ? "/" + path + component.href.split("|")[1] : component.href.split("|")[1] } target={ component.target } className={className}>
+                                        <a key={component.idUniqueIdentifier} href={ component.href.split("|")[0] === 'internal' ? "/" + path + "/" + component.href.split("|")[1] : component.href.split("|")[1] } target={ component.target } className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </a>
                                     )

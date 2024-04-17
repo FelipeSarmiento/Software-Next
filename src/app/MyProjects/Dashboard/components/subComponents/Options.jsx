@@ -379,7 +379,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 target: {
                                                     id: "valueInput",
                                                     name: "href",
-                                                    value: "internal|/" + value?.toLowerCase()
+                                                    value: "internal|" + value?.toLowerCase()
                                                 }
                                             })
                                         }
