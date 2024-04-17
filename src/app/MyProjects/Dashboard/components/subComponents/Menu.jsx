@@ -160,7 +160,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                                                         <IconForms stroke={2}/>) : ""}
                                                                     {option.type === "menu" ? (
                                                                         <IconMenu2 stroke={2}/>) : ""}
-                                                                    <span className="pl-1">
+                                                                    <span className="pl-1 text-nowrap truncate w-full">
                                                                         { option.type === "text" ? option.text !== "" ? option.text : option.label : "" }
                                                                         { option.type === "image" ? "Image" : "" }
                                                                     </span>

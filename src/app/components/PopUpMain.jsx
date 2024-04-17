@@ -43,7 +43,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
             type: "link",
             group: "container",
             description: "Represents a hyperlink.",
-            specificAttributes: {href: "/", hrefType: "internal", target: "_blank"},
+            specificAttributes: {href: "/", hrefType: "internal", target: "_self"},
             specificSettings: {
                 height: "h-[]",
                 width: "w-[]",

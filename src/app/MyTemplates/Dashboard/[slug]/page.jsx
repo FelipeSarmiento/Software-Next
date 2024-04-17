@@ -111,6 +111,9 @@ export default function Dashboard({params}) {
                     if (newObj.hasOwnProperty('href')) {
                         newObj.href = nuevoValor.href;
                     }
+                    if (newObj.hasOwnProperty('target')) {
+                        newObj.target = nuevoValor.target;
+                    }
                     if (newObj.hasOwnProperty('src')) {
                         newObj.src = nuevoValor.src;
                     }
@@ -270,11 +273,11 @@ export default function Dashboard({params}) {
         return (
             <div className="min-h-full bg-black text-white lg:bg-transparent pt-4">
                 <header className=" shadow">
-                    <div className="mx-auto relative grid grid-cols-2 lg:grid-cols-5 lg:flex justify-between px-4 py-3 sm:px-6 lg:px-24">
-                        <h1 className="col-span-2 flex flex-col md:flex-row items-center justify-center lg:justify-around text-3xl font-bold tracking-tight text-white">
-                            Template <span className="hidden md:flex px-3">-</span><span className="text-cyan-500 py-2 lg:py-0 font-extrabold"> {template?.templatename}</span>
+                    <div className="mx-auto relative grid grid-cols-2 2xl:grid-cols-5 2xl:flex justify-between px-4 py-3 sm:px-6 2xl:px-24">
+                        <h1 className="col-span-2 flex flex-col xl:flex-row items-center justify-center 2xl:justify-around text-3xl font-bold tracking-tight text-white">
+                            Template <span className="hidden 2xl:flex px-3">-</span><span className="text-cyan-500 py-2 2xl:py-0 font-extrabold"> {template?.templatename}</span>
                         </h1>
-                        <div className="col-span-2 lg:absolute lg:top-2/4 lg:left-2/4 lg:-translate-x-2/4 lg:-translate-y-2/4 flex items-center justify-center">
+                        <div className="col-span-2 2xl:absolute 2xl:top-2/4 2xl:left-2/4 2xl:-translate-x-2/4 2xl:-translate-y-2/4 flex items-center justify-center">
                             <div className="size-10 flex items-center justify-center">
                                 <Group justify="center">
                                     <HoverCard width={300} shadow="md">
@@ -374,7 +377,7 @@ export default function Dashboard({params}) {
                         <div className="col-span-2 py-2 flex space-x-4 justify-center">
                             <Link target="_blank" href={'/Template/' + template.templatepublicid}>
                                 <button className="text-white text-nowrap flex items-center justify-center border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
-                                    Visit &nbsp;<IconExternalLink/>
+                                    Preview &nbsp;<IconExternalLink/>
                                 </button>
                             </Link>
                             <button onClick={() => {
@@ -402,9 +405,9 @@ export default function Dashboard({params}) {
                             <div className="h-full">
                                 <main className="mx-auto max-w-11/12 px-4 sm:px-6 lg:px-8 pt-6">
                                     <section aria-labelledby="products-heading" className="h-[56vh] pt-3">
-                                        <div className="grid grid-cols-1 relative gap-x-5 gap-y-4 lg:grid-cols-5 h-full">
-                                            <div className="col-span-1 lg:col-span-5 grid grid-cols-2 lg:grid-cols-5 gap-y-3 py-2 h-15 rounded-md w-full bg-stone-950 border-2 border-stone-800">
-                                                <div className="col-span-1 hidden order-2 lg:order-1 lg:flex justify-end lg:justify-start items-center px-2">
+                                        <div className="grid grid-cols-1 relative 2xl:gap-x-5 gap-y-4 2xl:grid-cols-5 h-full">
+                                            <div className="col-span-1 2xl:col-span-5 grid grid-cols-2 2xl:grid-cols-5 gap-y-3 py-2 h-15 rounded-md w-full bg-stone-950 border-2 border-stone-800">
+                                                <div className="col-span-1 hidden order-2 2xl:order-1 2xl:flex justify-end 2xl:justify-start items-center px-2">
                                                     <button
                                                         disabled={optionItem === undefined}
                                                         onClick={() => {
@@ -473,7 +476,7 @@ export default function Dashboard({params}) {
                                                             </> : ""
                                                     }
                                                 </div>
-                                                <div className="col-span-2 order-1 lg:order-2 lg:col-span-3 relative flex items-center justify-center">
+                                                <div className="col-span-2 order-1 2xl:order-2 2xl:col-span-3 relative flex items-center justify-center">
                                                     {/*
                                                 MOBILE TREE VIEW
                                                 MOBILE TREE VIEW
@@ -483,11 +486,12 @@ export default function Dashboard({params}) {
                                                 MOBILE TREE VIEW
                                                 MOBILE TREE VIEW
                                                 */}
-                                                    <div className="absolute lg:hidden lg:invisible top-2/4 left-0 -translate-y-2/4">
+                                                    <div className="absolute 2xl:hidden 2xl:invisible top-2/4 left-0 -translate-y-2/4">
                                                         <div className="relative">
                                                             <Drawer
+                                                                closeOnEscape={false}
                                                                 classNames={{
-                                                                    root: "block lg:hidden",
+                                                                    root: "block 2xl:hidden",
                                                                     body: "bg-stone-950",
                                                                     content: "bg-stone-950",
                                                                     header: "bg-stone-950"
@@ -572,12 +576,13 @@ export default function Dashboard({params}) {
                                                             </Drawer>
                                                             <Button
                                                                 classNames={{
-                                                                    root: "bg-transparent hover:bg-transparent text-white m-0 h-auto",
+                                                                    root: "bg-transparent hover:bg-transparent flex items-center text-white m-0 h-auto",
                                                                 }}
                                                                 onClick={ () => { setOpenDrawerTreeView(!openDrawerTreeView) } }>
                                                         <span className="italic text-xs">
                                                             <IconBinaryTree/>
                                                         </span>
+                                                                <span className="hidden lg:block px-2 font-bold">Tree View</span>
                                                             </Button>
                                                         </div>
                                                     </div>
@@ -628,10 +633,11 @@ export default function Dashboard({params}) {
                                                 MOBILE SETTINGS
                                                 MOBILE SETTINGS
                                                 */}
-                                                    <div className="absolute lg:hidden lg:invisible top-2/4 right-0 -translate-y-2/4">
+                                                    <div className="absolute 2xl:hidden 2xl:invisible top-2/4 right-0 -translate-y-2/4">
                                                         <Drawer
+                                                            closeOnEscape={false}
                                                             classNames={{
-                                                                root: "block lg:hidden",
+                                                                root: "block 2xl:hidden",
                                                                 body: "bg-stone-950",
                                                                 content: "bg-stone-950",
                                                                 header: "bg-stone-950"
@@ -652,16 +658,17 @@ export default function Dashboard({params}) {
                                                         </Drawer>
                                                         <Button
                                                             classNames={{
-                                                                root: "bg-transparent hover:bg-transparent text-white m-0 h-auto"
+                                                                root: "bg-transparent hover:bg-transparent flex items-center text-white m-0 h-auto"
                                                             }}
                                                             onClick={ () => { setOpenDrawerSettings(!openDrawerSettings) } }>
+                                                            <span className="hidden lg:block px-2 font-bold">Settings</span>
                                                         <span className="italic text-xs">
                                                             <IconSettings/>
                                                         </span>
                                                         </Button>
                                                     </div>
                                                 </div>
-                                                <div className="col-span-1 hidden lg:flex items-center justify-end relative order-3">
+                                                <div className="col-span-1 hidden 2xl:flex items-center justify-end relative order-3">
                                                     <div className="absolute">
                                                         <Group justify="center">
                                                             <HoverCard shadow="md" closeDelay={0}>
@@ -691,7 +698,7 @@ export default function Dashboard({params}) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="hidden lg:block lg:cols-span-1">
+                                            <div className="hidden 2xl:block 2xl:cols-span-1">
                                                 <DropMenu viewport={viewport} currentPage={actualPage} items={itemsDashboard?.pages[actualPage]}
                                                           optionSelected={optionItem}
                                                           title="Tree View"
@@ -706,7 +713,7 @@ export default function Dashboard({params}) {
                                                                       components={itemsDashboard?.pages[actualPage]}/>
                                                 </div>
                                             </div>
-                                            <div className="hidden lg:block lg:cols-span-1">
+                                            <div className="hidden 2xl:block 2xl:cols-span-1">
                                                 <DropMenu pages={Object.keys(itemsDashboard?.pages).map((page, index) => { return (page.charAt(0).toUpperCase() + page.slice(1)) })} items={optionItem} viewport={viewport} keepOptions={keepOptions}
                                                           modifyItemsDashboard={modifyItemsDashboard}
                                                           title={optionItem !== undefined ? "Settings for " + optionItem.label : "Settings"}

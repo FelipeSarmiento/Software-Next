@@ -356,24 +356,41 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                     data={pages}
                                     onChange={(value) => {
                                         if (value) {
-                                            setSpecificAttributes({
-                                                ...specificAttributes,
-                                                href: "" + value,
-                                                hrefType: "internal"
-                                            })
-                                            onChangeInput({
-                                                target: {
-                                                    id: "valueInput",
-                                                    name: "href",
-                                                    value: "internal|/" + value?.toLowerCase()
-                                                }
-                                            })
+                                            if (value.toLowerCase() === 'index') {
+                                                setSpecificAttributes({
+                                                    ...specificAttributes,
+                                                    href: "",
+                                                    hrefType: "internal"
+                                                })
+                                                onChangeInput({
+                                                    target: {
+                                                        id: "valueInput",
+                                                        name: "href",
+                                                        value: ""
+                                                    }
+                                                })
+                                            } else {
+                                                setSpecificAttributes({
+                                                    ...specificAttributes,
+                                                    href: "" + value,
+                                                    hrefType: "internal"
+                                                })
+                                                onChangeInput({
+                                                    target: {
+                                                        id: "valueInput",
+                                                        name: "href",
+                                                        value: "internal|/" + value?.toLowerCase()
+                                                    }
+                                                })
+                                            }
                                         }
                                     }}
                                     onSearchChange={ setExternalLink }
-                                    searchable
+                                    searchValue={ specificAttributes.href}
+                                    allowDeselect={true}
                                     defaultValue={ specificAttributes.href }
                                     checkIconPosition="right"
+                                    title={ specificAttributes.href }
                                     nothingFoundMessage={ <button onClick={ () => {
                                         setSpecificAttributes({
                                             ...specificAttributes,
@@ -389,6 +406,49 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                         })
                                     }} className="w-full h-full text-white">External Link</button> }
                                 />
+                            </div>
+                        </div>
+                    ) : ""}
+
+                    {/*
+                        TARGET
+                        TARGET
+                        TARGET
+                        TARGET
+                    */}
+
+                    {optionItem.hasOwnProperty("target") ? (
+                        <div className="py-2 flex flex-col  justify-center items-center relative h-max">
+                            <div className="text-white py-1 flex justify-center">
+                                <h4>Target</h4>
+                            </div>
+                            <div className="w-full p-3 flex justify-center space-x-3">
+                                <button
+                                    onClick={() => {
+                                        onChangeInput({
+                                            target: {
+                                                id: "valueInput",
+                                                name: "target",
+                                                value: "_self"
+                                            }
+                                        })
+                                    }}
+                                    className={`w-3/6 flex items-center justify-center px-2 text-md rounded-md border-2 py-1 ${(optionItem.target === undefined || optionItem.target === '_self') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                    <span className="px-2">_self</span>
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        onChangeInput({
+                                            target: {
+                                                id: "valueInput",
+                                                name: "target",
+                                                value: "_blank"
+                                            }
+                                        })
+                                    }}
+                                    className={`w-3/6 flex items-center justify-center px-2 text-md rounded-md border-2 py-1 ${optionItem.target === '_blank' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                    <span className="px-2 text-center">_blank</span>
+                                </button>
                             </div>
                         </div>
                     ) : ""}
