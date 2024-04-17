@@ -275,7 +275,7 @@ export default function Dashboard({params}) {
                 <header className=" shadow">
                     <div className="mx-auto relative grid grid-cols-2 2xl:grid-cols-5 2xl:flex justify-between px-4 py-3 sm:px-6 2xl:px-24">
                         <h1 className="col-span-2 flex flex-col xl:flex-row items-center justify-center 2xl:justify-around text-3xl font-bold tracking-tight text-white">
-                            Template <span className="hidden 2xl:flex px-3">-</span><span className="text-cyan-500 py-2 2xl:py-0 font-extrabold"> {template?.templatename}</span>
+                            Template <span className="hidden xl:flex px-3">-</span><span className="text-cyan-500 py-2 2xl:py-0 font-extrabold"> {template?.templatename}</span>
                         </h1>
                         <div className="col-span-2 2xl:absolute 2xl:top-2/4 2xl:left-2/4 2xl:-translate-x-2/4 2xl:-translate-y-2/4 flex items-center justify-center">
                             <div className="size-10 flex items-center justify-center">
@@ -405,8 +405,8 @@ export default function Dashboard({params}) {
                             <div className="h-full">
                                 <main className="mx-auto max-w-11/12 px-4 sm:px-6 lg:px-8 pt-6">
                                     <section aria-labelledby="products-heading" className="h-[56vh] pt-3">
-                                        <div className="grid grid-cols-1 relative 2xl:gap-x-5 gap-y-4 2xl:grid-cols-5 h-full">
-                                            <div className="col-span-1 2xl:col-span-5 grid grid-cols-2 2xl:grid-cols-5 gap-y-3 py-2 h-15 rounded-md w-full bg-stone-950 border-2 border-stone-800">
+                                        <div className="grid grid-cols-1 relative 2xl:gap-x-5 gap-y-4 xl:grid-cols-9 2xl:grid-cols-5 h-full">
+                                            <div className="col-span-1 xl:col-span-9 2xl:col-span-5 grid grid-cols-2 2xl:grid-cols-5 gap-y-3 py-2 h-15 rounded-md w-full bg-stone-950 border-2 border-stone-800">
                                                 <div className="col-span-1 hidden order-2 2xl:order-1 2xl:flex justify-end 2xl:justify-start items-center px-2">
                                                     <button
                                                         disabled={optionItem === undefined}
@@ -698,7 +698,7 @@ export default function Dashboard({params}) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="hidden 2xl:block 2xl:cols-span-1">
+                                            <div className="hidden xl:block xl:col-span-2 2xl:col-span-1">
                                                 <DropMenu viewport={viewport} currentPage={actualPage} items={itemsDashboard?.pages[actualPage]}
                                                           optionSelected={optionItem}
                                                           title="Tree View"
@@ -706,14 +706,14 @@ export default function Dashboard({params}) {
                                                           functions={onSelectItem} addSection={addSection}
                                                           deleteItemDashboard={deleteItemDashboard}/>
                                             </div>
-                                            <div className="lg:col-span-3 bg-stone-950 overflow-x-auto  border-dotted border-2 flex justify-start rounded-md border-stone-800 h-[60vh] shrink-0 p-1">
+                                            <div className="lg:col-span-5 2xl:col-span-3 bg-stone-950 overflow-x-auto  border-dotted border-2 flex justify-start rounded-md border-stone-800 h-[60vh] shrink-0 p-1">
                                                 <div className={`outline outline-offset-2 relative outline-1 mx-auto outline-white overflow-x-auto rounded-md h-full p-1`} style={{"width": viewport.value, "min-width": viewport.value}}>
                                                     <DashboardPreview idUniqueIdentifier={optionItem?.idUniqueIdentifier}
                                                                       viewport={viewport} onSelectItem={onSelectItem}
                                                                       components={itemsDashboard?.pages[actualPage]}/>
                                                 </div>
                                             </div>
-                                            <div className="hidden 2xl:block 2xl:cols-span-1">
+                                            <div className="hidden xl:block xl:col-span-2 2xl:col-span-1">
                                                 <DropMenu pages={Object.keys(itemsDashboard?.pages).map((page, index) => { return (page.charAt(0).toUpperCase() + page.slice(1)) })} items={optionItem} viewport={viewport} keepOptions={keepOptions}
                                                           modifyItemsDashboard={modifyItemsDashboard}
                                                           title={optionItem !== undefined ? "Settings for " + optionItem.label : "Settings"}
