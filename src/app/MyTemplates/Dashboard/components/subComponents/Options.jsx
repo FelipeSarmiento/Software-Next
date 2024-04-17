@@ -359,20 +359,20 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                             if (value.toLowerCase() === 'index') {
                                                 setSpecificAttributes({
                                                     ...specificAttributes,
-                                                    href: "",
+                                                    href: "internal|",
                                                     hrefType: "internal"
                                                 })
                                                 onChangeInput({
                                                     target: {
                                                         id: "valueInput",
                                                         name: "href",
-                                                        value: ""
+                                                        value: "internal|"
                                                     }
                                                 })
                                             } else {
                                                 setSpecificAttributes({
                                                     ...specificAttributes,
-                                                    href: "" + value,
+                                                    href: "internal|" + value,
                                                     hrefType: "internal"
                                                 })
                                                 onChangeInput({
