@@ -2482,6 +2482,68 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 </select>
                                                             </div>
+                                                            <div className="relative col-span-2 flex flex-wrap rounded-md">
+                                                                <div className="w-2/4 p-1">
+                                                                    <button
+                                                                        onClick={() => {
+                                                                            onChangeInput({
+                                                                                target: {
+                                                                                    id: "placeItems",
+                                                                                    name: "placeItems",
+                                                                                    value: "place-items-start"
+                                                                                }
+                                                                            })
+                                                                        }}
+                                                                        className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewport.type]?.placeItems === undefined || optionItem['settings' + viewport.type]?.placeItems === 'place-items-start') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                        <span className="px-2">Place Items Start</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div className="w-2/4 p-1">
+                                                                    <button
+                                                                        onClick={() => {
+                                                                            onChangeInput({
+                                                                                target: {
+                                                                                    id: "placeItems",
+                                                                                    name: "placeItems",
+                                                                                    value: "place-items-center"
+                                                                                }
+                                                                            })
+                                                                        }}
+                                                                        className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.placeItems === 'place-items-center' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                        <span className="px-2">Place Items Center</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div className="w-2/4 p-1">
+                                                                    <button
+                                                                        onClick={() => {
+                                                                            onChangeInput({
+                                                                                target: {
+                                                                                    id: "placeItems",
+                                                                                    name: "placeItems",
+                                                                                    value: "place-items-end"
+                                                                                }
+                                                                            })
+                                                                        }}
+                                                                        className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.placeItems === 'place-items-end' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                        <span className="px-2">Place Items End</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div className="w-2/4 p-1">
+                                                                    <button
+                                                                        onClick={() => {
+                                                                            onChangeInput({
+                                                                                target: {
+                                                                                    id: "placeItems",
+                                                                                    name: "placeItems",
+                                                                                    value: "place-items-stretch"
+                                                                                }
+                                                                            })
+                                                                        }}
+                                                                        className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.placeItems === 'place-items-stretch' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                        <span className="px-2">Place Items Stretch</span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     ) : ''
                                                 }
