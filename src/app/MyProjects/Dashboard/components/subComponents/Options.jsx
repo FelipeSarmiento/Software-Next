@@ -198,7 +198,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 gridCols: options['settings' + viewport.type].gridCols?.match(/\d+/g) ? options['settings' + viewport.type].gridCols?.match(/\d+/g).map(Number)[0] : "",
                 gridRows: options['settings' + viewport.type].gridRows?.match(/\d+/g) ? options['settings' + viewport.type].gridRows?.match(/\d+/g).map(Number)[0] : ""
             })
-            setZIndex(options['settings' + viewport.type]?.zIndex?.match(/\d+/g)  ? options['settings' + viewport.type].zIndex?.match(/\d+/g).map(Number)[0] : "")
+            setZIndex(options['settings' + viewport.type]?.zIndex?.match(/\d+/g) ? options['settings' + viewport.type].zIndex?.match(/\d+/g).map(Number)[0] : "")
 
         }
     }, [options, viewport]);
@@ -372,7 +372,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                         } else {
                                             setSpecificAttributes({
                                                 ...specificAttributes,
-                                                href: "" + value,
+                                                href: "internal|" + value,
                                                 hrefType: "internal"
                                             })
                                             onChangeInput({
@@ -385,13 +385,14 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                         }
                                     }
                                 }}
-                                onSearchChange={ setExternalLink }
-                                searchValue={ specificAttributes.href}
+                                onSearchChange={setExternalLink}
+                                searchable
+                                defaultSearchValue={specificAttributes.href?.includes("|") ? specificAttributes.href?.split("|")[1] : specificAttributes.href}
                                 allowDeselect={true}
-                                defaultValue={ specificAttributes.href }
+                                defaultValue={specificAttributes.href?.includes("|") ? specificAttributes.href?.split("|")[1] : specificAttributes.href}
                                 checkIconPosition="right"
-                                title={ specificAttributes.href }
-                                nothingFoundMessage={ <button onClick={ () => {
+                                title={specificAttributes.href}
+                                nothingFoundMessage={<button onClick={() => {
                                     setSpecificAttributes({
                                         ...specificAttributes,
                                         href: externalLink,
@@ -404,7 +405,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                             value: "external|" + externalLink
                                         }
                                     })
-                                }} className="w-full h-full text-white">External Link</button> }
+                                }} className="w-full h-full text-white">External Link</button>}
                             />
                         </div>
                     </div>
@@ -465,12 +466,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                             <div
                                 className="relative flex rounded-md border-[1px] border-white h-10 w-full">
                                 <div
-                                    className="w-[30%] flex space-x-1 items-center justify-center border-r-[1px] h-full">
-                                    <IconPhoto stroke={2}/>
-                                    <span className="text-xs font-bold">SRC</span>
-                                </div>
-                                <div
-                                    className="relative w-[70%] before:content-['Select'] before:top-2/4 before:left-2/4 before:-translate-x-2/4 before:-translate-y-2/4 before:absolute">
+                                    className="relative before:cursor-pointer w-[30%] before:content-['Select'] before:top-2/4 before:left-2/4 before:-translate-x-2/4 before:-translate-y-2/4 before:absolute">
                                     <input
                                         onChange={(e) => {
                                             e.preventDefault()
@@ -479,7 +475,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                             reader.onload = function () {
                                                 setSpecificAttributes({
                                                     ...specificAttributes,
-                                                    src: reader.result
+                                                    src: reader.result,
+                                                    srcName: e.target.files[0].name
                                                 })
                                                 onChangeInput({
                                                     target: {
@@ -499,6 +496,28 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                         type="file"
                                         accept="image/*"
                                         className="w-full rounded-r-md appearance-none opacity-0 focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                </div>
+                                <div
+                                    className="w-[70%] flex space-x-1 items-center justify-center border-l-[1px] h-full">
+                                    <input
+                                        onChange={(e) => {
+                                            setSpecificAttributes({
+                                                ...specificAttributes,
+                                                src: e.target.value,
+                                                srcName: e.target.value
+                                            })
+                                            onChangeInput({
+                                                target: {
+                                                    id: "valueInput",
+                                                    name: "src",
+                                                    value: e.target.value
+                                                }
+                                            })
+                                        }}
+                                        value={ specificAttributes.srcName }
+                                        type="text"
+                                        className="w-full h-full bg-black rounded-md focus:outline-none px-2 placeholder:text-white"
+                                        placeholder="or type an URL"/>
                                 </div>
                             </div>
                         </div>
@@ -666,7 +685,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 })
                                                             }
                                                         }
-                                                        value={ colorOptions.textColor }
+                                                        value={colorOptions.textColor}
                                                         min={0}
                                                         type="text"
                                                         placeholder="Type a Hex or RGBA Color"
@@ -723,7 +742,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ (optionItem['settings'+ viewport.type]?.textDecoration === undefined || optionItem['settings'+ viewport.type]?.textDecoration === 'no-underline' ) ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewport.type]?.textDecoration === undefined || optionItem['settings' + viewport.type]?.textDecoration === 'no-underline') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2">No underline</span>
                                                         </button>
                                                     </div>
@@ -738,7 +757,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings'+ viewport.type]?.textDecoration === 'underline' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.textDecoration === 'underline' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2 underline">Underline</span>
                                                         </button>
                                                     </div>
@@ -753,7 +772,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings'+ viewport.type]?.textDecoration === 'overline' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.textDecoration === 'overline' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2 overline">Overline</span>
                                                         </button>
                                                     </div>
@@ -768,7 +787,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings'+ viewport.type]?.textDecoration === 'line-through' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.textDecoration === 'line-through' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2 line-through">Line Through</span>
                                                         </button>
                                                     </div>
@@ -784,7 +803,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-3/6 flex items-center px-2 text-xs rounded-md border-2 py-1 ${(optionItem['settings'+ viewport.type]?.textWrap === 'text-wrap' || optionItem['settings'+ viewport.type]?.textWrap === undefined ) ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        className={`w-3/6 flex items-center px-2 text-xs rounded-md border-2 py-1 ${(optionItem['settings' + viewport.type]?.textWrap === 'text-wrap' || optionItem['settings' + viewport.type]?.textWrap === undefined) ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                         <IconTextWrap/>
                                                         <span className="px-2">Text Wrap</span>
                                                     </button>
@@ -798,7 +817,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-3/6 flex items-center px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings'+ viewport.type]?.textWrap === 'text-nowrap' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        className={`w-3/6 flex items-center px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.textWrap === 'text-nowrap' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                         <span>
                                                                             <IconTextWrapDisabled/>
                                                                         </span>
@@ -943,7 +962,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 })
                                                             }
                                                         }
-                                                        value={ colorOptions.backgroundColor }
+                                                        value={colorOptions.backgroundColor}
                                                         min={0}
                                                         type="text"
                                                         placeholder="Type a Hex or RGBA Color"
@@ -1324,7 +1343,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 })
                                                             }
                                                         }
-                                                        value={ colorOptions.borderColor }
+                                                        value={colorOptions.borderColor}
                                                         min={0}
                                                         type="text"
                                                         placeholder="Type a Hex or RGBA Color"
@@ -1662,7 +1681,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 MARGINS AND PADDINGS
                                                 MARGINS AND PADDINGS
                                                 */}
-                                                <div className="relative h-24 mt-6 mb-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
+                                                <div
+                                                    className="relative h-24 mt-6 mb-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
                                                     <div className="absolute left-2/4 -translate-x-2/4 -translate-y-2/4">
                                                         <div
                                                             className="relative flex rounded-md border-[1px] border-white h-10 w-20">
@@ -1718,7 +1738,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
+                                                    <div
+                                                        className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
                                                         <div
                                                             className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input
@@ -1889,9 +1910,11 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="relative h-24 mt-12 mb-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
+                                                <div
+                                                    className="relative h-24 mt-12 mb-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
                                                     <div className="absolute left-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setPaddings({
@@ -1944,8 +1967,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                    <div
+                                                        className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input onChange={({target}) => {
                                                                 setPaddings({
                                                                     ...paddings,
@@ -1997,11 +2022,13 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <span className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
+                                                    <span
+                                                        className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
                                                             Paddings
                                                         </span>
                                                     <div className="absolute top-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input onChange={({target}) => {
                                                                 setPaddings({
                                                                     ...paddings,
@@ -2053,8 +2080,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
-                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                    <div
+                                                        className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
+                                                        <div
+                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
                                                             <input onChange={({target}) => {
                                                                 setPaddings({
                                                                     ...paddings,
@@ -2279,7 +2308,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 {
                                                     display === 'grid' ? (
                                                         <div className="grid grid-cols-2 gap-2">
-                                                            <div className="relative flex rounded-md border-[1px] border-white h-10">
+                                                            <div
+                                                                className="relative flex rounded-md border-[1px] border-white h-10">
                                                                 <div
                                                                     className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                                     <span className="text-[12px] font-bold">Cols</span>
@@ -2306,7 +2336,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     type="number"
                                                                     className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             </div>
-                                                            <div className="relative flex rounded-md border-[1px] border-white h-10">
+                                                            <div
+                                                                className="relative flex rounded-md border-[1px] border-white h-10">
                                                                 <div
                                                                     className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                                     <span className="text-[12px] font-bold">Rows</span>
@@ -2333,7 +2364,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     type="number"
                                                                     className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             </div>
-                                                            <div className="relative flex rounded-md border-[1px] border-white h-10">
+                                                            <div
+                                                                className="relative flex rounded-md border-[1px] border-white h-10">
                                                                 <div
                                                                     className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                                     <span className="text-[12px] font-bold">Gap X</span>
@@ -2391,7 +2423,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 </select>
                                                             </div>
-                                                            <div className="relative flex rounded-md border-[1px] border-white h-10">
+                                                            <div
+                                                                className="relative flex rounded-md border-[1px] border-white h-10">
                                                                 <div
                                                                     className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                                     <span className="text-[12px] font-bold">Gap Y</span>
@@ -2687,7 +2720,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ (optionItem['settings'+ viewport.type]?.overflow === undefined || optionItem['settings'+ viewport.type]?.overflow === 'overflow-auto' ) ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewport.type]?.overflow === undefined || optionItem['settings' + viewport.type]?.overflow === 'overflow-auto') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2">Auto</span>
                                                         </button>
                                                     </div>
@@ -2702,7 +2735,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings'+ viewport.type]?.overflow === 'overflow-hidden' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.overflow === 'overflow-hidden' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2">Hidden</span>
                                                         </button>
                                                     </div>
@@ -2717,7 +2750,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings'+ viewport.type]?.overflow === 'overflow-visible' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.overflow === 'overflow-visible' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2">Visible</span>
                                                         </button>
                                                     </div>
@@ -2732,7 +2765,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings'+ viewport.type]?.overflow === 'overflow-scroll' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.overflow === 'overflow-scroll' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2">Scroll</span>
                                                         </button>
                                                     </div>
@@ -3059,7 +3092,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         Z INDEX
                                                         */}
                                                 <div className="grid grid-cols-1 gap-2 my-2">
-                                                    <div className="relative flex rounded-md border-[1px] border-white h-10">
+                                                    <div
+                                                        className="relative flex rounded-md border-[1px] border-white h-10">
                                                         <div
                                                             className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                             <span className="text-[12px] font-bold">Z Index</span>
@@ -3144,7 +3178,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ (optionItem['settings'+ viewport.type]?.objectFit === undefined || optionItem['settings'+ viewport.type]?.objectFit === 'object-none' ) ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewport.type]?.objectFit === undefined || optionItem['settings' + viewport.type]?.objectFit === 'object-none') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">None</span>
                                                             </button>
                                                         </div>
@@ -3159,7 +3193,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectFit === 'object-cover' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectFit === 'object-cover' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Cover</span>
                                                             </button>
                                                         </div>
@@ -3174,7 +3208,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectFit === 'object-contain' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectFit === 'object-contain' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Contain</span>
                                                             </button>
                                                         </div>
@@ -3189,7 +3223,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectFit === 'object-fill' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectFit === 'object-fill' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Fill</span>
                                                             </button>
                                                         </div>
@@ -3216,7 +3250,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ (optionItem['settings'+ viewport.type]?.objectPosition === undefined || optionItem['settings'+ viewport.type]?.objectPosition === '' ) ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewport.type]?.objectPosition === undefined || optionItem['settings' + viewport.type]?.objectPosition === '') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">None</span>
                                                             </button>
                                                         </div>
@@ -3231,7 +3265,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Top</span>
                                                             </button>
                                                         </div>
@@ -3246,7 +3280,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Bottom</span>
                                                             </button>
                                                         </div>
@@ -3261,7 +3295,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-right' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-right' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Right</span>
                                                             </button>
                                                         </div>
@@ -3276,7 +3310,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-left' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-left' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Left</span>
                                                             </button>
                                                         </div>
@@ -3291,7 +3325,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-center' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-center' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Center</span>
                                                             </button>
                                                         </div>
@@ -3306,7 +3340,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-left-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-left-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Left Top</span>
                                                             </button>
                                                         </div>
@@ -3321,7 +3355,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-left-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-left-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Left Bottom</span>
                                                             </button>
                                                         </div>
@@ -3336,7 +3370,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-right-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-right-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Right Top</span>
                                                             </button>
                                                         </div>
@@ -3351,7 +3385,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${ optionItem['settings'+ viewport.type]?.objectPosition === 'object-right-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-right-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Right Bottom</span>
                                                             </button>
                                                         </div>
