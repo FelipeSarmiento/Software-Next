@@ -146,6 +146,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                     value: options['settings' + viewport.type].minWidth?.match(/\d+/g) ? options['settings' + viewport.type].minWidth.match(/\d+/g).map(Number)[0] : "",
                     unit: options['settings' + viewport.type].minWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 },
+                maxWidth: {
+                    value: options['settings' + viewport.type].maxWidth?.match(/\d+/g) ? options['settings' + viewport.type].maxWidth.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].maxWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
                 height: {
                     value: options['settings' + viewport.type].height?.match(/\d+/g) ? options['settings' + viewport.type].height.match(/\d+/g).map(Number)[0] : "",
                     unit: options['settings' + viewport.type].height?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
@@ -153,6 +157,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 minHeight: {
                     value: options['settings' + viewport.type].minHeight?.match(/\d+/g) ? options['settings' + viewport.type].minHeight.match(/\d+/g).map(Number)[0] : "",
                     unit: options['settings' + viewport.type].minHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                maxHeight: {
+                    value: options['settings' + viewport.type].maxHeight?.match(/\d+/g) ? options['settings' + viewport.type].maxHeight.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].maxHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 },
             })
             setRounded({
@@ -1552,6 +1560,69 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         className="relative flex rounded-md border-[1px] border-white h-10 w-full">
                                                         <div
                                                             className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
+                                                            <IconArrowsVertical/>
+                                                            <span
+                                                                className="text-xs text-center font-bold">Max<br/>Height</span>
+                                                        </div>
+                                                        <input
+                                                            onChange={
+                                                                ({target}) => {
+                                                                    setSize({
+                                                                        ...size,
+                                                                        maxHeight: {
+                                                                            value: target.value,
+                                                                            unit: size.maxHeight.unit
+                                                                        }
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "size",
+                                                                            name: "maxHeight",
+                                                                            value: "max-h-[" + target.value + size.maxHeight.unit + "]"
+                                                                        }
+                                                                    })
+                                                                }
+                                                            }
+                                                            value={size.minHeight?.value}
+                                                            min={0}
+                                                            type="number"
+                                                            className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                        <select
+                                                            onChange={
+                                                                ({target}) => {
+                                                                    setSize({
+                                                                        ...size,
+                                                                        maxHeight: {
+                                                                            value: size.maxHeight.value,
+                                                                            unit: target.value
+                                                                        }
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "size",
+                                                                            name: "maxHeight",
+                                                                            value: "max-h-[" + size.maxHeight.value + target.value + "]"
+                                                                        }
+                                                                    })
+                                                                }
+                                                            }
+                                                            value={size.minHeight?.unit}
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                            name="" id="">
+                                                            {
+                                                                units.map((unit, index) => {
+                                                                    return (<option key={index * Math.random()}
+                                                                                    value={unit}>{unit}</option>)
+                                                                })
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div className="py-2 flex items-center relative h-max">
+                                                    <div
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                                        <div
+                                                            className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
                                                             <IconArrowsHorizontal/>
                                                             <span className="text-xs font-bold">Width</span>
                                                         </div>
@@ -1661,6 +1732,69 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             }
                                                             value={size.minWidth?.unit}
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                            name="" id="">
+                                                            {
+                                                                units.map((unit, index) => {
+                                                                    return (<option key={index * Math.random()}
+                                                                                    value={unit}>{unit}</option>)
+                                                                })
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div className="py-2 flex items-center relative h-max">
+                                                    <div
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                                        <div
+                                                            className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
+                                                            <span className="rotate-90"><IconArrowsVertical/></span>
+                                                            <span
+                                                                className="text-xs text-center font-bold">Max<br/>Width</span>
+                                                        </div>
+                                                        <input
+                                                            onChange={
+                                                                ({target}) => {
+                                                                    setSize({
+                                                                        ...size,
+                                                                        maxWidth: {
+                                                                            value: target.value,
+                                                                            unit: size.maxWidth.unit
+                                                                        }
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "size",
+                                                                            name: "maxWidth",
+                                                                            value: "max-w-[" + target.value + size.maxWidth.unit + "]"
+                                                                        }
+                                                                    })
+                                                                }
+                                                            }
+                                                            value={size.maxWidth?.value}
+                                                            min={0}
+                                                            type="number"
+                                                            className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                        <select
+                                                            onChange={
+                                                                ({target}) => {
+                                                                    setSize({
+                                                                        ...size,
+                                                                        maxWidth: {
+                                                                            value: size.maxWidth.value,
+                                                                            unit: target.value
+                                                                        }
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "size",
+                                                                            name: "maxWidth",
+                                                                            value: "max-w-[" + size.maxWidth.value + target.value + "]"
+                                                                        }
+                                                                    })
+                                                                }
+                                                            }
+                                                            value={size.maxWidth?.unit}
                                                             className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
