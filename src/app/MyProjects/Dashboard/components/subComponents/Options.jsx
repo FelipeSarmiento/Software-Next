@@ -27,18 +27,26 @@ import {
 import {ColorInput, ColorPicker, NumberInput, Select} from "@mantine/core";
 
 export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, pages}) => {
+
     const units = ['auto', 'px', 'rem', 'vw', 'vh', '%'];
 
+    const [optionItem, setOptionItem] = useState(options);
+    const [viewportState, setViewportState] = useState(viewport);
+
+    useEffect(() => {
+        updateViewport(viewport)
+    }, [viewport]);
+
     const onChangeInput = ({target}) => {
-        let option = optionItem;
+        let option;
         switch (target.id) {
             case 'valueInput':
                 option = {
                     ...optionItem,
                     [target.name]: target.value
                 }
-                setOptionItem(option)
                 modifyItemsDashboard(option.idUniqueIdentifier, option)
+                updateOptionItem(option)
                 break
             default:
                 if (keepOptions) {
@@ -50,178 +58,34 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                         settingsDesktop: {...optionItem.settingsDesktop, [target.name]: target.value},
                         settingsTV: {...optionItem.settingsTV, [target.name]: target.value}
                     }
-                    setOptionItem(option)
+                    console.log("option", option)
                     modifyItemsDashboard(option.idUniqueIdentifier, option)
+                    updateOptionItem(option)
                 } else {
                     option = {
                         ...optionItem,
-                        ['settings' + viewport.type]: {
-                            ...optionItem['settings' + viewport.type],
+                        ['settings' + viewportState.type]: {
+                            ...optionItem['settings' + viewportState.type],
                             [target.name]: target.value
                         }
                     }
-                    setOptionItem(option)
                     modifyItemsDashboard(option.idUniqueIdentifier, option)
+                    updateOptionItem(option)
                 }
                 break
         }
     }
 
     useEffect(() => {
-        setOptionItem(options);
-        if (options !== undefined) {
-            setColorOptions({
-                textColor: options['settings' + viewport.type].textColor?.split("-")[1].replace("[", "").replace("]", ""),
-                borderColor: options['settings' + viewport.type].borderColor?.split("-")[1].replace("[", "").replace("]", ""),
-                backgroundColor: options['settings' + viewport.type].backgroundColor?.split("-")[1].replace("[", "").replace("]", ""),
-                decorationColor: options['settings' + viewport.type].decorationColor?.split("-")[1].replace("[", "").replace("]", ""),
-            })
-            setSpecificAttributes({
-                text: options?.text,
-                src: options?.src,
-                alt: options?.alt,
-                href: options?.href
-            })
+        console.log("optionItemChange", optionItem)
+    }, [optionItem]);
+    useEffect(() => {
+        console.log("options", options)
+    }, [options]);
 
-            setBorderWidth({
-                borderRight: {
-                    value: options['settings' + viewport.type].borderRight?.match(/\d+/g) ? options['settings' + viewport.type].borderRight.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].borderRight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                borderLeft: {
-                    value: options['settings' + viewport.type].borderLeft?.match(/\d+/g) ? options['settings' + viewport.type].borderLeft.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].borderLeft?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                borderTop: {
-                    value: options['settings' + viewport.type].borderTop?.match(/\d+/g) ? options['settings' + viewport.type].borderTop.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].borderTop?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                borderBottom: {
-                    value: options['settings' + viewport.type].borderBottom?.match(/\d+/g) ? options['settings' + viewport.type].borderBottom.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].borderBottom?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                }
-            })
-            setPaddings({
-                paddingRight: {
-                    value: options['settings' + viewport.type].paddingRight?.match(/\d+/g) ? options['settings' + viewport.type].paddingRight.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].paddingRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                paddingLeft: {
-                    value: options['settings' + viewport.type].paddingLeft?.match(/\d+/g) ? options['settings' + viewport.type].paddingLeft.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].paddingLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                paddingTop: {
-                    value: options['settings' + viewport.type].paddingTop?.match(/\d+/g) ? options['settings' + viewport.type].paddingTop.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].paddingTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                paddingBottom: {
-                    value: options['settings' + viewport.type].paddingBottom?.match(/\d+/g) ? options['settings' + viewport.type].paddingBottom.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].paddingBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                }
-            })
-            setMargins({
-                marginRight: {
-                    value: options['settings' + viewport.type].marginRight?.match(/\d+/g) ? options['settings' + viewport.type].marginRight.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].marginRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                marginLeft: {
-                    value: options['settings' + viewport.type].marginLeft?.match(/\d+/g) ? options['settings' + viewport.type].marginLeft.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].marginLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                marginTop: {
-                    value: options['settings' + viewport.type].marginTop?.match(/\d+/g) ? options['settings' + viewport.type].marginTop.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].marginTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                marginBottom: {
-                    value: options['settings' + viewport.type].marginBottom?.match(/\d+/g) ? options['settings' + viewport.type].marginBottom.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].marginBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                }
-            })
-            setSize({
-                width: {
-                    value: options['settings' + viewport.type].width?.match(/\d+/g) ? options['settings' + viewport.type].width.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].width?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                minWidth: {
-                    value: options['settings' + viewport.type].minWidth?.match(/\d+/g) ? options['settings' + viewport.type].minWidth.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].minWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                maxWidth: {
-                    value: options['settings' + viewport.type].maxWidth?.match(/\d+/g) ? options['settings' + viewport.type].maxWidth.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].maxWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                height: {
-                    value: options['settings' + viewport.type].height?.match(/\d+/g) ? options['settings' + viewport.type].height.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].height?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                minHeight: {
-                    value: options['settings' + viewport.type].minHeight?.match(/\d+/g) ? options['settings' + viewport.type].minHeight.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].minHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                maxHeight: {
-                    value: options['settings' + viewport.type].maxHeight?.match(/\d+/g) ? options['settings' + viewport.type].maxHeight.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].maxHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-            })
-            setRounded({
-                value: options['settings' + viewport.type].borderRadius?.match(/\d+/g) ? options['settings' + viewport.type].borderRadius.match(/\d+/g).map(Number)[0] : "",
-                unit: options['settings' + viewport.type].borderRadius?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-            })
-            setFontSize({
-                value: options['settings' + viewport.type]?.textSize?.match(/\d+/g) ? options['settings' + viewport.type].textSize.match(/\d+/g).map(Number)[0] : "",
-                unit: options['settings' + viewport.type]?.textSize?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-            })
-            setDisplay(options['settings' + viewport.type]?.display)
-            setFlexDirection(options['settings' + viewport.type]?.flexDirection)
-            setFlexWrap(options['settings' + viewport.type]?.flexWrap)
-            setPositions({
-                top: {
-                    value: options['settings' + viewport.type].top?.match(/\d+/g) ? options['settings' + viewport.type].top.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].top?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                left: {
-                    value: options['settings' + viewport.type].left?.match(/\d+/g) ? options['settings' + viewport.type].left.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].left?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                right: {
-                    value: options['settings' + viewport.type].right?.match(/\d+/g) ? options['settings' + viewport.type].right.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].right?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                bottom: {
-                    value: options['settings' + viewport.type].bottom?.match(/\d+/g) ? options['settings' + viewport.type].bottom.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].bottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                }
-            })
-            setGaps({
-                gapX: {
-                    value: options['settings' + viewport.type].gapX?.match(/\d+/g) ? options['settings' + viewport.type].gapX?.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].gapX?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                gapY: {
-                    value: options['settings' + viewport.type].gapY?.match(/\d+/g) ? options['settings' + viewport.type].gapY?.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].gapY?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-            })
-            setSpaces({
-                spaceX: {
-                    value: options['settings' + viewport.type].spaceX?.match(/\d+/g) ? options['settings' + viewport.type].spaceX?.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].spaceX?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-                spaceY: {
-                    value: options['settings' + viewport.type].spaceY?.match(/\d+/g) ? options['settings' + viewport.type].spaceY?.match(/\d+/g).map(Number)[0] : "",
-                    unit: options['settings' + viewport.type].spaceY?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
-                },
-            })
-            setGridTemplate({
-                gridCols: options['settings' + viewport.type].gridCols?.match(/\d+/g) ? options['settings' + viewport.type].gridCols?.match(/\d+/g).map(Number)[0] : "",
-                gridRows: options['settings' + viewport.type].gridRows?.match(/\d+/g) ? options['settings' + viewport.type].gridRows?.match(/\d+/g).map(Number)[0] : ""
-            })
-            setZIndex(options['settings' + viewport.type]?.zIndex?.match(/\d+/g) ? options['settings' + viewport.type].zIndex?.match(/\d+/g).map(Number)[0] : "")
-
-        }
-    }, [options, viewport])
-
-    const [optionItem, setOptionItem] = useState(options);
+    useEffect(() => {
+        updateOptionItem(options)
+    }, [options])
     const [colorOptions, setColorOptions] = useState({})
     const [specificAttributes, setSpecificAttributes] = useState({
         text: "",
@@ -594,7 +458,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 ) : ""}
 
 
-                {optionItem.hasOwnProperty("settings" + viewport.type) ? (
+                {optionItem.hasOwnProperty("settings" + viewportState.type) ? (
                     <>
                         {/*
                         TEXT SETTINGS
@@ -738,7 +602,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 />
                                                 <span className="text-white">Font Weight</span>
                                                 <select onChange={onChangeInput}
-                                                        value={optionItem['settings' + viewport.type].textWeight}
+                                                        value={optionItem['settings' + viewportState.type].textWeight}
                                                         id="FontWeight" name="textWeight"
                                                         className="appearance-none rounded-md py-1 border-2 border-gray-500 bg-black text-white px-1 w-full focus:outline-none">
                                                     <option value="font-light">Light</option>
@@ -761,7 +625,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewport.type]?.textDecoration === undefined || optionItem['settings' + viewport.type]?.textDecoration === 'no-underline') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewportState.type]?.textDecoration === undefined || optionItem['settings' + viewportState.type]?.textDecoration === 'no-underline') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2">No underline</span>
                                                         </button>
                                                     </div>
@@ -776,7 +640,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.textDecoration === 'underline' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type]?.textDecoration === 'underline' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2 underline">Underline</span>
                                                         </button>
                                                     </div>
@@ -791,7 +655,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.textDecoration === 'overline' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type]?.textDecoration === 'overline' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2 overline">Overline</span>
                                                         </button>
                                                     </div>
@@ -806,7 +670,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.textDecoration === 'line-through' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type]?.textDecoration === 'line-through' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2 line-through">Line Through</span>
                                                         </button>
                                                     </div>
@@ -822,7 +686,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-3/6 flex items-center px-2 text-xs rounded-md border-2 py-1 ${(optionItem['settings' + viewport.type]?.textWrap === 'text-wrap' || optionItem['settings' + viewport.type]?.textWrap === undefined) ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        className={`w-3/6 flex items-center px-2 text-xs rounded-md border-2 py-1 ${(optionItem['settings' + viewportState.type]?.textWrap === 'text-wrap' || optionItem['settings' + viewportState.type]?.textWrap === undefined) ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                         <IconTextWrap/>
                                                         <span className="px-2">Text Wrap</span>
                                                     </button>
@@ -836,7 +700,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-3/6 flex items-center px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.textWrap === 'text-nowrap' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        className={`w-3/6 flex items-center px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type]?.textWrap === 'text-nowrap' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                         <span>
                                                                             <IconTextWrapDisabled/>
                                                                         </span>
@@ -861,7 +725,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`text-center ${(optionItem['settings' + viewport.type].textAlign === 'text-left' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`text-center ${(optionItem['settings' + viewportState.type].textAlign === 'text-left' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="Left">
                                                             <IconAlignLeft/>
                                                         </button>
@@ -875,7 +739,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`text-center ${(optionItem['settings' + viewport.type].textAlign === 'text-center' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`text-center ${(optionItem['settings' + viewportState.type].textAlign === 'text-center' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="Center">
                                                             <IconAlignCenter/>
                                                         </button>
@@ -889,7 +753,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`text-center ${(optionItem['settings' + viewport.type].textAlign === 'text-right' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`text-center ${(optionItem['settings' + viewportState.type].textAlign === 'text-right' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="Right">
                                                             <IconAlignRight/>
                                                         </button>
@@ -903,7 +767,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`text-center ${(optionItem['settings' + viewport.type].textAlign === 'text-justify' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`text-center ${(optionItem['settings' + viewportState.type].textAlign === 'text-justify' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="Justify">
                                                             <IconAlignJustified/>
                                                         </button>
@@ -917,7 +781,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`text-center ${(optionItem['settings' + viewport.type].textAlign === '' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`text-center ${(optionItem['settings' + viewportState.type].textAlign === '' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="NONE">
                                                             <IconSquareX/>
                                                         </button>
@@ -2521,7 +2385,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                                 }
                                                                             })
                                                                         }}
-                                                                        className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewport.type]?.placeItems === undefined || optionItem['settings' + viewport.type]?.placeItems === 'place-items-start') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                        className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewportState.type]?.placeItems === undefined || optionItem['settings' + viewportState.type]?.placeItems === 'place-items-start') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                         <span className="px-2">Place Items Start</span>
                                                                     </button>
                                                                 </div>
@@ -2536,7 +2400,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                                 }
                                                                             })
                                                                         }}
-                                                                        className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.placeItems === 'place-items-center' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                        className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type]?.placeItems === 'place-items-center' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                         <span className="px-2">Place Items Center</span>
                                                                     </button>
                                                                 </div>
@@ -2551,7 +2415,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                                 }
                                                                             })
                                                                         }}
-                                                                        className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.placeItems === 'place-items-end' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                        className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type]?.placeItems === 'place-items-end' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                         <span className="px-2">Place Items End</span>
                                                                     </button>
                                                                 </div>
@@ -2566,7 +2430,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                                 }
                                                                             })
                                                                         }}
-                                                                        className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.placeItems === 'place-items-stretch' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                        className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type]?.placeItems === 'place-items-stretch' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                         <span className="px-2">Place Items Stretch</span>
                                                                     </button>
                                                                 </div>
@@ -2836,7 +2700,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`text-center ${(optionItem['settings' + viewport.type].itemsAlign === 'items-start' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`text-center ${(optionItem['settings' + viewportState.type].itemsAlign === 'items-start' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="Top">
                                                             <IconAlignBoxCenterTop/>
                                                         </button>
@@ -2850,7 +2714,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`text-center ${(optionItem['settings' + viewport.type].itemsAlign === 'items-center' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`text-center ${(optionItem['settings' + viewportState.type].itemsAlign === 'items-center' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="Center">
                                                             <IconAlignBoxCenterMiddle/>
                                                         </button>
@@ -2864,7 +2728,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`text-center ${(optionItem['settings' + viewport.type].itemsAlign === 'items-end' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`text-center ${(optionItem['settings' + viewportState.type].itemsAlign === 'items-end' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="Bottom">
                                                             <IconAlignBoxCenterBottom/>
                                                         </button>
@@ -2878,7 +2742,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`text-center ${(optionItem['settings' + viewport.type].itemsAlign === 'items-stretch' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`text-center ${(optionItem['settings' + viewportState.type].itemsAlign === 'items-stretch' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="Stretch">
                                                             <IconAlignBoxCenterStretch/>
                                                         </button>
@@ -2892,7 +2756,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`text-center ${(optionItem['settings' + viewport.type].itemsAlign === 'items-baseline' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`text-center ${(optionItem['settings' + viewportState.type].itemsAlign === 'items-baseline' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="Baseline">
                                                             <IconAlignBoxCenterStretch/>
                                                         </button>
@@ -2907,7 +2771,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`text-center ${(optionItem['settings' + viewport.type].itemsAlign === '' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`text-center ${(optionItem['settings' + viewportState.type].itemsAlign === '' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="NONE">
                                                             <IconSquareX/>
                                                         </button>
@@ -2930,7 +2794,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`text-center ${(optionItem['settings' + viewport.type].justifyContent === 'justify-start' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`text-center ${(optionItem['settings' + viewportState.type].justifyContent === 'justify-start' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="Left">
                                                             <IconAlignBoxLeftMiddle/>
                                                         </button>
@@ -2944,7 +2808,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`text-center ${(optionItem['settings' + viewport.type].justifyContent === 'justify-center' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`text-center ${(optionItem['settings' + viewportState.type].justifyContent === 'justify-center' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="Center">
                                                             <IconAlignBoxCenterMiddle/>
                                                         </button>
@@ -2958,7 +2822,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`text-center ${(optionItem['settings' + viewport.type].justifyContent === 'justify-end' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`text-center ${(optionItem['settings' + viewportState.type].justifyContent === 'justify-end' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="Right">
                                                             <IconAlignBoxRightMiddle/>
                                                         </button>
@@ -2972,7 +2836,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`rotate-90 text-center ${(optionItem['settings' + viewport.type].justifyContent === 'justify-around' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`rotate-90 text-center ${(optionItem['settings' + viewportState.type].justifyContent === 'justify-around' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="Around">
                                                             <IconAlignBoxCenterStretch/>
                                                         </button>
@@ -2986,7 +2850,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`rotate-90 text-center ${(optionItem['settings' + viewport.type].justifyContent === 'justify-between' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`rotate-90 text-center ${(optionItem['settings' + viewportState.type].justifyContent === 'justify-between' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="Between">
                                                             <IconAlignBoxCenterStretch/>
                                                         </button>
@@ -3000,7 +2864,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`rotate-90 text-center ${(optionItem['settings' + viewport.type].justifyContent === 'justify-evenly' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`rotate-90 text-center ${(optionItem['settings' + viewportState.type].justifyContent === 'justify-evenly' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="Evenly">
                                                             <IconAlignBoxCenterStretch/>
                                                         </button>
@@ -3014,7 +2878,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`text-center ${(optionItem['settings' + viewport.type].justifyContent === '' ? 'text-cyan-400' : 'text-white')}`}
+                                                            className={`text-center ${(optionItem['settings' + viewportState.type].justifyContent === '' ? 'text-cyan-400' : 'text-white')}`}
                                                             title="NONE">
                                                             <IconSquareX/>
                                                         </button>
@@ -3045,7 +2909,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewport.type]?.overflow === undefined || optionItem['settings' + viewport.type]?.overflow === 'overflow-auto') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewportState.type]?.overflow === undefined || optionItem['settings' + viewportState.type]?.overflow === 'overflow-auto') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2">Auto</span>
                                                         </button>
                                                     </div>
@@ -3060,7 +2924,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.overflow === 'overflow-hidden' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type]?.overflow === 'overflow-hidden' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2">Hidden</span>
                                                         </button>
                                                     </div>
@@ -3075,7 +2939,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.overflow === 'overflow-visible' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type]?.overflow === 'overflow-visible' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2">Visible</span>
                                                         </button>
                                                     </div>
@@ -3090,7 +2954,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewport.type]?.overflow === 'overflow-scroll' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type]?.overflow === 'overflow-scroll' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2">Scroll</span>
                                                         </button>
                                                     </div>
@@ -3117,7 +2981,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'relative' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type].position === 'relative' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                         <span className="px-2">Relative</span>
                                                     </button>
                                                     <button
@@ -3130,7 +2994,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'absolute' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type].position === 'absolute' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                         <span className="px-2">Absolute</span>
                                                     </button>
                                                     <button
@@ -3143,7 +3007,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'sticky' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type].position === 'sticky' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                         <span className="px-2">Sticky</span>
                                                     </button>
                                                     <button
@@ -3156,7 +3020,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewport.type].position === 'static' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type].position === 'static' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                         <span className="px-2">Static</span>
                                                     </button>
                                                 </div>
@@ -3503,7 +3367,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewport.type]?.objectFit === undefined || optionItem['settings' + viewport.type]?.objectFit === 'object-none') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewportState.type]?.objectFit === undefined || optionItem['settings' + viewportState.type]?.objectFit === 'object-none') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">None</span>
                                                             </button>
                                                         </div>
@@ -3518,7 +3382,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectFit === 'object-cover' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectFit === 'object-cover' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Cover</span>
                                                             </button>
                                                         </div>
@@ -3533,7 +3397,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectFit === 'object-contain' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectFit === 'object-contain' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Contain</span>
                                                             </button>
                                                         </div>
@@ -3548,7 +3412,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectFit === 'object-fill' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectFit === 'object-fill' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Fill</span>
                                                             </button>
                                                         </div>
@@ -3575,7 +3439,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewport.type]?.objectPosition === undefined || optionItem['settings' + viewport.type]?.objectPosition === '') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewportState.type]?.objectPosition === undefined || optionItem['settings' + viewportState.type]?.objectPosition === '') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">None</span>
                                                             </button>
                                                         </div>
@@ -3590,7 +3454,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Top</span>
                                                             </button>
                                                         </div>
@@ -3605,7 +3469,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Bottom</span>
                                                             </button>
                                                         </div>
@@ -3620,7 +3484,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-right' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-right' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Right</span>
                                                             </button>
                                                         </div>
@@ -3635,7 +3499,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-left' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-left' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Left</span>
                                                             </button>
                                                         </div>
@@ -3650,7 +3514,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-center' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-center' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Center</span>
                                                             </button>
                                                         </div>
@@ -3665,7 +3529,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-left-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-left-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Left Top</span>
                                                             </button>
                                                         </div>
@@ -3680,7 +3544,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-left-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-left-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Left Bottom</span>
                                                             </button>
                                                         </div>
@@ -3695,7 +3559,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-right-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-right-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Right Top</span>
                                                             </button>
                                                         </div>
@@ -3710,7 +3574,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewport.type]?.objectPosition === 'object-right-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-right-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Right Bottom</span>
                                                             </button>
                                                         </div>
@@ -3734,4 +3598,311 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 </p>
             </Disclosure>
         ))
+
+    function updateOptionItem(newOption) {
+        setOptionItem(newOption)
+        if (newOption !== undefined) {
+            setColorOptions({
+                textColor: newOption['settings' + viewportState.type].textColor?.split("-")[1].replace("[", "").replace("]", ""),
+                borderColor: newOption['settings' + viewportState.type].borderColor?.split("-")[1].replace("[", "").replace("]", ""),
+                backgroundColor: newOption['settings' + viewportState.type].backgroundColor?.split("-")[1].replace("[", "").replace("]", ""),
+                decorationColor: newOption['settings' + viewportState.type].decorationColor?.split("-")[1].replace("[", "").replace("]", ""),
+            })
+            setSpecificAttributes({
+                text: newOption?.text,
+                src: newOption?.src,
+                alt: newOption?.alt,
+                href: newOption?.href
+            })
+
+            setBorderWidth({
+                borderRight: {
+                    value: newOption['settings' + viewportState.type].borderRight?.match(/\d+/g) ? newOption['settings' + viewportState.type].borderRight.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].borderRight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                borderLeft: {
+                    value: newOption['settings' + viewportState.type].borderLeft?.match(/\d+/g) ? newOption['settings' + viewportState.type].borderLeft.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].borderLeft?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                borderTop: {
+                    value: newOption['settings' + viewportState.type].borderTop?.match(/\d+/g) ? newOption['settings' + viewportState.type].borderTop.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].borderTop?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                borderBottom: {
+                    value: newOption['settings' + viewportState.type].borderBottom?.match(/\d+/g) ? newOption['settings' + viewportState.type].borderBottom.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].borderBottom?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                }
+            })
+            setPaddings({
+                paddingRight: {
+                    value: newOption['settings' + viewportState.type].paddingRight?.match(/\d+/g) ? newOption['settings' + viewportState.type].paddingRight.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].paddingRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                paddingLeft: {
+                    value: newOption['settings' + viewportState.type].paddingLeft?.match(/\d+/g) ? newOption['settings' + viewportState.type].paddingLeft.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].paddingLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                paddingTop: {
+                    value: newOption['settings' + viewportState.type].paddingTop?.match(/\d+/g) ? newOption['settings' + viewportState.type].paddingTop.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].paddingTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                paddingBottom: {
+                    value: newOption['settings' + viewportState.type].paddingBottom?.match(/\d+/g) ? newOption['settings' + viewportState.type].paddingBottom.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].paddingBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                }
+            })
+            setMargins({
+                marginRight: {
+                    value: newOption['settings' + viewportState.type].marginRight?.match(/\d+/g) ? newOption['settings' + viewportState.type].marginRight.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].marginRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                marginLeft: {
+                    value: newOption['settings' + viewportState.type].marginLeft?.match(/\d+/g) ? newOption['settings' + viewportState.type].marginLeft.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].marginLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                marginTop: {
+                    value: newOption['settings' + viewportState.type].marginTop?.match(/\d+/g) ? newOption['settings' + viewportState.type].marginTop.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].marginTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                marginBottom: {
+                    value: newOption['settings' + viewportState.type].marginBottom?.match(/\d+/g) ? newOption['settings' + viewportState.type].marginBottom.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].marginBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                }
+            })
+            setSize({
+                width: {
+                    value: newOption['settings' + viewportState.type].width?.match(/\d+/g) ? newOption['settings' + viewportState.type].width.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].width?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                minWidth: {
+                    value: newOption['settings' + viewportState.type].minWidth?.match(/\d+/g) ? newOption['settings' + viewportState.type].minWidth.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].minWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                maxWidth: {
+                    value: newOption['settings' + viewportState.type].maxWidth?.match(/\d+/g) ? newOption['settings' + viewportState.type].maxWidth.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].maxWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                height: {
+                    value: newOption['settings' + viewportState.type].height?.match(/\d+/g) ? newOption['settings' + viewportState.type].height.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].height?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                minHeight: {
+                    value: newOption['settings' + viewportState.type].minHeight?.match(/\d+/g) ? newOption['settings' + viewportState.type].minHeight.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].minHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                maxHeight: {
+                    value: newOption['settings' + viewportState.type].maxHeight?.match(/\d+/g) ? newOption['settings' + viewportState.type].maxHeight.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].maxHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+            })
+            setRounded({
+                value: newOption['settings' + viewportState.type].borderRadius?.match(/\d+/g) ? newOption['settings' + viewportState.type].borderRadius.match(/\d+/g).map(Number)[0] : "",
+                unit: newOption['settings' + viewportState.type].borderRadius?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+            })
+            setFontSize({
+                value: newOption['settings' + viewportState.type]?.textSize?.match(/\d+/g) ? newOption['settings' + viewportState.type].textSize.match(/\d+/g).map(Number)[0] : "",
+                unit: newOption['settings' + viewportState.type]?.textSize?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+            })
+            setDisplay(newOption['settings' + viewportState.type]?.display)
+            setFlexDirection(newOption['settings' + viewportState.type]?.flexDirection)
+            setFlexWrap(newOption['settings' + viewportState.type]?.flexWrap)
+            setPositions({
+                top: {
+                    value: newOption['settings' + viewportState.type].top?.match(/\d+/g) ? newOption['settings' + viewportState.type].top.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].top?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                left: {
+                    value: newOption['settings' + viewportState.type].left?.match(/\d+/g) ? newOption['settings' + viewportState.type].left.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].left?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                right: {
+                    value: newOption['settings' + viewportState.type].right?.match(/\d+/g) ? newOption['settings' + viewportState.type].right.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].right?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                bottom: {
+                    value: newOption['settings' + viewportState.type].bottom?.match(/\d+/g) ? newOption['settings' + viewportState.type].bottom.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].bottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                }
+            })
+            setGaps({
+                gapX: {
+                    value: newOption['settings' + viewportState.type].gapX?.match(/\d+/g) ? newOption['settings' + viewportState.type].gapX?.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].gapX?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                gapY: {
+                    value: newOption['settings' + viewportState.type].gapY?.match(/\d+/g) ? newOption['settings' + viewportState.type].gapY?.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].gapY?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+            })
+            setSpaces({
+                spaceX: {
+                    value: newOption['settings' + viewportState.type].spaceX?.match(/\d+/g) ? newOption['settings' + viewportState.type].spaceX?.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].spaceX?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                spaceY: {
+                    value: newOption['settings' + viewportState.type].spaceY?.match(/\d+/g) ? newOption['settings' + viewportState.type].spaceY?.match(/\d+/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].spaceY?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+            })
+            setGridTemplate({
+                gridCols: newOption['settings' + viewportState.type].gridCols?.match(/\d+/g) ? newOption['settings' + viewportState.type].gridCols?.match(/\d+/g).map(Number)[0] : "",
+                gridRows: newOption['settings' + viewportState.type].gridRows?.match(/\d+/g) ? newOption['settings' + viewportState.type].gridRows?.match(/\d+/g).map(Number)[0] : ""
+            })
+            setZIndex(newOption['settings' + viewportState.type]?.zIndex?.match(/\d+/g) ? newOption['settings' + viewportState.type].zIndex?.match(/\d+/g).map(Number)[0] : "")
+
+        }
+    }
+    function updateViewport(newViewport) {
+        setViewportState(newViewport)
+        if (optionItem !== undefined) {
+            setColorOptions({
+                textColor: optionItem['settings' + newViewport.type].textColor?.split("-")[1].replace("[", "").replace("]", ""),
+                borderColor: optionItem['settings' + newViewport.type].borderColor?.split("-")[1].replace("[", "").replace("]", ""),
+                backgroundColor: optionItem['settings' + newViewport.type].backgroundColor?.split("-")[1].replace("[", "").replace("]", ""),
+                decorationColor: optionItem['settings' + newViewport.type].decorationColor?.split("-")[1].replace("[", "").replace("]", ""),
+            })
+            setSpecificAttributes({
+                text: optionItem?.text,
+                src: optionItem?.src,
+                alt: optionItem?.alt,
+                href: optionItem?.href
+            })
+
+            setBorderWidth({
+                borderRight: {
+                    value: optionItem['settings' + newViewport.type].borderRight?.match(/\d+/g) ? optionItem['settings' + newViewport.type].borderRight.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].borderRight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                borderLeft: {
+                    value: optionItem['settings' + newViewport.type].borderLeft?.match(/\d+/g) ? optionItem['settings' + newViewport.type].borderLeft.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].borderLeft?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                borderTop: {
+                    value: optionItem['settings' + newViewport.type].borderTop?.match(/\d+/g) ? optionItem['settings' + newViewport.type].borderTop.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].borderTop?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                borderBottom: {
+                    value: optionItem['settings' + newViewport.type].borderBottom?.match(/\d+/g) ? optionItem['settings' + newViewport.type].borderBottom.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].borderBottom?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                }
+            })
+            setPaddings({
+                paddingRight: {
+                    value: optionItem['settings' + newViewport.type].paddingRight?.match(/\d+/g) ? optionItem['settings' + newViewport.type].paddingRight.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].paddingRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                paddingLeft: {
+                    value: optionItem['settings' + newViewport.type].paddingLeft?.match(/\d+/g) ? optionItem['settings' + newViewport.type].paddingLeft.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].paddingLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                paddingTop: {
+                    value: optionItem['settings' + newViewport.type].paddingTop?.match(/\d+/g) ? optionItem['settings' + newViewport.type].paddingTop.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].paddingTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                paddingBottom: {
+                    value: optionItem['settings' + newViewport.type].paddingBottom?.match(/\d+/g) ? optionItem['settings' + newViewport.type].paddingBottom.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].paddingBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                }
+            })
+            setMargins({
+                marginRight: {
+                    value: optionItem['settings' + newViewport.type].marginRight?.match(/\d+/g) ? optionItem['settings' + newViewport.type].marginRight.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].marginRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                marginLeft: {
+                    value: optionItem['settings' + newViewport.type].marginLeft?.match(/\d+/g) ? optionItem['settings' + newViewport.type].marginLeft.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].marginLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                marginTop: {
+                    value: optionItem['settings' + newViewport.type].marginTop?.match(/\d+/g) ? optionItem['settings' + newViewport.type].marginTop.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].marginTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                marginBottom: {
+                    value: optionItem['settings' + newViewport.type].marginBottom?.match(/\d+/g) ? optionItem['settings' + newViewport.type].marginBottom.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].marginBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                }
+            })
+            setSize({
+                width: {
+                    value: optionItem['settings' + newViewport.type].width?.match(/\d+/g) ? optionItem['settings' + newViewport.type].width.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].width?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                minWidth: {
+                    value: optionItem['settings' + newViewport.type].minWidth?.match(/\d+/g) ? optionItem['settings' + newViewport.type].minWidth.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].minWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                maxWidth: {
+                    value: optionItem['settings' + newViewport.type].maxWidth?.match(/\d+/g) ? optionItem['settings' + newViewport.type].maxWidth.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].maxWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                height: {
+                    value: optionItem['settings' + newViewport.type].height?.match(/\d+/g) ? optionItem['settings' + newViewport.type].height.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].height?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                minHeight: {
+                    value: optionItem['settings' + newViewport.type].minHeight?.match(/\d+/g) ? optionItem['settings' + newViewport.type].minHeight.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].minHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                maxHeight: {
+                    value: optionItem['settings' + newViewport.type].maxHeight?.match(/\d+/g) ? optionItem['settings' + newViewport.type].maxHeight.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].maxHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+            })
+            setRounded({
+                value: optionItem['settings' + newViewport.type].borderRadius?.match(/\d+/g) ? optionItem['settings' + newViewport.type].borderRadius.match(/\d+/g).map(Number)[0] : "",
+                unit: optionItem['settings' + newViewport.type].borderRadius?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+            })
+            setFontSize({
+                value: optionItem['settings' + newViewport.type]?.textSize?.match(/\d+/g) ? optionItem['settings' + newViewport.type].textSize.match(/\d+/g).map(Number)[0] : "",
+                unit: optionItem['settings' + newViewport.type]?.textSize?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+            })
+            setDisplay(optionItem['settings' + newViewport.type]?.display)
+            setFlexDirection(optionItem['settings' + newViewport.type]?.flexDirection)
+            setFlexWrap(optionItem['settings' + newViewport.type]?.flexWrap)
+            setPositions({
+                top: {
+                    value: optionItem['settings' + newViewport.type].top?.match(/\d+/g) ? optionItem['settings' + newViewport.type].top.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].top?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                left: {
+                    value: optionItem['settings' + newViewport.type].left?.match(/\d+/g) ? optionItem['settings' + newViewport.type].left.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].left?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                right: {
+                    value: optionItem['settings' + newViewport.type].right?.match(/\d+/g) ? optionItem['settings' + newViewport.type].right.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].right?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                bottom: {
+                    value: optionItem['settings' + newViewport.type].bottom?.match(/\d+/g) ? optionItem['settings' + newViewport.type].bottom.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].bottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                }
+            })
+            setGaps({
+                gapX: {
+                    value: optionItem['settings' + newViewport.type].gapX?.match(/\d+/g) ? optionItem['settings' + newViewport.type].gapX?.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].gapX?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                gapY: {
+                    value: optionItem['settings' + newViewport.type].gapY?.match(/\d+/g) ? optionItem['settings' + newViewport.type].gapY?.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].gapY?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+            })
+            setSpaces({
+                spaceX: {
+                    value: optionItem['settings' + newViewport.type].spaceX?.match(/\d+/g) ? optionItem['settings' + newViewport.type].spaceX?.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].spaceX?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                spaceY: {
+                    value: optionItem['settings' + newViewport.type].spaceY?.match(/\d+/g) ? optionItem['settings' + newViewport.type].spaceY?.match(/\d+/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].spaceY?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+            })
+            setGridTemplate({
+                gridCols: optionItem['settings' + newViewport.type].gridCols?.match(/\d+/g) ? optionItem['settings' + newViewport.type].gridCols?.match(/\d+/g).map(Number)[0] : "",
+                gridRows: optionItem['settings' + newViewport.type].gridRows?.match(/\d+/g) ? optionItem['settings' + newViewport.type].gridRows?.match(/\d+/g).map(Number)[0] : ""
+            })
+            setZIndex(optionItem['settings' + newViewport.type]?.zIndex?.match(/\d+/g) ? optionItem['settings' + newViewport.type].zIndex?.match(/\d+/g).map(Number)[0] : "")
+
+        }
+    }
 };

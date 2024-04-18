@@ -4,10 +4,14 @@ import {PopUpMain} from "@/app/components/PopUpMain";
 import { IconBinaryTree, IconSettings  } from '@tabler/icons-react';
 
 export const DropMenu = ({items, title, type, functions, modifyItemsDashboard, addSection, deleteItemDashboard, optionSelected, viewport, keepOptions, currentPage, pages}) => {
+
+
+    const [itemsPrimary, setItemsPrimary] = useState(items ?? undefined)
+
     useEffect(() => {
         setItemsPrimary(items)
     }, [items]);
-    const [itemsPrimary, setItemsPrimary] = useState(items ?? undefined)
+
 
     return (
         <>
@@ -29,6 +33,7 @@ export const DropMenu = ({items, title, type, functions, modifyItemsDashboard, a
                     {
                         type === 'options' ? <Options pages={pages} viewport={viewport} keepOptions={keepOptions} options={itemsPrimary} modifyItemsDashboard={modifyItemsDashboard}/> : <Menu viewport={viewport} deleteItemDashboard={deleteItemDashboard} currentPage={currentPage} addSection={addSection} items={itemsPrimary.sections} functions={functions} optionSelected={optionSelected}/>
                     }
+
                 </section>
             </div>
         </>
