@@ -219,7 +219,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
             setZIndex(options['settings' + viewport.type]?.zIndex?.match(/\d+/g) ? options['settings' + viewport.type].zIndex?.match(/\d+/g).map(Number)[0] : "")
 
         }
-    }, [options]);
+    }, [options, viewport, keepOptions])
 
     const [optionItem, setOptionItem] = useState(options);
     const [colorOptions, setColorOptions] = useState({})
