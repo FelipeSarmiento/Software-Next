@@ -1458,7 +1458,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     })
                                                                 }
                                                             }
-                                                            value={size.minHeight?.value}
+                                                            value={size.maxHeight?.value}
                                                             min={0}
                                                             type="number"
                                                             className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
@@ -1481,7 +1481,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     })
                                                                 }
                                                             }
-                                                            value={size.minHeight?.unit}
+                                                            value={size.maxHeight?.unit}
                                                             className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
