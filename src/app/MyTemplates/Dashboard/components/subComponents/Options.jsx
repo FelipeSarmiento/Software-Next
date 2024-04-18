@@ -2498,124 +2498,6 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     type="number"
                                                                     className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             </div>
-                                                            <div
-                                                                className="relative flex rounded-md border-[1px] border-white h-10">
-                                                                <div
-                                                                    className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
-                                                                    <span className="text-[12px] font-bold">Gap X</span>
-                                                                </div>
-                                                                <input
-                                                                    onChange={
-                                                                        ({target}) => {
-                                                                            setGaps({
-                                                                                ...gaps,
-                                                                                gapX: {
-                                                                                    value: target.value,
-                                                                                    unit: gaps.gapX?.unit
-                                                                                }
-                                                                            })
-                                                                            onChangeInput({
-                                                                                target: {
-                                                                                    id: "gaps",
-                                                                                    name: "gapX",
-                                                                                    value: "gap-x-[" + target.value + gaps.gapX?.unit + "]"
-                                                                                }
-                                                                            })
-                                                                        }
-                                                                    }
-                                                                    value={gaps.gapX?.value}
-                                                                    min={0}
-                                                                    type="number"
-                                                                    className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
-                                                                <select
-                                                                    onChange={
-                                                                        ({target}) => {
-                                                                            setGaps({
-                                                                                ...gaps,
-                                                                                gapX: {
-                                                                                    value: gaps.gapX?.value,
-                                                                                    unit: target.value
-                                                                                }
-                                                                            })
-                                                                            onChangeInput({
-                                                                                target: {
-                                                                                    id: "gaps",
-                                                                                    name: "gapX",
-                                                                                    value: "gap-x-[" + gaps.gapX?.value + target.value + "]"
-                                                                                }
-                                                                            })
-                                                                        }
-                                                                    }
-                                                                    value={gaps.gapX?.unit}
-                                                                    className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 bg-black appearance-none"
-                                                                    name="" id="">
-                                                                    {
-                                                                        units.map((unit, index) => {
-                                                                            return (<option key={index * Math.random()}
-                                                                                            value={unit}>{unit}</option>)
-                                                                        })
-                                                                    }
-                                                                </select>
-                                                            </div>
-                                                            <div
-                                                                className="relative flex rounded-md border-[1px] border-white h-10">
-                                                                <div
-                                                                    className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
-                                                                    <span className="text-[12px] font-bold">Gap Y</span>
-                                                                </div>
-                                                                <input
-                                                                    onChange={
-                                                                        ({target}) => {
-                                                                            setGaps({
-                                                                                ...gaps,
-                                                                                gapY: {
-                                                                                    value: target.value,
-                                                                                    unit: gaps.gapY?.unit
-                                                                                }
-                                                                            })
-                                                                            onChangeInput({
-                                                                                target: {
-                                                                                    id: "gaps",
-                                                                                    name: "gapY",
-                                                                                    value: "gap-y-[" + target.value + gaps.gapY?.unit + "]"
-                                                                                }
-                                                                            })
-                                                                        }
-                                                                    }
-                                                                    value={gaps.gapY?.value}
-                                                                    min={0}
-                                                                    type="number"
-                                                                    className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
-                                                                <select
-                                                                    onChange={
-                                                                        ({target}) => {
-                                                                            setGaps({
-                                                                                ...gaps,
-                                                                                gapY: {
-                                                                                    value: gaps.gapY?.value,
-                                                                                    unit: target.value
-                                                                                }
-                                                                            })
-                                                                            onChangeInput({
-                                                                                target: {
-                                                                                    id: "gaps",
-                                                                                    name: "gapY",
-                                                                                    value: "gap-y-[" + gaps.gapY?.value + target.value + "]"
-                                                                                }
-                                                                            })
-                                                                        }
-                                                                    }
-                                                                    value={gaps.gapY?.unit}
-                                                                    className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 bg-black appearance-none"
-                                                                    name="" id="">
-                                                                    {
-                                                                        units.map((unit, index) => {
-                                                                            return (<option key={index * Math.random()}
-                                                                                            value={unit}>{unit}</option>)
-                                                                        })
-                                                                    }
-                                                                </select>
-                                                            </div>
                                                             <div className="relative col-span-2 flex flex-wrap rounded-md">
                                                                 <div className="w-2/4 p-1">
                                                                     <button
@@ -2681,6 +2563,124 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         </div>
                                                     ) : ''
                                                 }
+                                                <div
+                                                    className="relative my-2 flex rounded-md border-[1px] border-white h-10">
+                                                    <div
+                                                        className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
+                                                        <span className="text-[12px] font-bold">Gap X</span>
+                                                    </div>
+                                                    <input
+                                                        onChange={
+                                                            ({target}) => {
+                                                                setGaps({
+                                                                    ...gaps,
+                                                                    gapX: {
+                                                                        value: target.value,
+                                                                        unit: gaps.gapX?.unit
+                                                                    }
+                                                                })
+                                                                onChangeInput({
+                                                                    target: {
+                                                                        id: "gaps",
+                                                                        name: "gapX",
+                                                                        value: "gap-x-[" + target.value + gaps.gapX?.unit + "]"
+                                                                    }
+                                                                })
+                                                            }
+                                                        }
+                                                        value={gaps.gapX?.value}
+                                                        min={0}
+                                                        type="number"
+                                                        className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                    <select
+                                                        onChange={
+                                                            ({target}) => {
+                                                                setGaps({
+                                                                    ...gaps,
+                                                                    gapX: {
+                                                                        value: gaps.gapX?.value,
+                                                                        unit: target.value
+                                                                    }
+                                                                })
+                                                                onChangeInput({
+                                                                    target: {
+                                                                        id: "gaps",
+                                                                        name: "gapX",
+                                                                        value: "gap-x-[" + gaps.gapX?.value + target.value + "]"
+                                                                    }
+                                                                })
+                                                            }
+                                                        }
+                                                        value={gaps.gapX?.unit}
+                                                        className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                        name="" id="">
+                                                        {
+                                                            units.map((unit, index) => {
+                                                                return (<option key={index * Math.random()}
+                                                                                value={unit}>{unit}</option>)
+                                                            })
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <div
+                                                    className="relative my-2 flex rounded-md border-[1px] border-white h-10">
+                                                    <div
+                                                        className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
+                                                        <span className="text-[12px] font-bold">Gap Y</span>
+                                                    </div>
+                                                    <input
+                                                        onChange={
+                                                            ({target}) => {
+                                                                setGaps({
+                                                                    ...gaps,
+                                                                    gapY: {
+                                                                        value: target.value,
+                                                                        unit: gaps.gapY?.unit
+                                                                    }
+                                                                })
+                                                                onChangeInput({
+                                                                    target: {
+                                                                        id: "gaps",
+                                                                        name: "gapY",
+                                                                        value: "gap-y-[" + target.value + gaps.gapY?.unit + "]"
+                                                                    }
+                                                                })
+                                                            }
+                                                        }
+                                                        value={gaps.gapY?.value}
+                                                        min={0}
+                                                        type="number"
+                                                        className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                    <select
+                                                        onChange={
+                                                            ({target}) => {
+                                                                setGaps({
+                                                                    ...gaps,
+                                                                    gapY: {
+                                                                        value: gaps.gapY?.value,
+                                                                        unit: target.value
+                                                                    }
+                                                                })
+                                                                onChangeInput({
+                                                                    target: {
+                                                                        id: "gaps",
+                                                                        name: "gapY",
+                                                                        value: "gap-y-[" + gaps.gapY?.value + target.value + "]"
+                                                                    }
+                                                                })
+                                                            }
+                                                        }
+                                                        value={gaps.gapY?.unit}
+                                                        className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                        name="" id="">
+                                                        {
+                                                            units.map((unit, index) => {
+                                                                return (<option key={index * Math.random()}
+                                                                                value={unit}>{unit}</option>)
+                                                            })
+                                                        }
+                                                    </select>
+                                                </div>
                                                 {/*
                                                     ALIGN AND JUSTIFY
                                                     ALIGN AND JUSTIFY
