@@ -202,6 +202,16 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                     unit: options['settings' + viewport.type].gapY?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
                 },
             })
+            setSpaces({
+                spaceX: {
+                    value: options['settings' + viewport.type].spaceX?.match(/\d+/g) ? options['settings' + viewport.type].spaceX?.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].spaceX?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+                spaceY: {
+                    value: options['settings' + viewport.type].spaceY?.match(/\d+/g) ? options['settings' + viewport.type].spaceY?.match(/\d+/g).map(Number)[0] : "",
+                    unit: options['settings' + viewport.type].spaceY?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                },
+            })
             setGridTemplate({
                 gridCols: options['settings' + viewport.type].gridCols?.match(/\d+/g) ? options['settings' + viewport.type].gridCols?.match(/\d+/g).map(Number)[0] : "",
                 gridRows: options['settings' + viewport.type].gridRows?.match(/\d+/g) ? options['settings' + viewport.type].gridRows?.match(/\d+/g).map(Number)[0] : ""
@@ -296,6 +306,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
     const [flexDirection, setFlexDirection] = useState()
     const [flexWrap, setFlexWrap] = useState()
     const [gaps, setGaps] = useState({})
+    const [spaces, setSpaces] = useState({})
     const [gridTemplate, setGridTemplate] = useState({})
     const [externalLink, setExternalLink] = useState()
     const [zIndex, setZIndex] = useState()
@@ -2671,6 +2682,124 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             }
                                                         }
                                                         value={gaps.gapY?.unit}
+                                                        className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                        name="" id="">
+                                                        {
+                                                            units.map((unit, index) => {
+                                                                return (<option key={index * Math.random()}
+                                                                                value={unit}>{unit}</option>)
+                                                            })
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <div
+                                                    className="relative my-2 flex rounded-md border-[1px] border-white h-10">
+                                                    <div
+                                                        className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
+                                                        <span className="text-[12px] font-bold">Space X</span>
+                                                    </div>
+                                                    <input
+                                                        onChange={
+                                                            ({target}) => {
+                                                                setSpaces({
+                                                                    ...spaces,
+                                                                    spaceX: {
+                                                                        value: target.value,
+                                                                        unit: spaces.spaceX?.unit
+                                                                    }
+                                                                })
+                                                                onChangeInput({
+                                                                    target: {
+                                                                        id: "spaces",
+                                                                        name: "spaceX",
+                                                                        value: "space-x-[" + target.value + spaces.spaceX?.unit + "]"
+                                                                    }
+                                                                })
+                                                            }
+                                                        }
+                                                        value={spaces.spaceX?.value}
+                                                        min={0}
+                                                        type="number"
+                                                        className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                    <select
+                                                        onChange={
+                                                            ({target}) => {
+                                                                setSpaces({
+                                                                    ...spaces,
+                                                                    spaceX: {
+                                                                        value: spaces.spaceX?.value,
+                                                                        unit: target.value
+                                                                    }
+                                                                })
+                                                                onChangeInput({
+                                                                    target: {
+                                                                        id: "spaces",
+                                                                        name: "spaceX",
+                                                                        value: "space-x-[" + spaces.spaceX?.value + target.value + "]"
+                                                                    }
+                                                                })
+                                                            }
+                                                        }
+                                                        value={spaces.spaceX?.unit}
+                                                        className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                        name="" id="">
+                                                        {
+                                                            units.map((unit, index) => {
+                                                                return (<option key={index * Math.random()}
+                                                                                value={unit}>{unit}</option>)
+                                                            })
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <div
+                                                    className="relative my-2 flex rounded-md border-[1px] border-white h-10">
+                                                    <div
+                                                        className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
+                                                        <span className="text-[12px] font-bold">Space Y</span>
+                                                    </div>
+                                                    <input
+                                                        onChange={
+                                                            ({target}) => {
+                                                                setSpaces({
+                                                                    ...spaces,
+                                                                    spaceY: {
+                                                                        value: target.value,
+                                                                        unit: spaces.spaceY?.unit
+                                                                    }
+                                                                })
+                                                                onChangeInput({
+                                                                    target: {
+                                                                        id: "spaces",
+                                                                        name: "spaceY",
+                                                                        value: "space-y-[" + target.value + spaces.spaceY?.unit + "]"
+                                                                    }
+                                                                })
+                                                            }
+                                                        }
+                                                        value={spaces.spaceY?.value}
+                                                        min={0}
+                                                        type="number"
+                                                        className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                    <select
+                                                        onChange={
+                                                            ({target}) => {
+                                                                setSpaces({
+                                                                    ...spaces,
+                                                                    spaceY: {
+                                                                        value: spaces.spaceY?.value,
+                                                                        unit: target.value
+                                                                    }
+                                                                })
+                                                                onChangeInput({
+                                                                    target: {
+                                                                        id: "spaces",
+                                                                        name: "spaceY",
+                                                                        value: "space-y-[" + spaces.spaceY?.value + target.value + "]"
+                                                                    }
+                                                                })
+                                                            }
+                                                        }
+                                                        value={spaces.spaceY?.unit}
                                                         className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 bg-black appearance-none"
                                                         name="" id="">
                                                         {
