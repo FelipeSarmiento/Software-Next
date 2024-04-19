@@ -138,7 +138,9 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
         settings = Object.assign(settings, specificSettings)
         let newSection = {
             id: id,
+            idHTML: "",
             idUniqueIdentifier: id,
+            nameHTML: "",
             type: type,
             group: group,
             label: section.includes('-') ? section.split('-').join(' ').toUpperCase()[0] + section.split('-').join(' ').slice(1) : section.toUpperCase()[0] + section.slice(1),

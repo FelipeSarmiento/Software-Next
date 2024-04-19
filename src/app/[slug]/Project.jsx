@@ -14,13 +14,13 @@ export const Project = ({ components, viewport, path }) => {
                             switch (component.type) {
                                 case "text":
                                     return (
-                                        <p className={className} key={component.idUniqueIdentifier}>
+                                        <p className={className} id={component?.idHTML} name={component?.nameHTML} key={component.idUniqueIdentifier}>
                                             {component.text}
                                         </p>
                                     )
                                 case "image":
                                     return (
-                                        <img src={ component.src } className={className} key={component.idUniqueIdentifier}  alt={ component.alt }/>
+                                        <img src={ component.src } className={className} id={component?.idHTML} name={component?.nameHTML} key={component.idUniqueIdentifier}  alt={ component.alt }/>
                                     )
                             }
                             break;
@@ -28,79 +28,79 @@ export const Project = ({ components, viewport, path }) => {
                             switch (component.type) {
                                 case "container":
                                     return (
-                                        <container key={component.idUniqueIdentifier}  className={className}>
+                                        <container key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </container>
                                     )
                                 case "link":
                                     return (
-                                        <a key={component.idUniqueIdentifier} href={ component.href.split("|")[0] === 'internal' ? "/" + path + "/" + component.href.split("|")[1] : component.href.split("|")[1] } target={ component.target } className={className}>
+                                        <a key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} href={ component.href.split("|")[0] === 'internal' ? "/" + path + "/" + component.href.split("|")[1] : component.href.split("|")[1] } target={ component.target } className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </a>
                                     )
                                 case "main":
                                     return (
-                                        <main key={component.idUniqueIdentifier}  className={className}>
+                                        <main key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML}  className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </main>
                                     )
                                 case "div":
                                     return (
-                                        <div key={component.idUniqueIdentifier}  className={className}>
+                                        <div key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </div>
                                     )
                                 case "article":
                                     return (
-                                        <article key={component.idUniqueIdentifier}  className={className}>
+                                        <article key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </article>
                                     )
                                 case "section":
                                     return (
-                                        <section key={component.idUniqueIdentifier}  className={className}>
+                                        <section key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </section>
                                     )
                                 case "header":
                                     return (
-                                        <header key={component.idUniqueIdentifier}  className={className}>
+                                        <header key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </header>
                                     )
                                 case "nav":
                                     return (
-                                        <nav key={component.idUniqueIdentifier}  className={className}>
+                                        <nav key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </nav>
                                     )
                                 case "aside":
                                     return (
-                                        <aside key={component.idUniqueIdentifier}  className={className}>
+                                        <aside key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </aside>
                                     )
                                 case "form":
                                     return (
-                                        <form key={component.idUniqueIdentifier}  className={className}>
+                                        <form key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </form>
                                     )
                                 case "button":
                                     return (
-                                        <button key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
+                                        <button key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </button>
                                     )
                                 case "footer":
                                     return (
-                                        <form key={component.idUniqueIdentifier}  className={className}>
+                                        <form key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </form>
                                     )
                                 case "menu":
                                     return (
-                                        <Disclosure as="div" className={ className } key={component.idUniqueIdentifier}>
+                                        <Disclosure as="div" className={ className } id={component?.idHTML} name={component?.nameHTML} key={component.idUniqueIdentifier}>
                                             <Disclosure.Button>
                                                 <IconMenu2/>
                                             </Disclosure.Button>

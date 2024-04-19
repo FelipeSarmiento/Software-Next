@@ -64,7 +64,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                             <IconForms stroke={2}/>) : ""}
                                         {section.type === "menu" ? (
                                             <IconMenu2 stroke={2}/>) : ""}
-                                        <span className="pl-1">{section.label}</span>
+                                        <span className="pl-1">{section?.nameHTML ? section?.nameHTML : section.label}</span>
                                         {
                                             section['settings' + viewport.type]?.display === 'hidden' ? (
                                                 <span className="pl-2 text-[1px] text-red-500">
@@ -161,7 +161,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                                                     {option.type === "menu" ? (
                                                                         <IconMenu2 stroke={2}/>) : ""}
                                                                     <span className="pl-1 text-nowrap truncate w-full">
-                                                                        { option.type === "text" ? option.text !== "" ? option.text : option.label : "" }
+                                                                        { option.type === "text" ? option.text !== "" ? option.text : option.label : option?.nameHTML ? option?.nameHTML : option?.label }
                                                                         { option.type === "image" ? "Image" : "" }
                                                                     </span>
                                                                 </span>
@@ -187,7 +187,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                     <h3 className="relative flow-root w-full">
                         <div
                             onClick={ () => selectItem()}
-                             className={`relative focus:border-stone-800 border-2 border-cyan-500 rounded-md mt-1 h-10 z-50 flex w-full items-center justify-between text-sm  px-2 bg-black`}>
+                            className={`relative focus:border-stone-800 border-2 border-cyan-500 rounded-md mt-1 h-10 z-50 flex w-full items-center justify-between text-sm  px-2 bg-black`}>
                                     <span className={`font-medium flex items-center text-cyan-500 text-nowrap truncate`}>
                                         <IconPackages stroke={2}/>
                                         <span className="pl-1">{currentPage.charAt(0).toUpperCase() + currentPage.slice(1) } Page</span>

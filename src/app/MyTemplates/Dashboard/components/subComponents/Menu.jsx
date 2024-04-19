@@ -64,7 +64,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                             <IconForms stroke={2}/>) : ""}
                                         {section.type === "menu" ? (
                                             <IconMenu2 stroke={2}/>) : ""}
-                                        <span className="pl-1">{section.label}</span>
+                                        <span className="pl-1">{section?.nameHTML ? section?.nameHTML : section.label}</span>
                                         {
                                             section['settings' + viewport.type]?.display === 'hidden' ? (
                                                 <span className="pl-2 text-[1px] text-red-500">
@@ -161,7 +161,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                                                     {option.type === "menu" ? (
                                                                         <IconMenu2 stroke={2}/>) : ""}
                                                                     <span className="pl-1 text-nowrap truncate w-full">
-                                                                        { option.type === "text" ? option.text !== "" ? option.text : option.label : "" }
+                                                                        { option.type === "text" ? option.text !== "" ? option.text : option.label : option?.nameHTML ? option?.nameHTML : option?.label }
                                                                         { option.type === "image" ? "Image" : "" }
                                                                     </span>
                                                                 </span>

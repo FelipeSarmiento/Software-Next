@@ -120,6 +120,12 @@ export default function Dashboard({params}) {
                     if (newObj.hasOwnProperty('alt')) {
                         newObj.alt = nuevoValor.alt;
                     }
+                    if (nuevoValor.hasOwnProperty('idHTML')) {
+                        newObj.idHTML = nuevoValor.idHTML;
+                    }
+                    if (nuevoValor.hasOwnProperty('nameHTML')) {
+                        newObj.nameHTML = nuevoValor.nameHTML;
+                    }
                 }
             }
             return newObj;

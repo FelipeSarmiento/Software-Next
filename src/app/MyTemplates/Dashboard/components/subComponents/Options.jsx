@@ -19,10 +19,10 @@ import {
     IconGrid4x4,
     IconTextIncrease,
     IconSquareX,
-    IconPhoto,
+    IconTag,
     IconArrowsUpDown,
     IconTextWrap,
-    IconTextWrapDisabled, IconAlignLeft, IconAlignCenter, IconAlignRight, IconAlignJustified, IconLink
+    IconTextWrapDisabled, IconAlignLeft, IconAlignCenter, IconAlignRight, IconAlignJustified, IconLink, IconId
 } from '@tabler/icons-react';
 import {ColorInput, ColorPicker, NumberInput, Select} from "@mantine/core";
 
@@ -178,6 +178,72 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
     return (optionItem !== undefined ? (
             <div className="py-2 pr-2 text-white">
 
+                {/*
+                        ID
+                        ID
+                        ID
+                        ID
+                    */}
+                <div className="py-2 flex items-center relative h-max">
+                    <div className="relative flex rounded-md border-[1px] border-white w-full">
+                        <div className="w-[30%] flex items-center justify-start px-4 space-x-2 border-r-[1px] h-10">
+                            <IconId/>
+                            <span className="text-xs font-bold">ID</span>
+                        </div>
+                        <input
+                            onChange={({target}) => {
+                                setSpecificAttributes({
+                                    ...specificAttributes,
+                                    idHTML: target.value
+                                })
+                                onChangeInput({
+                                    target: {
+                                        id: "valueInput",
+                                        name: "idHTML",
+                                        value: target.value
+                                    }
+                                })
+                            }}
+                            name="idHTML"
+                            value={specificAttributes?.idHTML}
+                            min={0}
+                            type="text"
+                            className="w-[70%] h-10 rounded-md appearance-none focus:outline-none bg-black p-1"/>
+                    </div>
+                </div>
+                {/*
+                        NAME
+                        NAME
+                        NAME
+                        NAME
+                    */}
+                <div className="py-2 flex items-center relative h-max">
+                    <div className="relative flex rounded-md border-[1px] border-white w-full">
+                        <div className="w-[30%] flex items-center justify-start px-4 space-x-2 border-r-[1px] h-10">
+                            <IconTag/>
+                            <span className="text-xs font-bold">Name</span>
+                        </div>
+                        <input
+                            onChange={({target}) => {
+                                setSpecificAttributes({
+                                    ...specificAttributes,
+                                    nameHTML: target.value
+                                })
+                                onChangeInput({
+                                    target: {
+                                        id: "valueInput",
+                                        name: "nameHTML",
+                                        value: target.value
+                                    }
+                                })
+                            }}
+                            name="idHTML"
+                            value={specificAttributes?.nameHTML}
+                            min={0}
+                            type="text"
+                            className="w-[70%] h-10 rounded-md appearance-none focus:outline-none bg-black p-1"/>
+                    </div>
+                </div>
                 {/*
                         TEXT
                         TEXT
@@ -3612,7 +3678,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 text: newOption?.text,
                 src: newOption?.src,
                 alt: newOption?.alt,
-                href: newOption?.href
+                href: newOption?.href,
+                idHTML: newOption?.idHTML,
+                nameHTML: newOption?.nameHTML
             })
 
             setBorderWidth({
@@ -3765,7 +3833,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 text: optionItem?.text,
                 src: optionItem?.src,
                 alt: optionItem?.alt,
-                href: optionItem?.href
+                href: optionItem?.href,
+                idHTML: optionItem?.idHTML,
+                nameHTML: optionItem?.nameHTML,
             })
 
             setBorderWidth({
