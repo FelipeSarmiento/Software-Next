@@ -25,9 +25,6 @@ export default function Home() {
                             <div className="min-h-[calc(100vh_-_84px)]">
                                 <Index/>
                             </div>
-                            <div className="hidden lg:block">
-                                <BackgroundBeams />
-                            </div>
                         </div>
                     </MantineProvider>
                 </StoreProvider>

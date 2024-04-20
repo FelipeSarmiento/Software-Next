@@ -8,6 +8,8 @@ import login from '@/settings/assets/images/login.png'
 import createProject from '@/settings/assets/images/createProject.png'
 import dashboard from '@/settings/assets/images/dashboard.png'
 import preview from '@/settings/assets/images/preview.png'
+import previewPage from '@/settings/assets/images/previewPage.png'
+import contact from '@/settings/assets/images/contact.png'
 export default function Home() {
     const words = `Welcome to our platform! Here's a guide on how to use our website builder`
 
@@ -65,7 +67,7 @@ export default function Home() {
                     <Image width={500} height={100} className="object-contain h-5/6" src={dashboard} alt=""/>
                 </div>
                 <div className="w-full h-72 flex flex-col items-center order-8 md:order-8 justify-center border-green-500 shadow-lg shadow-cyan-500 rounded-md">
-                    <Image width={500} height={100} className="object-contain h-5/6" src={preview} alt=""/>
+                    <Image width={500} height={100} className="object-contain h-5/6" src={previewPage} alt=""/>
                 </div>
                 <div className="w-full h-72 flex flex-col items-center order-7 md:order-9 justify-center px-6 text-center shadow-lg shadow-cyan-100 rounded-md">
                     <span className="text-2xl font-extrabold">Preview and Publish</span>
@@ -76,7 +78,7 @@ export default function Home() {
                     <span className="text-lg font-extrabold">If you find the process tedious or need help, you can opt for services such as site creation assistance or dedicated developer support.</span>
                 </div>
                 <div className="w-full h-72 flex flex-col items-center order-9 md:order-12 justify-center border-green-500 shadow-lg shadow-cyan-500 rounded-md">
-5
+                    <Image width={500} height={100} className="object-contain h-5/6" src={contact} alt=""/>
                 </div>
 
             </div>

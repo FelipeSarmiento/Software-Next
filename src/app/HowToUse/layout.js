@@ -26,9 +26,6 @@ export default function RootLayout({children}) {
                         <div className="min-h-[calc(100vh_-_84px)]">
                             {children}
                         </div>
-                        <div className="hidden lg:block">
-                            <BackgroundBeams />
-                        </div>
                     </div>
                 </MantineProvider>
             </StoreProvider>
