@@ -61,7 +61,7 @@ export default function Home() {
                                 </div>
                                 <div className="rounded-md max-h-64 flex flex-wrap lg:h-full px-3 md:px-3 lg:px-3 py-2 text-white">
                                     <div className="w-full relative min-h-1/5 flex flex-wrap items-center text-2xl font-bold ">
-                                        <h3 className="text-cyan-500 text-nowrap truncate pr-8">{ template?.templatename }</h3>
+                                        <h3 className="text-cyan-500 text-nowrap truncate pr-14">{ template?.templatename }</h3>
                                         <span className={`absolute top-2/4 -translate-y-2/4 right-0 ${template?.ispublic ? 'text-green-500' : 'text-red-500'}`} title={ template?.ispublic ? 'Is public' : 'Is not public' }>
                                             <IconWorld/>
                                         </span>
