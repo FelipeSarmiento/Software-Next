@@ -52,10 +52,10 @@ export default function Home() {
                         </button>
                     </div>
                 </header>
-                <div className="grid grid-cols-1 2xl:grid-cols-2 justify-center place-items-center xl:w-max mx-auto gap-8">
+                <div className="grid grid-cols-1 xl:grid-cols-2 justify-center place-items-center 2xl:w-max mx-auto gap-8">
                     {
                         templates.length > 0 ? templates.map((template, index) => (
-                            <div key={ template.idtemplate * index } className="grid grid-cols-1 lg:grid-cols-2 p-2 w-full  md:p-6 md:w-[750px] lg:h-72 lg:max-h-72 rounded-lg border-2 border-neutral-300">
+                            <div key={ template.idtemplate * index } className="grid grid-cols-1 lg:grid-cols-2 p-2 w-full  md:p-6 md:w-[750px] xl:w-full 2xl:w-[750px] lg:h-72 lg:max-h-72 rounded-lg border-2 border-neutral-300">
                                 <div className="border-2 flex items-center justify-center select-none border-neutral-300 rounded-md lg:h-full">
                                     <Image src={ SoftwareNextLogo } alt="Software Next Logo" width={500} height={500} className="size-52 object-cover rounded-md"/>
                                 </div>
