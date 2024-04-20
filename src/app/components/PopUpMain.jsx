@@ -195,21 +195,21 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                                     }}
                                     key={index}
                                     className="rounded-md relative hover:border-white flex flex-col items-center justify-center border-2 text-white border-gray-500 size-24 lg:size-32">
-                                    {item.type === "container" ? (<IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
-                                    {item.type === "article" ? (<IconArticle stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
-                                    {item.type === "section" ? (<IconSection stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
-                                    {item.type === "div" ? (<IconCrop54 stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
-                                    {item.type === "main" ? (<IconPackage stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
-                                    {item.type === "header" ? (<IconLayoutNavbar stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
-                                    {item.type === "nav" ? (<IconLayoutNavbarCollapse stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
-                                    {item.type === "footer" ? (<IconLayoutBottombar stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
-                                    {item.type === "aside" ? (<IconLayoutSidebar stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
-                                    {item.type === "image" ? (<IconPhoto stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
-                                    {item.type === "text" ? (<IconLetterCase stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
-                                    {item.type === "link" ? (<IconLink stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
-                                    {item.type === "form" ? (<IconForms stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                    {item.type === "container" ? (<IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
+                                    {item.type === "article" ? (<IconArticle stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
+                                    {item.type === "section" ? (<IconSection stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
+                                    {item.type === "div" ? (<IconCrop54 stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
+                                    {item.type === "main" ? (<IconPackage stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
+                                    {item.type === "header" ? (<IconLayoutNavbar stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
+                                    {item.type === "nav" ? (<IconLayoutNavbarCollapse stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
+                                    {item.type === "footer" ? (<IconLayoutBottombar stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
+                                    {item.type === "aside" ? (<IconLayoutSidebar stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
+                                    {item.type === "image" ? (<IconPhoto stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
+                                    {item.type === "text" ? (<IconLetterCase stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
+                                    {item.type === "link" ? (<IconLink stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
+                                    {item.type === "form" ? (<IconForms stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                     {item.type === "button" ? (
-                                        <IconRowInsertBottom stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                        <IconRowInsertBottom stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                     <div className="text-sm">
                                         {item.label}
                                     </div>
@@ -267,35 +267,35 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                                                     className="rounded-md relative hover:border-white flex items-center border-2 text-white border-gray-500 h-32 w-64 md:w-60 lg:w-60 xl:w-72  ">
                                                     <div className="w-2/6 flex items-center justify-center">
                                                         {item.type === "container" ? (
-                                                            <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                                            <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                                         {item.type === "article" ? (
-                                                            <IconArticle stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                                            <IconArticle stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                                         {item.type === "section" ? (
-                                                            <IconSection stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                                            <IconSection stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                                         {item.type === "div" ? (
-                                                            <IconCrop54 stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                                            <IconCrop54 stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                                         {item.type === "main" ? (
-                                                            <IconPackage stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                                            <IconPackage stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                                         {item.type === "header" ? (
-                                                            <IconLayoutNavbar stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                                            <IconLayoutNavbar stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                                         {item.type === "nav" ? (
-                                                            <IconLayoutNavbarCollapse stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                                            <IconLayoutNavbarCollapse stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                                         {item.type === "footer" ? (
-                                                            <IconLayoutBottombar stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                                            <IconLayoutBottombar stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                                         {item.type === "aside" ? (
-                                                            <IconLayoutSidebar stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                                            <IconLayoutSidebar stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                                         {item.type === "image" ? (
-                                                            <IconPhoto stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                                            <IconPhoto stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                                         {item.type === "text" ? (
-                                                            <IconLetterCase stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                                            <IconLetterCase stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                                         {item.type === "link" ? (
-                                                            <IconLink stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                                            <IconLink stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                                         {item.type === "form" ? (
-                                                            <IconForms stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                                            <IconForms stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                                         {item.type === "button" ? (
-                                                            <IconRowInsertBottom stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                                            <IconRowInsertBottom stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                                         {item.type === "menu" ? (
-                                                            <IconMenu2 stroke={2} className=" size-6 xl:size-5 2xl:size-6 " className="size-16"/>) : ""}
+                                                            <IconMenu2 stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
                                                     </div>
                                                     <div className="w-4/6 flex flex-col items-start">
                                                         <span className="text-sm font-bold">
