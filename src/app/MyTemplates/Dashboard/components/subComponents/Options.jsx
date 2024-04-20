@@ -186,7 +186,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                     */}
                 <div className="py-2 flex items-center relative h-max">
                     <div className="relative flex rounded-md border-[1px] border-white w-full">
-                        <div className="w-[30%] flex items-center justify-start px-4 space-x-2 border-r-[1px] h-10">
+                        <div className="w-[30%] flex items-center justify-start px-4 space-x-2 border-r-[1px] h-10 xl:h-8 2xl:h-10">
                             <IconId/>
                             <span className="text-xs font-bold">ID</span>
                         </div>
@@ -208,7 +208,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                             value={specificAttributes?.idHTML}
                             min={0}
                             type="text"
-                            className="w-[70%] h-10 rounded-md appearance-none focus:outline-none bg-black p-1"/>
+                            className="w-[70%] h-full rounded-md appearance-none focus:outline-none bg-black p-1"/>
                     </div>
                 </div>
                 {/*
@@ -218,10 +218,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                         NAME
                     */}
                 <div className="py-2 flex items-center relative h-max">
-                    <div className="relative flex rounded-md border-[1px] border-white w-full">
-                        <div className="w-[30%] flex items-center justify-start px-4 space-x-2 border-r-[1px] h-10">
+                    <div className="relative flex text-xs rounded-md border-[1px] border-white w-full">
+                        <div className="w-[30%] flex items-center justify-start px-4 space-x-2 border-r-[1px] h-10 xl:h-8 2xl:h-10">
                             <IconTag/>
-                            <span className="text-xs font-bold">Name</span>
+                            <span className="font-bold">Name</span>
                         </div>
                         <input
                             onChange={({target}) => {
@@ -241,7 +241,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                             value={specificAttributes?.nameHTML}
                             min={0}
                             type="text"
-                            className="w-[70%] h-10 rounded-md appearance-none focus:outline-none bg-black p-1"/>
+                            className="w-[70%] h-10 xl:h-8 2xl:h-10 flex items-center rounded-md appearance-none focus:outline-none bg-black p-1"/>
                     </div>
                 </div>
                 {/*
@@ -253,10 +253,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
 
                 {optionItem.hasOwnProperty("text") ? (
                     <div className="py-2 flex items-center relative h-max">
-                        <div className="relative flex flex-col rounded-md border-[1px] border-white min-h-28 w-full">
-                            <div className="w-full flex items-center justify-center border-b-[1px] h-10">
+                        <div className="relative text-xs flex flex-col rounded-md border-[1px] border-white min-h-28 w-full">
+                            <div className="w-full flex items-center justify-center border-b-[1px] h-10 xl:h-8 2xl:h-10">
                                 <IconCursorText/>
-                                <span className="text-xs font-bold">Text</span>
+                                <span className="font-bold">Text</span>
                             </div>
                             <textarea
                                 onChange={({target}) => {
@@ -290,14 +290,15 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
 
                 {optionItem.hasOwnProperty("href") ? (
                     <div className="py-2 flex items-center relative h-max">
-                        <div className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                        <div className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
                             <div className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
                                 <IconLink/>
                                 <span className="text-xs font-bold">Href</span>
                             </div>
                             <Select
                                 classNames={{
-                                    input: "bg-stone-950 text-white border-2 border-stone-800 rounded-md h-full text-md font-bold text-center",
+                                    root: "h-10 w-[70%] xl:h-7 2xl:h-10 py-0 border-0",
+                                    input: "bg-stone-950 text-white rounded-md border-0 my-0 h-10 xl:h-7 py-0 2xl:h-10 text-md xl:text-xs 2xl:text-md min-h-0 font-bold text-center",
                                     dropdown: "bg-stone-950 text-white",
                                     option: "hover:bg-stone-950 border-2 border-transparent hover:border-cyan-500 hover:text-cyan-500 text-white font-bold text-md"
                                 }}
@@ -368,10 +369,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
 
                 {optionItem.hasOwnProperty("target") ? (
                     <div className="py-2 flex flex-col  justify-center items-center relative h-max">
-                        <div className="text-white py-1 flex justify-center">
+                        <div className="text-white text-md xl:text-sm 2xl:text-md py-2 flex justify-center">
                             <h4>Target</h4>
                         </div>
-                        <div className="w-full p-3 flex justify-center space-x-3">
+                        <div className="w-full px-3 flex justify-center space-x-3">
                             <button
                                 onClick={() => {
                                     onChangeInput({
@@ -382,7 +383,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                         }
                                     })
                                 }}
-                                className={`w-3/6 flex items-center justify-center px-2 text-md rounded-md border-2 py-1 ${(optionItem.target === undefined || optionItem.target === '_self') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                className={`w-3/6 flex items-center justify-center px-2 text-md rounded-md border-2 h-10 xl:h-8 2xl:h-10 xl:text-sm 2xl:text-md ${(optionItem.target === undefined || optionItem.target === '_self') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                 <span className="px-2">_self</span>
                             </button>
                             <button
@@ -395,7 +396,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                         }
                                     })
                                 }}
-                                className={`w-3/6 flex items-center justify-center px-2 text-md rounded-md border-2 py-1 ${optionItem.target === '_blank' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                className={`w-3/6 flex items-center justify-center px-2 text-md rounded-md border-2 h-10 xl:h-8 2xl:h-10 xl:text-sm 2xl:text-md ${optionItem.target === '_blank' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                 <span className="px-2 text-center">_blank</span>
                             </button>
                         </div>
@@ -413,9 +414,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                     <>
                         <div className="py-2 flex items-center relative h-max">
                             <div
-                                className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
                                 <div
-                                    className="relative before:cursor-pointer w-[30%] before:content-['Select'] before:top-2/4 before:left-2/4 before:-translate-x-2/4 before:-translate-y-2/4 before:absolute">
+                                    className="relative before:cursor-pointer w-[30%] before:text-md xl:before:text-md 2xl:before:text-md before:content-['Select'] before:top-2/4 before:left-2/4 before:-translate-x-2/4 before:-translate-y-2/4 before:absolute">
                                     <input
                                         onChange={(e) => {
                                             e.preventDefault()
@@ -465,7 +466,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                         }}
                                         value={ specificAttributes.srcName }
                                         type="text"
-                                        className="w-full h-full bg-black rounded-md focus:outline-none px-2 placeholder:text-white"
+                                        className="w-full h-full bg-black rounded-md focus:outline-none px-2 placeholder:text-white placeholder:text-md placeholder:xl:text-sm placeholder:2xl:text-md text-nowrap truncate"
                                         placeholder="or type an URL"/>
                                 </div>
                             </div>
@@ -495,7 +496,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 {optionItem.hasOwnProperty("alt") ? (
                     <div className="py-2 flex items-center relative h-max">
                         <div
-                            className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                            className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
                             <div
                                 className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
                                 <IconCursorText/>
@@ -540,7 +541,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                 <>
                                     <h3 className="flow-root">
                                         <div
-                                            className={"border-2 rounded-md py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
+                                            className={"border-2 rounded-md py-1 xl:py-0 2xl:py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
                                             <span className="font-bold text-white">Text</span>
                                             <div className="relative">
                                                 <Disclosure.Button className="p-2 ml-1">
@@ -560,11 +561,11 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                             <div className="py-1 border-l-2 w-full pl-1">
                                                 <div className="py-2 flex items-center relative h-max">
                                                     <div
-                                                        className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
                                                         <div
-                                                            className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
-                                                            <IconTextIncrease/>
-                                                            <span className="text-[12px] font-bold">Font Size</span>
+                                                            className="w-[30%] flex items-center justify-center px-1 border-r-[1px] h-full">
+                                                            <IconTextIncrease className="flex xl:hidden 2xl:flex"/>
+                                                            <span className="text-[12px] font-bold text-center text-md xl:text-[10px] 2xl:text-md">Font Size</span>
                                                         </div>
                                                         <input
                                                             onChange={
@@ -603,7 +604,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             }
                                                             value={fontSize.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -617,7 +618,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 <div className="text-white py-2 flex justify-center">
                                                     <h4>Font color</h4>
                                                 </div>
-                                                <div className="flex items-center my-3 px-5 h-10 justify-center">
+                                                <div className="flex items-center my-2 px-5 xl:px-1 2xl:px-5 h-10 xl:h-8 2xl:h-10 justify-center">
                                                     <input
                                                         onChange={
                                                             ({target}) => {
@@ -638,7 +639,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         min={0}
                                                         type="text"
                                                         placeholder="Type a Hex or RGBA Color"
-                                                        className="w-full rounded-md h-full appearance-none border-2 text-center focus:outline-none bg-black text-nowrap truncate"/>
+                                                        className="w-full rounded-md h-full appearance-none text-md xl:text-sm 2xl:text-md border-2 text-center focus:outline-none bg-black text-nowrap truncate"/>
 
                                                 </div>
                                                 <ColorPicker
@@ -666,11 +667,11 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         input: "bg-black text-white "
                                                     }}
                                                 />
-                                                <span className="text-white">Font Weight</span>
+                                                <span className="text-white text-md xl:text-sm 2xl:text-md">Font Weight</span>
                                                 <select onChange={onChangeInput}
                                                         value={optionItem['settings' + viewportState.type].textWeight}
                                                         id="FontWeight" name="textWeight"
-                                                        className="appearance-none rounded-md py-1 border-2 border-gray-500 bg-black text-white px-1 w-full focus:outline-none">
+                                                        className="appearance-none rounded-md py-1 border-2 text-md xl:text-sm 2xl:text-md border-gray-500 bg-black text-white px-1 w-full focus:outline-none">
                                                     <option value="font-light">Light</option>
                                                     <option value="font-normal">Normal</option>
                                                     <option value="font-medium">Medium</option>
@@ -678,7 +679,6 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     <option value="font-bold">Bold</option>
                                                     <option value="font-extrabold">Extrabold</option>
                                                 </select>
-                                                <hr/>
                                                 <div className="w-full p-3 flex flex-wrap">
                                                     <div className="w-2/4 p-1">
                                                         <button
@@ -691,7 +691,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewportState.type]?.textDecoration === undefined || optionItem['settings' + viewportState.type]?.textDecoration === 'no-underline') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs xl:text-[9px] 2xl:text-xs rounded-md border-2 ${(optionItem['settings' + viewportState.type]?.textDecoration === undefined || optionItem['settings' + viewportState.type]?.textDecoration === 'no-underline') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2">No underline</span>
                                                         </button>
                                                     </div>
@@ -706,7 +706,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type]?.textDecoration === 'underline' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs xl:text-[9px] 2xl:text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.textDecoration === 'underline' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2 underline">Underline</span>
                                                         </button>
                                                     </div>
@@ -721,7 +721,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type]?.textDecoration === 'overline' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs xl:text-[9px] 2xl:text-xs rounded-md border-2  ${optionItem['settings' + viewportState.type]?.textDecoration === 'overline' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2 overline">Overline</span>
                                                         </button>
                                                     </div>
@@ -736,7 +736,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 })
                                                             }}
-                                                            className={`w-full h-10 flex items-center justify-center font-bold px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type]?.textDecoration === 'line-through' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                            className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs xl:text-[9px] 2xl:text-xs rounded-md border-2  ${optionItem['settings' + viewportState.type]?.textDecoration === 'line-through' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                             <span className="px-2 line-through">Line Through</span>
                                                         </button>
                                                     </div>
@@ -752,8 +752,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-3/6 flex items-center px-2 text-xs rounded-md border-2 py-1 ${(optionItem['settings' + viewportState.type]?.textWrap === 'text-wrap' || optionItem['settings' + viewportState.type]?.textWrap === undefined) ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
-                                                        <IconTextWrap/>
+                                                        className={`w-3/6 flex items-center px-2 text-xs xl:text-[10px] 2xl:text-xs rounded-md border-2 py-1 ${(optionItem['settings' + viewportState.type]?.textWrap === 'text-wrap' || optionItem['settings' + viewportState.type]?.textWrap === undefined) ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        <IconTextWrap className="flex xl:hidden 2xl:flex"/>
                                                         <span className="px-2">Text Wrap</span>
                                                     </button>
                                                     <button
@@ -766,9 +766,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-3/6 flex items-center px-2 text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type]?.textWrap === 'text-nowrap' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        className={`w-3/6 flex items-center px-2 text-xs xl:text-[10px] 2xl:text-xs rounded-md border-2 py-1 ${optionItem['settings' + viewportState.type]?.textWrap === 'text-nowrap' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                         <span>
-                                                                            <IconTextWrapDisabled/>
+                                                                            <IconTextWrapDisabled className="flex xl:hidden 2xl:flex"/>
                                                                         </span>
                                                         <span className="px-2">Text No wrap</span>
                                                     </button>
@@ -776,9 +776,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
 
                                                 <div className="relative my-1 flex h-10 w-full">
                                                     <div
-                                                        className="w-[35%] flex items-center text-xs justify-start px-2 border-r-[1px] h-full">
-                                                        <span className="rotate-90"><IconSpacingVertical/></span>
-                                                        <span className="font-bold">Text Align</span>
+                                                        className="w-[35%] xl:w-[30%] 2xl:w-[35%] flex items-center text-xs justify-start px-2 border-r-[1px] h-full">
+                                                        <span className="rotate-90"><IconSpacingVertical className="flex xl:hidden 2xl:flex"/></span>
+                                                        <span className="font-bold text-center">Text Align</span>
                                                     </div>
                                                     <div className="flex items-center justify-around w-[65%]">
                                                         <button
@@ -873,7 +873,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                 <>
                                     <h3 className="flow-root">
                                         <div
-                                            className={"border-2 rounded-md py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
+                                            className={"border-2 rounded-md py-1 xl:py-0 2xl:py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
                                             <span className="font-bold text-white">Background</span>
                                             <div className="relative">
                                                 <Disclosure.Button className="p-2 ml-1">
@@ -891,10 +891,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                     <Disclosure.Panel className="pl-2 w-full py-1">
                                         <div className="relative flex items-center w-full">
                                             <div className="py-2 relative border-l-2 w-full pl-1">
-                                                <div className="text-white pb-2 flex justify-center">
+                                                <div className="text-white pb-1 flex justify-center">
                                                     <h4>Background color</h4>
                                                 </div>
-                                                <div className="flex items-center my-3 px-5 h-10 justify-center">
+                                                <div className="flex items-center my-3 px-5 xl:px-1 2xl:px-5 h-10 justify-center">
                                                     <input
                                                         onChange={
                                                             ({target}) => {
@@ -915,7 +915,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         min={0}
                                                         type="text"
                                                         placeholder="Type a Hex or RGBA Color"
-                                                        className="w-full rounded-md h-full appearance-none border-2 text-center focus:outline-none bg-black text-nowrap truncate"/>
+                                                        className="w-full rounded-md text-md xl:text-sm 2xl:text-md h-full appearance-none border-2 text-center focus:outline-none bg-black text-nowrap truncate"/>
 
                                                 </div>
                                                 <ColorPicker
@@ -964,7 +964,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                 <>
                                     <h3 className="flow-root">
                                         <div
-                                            className={"border-2 rounded-md py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
+                                            className={"border-2 rounded-md py-1 xl:py-0 2xl:py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
                                             <span className="font-bold text-white">Border</span>
                                             <div className="relative">
                                                 <Disclosure.Button className="p-2 ml-1">
@@ -990,8 +990,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 <div
                                                     className="relative h-24 my-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
                                                     <div className="absolute left-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                        <div className="relative flex rounded-md border-[1px] text-md xl:text-xs 2xl:text-md border-white h-10 xl:h-8 2xl:h-10 w-20 xl:w-16 2xl:w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setBorderWidth({
@@ -1033,7 +1032,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 }
                                                                 value={borderWidth.borderTop.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 xl:w-8 2xl:w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -1044,10 +1043,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div
-                                                        className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                    <div className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
+                                                        <div className="relative flex rounded-md border-[1px] text-md xl:text-xs 2xl:text-md border-white h-10 xl:h-8 2xl:h-10 w-20 xl:w-16 2xl:w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setBorderWidth({
@@ -1089,7 +1086,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 }
                                                                 value={borderWidth.borderBottom.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 xl:w-8 2xl:w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -1100,13 +1097,11 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <span
-                                                        className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
+                                                    <span className="absolute text-sm xl:text-[10px] 2xl:text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
                                                             Borders
-                                                        </span>
+                                                    </span>
                                                     <div className="absolute top-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                        <div className="relative flex rounded-md border-[1px] text-md xl:text-xs 2xl:text-md border-white h-10 xl:h-8 2xl:h-10 w-20 xl:w-16 2xl:w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setBorderWidth({
@@ -1148,7 +1143,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 }
                                                                 value={borderWidth.borderLeft.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 xl:w-8 2xl:w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -1159,10 +1154,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div
-                                                        className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                    <div className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
+                                                        <div className="relative flex rounded-md border-[1px] text-md xl:text-xs 2xl:text-md border-white h-10 xl:h-8 2xl:h-10 w-20 xl:w-16 2xl:w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setBorderWidth({
@@ -1204,7 +1197,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 }
                                                                 value={borderWidth.borderRight.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 xl:w-8 2xl:w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -1218,10 +1211,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 </div>
                                                 <div className="py-2 flex items-center relative h-max">
                                                     <div
-                                                        className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
                                                         <div
                                                             className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
-                                                            <IconBorderRadius/>
+                                                            <IconBorderRadius className="flex xl:hidden 2xl:flex"/>
                                                             <span className="text-xs font-bold">Radius</span>
                                                         </div>
                                                         <input
@@ -1261,7 +1254,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             }
                                                             value={rounded.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 xl:h-6 2xl:h-10 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -1272,10 +1265,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div className="text-white py-2 flex justify-center">
+                                                <div className="text-white pb-2 flex justify-center">
                                                     <h4>Border color</h4>
                                                 </div>
-                                                <div className="flex items-center my-3 px-5 h-10 justify-center">
+                                                <div className="flex items-center my-2 px-5 xl:px-1 2xl:px-5 h-10 xl:h-8 2xl:h-10 text-md xl:text-sm 2xl:text-md justify-center">
                                                     <input
                                                         onChange={
                                                             ({target}) => {
@@ -1344,7 +1337,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                 <>
                                     <h3 className="flow-root">
                                         <div
-                                            className={"border-2 rounded-md py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
+                                            className={"border-2 rounded-md py-1 xl:py-0 2xl:py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
                                             <span className="font-bold text-white">Size and spacing</span>
                                             <div className="relative">
                                                 <Disclosure.Button className="p-2 ml-1">
@@ -1373,10 +1366,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 */}
                                                 <div className="pb-2 flex items-center relative h-max">
                                                     <div
-                                                        className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
                                                         <div
                                                             className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
-                                                            <IconArrowsVertical/>
+                                                            <IconArrowsVertical className="flex xl:hidden 2xl:flex"/>
                                                             <span className="text-xs font-bold">Height</span>
                                                         </div>
                                                         <input
@@ -1422,7 +1415,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             }
                                                             value={size.height.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 xl:h-6 2xl:h-10 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -1435,10 +1428,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 </div>
                                                 <div className="py-2 flex items-center relative h-max">
                                                     <div
-                                                        className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
                                                         <div
                                                             className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
-                                                            <IconArrowsVertical/>
+                                                            <IconArrowsVertical className="flex xl:hidden 2xl:flex"/>
                                                             <span
                                                                 className="text-xs text-center font-bold">Min<br/>Height</span>
                                                         </div>
@@ -1485,7 +1478,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             }
                                                             value={size.minHeight?.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -1498,10 +1491,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 </div>
                                                 <div className="py-2 flex items-center relative h-max">
                                                     <div
-                                                        className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
                                                         <div
                                                             className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
-                                                            <IconArrowsVertical/>
+                                                            <IconArrowsVertical className="flex xl:hidden 2xl:flex"/>
                                                             <span
                                                                 className="text-xs text-center font-bold">Max<br/>Height</span>
                                                         </div>
@@ -1548,7 +1541,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             }
                                                             value={size.maxHeight?.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -1561,10 +1554,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 </div>
                                                 <div className="py-2 flex items-center relative h-max">
                                                     <div
-                                                        className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
                                                         <div
                                                             className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
-                                                            <IconArrowsHorizontal/>
+                                                            <IconArrowsHorizontal className="flex xl:hidden 2xl:flex"/>
                                                             <span className="text-xs font-bold">Width</span>
                                                         </div>
                                                         <input
@@ -1610,7 +1603,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             }
                                                             value={size.width.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -1623,10 +1616,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 </div>
                                                 <div className="py-2 flex items-center relative h-max">
                                                     <div
-                                                        className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
                                                         <div
                                                             className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
-                                                            <span className="rotate-90"><IconArrowsVertical/></span>
+                                                            <span className="rotate-90"><IconArrowsVertical className="flex xl:hidden 2xl:flex"/></span>
                                                             <span
                                                                 className="text-xs text-center font-bold">Min<br/>Width</span>
                                                         </div>
@@ -1673,7 +1666,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             }
                                                             value={size.minWidth?.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -1686,10 +1679,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 </div>
                                                 <div className="py-2 flex items-center relative h-max">
                                                     <div
-                                                        className="relative flex rounded-md border-[1px] border-white h-10 w-full">
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
                                                         <div
                                                             className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
-                                                            <span className="rotate-90"><IconArrowsVertical/></span>
+                                                            <span className="rotate-90"><IconArrowsVertical className="flex xl:hidden 2xl:flex"/></span>
                                                             <span
                                                                 className="text-xs text-center font-bold">Max<br/>Width</span>
                                                         </div>
@@ -1736,7 +1729,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             }
                                                             value={size.maxWidth?.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -1758,9 +1751,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 */}
                                                 <div
                                                     className="relative h-24 mt-6 mb-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
-                                                    <div className="absolute left-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                    <div className="absolute left-2/4 text-md xl:text-xs 2xl:text-md -translate-x-2/4 -translate-y-2/4">
+                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-20 xl:w-16 2xl:w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setMargins({
@@ -1802,7 +1794,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 }
                                                                 value={margins.marginTop?.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 xl:w-8 2xl:w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -1813,10 +1805,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div
-                                                        className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                    <div className="absolute left-2/4 bottom-0 text-md xl:text-xs 2xl:text-md -translate-x-2/4 translate-y-2/4">
+                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-20 xl:w-16 2xl:w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setMargins({
@@ -1858,7 +1848,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 }
                                                                 value={margins.marginBottom.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 xl:w-8 2xl:w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -1869,13 +1859,11 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <span
-                                                        className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
+                                                    <span className="absolute text-sm xl:text-[10px] 2xl:text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
                                                             Margins
                                                         </span>
-                                                    <div className="absolute top-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                    <div className="absolute left-0 top-2/4 text-md xl:text-xs 2xl:text-md -translate-x-2/4 -translate-y-2/4">
+                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-20 xl:w-16 2xl:w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setMargins({
@@ -1917,7 +1905,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 }
                                                                 value={margins.marginLeft.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 xl:w-8 2xl:w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -1928,10 +1916,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div
-                                                        className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                    <div className="absolute right-0 top-2/4 text-md xl:text-xs 2xl:text-md translate-x-2/4 -translate-y-2/4">
+                                                        <div className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-20 xl:w-16 2xl:w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setMargins({
@@ -1973,7 +1959,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 }
                                                                 value={margins.marginRight.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 xl:w-8 2xl:w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -1985,11 +1971,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div
-                                                    className="relative h-24 mt-12 mb-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
+                                                <div className="relative h-24 mt-12 mb-5 mx-auto w-3/5 border-2 border-gray-500 rounded-md">
                                                     <div className="absolute left-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                        <div className="relative flex rounded-md border-[1px] text-md xl:text-xs 2xl:text-md border-white h-10 xl:h-8 2xl:h-10 w-20 xl:w-16 2xl:w-20">
                                                             <input
                                                                 onChange={({target}) => {
                                                                     setPaddings({
@@ -2031,7 +2015,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 }
                                                                 value={paddings.paddingTop.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 xl:w-8 2xl:w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -2042,11 +2026,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div
-                                                        className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
-                                                            <input onChange={({target}) => {
+                                                    <div className="absolute left-2/4 bottom-0 -translate-x-2/4 translate-y-2/4">
+                                                        <div className="relative flex rounded-md border-[1px] text-md xl:text-xs 2xl:text-md border-white h-10 xl:h-8 2xl:h-10 w-20 xl:w-16 2xl:w-20">
+                                                            <input
+                                                                onChange={({target}) => {
                                                                 setPaddings({
                                                                     ...paddings,
                                                                     paddingBottom: {
@@ -2086,7 +2069,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 }
                                                                 value={paddings.paddingBottom.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 xl:w-8 2xl:w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -2097,13 +2080,11 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <span
-                                                        className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
+                                                    <span className="absolute text-sm top-2/4 -translate-x-2/4 -translate-y-2/4 left-2/4">
                                                             Paddings
-                                                        </span>
+                                                    </span>
                                                     <div className="absolute top-2/4 -translate-x-2/4 -translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                        <div className="relative flex rounded-md border-[1px] text-md xl:text-xs 2xl:text-md border-white h-10 xl:h-8 2xl:h-10 w-20 xl:w-16 2xl:w-20">
                                                             <input onChange={({target}) => {
                                                                 setPaddings({
                                                                     ...paddings,
@@ -2144,7 +2125,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 }
                                                                 value={paddings.paddingLeft.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 xl:w-8 2xl:w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -2155,10 +2136,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div
-                                                        className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
-                                                        <div
-                                                            className="relative flex rounded-md border-[1px] border-white h-10 w-20">
+                                                    <div className="absolute top-2/4 right-0 translate-x-2/4 -translate-y-2/4">
+                                                        <div className="relative flex rounded-md border-[1px] text-md xl:text-xs 2xl:text-md border-white h-10 xl:h-8 2xl:h-10 w-20 xl:w-16 2xl:w-20">
                                                             <input onChange={({target}) => {
                                                                 setPaddings({
                                                                     ...paddings,
@@ -2199,7 +2178,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     }
                                                                 }
                                                                 value={paddings.paddingRight.unit}
-                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                                className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 xl:w-8 2xl:w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                                 name="" id="">
                                                                 {
                                                                     units.map((unit, index) => {
@@ -2231,7 +2210,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                 <>
                                     <h3 className="flow-root">
                                         <div
-                                            className={"border-2 rounded-md py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
+                                            className={"border-2 rounded-md py-1 xl:py-0 2xl:py-1 z-50 flex w-full items-center justify-between text-md xl:text-sm 2xl:text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
                                             <span className="font-bold text-white">Display and Position</span>
                                             <div className="relative">
                                                 <Disclosure.Button className="p-2 ml-1">
@@ -2259,7 +2238,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     DISPLAY
                                                     */}
                                                 <h3 className="text-sm text-center font-bold">Display</h3>
-                                                <div className="w-full p-3 flex justify-center space-x-3">
+                                                <div className="w-full p-3 flex flex-wrap justify-center space-y-2 space-x-3 xl:space-x-0 2xl:space-x-3">
                                                     <button
                                                         onClick={() => {
                                                             setDisplay("hidden")
@@ -2271,7 +2250,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-2/6 flex items-center px-2 rounded-md border-2 py-1 ${display === 'hidden' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        className={`w-2/6 xl:w-full 2xl:w-2/6 flex items-center justify-center px-2 rounded-md border-2 py-1 ${display === 'hidden' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                         <IconSquareX/>
                                                         <span className="pl-1">Hidden</span>
                                                     </button>
@@ -2286,7 +2265,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-2/6 flex items-center px-2 rounded-md border-2 py-1 ${display === 'flex' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        className={`w-2/6 xl:w-full 2xl:w-2/6 flex items-center justify-center px-2 rounded-md border-2 py-1 ${display === 'flex' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                         <IconColumns1/>
                                                         <span className="px-2">Flex</span>
                                                     </button>
@@ -2301,7 +2280,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-2/6 flex items-center px-2 rounded-md border-2 py-1 ${display === 'grid' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        className={`w-2/6 xl:w-full 2xl:w-2/6 flex items-center justify-center px-2 rounded-md border-2 py-1 ${display === 'grid' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                         <IconGrid4x4/>
                                                         <span className="px-2">Grid</span>
                                                     </button>
@@ -2309,7 +2288,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 {
                                                     display === 'flex' ? (
                                                         <>
-                                                            <div className="w-full p-3 flex justify-center space-x-3">
+                                                            <div className="w-full p-2 flex justify-center space-x-3">
                                                                 <button
                                                                     onClick={() => {
                                                                         setFlexDirection("flex-col")
@@ -2321,8 +2300,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                             }
                                                                         })
                                                                     }}
-                                                                    className={`w-3/6 flex items-center px-2 rounded-md border-2 py-1 ${flexDirection === 'flex-col' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
-                                                                    <IconArrowsUpDown/>
+                                                                    className={`w-3/6 flex items-center justify-center text-md xl:text-xs 2xl:text-md px-1 rounded-md border-2 py-1 ${flexDirection === 'flex-col' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                    <IconArrowsUpDown className="flex xl:hidden 2xl:flex"/>
                                                                     <span className="px-2">Flex Col</span>
                                                                 </button>
                                                                 <button
@@ -2336,14 +2315,14 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                             }
                                                                         })
                                                                     }}
-                                                                    className={`w-3/6 flex items-center px-2 rounded-md border-2 py-1 ${flexDirection === 'flex-row' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                    className={`w-3/6 flex items-center justify-center text-md xl:text-xs 2xl:text-md px-1 rounded-md border-2 py-1 ${flexDirection === 'flex-row' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="rotate-90">
-                                                                    <IconArrowsUpDown/>
+                                                                    <IconArrowsUpDown className="flex xl:hidden 2xl:flex"/>
                                                                 </span>
                                                                     <span className="px-2">Flex Row</span>
                                                                 </button>
                                                             </div>
-                                                            <div className="w-full p-3 flex justify-center space-x-3">
+                                                            <div className="w-full p-2 flex justify-center space-x-3">
                                                                 <button
                                                                     onClick={() => {
                                                                         setFlexWrap("flex-wrap")
@@ -2355,8 +2334,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                             }
                                                                         })
                                                                     }}
-                                                                    className={`w-3/6 flex items-center px-2 rounded-md border-2 py-1 ${flexWrap === 'flex-wrap' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
-                                                                    <IconTextWrap/>
+                                                                    className={`w-3/6 flex items-center justify-center text-md xl:text-xs 2xl:text-md px-1 rounded-md border-2 py-1 ${flexWrap === 'flex-wrap' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                    <IconTextWrap className="flex xl:hidden 2xl:flex"/>
                                                                     <span className="px-2">Wrap</span>
                                                                 </button>
                                                                 <button
@@ -2370,9 +2349,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                             }
                                                                         })
                                                                     }}
-                                                                    className={`w-3/6 flex items-center px-2 rounded-md border-2 py-1 ${flexWrap === 'flex-nowrap' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                    className={`w-3/6 flex items-center justify-center text-md xl:text-xs 2xl:text-md px-1 rounded-md border-2 py-1 ${flexWrap === 'flex-nowrap' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                         <span>
-                                                                            <IconTextWrapDisabled/>
+                                                                            <IconTextWrapDisabled className="flex xl:hidden 2xl:flex"/>
                                                                         </span>
                                                                     <span className="px-2">No wrap</span>
                                                                 </button>
@@ -2384,7 +2363,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     display === 'grid' ? (
                                                         <div className="grid grid-cols-2 gap-2">
                                                             <div
-                                                                className="relative flex rounded-md border-[1px] border-white h-10">
+                                                                className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10">
                                                                 <div
                                                                     className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                                     <span className="text-[12px] font-bold">Cols</span>
@@ -2412,7 +2391,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             </div>
                                                             <div
-                                                                className="relative flex rounded-md border-[1px] border-white h-10">
+                                                                className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10">
                                                                 <div
                                                                     className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                                     <span className="text-[12px] font-bold">Rows</span>
@@ -2440,7 +2419,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                     className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             </div>
                                                             <div className="relative col-span-2 flex flex-wrap rounded-md">
-                                                                <div className="w-2/4 p-1">
+                                                                <div className="w-2/4 xl:w-full 2xl:w-2/4 p-1">
                                                                     <button
                                                                         onClick={() => {
                                                                             onChangeInput({
@@ -2455,7 +2434,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         <span className="px-2">Place Items Start</span>
                                                                     </button>
                                                                 </div>
-                                                                <div className="w-2/4 p-1">
+                                                                <div className="w-2/4 xl:w-full 2xl:w-2/4 p-1">
                                                                     <button
                                                                         onClick={() => {
                                                                             onChangeInput({
@@ -2470,7 +2449,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         <span className="px-2">Place Items Center</span>
                                                                     </button>
                                                                 </div>
-                                                                <div className="w-2/4 p-1">
+                                                                <div className="w-2/4 xl:w-full 2xl:w-2/4 p-1">
                                                                     <button
                                                                         onClick={() => {
                                                                             onChangeInput({
@@ -2485,7 +2464,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         <span className="px-2">Place Items End</span>
                                                                     </button>
                                                                 </div>
-                                                                <div className="w-2/4 p-1">
+                                                                <div className="w-2/4 xl:w-full 2xl:w-2/4 p-1">
                                                                     <button
                                                                         onClick={() => {
                                                                             onChangeInput({
@@ -2505,7 +2484,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     ) : ''
                                                 }
                                                 <div
-                                                    className="relative my-2 flex rounded-md border-[1px] border-white h-10">
+                                                    className="relative my-2 flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10">
                                                     <div
                                                         className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                         <span className="text-[12px] font-bold">Gap X</span>
@@ -2553,7 +2532,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             }
                                                         }
                                                         value={gaps.gapX?.unit}
-                                                        className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                        className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 xl:h-6 2xl:h-10 bg-black appearance-none"
                                                         name="" id="">
                                                         {
                                                             units.map((unit, index) => {
@@ -2564,7 +2543,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     </select>
                                                 </div>
                                                 <div
-                                                    className="relative my-2 flex rounded-md border-[1px] border-white h-10">
+                                                    className="relative my-2 flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10">
                                                     <div
                                                         className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                         <span className="text-[12px] font-bold">Gap Y</span>
@@ -2612,7 +2591,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             }
                                                         }
                                                         value={gaps.gapY?.unit}
-                                                        className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                        className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                         name="" id="">
                                                         {
                                                             units.map((unit, index) => {
@@ -2623,7 +2602,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     </select>
                                                 </div>
                                                 <div
-                                                    className="relative my-2 flex rounded-md border-[1px] border-white h-10">
+                                                    className="relative my-2 flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10">
                                                     <div
                                                         className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                         <span className="text-[12px] font-bold">Space X</span>
@@ -2671,7 +2650,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             }
                                                         }
                                                         value={spaces.spaceX?.unit}
-                                                        className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                        className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                         name="" id="">
                                                         {
                                                             units.map((unit, index) => {
@@ -2682,7 +2661,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     </select>
                                                 </div>
                                                 <div
-                                                    className="relative my-2 flex rounded-md border-[1px] border-white h-10">
+                                                    className="relative my-2 flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10">
                                                     <div
                                                         className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                         <span className="text-[12px] font-bold">Space Y</span>
@@ -2730,7 +2709,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             }
                                                         }
                                                         value={spaces.spaceY?.unit}
-                                                        className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                        className="absolute top-2/4 focus:outline-none -translate-y-2/4 right-0 w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                         name="" id="">
                                                         {
                                                             units.map((unit, index) => {
@@ -2749,13 +2728,13 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     ALIGN AND JUSTIFY
                                                     ALIGN AND JUSTIFY
                                                     */}
-                                                <div className="relative my-2 flex h-10 w-full">
+                                                <div className="relative my-2 flex flex-wrap h-10 xl:h-20 2xl:h-10 w-full">
                                                     <div
-                                                        className="w-[35%] flex items-center text-xs justify-start px-2 border-r-[1px] h-full">
+                                                        className="w-[35%] xl:w-full 2xl:w-[35%] flex items-center text-xs justify-start xl:justify-center px-2 border-r-[1px] xl:border-r-0 2xl:border-r-[1px] h-full xl:h-10 2xl:h-full">
                                                         <IconSpacingVertical/>
                                                         <span className="font-bold">Align</span>
                                                     </div>
-                                                    <div className="flex items-center justify-around w-[65%]">
+                                                    <div className="flex items-center justify-around w-[65%] xl:w-full 2xl:w-[65%]">
                                                         <button
                                                             onClick={() => {
                                                                 onChangeInput({
@@ -2843,13 +2822,13 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <div className="relative my-2 flex h-10 w-full">
+                                                <div className="relative my-2 flex flex-wrap h-10 xl:h-20 w-full">
                                                     <div
-                                                        className="w-[35%] flex items-center text-xs text-center justify-start px-2 border-r-[1px] h-full">
+                                                        className="w-[35%] xl:w-full 2xl:w-[35%] flex items-center text-xs text-center justify-start xl:justify-center 2xl:justify-start px-2 border-r-[1px] xl:border-r-0 2xl:border-r-[1px] h-full xl:h-10 2xl:h-full">
                                                         <IconSpacingHorizontal/>
                                                         <span className="font-bold">Justify</span>
                                                     </div>
-                                                    <div className="flex items-center justify-around w-[65%]">
+                                                    <div className="flex items-center justify-around w-[65%] xl:w-full 2xl:w-[65%]">
                                                         <button
                                                             onClick={() => {
                                                                 onChangeInput({
@@ -3099,9 +3078,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         POSITIONS TOP BOTTOM LEFT RIGHT
                                                         POSITIONS TOP BOTTOM LEFT RIGHT
                                                         */}
-                                                <div className="grid grid-cols-2 gap-2">
+                                                <div className="grid grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2 gap-2">
                                                     <div
-                                                        className="relative flex rounded-md border-[1px] border-white h-10">
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10">
                                                         <div
                                                             className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                             <span className="text-[12px] font-bold">Top</span>
@@ -3149,7 +3128,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             }
                                                             value={positions.top.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -3160,7 +3139,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         </select>
                                                     </div>
                                                     <div
-                                                        className="relative flex rounded-md border-[1px] border-white h-10">
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10">
                                                         <div
                                                             className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                             <span className="text-[12px] font-bold">Bottom</span>
@@ -3208,7 +3187,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             }
                                                             value={positions.bottom.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 xl:h-6 2xl:h-10 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -3219,7 +3198,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         </select>
                                                     </div>
                                                     <div
-                                                        className="relative flex rounded-md border-[1px] border-white h-10">
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10">
                                                         <div
                                                             className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                             <span className="text-[12px] font-bold">Left</span>
@@ -3267,7 +3246,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             }
                                                             value={positions.left.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -3278,7 +3257,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         </select>
                                                     </div>
                                                     <div
-                                                        className="relative flex rounded-md border-[1px] border-white h-10">
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10">
                                                         <div
                                                             className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                             <span className="text-[12px] font-bold">Right</span>
@@ -3326,7 +3305,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             }
                                                             value={positions.right.unit}
-                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 bg-black appearance-none"
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
                                                             name="" id="">
                                                             {
                                                                 units.map((unit, index) => {
@@ -3348,7 +3327,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         */}
                                                 <div className="grid grid-cols-1 gap-2 my-2">
                                                     <div
-                                                        className="relative flex rounded-md border-[1px] border-white h-10">
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10">
                                                         <div
                                                             className="w-[40%] flex items-center justify-center border-r-[1px] h-full">
                                                             <span className="text-[12px] font-bold">Z Index</span>
@@ -3393,7 +3372,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                     <>
                                         <h3 className="flow-root">
                                             <div
-                                                className={"border-2 rounded-md py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
+                                                className={"border-2 rounded-md py-1 xl:py-0 2xl:py-1 z-50 flex w-full items-center justify-between text-md text-gray-400 hover:text-white px-2 bg-black border-stone-800"}>
                                                 <span className="font-bold text-white">Image</span>
                                                 <div className="relative">
                                                     <Disclosure.Button className="p-2 ml-1">
@@ -3433,7 +3412,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewportState.type]?.objectFit === undefined || optionItem['settings' + viewportState.type]?.objectFit === 'object-none') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewportState.type]?.objectFit === undefined || optionItem['settings' + viewportState.type]?.objectFit === 'object-none') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">None</span>
                                                             </button>
                                                         </div>
@@ -3448,7 +3427,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectFit === 'object-cover' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectFit === 'object-cover' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Cover</span>
                                                             </button>
                                                         </div>
@@ -3463,7 +3442,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectFit === 'object-contain' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectFit === 'object-contain' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Contain</span>
                                                             </button>
                                                         </div>
@@ -3478,7 +3457,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectFit === 'object-fill' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectFit === 'object-fill' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Fill</span>
                                                             </button>
                                                         </div>
@@ -3505,7 +3484,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewportState.type]?.objectPosition === undefined || optionItem['settings' + viewportState.type]?.objectPosition === '') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${(optionItem['settings' + viewportState.type]?.objectPosition === undefined || optionItem['settings' + viewportState.type]?.objectPosition === '') ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">None</span>
                                                             </button>
                                                         </div>
@@ -3520,7 +3499,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Top</span>
                                                             </button>
                                                         </div>
@@ -3535,7 +3514,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Bottom</span>
                                                             </button>
                                                         </div>
@@ -3550,7 +3529,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-right' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 2xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-right' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Right</span>
                                                             </button>
                                                         </div>
@@ -3565,7 +3544,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-left' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-left' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Left</span>
                                                             </button>
                                                         </div>
@@ -3580,7 +3559,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-center' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-center' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Center</span>
                                                             </button>
                                                         </div>
@@ -3595,7 +3574,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-left-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-left-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Left Top</span>
                                                             </button>
                                                         </div>
@@ -3610,7 +3589,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-left-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-left-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Left Bottom</span>
                                                             </button>
                                                         </div>
@@ -3625,7 +3604,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-right-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-right-top' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Right Top</span>
                                                             </button>
                                                         </div>
@@ -3640,7 +3619,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                         }
                                                                     })
                                                                 }}
-                                                                className={`w-full h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-right-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                                className={`w-full h-10 xl:h-8 2xl:h-10 flex py-2 items-center justify-center font-bold px-2 text-xs rounded-md border-2 ${optionItem['settings' + viewportState.type]?.objectPosition === 'object-right-bottom' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                                 <span className="px-2">Right Bottom</span>
                                                             </button>
                                                         </div>

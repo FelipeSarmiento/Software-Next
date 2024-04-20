@@ -110,8 +110,8 @@ export function SignUpForm() {
                 {
                     message.message !== '' && (
                         <LabelInputContainer className="md:col-span-2">
-                            <p className="text-center font-bold">
-                                <span className={"px-4 py-2 rounded-lg border-2 " + ( message.type === 'success' ? 'border-green-500 text-green-500' : 'border-red-500 text-red-500' )}>{ message.message }</span>
+                            <p className={"px-4 py-2 rounded-lg text-center border-2 font-bold " + ( message.type === 'success' ? 'border-green-500 text-green-500' : 'border-red-500 text-red-500' )}>
+                                <span className="rounded-lg text-wrap ">{ message.message }</span>
                             </p>
                         </LabelInputContainer>
                     )

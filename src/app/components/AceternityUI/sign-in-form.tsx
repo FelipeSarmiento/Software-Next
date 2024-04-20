@@ -5,7 +5,7 @@ import {cn} from "../../../settings/utils/cn";
 import {useForm} from "../../../lib/hooks/useForm";
 import Link from "next/link";
 import { login } from "@/data/data";
-import {useState} from "react";
+import React, {useState} from "react";
 import { setSession } from "@/data/data";
 
 export function SignInForm() {
@@ -56,8 +56,8 @@ export function SignInForm() {
                 {
                     errorMessage !== '' && (
                         <LabelInputContainer className="md:col-span-2 my-5">
-                            <p className="text-center font-bold">
-                                <span className="px-4 py-2 rounded-lg border-2 border-red-500 text-red-500">{ errorMessage }</span>
+                            <p className={"px-4 py-2 rounded-lg text-center border-2 font-bold"}>
+                                <span className="rounded-lg text-wrap ">{ errorMessage }</span>
                             </p>
                         </LabelInputContainer>
                     )

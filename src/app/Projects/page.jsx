@@ -30,11 +30,11 @@ export default function Home() {
                         </h1>
                     </div>
                 </header>
-                <div className="grid grid-cols-1 2xl:grid-cols-2 justify-center md:place-items-center xl:w-max mx-auto gap-8">
+                <div className="grid grid-cols-1 xl:grid-cols-2 justify-center md:place-items-center xl:place-items-stretch 2xl:place-items-center 2xl:w-max mx-auto gap-8">
                     {
                         projects.length > 0 ? projects.map((project, index) => (
                             <Link key={ project.idproject * index } target="_blank" href={ "/" + project.projectpublicid }>
-                                <div className="relative grid grid-cols-1 md:grid-cols-2 p-2 w-full  md:p-6 md:w-[750px] md:h-72 md:max-h-72 rounded-lg border-2 border-neutral-300">
+                                <div className="relative grid grid-cols-1 md:grid-cols-2 p-2 w-full  md:p-6 md:w-[750px] xl:w-full 2xl:w-[750px] md:h-72 md:max-h-72 rounded-lg border-2 border-neutral-300">
                                     <div className="border-2 flex items-center justify-center select-none border-neutral-300 rounded-md md:h-full">
                                         <Image src={ SoftwareNextLogo } alt="Software Next Logo" width={500} height={500} className="size-52 object-cover rounded-md"/>
                                     </div>

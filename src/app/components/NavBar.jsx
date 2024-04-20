@@ -167,15 +167,12 @@ export function NavBar() {
                                             <Menu as="div" className="relative">
                                                 <div className="">
                                                     <Link href="/MyProjects" className={ 'text-gray-300 hover:bg-stone-800 hover:text-white block rounded-md px-3 py-2 text-base font-medium'}>
-                                                        <span className="absolute -inset-1.5"/>
                                                         <span className="">My Projects</span>
                                                     </Link>
                                                     <Link href="/MyTemplates" className={ 'text-gray-300 hover:bg-stone-800 hover:text-white block rounded-md px-3 py-2 text-base font-medium'}>
-                                                        <span className="absolute -inset-1.5"/>
                                                         <span className="">My Templates</span>
                                                     </Link>
                                                     <Link title="My Profile" href="/MyProfile" className={ 'text-gray-300 hover:bg-stone-800 hover:text-white block rounded-md px-3 py-2 text-base font-medium'}>
-                                                        <span className="absolute -inset-1.5"/>
                                                         <span className="">My Profile</span>
                                                     </Link>
                                                     <Disclosure.Button title="Log out" onClick={() => logout()} className={ 'text-gray-300 flex hover:bg-stone-800 hover:text-white block rounded-md px-3 py-2 text-base font-medium'}>

@@ -279,11 +279,11 @@ export default function Dashboard({params}) {
         return (
             <div className="min-h-full bg-black text-white lg:bg-transparent pt-4">
                 <header className=" shadow">
-                    <div className="mx-auto relative grid grid-cols-2 2xl:grid-cols-5 2xl:flex justify-between px-4 py-3 sm:px-6 2xl:px-24">
-                        <h1 className="col-span-2 flex flex-col xl:flex-row items-center justify-center 2xl:justify-around text-3xl font-bold tracking-tight text-white">
+                    <div className="mx-auto relative grid grid-cols-2 xl:grid-cols-5 xl:flex justify-between px-4 py-3 sm:px-6 xl:px-24">
+                        <h1 className="col-span-2 flex flex-col xl:flex-row items-center justify-center xl:justify-around text-3xl font-bold tracking-tight text-white">
                             Template <span className="hidden xl:flex px-3">-</span><span className="text-cyan-500 py-2 2xl:py-0 font-extrabold"> {template?.templatename}</span>
                         </h1>
-                        <div className="col-span-2 2xl:absolute 2xl:top-2/4 2xl:left-2/4 2xl:-translate-x-2/4 2xl:-translate-y-2/4 flex items-center justify-center">
+                        <div className="col-span-2 xl:absolute xl:top-2/4 xl:left-2/4 xl:-translate-x-2/4 xl:-translate-y-2/4 flex items-center justify-center">
                             <div className="size-10 flex items-center justify-center">
                                 <Group justify="center">
                                     <HoverCard width={300} shadow="md">
@@ -411,9 +411,9 @@ export default function Dashboard({params}) {
                             <div className="h-full">
                                 <main className="mx-auto max-w-11/12 px-4 sm:px-6 lg:px-8 pt-6">
                                     <section aria-labelledby="products-heading" className="h-[56vh] pt-3">
-                                        <div className="grid grid-cols-1 relative 2xl:gap-x-5 gap-y-4 xl:grid-cols-9 2xl:grid-cols-5 h-full">
-                                            <div className="col-span-1 xl:col-span-9 2xl:col-span-5 grid grid-cols-2 2xl:grid-cols-5 gap-y-3 py-2 h-15 rounded-md w-full bg-stone-950 border-2 border-stone-800">
-                                                <div className="col-span-1 hidden order-2 2xl:order-1 2xl:flex justify-end 2xl:justify-start items-center px-2">
+                                        <div className="grid grid-cols-1 relative xl:gap-x-5 gap-y-4 xl:grid-cols-5 h-full">
+                                            <div className="col-span-1 xl:col-span-5 grid grid-cols-2 xl:grid-cols-5 gap-y-3 py-2 h-15 rounded-md w-full bg-stone-950 border-2 border-stone-800">
+                                                <div className="col-span-1 hidden order-2 xl:order-1 xl:flex justify-end xl:justify-start items-center px-2">
                                                     <button
                                                         disabled={optionItem === undefined}
                                                         onClick={() => {
@@ -482,7 +482,7 @@ export default function Dashboard({params}) {
                                                             </> : ""
                                                     }
                                                 </div>
-                                                <div className="col-span-2 order-1 2xl:order-2 2xl:col-span-3 relative flex items-center justify-center">
+                                                <div className="col-span-2 order-1 xl:order-2 xl:col-span-3 relative flex items-center justify-center">
                                                     {/*
                                                 MOBILE TREE VIEW
                                                 MOBILE TREE VIEW
@@ -492,12 +492,12 @@ export default function Dashboard({params}) {
                                                 MOBILE TREE VIEW
                                                 MOBILE TREE VIEW
                                                 */}
-                                                    <div className="absolute 2xl:hidden 2xl:invisible top-2/4 left-0 -translate-y-2/4">
+                                                    <div className="absolute xl:hidden xl:invisible top-2/4 left-0 -translate-y-2/4">
                                                         <div className="relative">
                                                             <Drawer
                                                                 closeOnEscape={false}
                                                                 classNames={{
-                                                                    root: "block 2xl:hidden",
+                                                                    root: "block xl:hidden",
                                                                     body: "bg-stone-950",
                                                                     content: "bg-stone-950",
                                                                     header: "bg-stone-950"
@@ -639,11 +639,11 @@ export default function Dashboard({params}) {
                                                 MOBILE SETTINGS
                                                 MOBILE SETTINGS
                                                 */}
-                                                    <div className="absolute 2xl:hidden 2xl:invisible top-2/4 right-0 -translate-y-2/4">
+                                                    <div className="absolute xl:hidden xl:invisible top-2/4 right-0 -translate-y-2/4">
                                                         <Drawer
                                                             closeOnEscape={false}
                                                             classNames={{
-                                                                root: "block 2xl:hidden",
+                                                                root: "block xl:hidden",
                                                                 body: "bg-stone-950",
                                                                 content: "bg-stone-950",
                                                                 header: "bg-stone-950"
@@ -674,7 +674,7 @@ export default function Dashboard({params}) {
                                                         </Button>
                                                     </div>
                                                 </div>
-                                                <div className="col-span-1 hidden 2xl:flex items-center justify-end relative order-3">
+                                                <div className="col-span-1 hidden xl:flex items-center justify-end relative order-3">
                                                     <div className="absolute">
                                                         <Group justify="center">
                                                             <HoverCard shadow="md" closeDelay={0}>
@@ -704,7 +704,7 @@ export default function Dashboard({params}) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="hidden xl:block xl:col-span-2 2xl:col-span-1">
+                                            <div className="hidden xl:block xl:col-span-1">
                                                 <DropMenu viewport={viewport} currentPage={actualPage} items={itemsDashboard?.pages[actualPage]}
                                                           optionSelected={optionItem}
                                                           title="Tree View"
@@ -712,14 +712,14 @@ export default function Dashboard({params}) {
                                                           functions={onSelectItem} addSection={addSection}
                                                           deleteItemDashboard={deleteItemDashboard}/>
                                             </div>
-                                            <div className="lg:col-span-5 2xl:col-span-3 bg-stone-950 overflow-x-auto  border-dotted border-2 flex justify-start rounded-md border-stone-800 h-[60vh] shrink-0 p-1">
+                                            <div className="xl:col-span-3 bg-stone-950 overflow-x-auto  border-dotted border-2 flex justify-start rounded-md border-stone-800 h-[60vh] shrink-0 p-1">
                                                 <div className={`outline outline-offset-2 relative outline-1 mx-auto outline-white overflow-x-auto rounded-md h-full p-1`} style={{"width": viewport.value, "min-width": viewport.value}}>
                                                     <DashboardPreview idUniqueIdentifier={optionItem?.idUniqueIdentifier}
                                                                       viewport={viewport} onSelectItem={onSelectItem}
                                                                       components={itemsDashboard?.pages[actualPage]}/>
                                                 </div>
                                             </div>
-                                            <div className="hidden xl:block xl:col-span-2 2xl:col-span-1">
+                                            <div className="hidden xl:block xl:col-span-1">
                                                 <DropMenu pages={Object.keys(itemsDashboard?.pages).map((page, index) => { return (page.charAt(0).toUpperCase() + page.slice(1)) })} items={optionItem} viewport={viewport} keepOptions={keepOptions}
                                                           modifyItemsDashboard={modifyItemsDashboard}
                                                           title={optionItem !== undefined ? "Settings for " + optionItem.label : "Settings"}

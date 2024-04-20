@@ -281,11 +281,11 @@ export default function Dashboard({params}) {
         return (
             <div className="min-h-full bg-black text-white lg:bg-transparent pt-4">
                 <header className=" shadow">
-                    <div className="mx-auto relative grid grid-cols-2 2xl:grid-cols-5 2xl:flex justify-between px-4 py-3 sm:px-6 2xl:px-24">
-                        <h1 className="col-span-2 flex flex-col xl:flex-row items-center justify-center 2xl:justify-around text-3xl font-bold tracking-tight text-white">
+                    <div className="mx-auto relative grid grid-cols-2 xl:grid-cols-5 xl:flex justify-between px-4 py-3 sm:px-6 xl:px-24">
+                        <h1 className="col-span-2 flex flex-col xl:flex-row items-center justify-center xl:justify-around text-3xl font-bold tracking-tight text-white">
                             Project <span className="hidden xl:flex px-3">-</span><span className="text-cyan-500 py-2 2xl:py-0 font-extrabold"> {project?.projectname}</span>
                         </h1>
-                        <div className="col-span-2 2xl:absolute 2xl:top-2/4 2xl:left-2/4 2xl:-translate-x-2/4 2xl:-translate-y-2/4 flex items-center justify-center">
+                        <div className="col-span-2 xl:absolute xl:top-2/4 xl:left-2/4 xl:-translate-x-2/4 xl:-translate-y-2/4 flex items-center justify-center">
                             <div className="size-10 flex items-center justify-center">
                                 <Group justify="center">
                                     <HoverCard width={300} shadow="md">
