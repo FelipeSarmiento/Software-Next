@@ -58,7 +58,6 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                         settingsDesktop: {...optionItem.settingsDesktop, [target.name]: target.value},
                         settingsTV: {...optionItem.settingsTV, [target.name]: target.value}
                     }
-                    console.log("option", option)
                     modifyItemsDashboard(option.idUniqueIdentifier, option)
                     updateOptionItem(option)
                 } else {
@@ -76,12 +75,6 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
         }
     }
 
-    useEffect(() => {
-        console.log("optionItemChange", optionItem)
-    }, [optionItem]);
-    useEffect(() => {
-        console.log("options", options)
-    }, [options]);
 
     useEffect(() => {
         updateOptionItem(options)
