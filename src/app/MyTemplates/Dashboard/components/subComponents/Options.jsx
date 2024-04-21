@@ -188,7 +188,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                     <div className="relative flex rounded-md border-[1px] border-white w-full">
                         <div className="w-[30%] flex items-center justify-start space-x-1 px-1 border-r-[1px] h-10 xl:h-8 2xl:h-10">
                             <IconId/>
-                            <span className="text-xs font-bold">ID</span>
+                            <span className="text-[12px] font-bold text-center text-md xl:text-[10px] 2xl:text-[12px]">ID</span>
                         </div>
                         <input
                             onChange={({target}) => {
@@ -221,7 +221,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                     <div className="relative flex text-xs rounded-md border-[1px] border-white w-full">
                         <div className="w-[30%] flex items-center justify-start space-x-1 px-1 border-r-[1px] h-10 xl:h-8 2xl:h-10">
                             <IconTag className="flex xl:hidden 2xl:flex"/>
-                            <span className="text-[12px] font-bold text-center text-md xl:text-[10px] 2xl:text-md">Name</span>
+                            <span className="text-[12px] font-bold text-center text-md xl:text-[10px] 2xl:text-[12px]">Name</span>
                         </div>
                         <input
                             onChange={({target}) => {
