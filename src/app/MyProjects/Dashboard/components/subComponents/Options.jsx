@@ -290,8 +290,8 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                             </div>
                             <Select
                                 classNames={{
-                                    root: "h-10 w-[70%] xl:h-7 2xl:h-10 py-0 border-0",
-                                    input: "bg-stone-950 text-white rounded-md border-0 my-0 h-10 xl:h-7 py-0 2xl:h-10 text-md xl:text-xs 2xl:text-md min-h-0 font-bold text-center",
+                                    root: "h-8 w-[70%] xl:h-6 2xl:h-8 py-0 border-0",
+                                    input: "bg-stone-950 text-white rounded-md border-0 my-0 h-8 xl:h-6 py-0 2xl:h-8 text-md xl:text-xs 2xl:text-md min-h-0 font-bold text-center",
                                     dropdown: "bg-stone-950 text-white",
                                     option: "hover:bg-stone-950 border-2 border-transparent hover:border-cyan-500 hover:text-cyan-500 text-white font-bold text-md"
                                 }}

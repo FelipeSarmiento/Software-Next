@@ -23,6 +23,9 @@ const nextConfig = {
                 hostname: 'image.thum.io',
             },
         ],
+    },
+    serverActions: {
+        bodySizeLimit: '10mb' //
     }
 };
 
