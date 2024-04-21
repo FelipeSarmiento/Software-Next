@@ -127,7 +127,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                                             }}
                                                             className="relative flow-root w-full">
                                                             <Disclosure.Button
-                                                                className={"flex w-full bg-black rounded-md border-2 px-2 mt-1 h-10 xl:h-8 2xl:h-10 items-center justify-between text-[10px] text-white " + (optionSelected?.idUniqueIdentifier === option?.idUniqueIdentifier ? "border-cyan-400 " : "border-stone-800 ")} >
+                                                                className={"flex w-full bg-black rounded-md border-2 px-2 mt-1 h-10 xl:h-8 2xl:h-10 items-center justify-between text-sm xl:text-[10px] 2xl:text-sm text-white " + (optionSelected?.idUniqueIdentifier === option?.idUniqueIdentifier ? "border-cyan-400 " : "border-stone-800 ")} >
                                                                 <span
                                                                     className={`font-medium flex items-center text-nowrap size-auto truncate pr-5 ${(optionSelected?.idUniqueIdentifier === option?.idUniqueIdentifier ? "text-cyan-400" : "text-white")}`}>
                                                                     {option.type === "container" ? (

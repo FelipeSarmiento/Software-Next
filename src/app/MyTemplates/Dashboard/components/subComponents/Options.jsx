@@ -253,7 +253,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
 
                 {optionItem.hasOwnProperty("text") ? (
                     <div className="py-2 flex items-center relative h-max">
-                        <div className="relative text-xs flex flex-col rounded-md border-[1px] border-white min-h-28 w-full">
+                        <div className="relative text-md xl:text-xs 2xl:text-md flex flex-col rounded-md border-[1px] border-white min-h-28 w-full">
                             <div className="w-full flex items-center justify-center border-b-[1px] h-10 xl:h-8 2xl:h-10">
                                 <IconCursorText/>
                                 <span className="font-bold">Text</span>
@@ -276,7 +276,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                 value={specificAttributes.text}
                                 min={0}
                                 type="text"
-                                className="w-full min-h-20 max-h-28 rounded-md appearance-none focus:outline-none bg-black p-1"/>
+                                className="w-full min-h-20 max-h-28 rounded-md text-md xl:text-sm 2xl:text-md appearance-none focus:outline-none bg-black p-1"/>
                         </div>
                     </div>
                 ) : ""}
