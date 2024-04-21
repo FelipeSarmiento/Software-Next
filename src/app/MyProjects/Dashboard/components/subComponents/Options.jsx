@@ -253,7 +253,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
 
                 {optionItem.hasOwnProperty("text") ? (
                     <div className="py-2 flex items-center relative h-max">
-                        <div className="relative text-xs flex flex-col rounded-md border-[1px] border-white min-h-28 w-full">
+                        <div className="relative text-md xl:text-xs 2xl:text-md flex flex-col rounded-md border-[1px] border-white min-h-28 w-full">
                             <div className="w-full flex items-center justify-center border-b-[1px] h-10 xl:h-8 2xl:h-10">
                                 <IconCursorText/>
                                 <span className="font-bold">Text</span>
@@ -276,7 +276,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                 value={specificAttributes.text}
                                 min={0}
                                 type="text"
-                                className="w-full min-h-20 max-h-28 rounded-md appearance-none focus:outline-none bg-black p-1"/>
+                                className="w-full min-h-20 max-h-28 rounded-md text-md xl:text-sm 2xl:text-md appearance-none focus:outline-none bg-black p-1"/>
                         </div>
                     </div>
                 ) : ""}
@@ -2030,25 +2030,25 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         <div className="relative flex rounded-md border-[1px] text-md xl:text-xs 2xl:text-md border-white h-10 xl:h-8 2xl:h-10 w-20 xl:w-16 2xl:w-20">
                                                             <input
                                                                 onChange={({target}) => {
-                                                                setPaddings({
-                                                                    ...paddings,
-                                                                    paddingBottom: {
-                                                                        value: target.value,
-                                                                        unit: paddings.paddingBottom.unit
-                                                                    }
-                                                                })
-                                                                onChangeInput({
-                                                                    target: {
-                                                                        id: "paddings",
-                                                                        name: "paddingBottom",
-                                                                        value: "pb-[" + target.value + paddings.paddingBottom.unit + "]"
-                                                                    }
-                                                                })
-                                                            }}
-                                                                   value={paddings.paddingBottom.value}
-                                                                   min={0}
-                                                                   type="number"
-                                                                   className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                                    setPaddings({
+                                                                        ...paddings,
+                                                                        paddingBottom: {
+                                                                            value: target.value,
+                                                                            unit: paddings.paddingBottom.unit
+                                                                        }
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "paddings",
+                                                                            name: "paddingBottom",
+                                                                            value: "pb-[" + target.value + paddings.paddingBottom.unit + "]"
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                value={paddings.paddingBottom.value}
+                                                                min={0}
+                                                                type="number"
+                                                                className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             <select
                                                                 onChange={
                                                                     ({target}) => {
@@ -2238,7 +2238,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     DISPLAY
                                                     */}
                                                 <h3 className="text-sm text-center font-bold">Display</h3>
-                                                <div className="w-full p-3 flex flex-wrap justify-center space-y-2 space-x-3 xl:space-x-0 2xl:space-x-3">
+                                                <div className="w-full p-3 flex flex-wrap justify-center space-y-0 xl:space-y-2 2xl:space-y-0 space-x-3 xl:space-x-0 2xl:space-x-3">
                                                     <button
                                                         onClick={() => {
                                                             setDisplay("hidden")
