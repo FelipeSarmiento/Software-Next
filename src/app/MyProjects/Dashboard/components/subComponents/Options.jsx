@@ -22,7 +22,14 @@ import {
     IconTag,
     IconArrowsUpDown,
     IconTextWrap,
-    IconTextWrapDisabled, IconAlignLeft, IconAlignCenter, IconAlignRight, IconAlignJustified, IconLink, IconId
+    IconTextWrapDisabled,
+    IconAlignLeft,
+    IconAlignCenter,
+    IconAlignRight,
+    IconAlignJustified,
+    IconLink,
+    IconId,
+    IconPhoto
 } from '@tabler/icons-react';
 import {ColorInput, ColorPicker, NumberInput, Select} from "@mantine/core";
 
@@ -284,14 +291,14 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 {optionItem.hasOwnProperty("href") ? (
                     <div className="py-2 flex items-center relative h-max">
                         <div className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
-                            <div className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
+                            <div className="w-[30%] flex items-center justify-start space-x-1 px-1 border-r-[1px] h-10 xl:h-8 2xl:h-10">
                                 <IconLink/>
-                                <span className="text-xs font-bold">Href</span>
+                                <span className="text-[12px] font-bold text-center text-md xl:text-[10px] 2xl:text-[12px]">Href</span>
                             </div>
                             <Select
                                 classNames={{
-                                    root: "h-8 w-[70%] xl:h-6 2xl:h-8 py-0 border-0",
-                                    input: "bg-stone-950 text-white rounded-md border-0 my-0 h-8 xl:h-6 py-0 2xl:h-8 text-md xl:text-xs 2xl:text-md min-h-0 font-bold text-center",
+                                    root: "h-9 w-[70%] xl:h-7 2xl:h-9 py-0 border-0",
+                                    input: "bg-stone-950 text-white rounded-md border-0 my-0 h-9 xl:h-7 py-0 2xl:h-9 text-md xl:text-xs 2xl:text-md min-h-0 font-bold text-center",
                                     dropdown: "bg-stone-950 text-white",
                                     option: "hover:bg-stone-950 border-2 border-transparent hover:border-cyan-500 hover:text-cyan-500 text-white font-bold text-md"
                                 }}
@@ -408,38 +415,40 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                         <div className="py-2 flex items-center relative h-max">
                             <div
                                 className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
-                                <div
-                                    className="relative before:cursor-pointer w-[30%] before:text-md xl:before:text-md 2xl:before:text-md before:content-['Img URL'] before:top-2/4 before:left-2/4 before:-translate-x-2/4 before:-translate-y-2/4 before:absolute">
-                                    <input
-                                        disabled={true}
-                                        onChange={(e) => {
-                                            e.preventDefault()
-                                            let reader = new FileReader();
-                                            reader.readAsDataURL(e.target?.files[0])
-                                            reader.onload = function () {
-                                                setSpecificAttributes({
-                                                    ...specificAttributes,
-                                                    src: reader.result,
-                                                    srcName: e.target.files[0].name
-                                                })
-                                                onChangeInput({
-                                                    target: {
-                                                        id: "valueInput",
-                                                        name: "src",
-                                                        value: reader.result
-                                                    }
-                                                })
-                                            }
-                                            reader.onerror = function (error) {
-                                                console.log('Error: ', error);
-                                            }
-                                        }}
-                                        name="image"
-                                        id="valueInput"
-                                        min={0}
-                                        type="file"
-                                        accept="image/*"
-                                        className="w-full rounded-r-md appearance-none opacity-0 focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                {/*<div className="relative before:cursor-pointer w-[30%] before:text-md before:text-nowrap 2xl:before:text-sm before:font-bold before:content-['SRC'] before:top-2/4 before:left-2 before:-translate-y-2/4 before:absolute">*/}
+                                {/*    <input*/}
+                                {/*        onChange={(e) => {*/}
+                                {/*            e.preventDefault()*/}
+                                {/*            let reader = new FileReader();*/}
+                                {/*            reader.readAsDataURL(e.target?.files[0])*/}
+                                {/*            reader.onload = function () {*/}
+                                {/*                setSpecificAttributes({*/}
+                                {/*                    ...specificAttributes,*/}
+                                {/*                    src: reader.result,*/}
+                                {/*                    srcName: e.target.files[0].name*/}
+                                {/*                })*/}
+                                {/*                onChangeInput({*/}
+                                {/*                    target: {*/}
+                                {/*                        id: "valueInput",*/}
+                                {/*                        name: "src",*/}
+                                {/*                        value: reader.result*/}
+                                {/*                    }*/}
+                                {/*                })*/}
+                                {/*            }*/}
+                                {/*            reader.onerror = function (error) {*/}
+                                {/*                console.log('Error: ', error);*/}
+                                {/*            }*/}
+                                {/*        }}*/}
+                                {/*        name="image"*/}
+                                {/*        id="valueInput"*/}
+                                {/*        min={0}*/}
+                                {/*        type="file"*/}
+                                {/*        accept="image/*"*/}
+                                {/*        className="w-full rounded-r-md appearance-none opacity-0 focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>*/}
+                                {/*</div>*/}
+                                <div className="w-[30%] flex items-center justify-start space-x-1 px-1 border-r-[1px] h-10 xl:h-8 2xl:h-10">
+                                    <IconPhoto/>
+                                    <span className="text-[12px] font-bold text-center text-md xl:text-[10px] 2xl:text-[12px]">SRC</span>
                                 </div>
                                 <div
                                     className="w-[70%] flex space-x-1 items-center justify-center border-l-[1px] h-full">
@@ -458,10 +467,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 }
                                             })
                                         }}
-                                        value={ specificAttributes.srcName }
+                                        value={ specificAttributes?.srcName ?? specificAttributes?.src}
                                         type="text"
                                         className="w-full h-full bg-black rounded-md focus:outline-none px-2 placeholder:text-white placeholder:text-md placeholder:xl:text-sm placeholder:2xl:text-md text-nowrap truncate"
-                                        placeholder=""/>
+                                        placeholder="Type or paste an image URL"/>
                                 </div>
                             </div>
                         </div>
@@ -491,10 +500,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                     <div className="py-2 flex items-center relative h-max">
                         <div
                             className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
-                            <div
-                                className="w-[30%] flex items-center justify-center border-r-[1px] h-full">
+                            <div className="w-[30%] flex items-center justify-start space-x-1 px-1 border-r-[1px] h-10 xl:h-8 2xl:h-10">
                                 <IconCursorText/>
-                                <span className="text-xs text-center font-bold">Alt</span>
+                                <span className="text-[12px] font-bold text-center text-md xl:text-[10px] 2xl:text-[12px]">Alt</span>
                             </div>
                             <input
                                 onChange={({target}) => {

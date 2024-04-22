@@ -396,5 +396,5 @@ export const deleteTemplate = async (idTemplate) => {
 
     // @ts-ignore
     const {iduser} = session
-    return await sql`DELETE FROM template WHERE idtemplate = ${idTemplate} AND iduser = ${iduser} RETURNING *`;
+    return await sql`DELETE FROM templates WHERE idtemplate = ${idTemplate} AND iduser = ${iduser} RETURNING *`;
 }
