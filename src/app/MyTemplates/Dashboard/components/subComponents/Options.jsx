@@ -409,8 +409,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                             <div
                                 className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
                                 <div
-                                    className="relative before:cursor-pointer w-[30%] before:text-md xl:before:text-md 2xl:before:text-md before:content-['Select'] before:top-2/4 before:left-2/4 before:-translate-x-2/4 before:-translate-y-2/4 before:absolute">
+                                    className="relative before:cursor-pointer w-[30%] before:text-md xl:before:text-md 2xl:before:text-md before:content-['Img URL'] before:top-2/4 before:left-2/4 before:-translate-x-2/4 before:-translate-y-2/4 before:absolute">
                                     <input
+                                        disabled={true}
                                         onChange={(e) => {
                                             e.preventDefault()
                                             let reader = new FileReader();
@@ -460,7 +461,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                         value={ specificAttributes.srcName }
                                         type="text"
                                         className="w-full h-full bg-black rounded-md focus:outline-none px-2 placeholder:text-white placeholder:text-md placeholder:xl:text-sm placeholder:2xl:text-md text-nowrap truncate"
-                                        placeholder="or type an URL"/>
+                                        placeholder=""/>
                                 </div>
                             </div>
                         </div>
