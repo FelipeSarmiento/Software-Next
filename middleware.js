@@ -39,7 +39,7 @@ export function middleware(req) {
 }
 
 export const config = {
-    matcher: ['/Auth/Login', '/Auth/Register', '/MyProjects', '/MyProfile', '/MyTemplates', '/MyProjects/Dashboard', '/MyProjects/Dashboard/:path*', '/MyTemplates/Dashboard', '/MyTemplates/Dashboard/:path*'],
+    matcher: ['/Auth/Login', '/Auth/Register', '/MyProjects', '/', '/MyProfile', '/MyTemplates', '/MyProjects/Dashboard', '/MyProjects/Dashboard/:path*', '/MyTemplates/Dashboard', '/MyTemplates/Dashboard/:path*'],
     api: {
         bodyParser: {
             sizeLimit: '40mb',
