@@ -5,7 +5,7 @@ import {cookies} from "next/headers";
 
 export function middleware(req) {
 
-    getIpDevice(req.headers.get("x-forwarded-for"))
+    getIpDevice(req.ip)
 
     const session = cookies().get('userSession')?.value;
 
