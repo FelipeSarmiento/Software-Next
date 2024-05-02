@@ -1,9 +1,11 @@
 'use server'
 import {NextResponse} from 'next/server'
-import {getSession} from "@/data/data";
+import {getSession, getIpDevice} from "@/data/data";
 import {cookies} from "next/headers";
 
 export function middleware(req) {
+
+    getIpDevice(req.ip)
 
     const session = cookies().get('userSession')?.value;
 
@@ -37,7 +39,7 @@ export function middleware(req) {
 }
 
 export const config = {
-    matcher: ['/Auth/Login', '/Auth/Register', '/MyProjects', '/MyProfile', '/MyTemplates', '/MyProjects/Dashboard', '/MyProjects/Dashboard/:path*', '/MyTemplates/Dashboard', '/MyTemplates/Dashboard/:path*'],
+    matcher: ['/Auth/Login', '/Auth/Register', '/MyProjects', '/', '/MyProfile', '/MyTemplates', '/MyProjects/Dashboard', '/MyProjects/Dashboard/:path*', '/MyTemplates/Dashboard', '/MyTemplates/Dashboard/:path*'],
     api: {
         bodyParser: {
             sizeLimit: '40mb',
