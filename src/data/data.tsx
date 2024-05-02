@@ -398,3 +398,18 @@ export const deleteTemplate = async (idTemplate) => {
     const {iduser} = session
     return await sql`DELETE FROM templates WHERE idtemplate = ${idTemplate} AND iduser = ${iduser} RETURNING *`;
 }
+
+/*
+*  ANALYTICS
+*  ANALYTICS
+*  ANALYTICS
+*  ANALYTICS
+*  ANALYTICS
+*  ANALYTICS
+*  ANALYTICS
+*/
+
+export const getIpDevice = (ip) => {
+    const date = new Date();
+    return sql`INSERT INTO visitors (ipVisitor, dateVisit) VALUES (${ip}, ${date.toString()}) RETURNING *`;
+}

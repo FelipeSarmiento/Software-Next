@@ -1,9 +1,11 @@
 'use server'
 import {NextResponse} from 'next/server'
-import {getSession} from "@/data/data";
+import {getSession, getIpDevice} from "@/data/data";
 import {cookies} from "next/headers";
 
 export function middleware(req) {
+
+    getIpDevice(req.ip)
 
     const session = cookies().get('userSession')?.value;
 
