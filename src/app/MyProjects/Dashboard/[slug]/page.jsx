@@ -58,8 +58,16 @@ export default function Dashboard({params}) {
         setUnSaved(false)
     }
 
+    function scrollToElement(elementId) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    }
+
     const onSelectItem = (event, value) => {
         setOptionItem(value);
+        scrollToElement(value.idUniqueIdentifier);
         event?.stopPropagation();
     }
     const modifyItemsDashboard = (valorBuscado, nuevoValor) => {
