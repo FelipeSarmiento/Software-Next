@@ -37,6 +37,8 @@ export default function Dashboard({params}) {
     const [actualPage, setActualPage] = useState("")
     const [itemCopied, setItemCopied] = useState()
     const [optionItem, setOptionItem] = useState();
+    const [lastItemSelected, setLastItemSelected] = useState(0)
+    const [itemSelected, setItemSelected] = useState(false)
     const [unSaved, setUnSaved] = useState(false)
     const [viewport, setViewport] = useState({
         value: "1024px",
@@ -56,8 +58,9 @@ export default function Dashboard({params}) {
         setUnSaved(false)
     }
 
-    const onSelectItem = (value) => {
+    const onSelectItem = (event, value) => {
         setOptionItem(value);
+        event?.stopPropagation();
     }
     const modifyItemsDashboard = (valorBuscado, nuevoValor) => {
         const modify = (obj) => {

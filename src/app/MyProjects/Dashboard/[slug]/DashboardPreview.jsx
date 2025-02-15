@@ -7,20 +7,22 @@ export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueId
             const newObj = structuredClone(obj)
             return newObj.map((component, index) => {
                 if (component !== undefined) {
-                    let className = `${component["settings" + viewport.type]?.className} ${(idUniqueIdentifier === component?.idUniqueIdentifier ? " outline outline-2 outline-offset-2 outline-cyan-400 z-40" : "")}`
+                    let className = `${component["settings" + viewport.type]?.className} ${(idUniqueIdentifier === component?.idUniqueIdentifier ? " outline outline-2 select-none outline-offset-2! outline-cyan-400! z-40" : "")}`
                     className = className.replaceAll("sm:", "").replaceAll("md:", "").replaceAll("lg:", "").replaceAll("xl:", "");
                     switch (component.group) {
                         case "element":
                             switch (component.type) {
                                 case "text":
                                     return (
-                                        <p onClick={ () => { onSelectItem(component) } } className={className} key={component.idUniqueIdentifier}>
+                                        <p onClick={ (event) => {
+                                            onSelectItem(event, component)
+                                        } }   className={className} key={component.idUniqueIdentifier}>
                                             {component.text}
                                         </p>
                                     )
                                 case "image":
                                     return (
-                                        <img src={ component.src } onClick={ () => { onSelectItem(component) } } className={className} key={component.idUniqueIdentifier} />
+                                        <img src={ component.src } onClick={ (event) => { onSelectItem(event, component) } }   className={className} key={component.idUniqueIdentifier} />
                                     )
                                 default:
                                     return <div key={component.idUniqueIdentifier}>Component not found</div>
@@ -29,73 +31,73 @@ export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueId
                             switch (component.type) {
                                 case "container":
                                     return (
-                                        <container key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
+                                        <container key={component.idUniqueIdentifier} onClick={ (event) => { onSelectItem(event, component) } }   className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </container>
                                     )
                                 case "link":
                                     return (
-                                        <a key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
+                                        <a key={component.idUniqueIdentifier} onClick={ (event) => { onSelectItem(event, component) } }   className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </a>
                                     )
                                 case "main":
                                     return (
-                                        <main key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
+                                        <main key={component.idUniqueIdentifier} onClick={ (event) => { onSelectItem(event, component) } }   className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </main>
                                     )
                                 case "div":
                                     return (
-                                        <div key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
+                                        <div key={component.idUniqueIdentifier} onClick={ (event) => { onSelectItem(event, component) } }   className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </div>
                                     )
                                 case "article":
                                     return (
-                                        <article key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
+                                        <article key={component.idUniqueIdentifier} onClick={ (event) => { onSelectItem(event, component) } }   className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </article>
                                     )
                                 case "section":
                                     return (
-                                        <section key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
+                                        <section key={component.idUniqueIdentifier} onClick={ (event) => { onSelectItem(event, component) } }   className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </section>
                                     )
                                 case "header":
                                     return (
-                                        <header key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
+                                        <header key={component.idUniqueIdentifier} onClick={ (event) => { onSelectItem(event, component) } }   className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </header>
                                     )
                                 case "nav":
                                     return (
-                                        <nav key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
+                                        <nav key={component.idUniqueIdentifier} onClick={ (event) => { onSelectItem(event, component) } }   className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </nav>
                                     )
                                 case "aside":
                                     return (
-                                        <aside key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
+                                        <aside key={component.idUniqueIdentifier} onClick={ (event) => { onSelectItem(event, component) } }   className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </aside>
                                     )
                                 case "form":
                                     return (
-                                        <form key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
+                                        <form key={component.idUniqueIdentifier} onClick={ (event) => { onSelectItem(event, component) } }   className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </form>
                                     )
                                 case "button":
                                     return (
-                                        <button key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
+                                        <button key={component.idUniqueIdentifier} onClick={ (event) => { onSelectItem(event, component) } }   className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </button>
                                     )
                                 case "footer":
                                     return (
-                                        <form key={component.idUniqueIdentifier} onClick={ () => { onSelectItem(component) } } className={className}>
+                                        <form key={component.idUniqueIdentifier} onClick={ (event) => { onSelectItem(event, component) } }   className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </form>
                                     )

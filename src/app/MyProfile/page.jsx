@@ -319,7 +319,7 @@ export default function Home() {
                     <div className="lg:col-span-2 border-4 rounded-3xl border-stone-800 w-full h-full">
                         <div className="lg:h-5/6 overflow-y-auto p-5">
                             <div
-                                className="grid grid-cols-1 2xl:grid-cols-2 justify-center md:place-items-center xl:w-max mx-auto">
+                                className="grid grid-cols-1 gap-2 2xl:grid-cols-2 justify-center md:place-items-center xl:w-max mx-auto">
                                 {
                                     projects.length > 0 ? projects.map((project, index) => (
                                         <Link key={project.idproject * index} href={"/" + project.projectpublicid}>

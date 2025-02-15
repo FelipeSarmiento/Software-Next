@@ -20,8 +20,8 @@ import {
 } from '@tabler/icons-react';
 
 export const Menu = ({items, functions, deleteItemDashboard, addSection, optionSelected, currentPage, viewport}) => {
-    const selectItem = (value) => {
-        functions(value)
+    const selectItem = (event, value) => {
+        functions(event, value)
     }
 
     const createContent = (section) => {
@@ -31,7 +31,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                     {({open}) => (
                         <>
                             <h3 className="relative flow-root">
-                                <div onClick={() => selectItem(section)}
+                                <div onClick={(event) => selectItem(event, section)}
                                      className={`relative focus:border-stone-800 border-2 rounded-md mt-1 h-10 xl:h-8 2xl:h-10 z-50 flex w-full items-center justify-between text-sm xl:text-[10px] 2xl:text-sm  px-2 bg-black ${(optionSelected?.idUniqueIdentifier === section?.idUniqueIdentifier ? "border-cyan-400 " : "border-stone-800 ")}`}>
                                     <span className={`font-medium flex items-center text-nowrap truncate "  ${(optionSelected?.idUniqueIdentifier === section?.idUniqueIdentifier ? "text-cyan-400" : "text-white")}`}>
                                         {section.type === "container" ? (
@@ -122,8 +122,8 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                                      className="relative flex items-center">
                                                     <Disclosure as="div" className="w-full flex items-center relative pl-3">
                                                         <h3
-                                                            onClick={() => {
-                                                                selectItem(option)
+                                                            onClick={(event) => {
+                                                                selectItem(event, option)
                                                             }}
                                                             className="relative flow-root w-full">
                                                             <Disclosure.Button

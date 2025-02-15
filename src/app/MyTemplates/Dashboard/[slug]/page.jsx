@@ -56,8 +56,9 @@ export default function Dashboard({params}) {
         setUnSaved(false)
     }
 
-    const onSelectItem = (value) => {
+    const onSelectItem = (event, value) => {
         setOptionItem(value);
+        event?.stopPropagation();
     }
     const modifyItemsDashboard = (valorBuscado, nuevoValor) => {
         const modify = (obj) => {
