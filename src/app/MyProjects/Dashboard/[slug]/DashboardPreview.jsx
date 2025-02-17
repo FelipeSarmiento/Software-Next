@@ -125,7 +125,7 @@ export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueId
     }
 
     return (
-        <div className="h-auto w-auto">
+        <div className="relative min-h-[700px] w-auto">
             {createContent(components?.sections)}
         </div>
     )

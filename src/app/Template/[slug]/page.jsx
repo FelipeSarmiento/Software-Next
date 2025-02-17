@@ -47,11 +47,17 @@ export default function Home({params}){
 async function getTemplate() {
     try {
         getPublicTemplate(params.slug).then(( resp ) => {
-            setTitle(resp.templates[0]?.templatename)
-            setItems(resp.templates[0]?.items ? JSON.parse(resp.templates[0]?.items) : undefined)
+            if (resp.templates.length > 0) {
+                setTitle(resp.templates[0]?.templatename)
+                setItems(resp.templates[0]?.items ? JSON.parse(resp.templates[0]?.items) : undefined)
+            }
+            else {
+                window.location.href = "/"
+            }
         });
 
     } catch (error) {
+        window.location.href = "/"
         console.error('Error fetching template:', error);
     }
 }

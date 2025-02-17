@@ -47,8 +47,13 @@ export default function Home({params}){
 async function getProject() {
     try {
         getPublicProject(params.slug).then(( resp ) => {
-            setTitle(resp.project[0]?.projectname)
-            setItems(resp.project[0]?.items ? JSON.parse(resp.project[0]?.items) : undefined)
+            if (resp.project.length > 0){
+                setTitle(resp.project[0]?.projectname)
+                setItems(resp.project[0]?.items ? JSON.parse(resp.project[0]?.items) : undefined)
+            }
+            else {
+                window.location.href = "/"
+            }
         });
 
     } catch (error) {
