@@ -1,6 +1,4 @@
 ﻿import {Disclosure} from "@headlessui/react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronUp, faChevronRight} from '@fortawesome/free-solid-svg-icons'
 import {PopUpMain} from "@/app/components/PopUpMain";
 import {
     IconPackage,
@@ -16,10 +14,12 @@ import {
     IconLayoutSidebar,
     IconLink,
     IconForms,
-    IconPackages, IconRowInsertBottom, IconEyeOff, IconMenu2
+    IconPackages, IconRowInsertBottom, IconEyeOff, IconMenu2,
+    IconChevronRight,
+    IconChevronUp,
 } from '@tabler/icons-react';
 
-export const Menu = ({items, functions, deleteItemDashboard, addSection, optionSelected, currentPage, viewport}) => {
+export const Menu = ({items, functions, addSection, optionSelected, currentPage, viewport}) => {
     const selectItem = (event, value) => {
         functions(event, value)
     }
@@ -73,10 +73,10 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                             ) : ''
                                         }
                                     </span>
-                                    <div className="relative">
+                                    <div className="relative flex items-center ">
                                         {
                                             section.group === 'container' ? (
-                                                <div className="absolute top-2/4 text-white -translate-y-2/4 right-6">
+                                                <div className=" right-6">
                                                     <PopUpMain addSection={addSection}
                                                                idUniqueIdentifier={section.idUniqueIdentifier}
                                                                title="Add Item"/>
@@ -84,15 +84,15 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                             ) : ''
                                         }
                                         <div
-                                            className="ml-1 absolute top-2/4 -translate-y-2/4 flex items-center right-0 hover:text-gray-500">
+                                            className="ml-1 flex items-center right-0 hover:text-gray-500">
                                             {
                                                 section.items?.length > 0 ? (
                                                     <Disclosure.Button className="h-full">
                                                         <span className="flex items-center text-white">
                                                           {open ? (
-                                                              <FontAwesomeIcon icon={faChevronUp}/>
+                                                              <IconChevronUp/>
                                                           ) : (
-                                                              <FontAwesomeIcon icon={faChevronRight}/>
+                                                              <IconChevronRight />
                                                           )}
                                                         </span>
                                                     </Disclosure.Button>
@@ -203,9 +203,9 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                             <Disclosure.Button className="h-full">
                                                         <span className="flex items-center text-white">
                                                           {open ? (
-                                                              <FontAwesomeIcon icon={faChevronUp}/>
+                                                              <IconChevronUp  stroke={2}/>
                                                           ) : (
-                                                              <FontAwesomeIcon icon={faChevronRight}/>
+                                                              <IconChevronRight stroke={2}/>
                                                           )}
                                                         </span>
                                             </Disclosure.Button>

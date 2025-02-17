@@ -1,6 +1,4 @@
 ﻿import {Disclosure} from "@headlessui/react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronUp, faChevronRight} from '@fortawesome/free-solid-svg-icons'
 import {PopUpMain} from "@/app/components/PopUpMain";
 import {
     IconPackage,
@@ -16,6 +14,9 @@ import {
     IconLayoutSidebar,
     IconLink,
     IconForms,
+    IconChevronUp,
+    IconChevronDown,
+    IconChevronRight,
     IconPackages, IconRowInsertBottom, IconEyeOff, IconMenu2
 } from '@tabler/icons-react';
 
@@ -83,10 +84,10 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                             ) : ''
                                         }
                                     </div>
-                                    <div className="relative w-[50px] flex justify-end pr-1 gap-1">
+                                    <div className="relative w-[50px] text-md flex justify-between">
                                         {
                                             section.group === 'container' ? (
-                                                <div className="w-(50%) text-white right-6">
+                                                <div className="text-white">
                                                     <PopUpMain addSection={addSection}
                                                                idUniqueIdentifier={section.idUniqueIdentifier}
                                                                title="Add Item"/>
@@ -94,15 +95,15 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                             ) : ''
                                         }
                                         <div
-                                            className="ml-1 w-(50%) flex items-center right-0 hover:text-gray-500">
+                                            className="flex items-center hover:text-gray-500">
                                             {
                                                 section.items?.length > 0 ? (
                                                     <Disclosure.Button className="h-full">
                                                         <span className="flex items-center text-white">
                                                           {open ? (
-                                                              <FontAwesomeIcon icon={faChevronUp}/>
+                                                              <IconChevronUp />
                                                           ) : (
-                                                              <FontAwesomeIcon icon={faChevronRight}/>
+                                                              <IconChevronRight/>
                                                           )}
                                                         </span>
                                                     </Disclosure.Button>
@@ -233,9 +234,9 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                             <Disclosure.Button className="h-full">
                                                         <span className="flex items-center text-white">
                                                           {open ? (
-                                                              <FontAwesomeIcon icon={faChevronUp}/>
+                                                              <IconChevronUp />
                                                           ) : (
-                                                              <FontAwesomeIcon icon={faChevronRight}/>
+                                                              <IconChevronRight/>
                                                           )}
                                                         </span>
                                             </Disclosure.Button>

@@ -1,12 +1,9 @@
 import '@mantine/core/styles.css';
 import "@/settings/assets/globals.css";
-import {config} from '@fortawesome/fontawesome-svg-core'
-import '@fortawesome/fontawesome-svg-core/styles.css'
 import { Analytics } from "@vercel/analytics/react"
 
 import {MantineProvider} from '@mantine/core';
-
-config.autoAddCss = false;
+;
 
 export default function RootLayout({children}) {
 

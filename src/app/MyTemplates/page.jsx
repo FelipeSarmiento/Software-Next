@@ -76,7 +76,7 @@ export default function Home() {
                                     </div>
                                     <div className="w-2/4 lg:w-full min-h-1/5 flex overflow-y-hidden py-1 overflow-x-auto items-center space-x-2 justify-start">
                                         { template.tags.map((tag, index) => (
-                                            <span className="bg-stone-800 rounded-lg p-1 text-xs text-nowrap md:text-sm border-stone-900">{tag}</span>
+                                            <span key={ tag+index } className="bg-stone-800 rounded-lg p-1 text-xs text-nowrap md:text-sm border-stone-900">{tag}</span>
                                         ))}
                                     </div>
                                     <div className="w-2/4 lg:w-full min-h-1/5 flex py-1 lg:py-0 items-center lg:items-end justify-end lg:justify-center space-x-5 px-2">
