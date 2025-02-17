@@ -57,20 +57,25 @@ export default function Dashboard({params}) {
     }
 
     function scrollToElement(elementId) {
+        const container = document.getElementById('dashboard-preview');
         const element = document.getElementById(elementId);
-        if (element) {
-            const parent = element.closest(".scrollable-container"); // Ajusta según el contenedor que deseas evitar mover
-            if (parent) {
-                const elementRect = element.getBoundingClientRect();
-                const parentRect = parent.getBoundingClientRect();
 
-                // Solo hacer scroll si el elemento está fuera de la vista del contenedor
-                if (elementRect.top < parentRect.top || elementRect.bottom > parentRect.bottom) {
-                    parent.scrollTo({
-                        top: parent.scrollTop + elementRect.top - parentRect.top,
-                        behavior: "smooth"
-                    });
-                }
+        if (container && element) {
+            // Calcula la posición relativa del elemento dentro del contenedor
+            const elementRect = element.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+
+            element.scrollIntoView({behavior: "smooth", block: "nearest"})
+
+            // Si hay una vista previa del elemento, también la desplaza
+            const elementPreview = document.getElementById(elementId + "preview");
+            if (elementPreview) {
+                const previewRect = elementPreview.getBoundingClientRect();
+                const previewScrollOffset = previewRect.top - containerRect.top + container.scrollTop;
+                container.scrollTo({
+                    top: previewScrollOffset - 40,
+                    behavior: 'smooth'
+                });
             }
         }
     }
@@ -734,7 +739,7 @@ export default function Dashboard({params}) {
                                                           deleteItemDashboard={deleteItemDashboard}/>
                                             </div>
                                             <div className="xl:col-span-3 bg-stone-950 overflow-x-auto  border-dotted border-2 flex justify-start rounded-md border-stone-800 h-[60vh] shrink-0 p-1">
-                                                <div className={`outline outline-offset-2 relative outline-1 mx-auto outline-white overflow-x-auto rounded-md h-full p-1`} style={{"width": viewport.value, "min-width": viewport.value}}>
+                                                <div id="dashboard-preview" className={`outline outline-offset-2 relative outline-1 mx-auto outline-white overflow-x-auto rounded-md h-full p-1`} style={{"width": viewport.value, "min-width": viewport.value}}>
                                                     <DashboardPreview idUniqueIdentifier={optionItem?.idUniqueIdentifier}
                                                                       viewport={viewport} onSelectItem={onSelectItem}
                                                                       components={itemsDashboard?.pages[actualPage]}/>
