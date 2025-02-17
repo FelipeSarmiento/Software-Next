@@ -59,10 +59,18 @@ export default function Dashboard({params}) {
     function scrollToElement(elementId) {
         const element = document.getElementById(elementId);
         if (element) {
-            element.scrollIntoView({behavior: "smooth", block: "start"})
-            const elementPreview = document.getElementById(elementId + "preview");
-            if (elementPreview) {
-                elementPreview.scrollIntoView({behavior: "smooth", block: "start"})
+            const parent = element.closest(".scrollable-container"); // Ajusta según el contenedor que deseas evitar mover
+            if (parent) {
+                const elementRect = element.getBoundingClientRect();
+                const parentRect = parent.getBoundingClientRect();
+
+                // Solo hacer scroll si el elemento está fuera de la vista del contenedor
+                if (elementRect.top < parentRect.top || elementRect.bottom > parentRect.bottom) {
+                    parent.scrollTo({
+                        top: parent.scrollTop + elementRect.top - parentRect.top,
+                        behavior: "smooth"
+                    });
+                }
             }
         }
     }
