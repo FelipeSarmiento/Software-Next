@@ -4,11 +4,15 @@ import {SparklesCore} from "@/../src/app/components/AceternityUI/sparkles";
 import {TextGenerateEffect} from "../components/AceternityUI/text-generate-effect";
 import Image from "next/image";
 
+// @ts-ignore
 import login from '@/settings/assets/images/login.png'
+// @ts-ignore
 import createProject from '@/settings/assets/images/createProject.png'
+// @ts-ignore
 import dashboard from '@/settings/assets/images/dashboard.png'
-import preview from '@/settings/assets/images/preview.png'
+// @ts-ignore
 import previewPage from '@/settings/assets/images/previewPage.png'
+// @ts-ignore
 import contact from '@/settings/assets/images/contact.png'
 export default function Home() {
     const words = `Welcome to our platform! Here's a guide on how to use our website builder`
