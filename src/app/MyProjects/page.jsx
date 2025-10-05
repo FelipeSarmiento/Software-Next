@@ -62,11 +62,11 @@ export default function Home() {
                     </div>
                 </header>
                 <div
-                    className="grid grid-cols-1 2xl:grid-cols-2 justify-center place-items-center xl:w-max mx-auto gap-8">
+                    className="grid grid-cols-1 max-w-screen 2xl:grid-cols-2 mx-auto box-border gap-8">
                     {
                         projects.length > 0 ? projects.map((project, index) => (
                             <div key={project.idproject * index}
-                                 className="grid grid-cols-1 lg:grid-cols-2 p-2 w-full  md:p-6 md:w-[750px] lg:h-72 lg:max-h-72 rounded-lg border-2 border-neutral-300">
+                                 className="grid grid-cols-1 lg:grid-cols-2 p-2  md:p-6 md:max-w-[750px] lg:h-72 lg:max-h-72 rounded-lg border-2 border-neutral-300">
                                 <div
                                     className="border-2 flex overflow-hidden justify-center select-none border-neutral-300 rounded-md lg:h-full">
                                     <Image src={ SoftwareNextLogo } alt={ project.projectname } width={500} height={500}

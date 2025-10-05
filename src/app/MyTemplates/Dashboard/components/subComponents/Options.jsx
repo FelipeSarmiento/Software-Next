@@ -1,6 +1,4 @@
 ﻿import {Disclosure} from "@headlessui/react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronUp, faChevronDown, faTrash} from '@fortawesome/free-solid-svg-icons'
 import React, {useEffect, useMemo, useState} from "react";
 import {
     IconArrowsVertical,
@@ -29,7 +27,7 @@ import {
     IconAlignJustified,
     IconLink,
     IconId,
-    IconPhoto
+    IconPhoto, IconChevronDown, IconChevronUp
 } from '@tabler/icons-react';
 import {ColorInput, ColorPicker, NumberInput, Select} from "@mantine/core";
 
@@ -549,9 +547,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 <Disclosure.Button className="p-2 ml-1">
                                                             <span className="flex items-center">
                                                               {open ? (
-                                                                  <FontAwesomeIcon icon={faChevronUp}/>
+                                                                  <IconChevronUp />
                                                               ) : (
-                                                                  <FontAwesomeIcon icon={faChevronDown}/>
+                                                                  <IconChevronDown />
                                                               )}
                                                             </span>
                                                 </Disclosure.Button>
@@ -881,9 +879,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 <Disclosure.Button className="p-2 ml-1">
                                                             <span className="flex items-center">
                                                               {open ? (
-                                                                  <FontAwesomeIcon icon={faChevronUp}/>
+                                                                  <IconChevronUp />
                                                               ) : (
-                                                                  <FontAwesomeIcon icon={faChevronDown}/>
+                                                                  <IconChevronDown />
                                                               )}
                                                             </span>
                                                 </Disclosure.Button>
@@ -972,9 +970,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 <Disclosure.Button className="p-2 ml-1">
                                                             <span className="flex items-center">
                                                               {open ? (
-                                                                  <FontAwesomeIcon icon={faChevronUp}/>
+                                                                  <IconChevronUp />
                                                               ) : (
-                                                                  <FontAwesomeIcon icon={faChevronDown}/>
+                                                                  <IconChevronDown />
                                                               )}
                                                             </span>
                                                 </Disclosure.Button>
@@ -1345,9 +1343,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 <Disclosure.Button className="p-2 ml-1">
                                                             <span className="flex items-center">
                                                               {open ? (
-                                                                  <FontAwesomeIcon icon={faChevronUp}/>
+                                                                  <IconChevronUp />
                                                               ) : (
-                                                                  <FontAwesomeIcon icon={faChevronDown}/>
+                                                                  <IconChevronDown />
                                                               )}
                                                             </span>
                                                 </Disclosure.Button>
@@ -2218,9 +2216,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                 <Disclosure.Button className="p-2 ml-1">
                                                             <span className="flex items-center">
                                                               {open ? (
-                                                                  <FontAwesomeIcon icon={faChevronUp}/>
+                                                                  <IconChevronUp />
                                                               ) : (
-                                                                  <FontAwesomeIcon icon={faChevronDown}/>
+                                                                  <IconChevronDown />
                                                               )}
                                                             </span>
                                                 </Disclosure.Button>
@@ -3378,9 +3376,9 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     <Disclosure.Button className="p-2 ml-1">
                                                             <span className="flex items-center">
                                                               {open ? (
-                                                                  <FontAwesomeIcon icon={faChevronUp}/>
+                                                                  <IconChevronUp />
                                                               ) : (
-                                                                  <FontAwesomeIcon icon={faChevronDown}/>
+                                                                  <IconChevronDown />
                                                               )}
                                                             </span>
                                                     </Disclosure.Button>
@@ -3639,7 +3637,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
         (
             <Disclosure as="div" className="border-white py-5">
                 <p className="text-white text-center px-2">
-                    Select an item from <br/>tree view to see the settings
+                    Select an item from <br/>Components to see the settings
                 </p>
             </Disclosure>
         ))

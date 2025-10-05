@@ -1,7 +1,6 @@
 'use client'
 import React, {useEffect, useState} from 'react'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faFloppyDisk} from '@fortawesome/free-solid-svg-icons'
+import { IconBadge4k } from '@tabler/icons-react'
 import {DropMenu} from "../components/DropMenu";
 import {DashboardPreview} from "./DashboardPreview.jsx";
 import {
@@ -12,6 +11,7 @@ import {
     IconDeviceLaptop,
     IconDeviceMobile,
     IconDeviceTv,
+    IconDeviceFloppy,
     IconComponents, IconX, IconCheck, IconBinaryTree, IconSettings, IconExternalLink, IconTrash, IconQuestionMark
 } from '@tabler/icons-react';
 import {Button, Drawer, Group, HoverCard, Text, Menu, Select} from '@mantine/core';
@@ -56,8 +56,34 @@ export default function Dashboard({params}) {
         setUnSaved(false)
     }
 
-    const onSelectItem = (value) => {
+    function scrollToElement(elementId) {
+        const container = document.getElementById('dashboard-preview');
+        const element = document.getElementById(elementId);
+
+        if (container && element) {
+            // Calcula la posición relativa del elemento dentro del contenedor
+            const elementRect = element.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+
+            element.scrollIntoView({behavior: "smooth", block: "nearest"})
+
+            // Si hay una vista previa del elemento, también la desplaza
+            const elementPreview = document.getElementById(elementId + "preview");
+            if (elementPreview) {
+                const previewRect = elementPreview.getBoundingClientRect();
+                const previewScrollOffset = previewRect.top - containerRect.top + container.scrollTop;
+                container.scrollTo({
+                    top: previewScrollOffset - 40,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    }
+
+    const onSelectItem = async (event, value) => {
         setOptionItem(value);
+        scrollToElement(value.idUniqueIdentifier);
+        event?.stopPropagation();
     }
     const modifyItemsDashboard = (valorBuscado, nuevoValor) => {
         const modify = (obj) => {
@@ -399,7 +425,7 @@ export default function Dashboard({params}) {
                             }}
                                     className="text-white text-nowrap flex items-center justify-center border-2 border-white hover:bg-gradient-to-r py-2 from-black via-zinc-700 to-black px-4 rounded-md">
                                 Save &nbsp;<span className={unSaved ? 'text-red-500' : 'text-white'}>
-                        <FontAwesomeIcon icon={faFloppyDisk}/>
+                        <IconDeviceFloppy stroke={2}/>
                             </span>
                             </button>
                         </div>
@@ -484,13 +510,13 @@ export default function Dashboard({params}) {
                                                 </div>
                                                 <div className="col-span-2 order-1 xl:order-2 xl:col-span-3 relative flex items-center justify-center">
                                                     {/*
-                                                MOBILE TREE VIEW
-                                                MOBILE TREE VIEW
-                                                MOBILE TREE VIEW
-                                                MOBILE TREE VIEW
-                                                MOBILE TREE VIEW
-                                                MOBILE TREE VIEW
-                                                MOBILE TREE VIEW
+                                                MOBILE Components
+                                                MOBILE Components
+                                                MOBILE Components
+                                                MOBILE Components
+                                                MOBILE Components
+                                                MOBILE Components
+                                                MOBILE Components
                                                 */}
                                                     <div className="absolute xl:hidden xl:invisible top-2/4 left-0 -translate-y-2/4">
                                                         <div className="relative">
@@ -575,7 +601,7 @@ export default function Dashboard({params}) {
                                                                 </div>
                                                                 <DropMenu viewport={viewport} currentPage={actualPage} items={itemsDashboard?.pages[actualPage]}
                                                                           optionSelected={optionItem}
-                                                                          title="Tree View"
+                                                                          title="Components"
                                                                           type="tree-view"
                                                                           functions={onSelectItem} addSection={addSection}
                                                                           deleteItemDashboard={deleteItemDashboard}/>
@@ -588,7 +614,7 @@ export default function Dashboard({params}) {
                                                         <span className="italic text-xs">
                                                             <IconBinaryTree/>
                                                         </span>
-                                                                <span className="hidden lg:block px-2 font-bold">Tree View</span>
+                                                                <span className="hidden lg:block px-2 font-bold">Components</span>
                                                             </Button>
                                                         </div>
                                                     </div>
@@ -653,9 +679,9 @@ export default function Dashboard({params}) {
                                                                 onClick={() => {
                                                                     setKeepOptions(!keepOptions)
                                                                 }}
-                                                                className={"h-full m-0 flex py-2 px-1 hover:bg-transparent bg-transparent hover:text-cyan-400 " + (keepOptions ? ' text-cyan-400' : ' text-white')}>
+                                                                className={"h-full m-0 flex  py-2 px-1 hover:bg-transparent bg-transparent hover:text-cyan-400 " + (keepOptions ? ' text-cyan-400' : ' text-white')}>
                                                                 <span>Keep Settings</span>
-                                                                <IconComponents/>
+                                                                <IconComponents className="mx-2"/>
                                                             </button>
                                                             <DropMenu pages={Object.keys(itemsDashboard?.pages).map((page, index) => { return (page.charAt(0).toUpperCase() + page.slice(1)) })} items={optionItem} viewport={viewport} keepOptions={keepOptions}
                                                                       modifyItemsDashboard={modifyItemsDashboard}
@@ -707,13 +733,13 @@ export default function Dashboard({params}) {
                                             <div className="hidden xl:block xl:col-span-1">
                                                 <DropMenu viewport={viewport} currentPage={actualPage} items={itemsDashboard?.pages[actualPage]}
                                                           optionSelected={optionItem}
-                                                          title="Tree View"
+                                                          title="Components"
                                                           type="tree-view"
                                                           functions={onSelectItem} addSection={addSection}
                                                           deleteItemDashboard={deleteItemDashboard}/>
                                             </div>
                                             <div className="xl:col-span-3 bg-stone-950 overflow-x-auto  border-dotted border-2 flex justify-start rounded-md border-stone-800 h-[60vh] shrink-0 p-1">
-                                                <div className={`outline outline-offset-2 relative outline-1 mx-auto outline-white overflow-x-auto rounded-md h-full p-1`} style={{"width": viewport.value, "min-width": viewport.value}}>
+                                                <div id="dashboard-preview" className={`outline outline-offset-2 relative outline-1 mx-auto outline-white overflow-x-auto rounded-md h-full p-1`} style={{"width": viewport.value, "min-width": viewport.value}}>
                                                     <DashboardPreview idUniqueIdentifier={optionItem?.idUniqueIdentifier}
                                                                       viewport={viewport} onSelectItem={onSelectItem}
                                                                       components={itemsDashboard?.pages[actualPage]}/>

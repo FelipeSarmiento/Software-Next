@@ -1,9 +1,4 @@
 ﻿import Popup from 'reactjs-popup';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {
-    faPlus,
-    faXmark
-} from '@fortawesome/free-solid-svg-icons'
 
 import Image from "next/image";
 import {useRef, useState} from "react";
@@ -22,7 +17,9 @@ import {
     IconLayoutBottombar,
     IconLayoutSidebar,
     IconRowInsertBottom,
-    IconMenu2
+    IconMenu2,
+    IconX,
+    IconPlus
 } from '@tabler/icons-react';
 
 export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
@@ -237,16 +234,16 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
     return (
         <>
             <Popup className="animate__animated animate__pulse" ref={ref}
-                   trigger={<button><FontAwesomeIcon icon={faPlus}/></button>} arrow={false}
+                   trigger={<button className="flex items-center h-full"><IconPlus stroke={2}/></button>} arrow={false}
                    position="center center" title={title}>
                 <div
                     className="fixed flex left-2/4 -translate-x-2/4 top-2/4 -translate-y-2/4 h-screen bg-stone-800/90 w-screen  z-50 justify-center items-center">
                     <div
-                        className="relative flex bg-stone-950 border-2 rounded-md border-stone-700 w-[90vw] h-[80vh] overflow-y-auto">
+                        className="relative flex bg-stone-950 border-2 rounded-md border-stone-700 w-[90vw] h-[95vh] overflow-y-hidden">
                         <button className="absolute right-6 top-3 text-white text-2xl" onClick={() => {
                             ref.current.close()
                         }} title={title}>
-                            <FontAwesomeIcon icon={faXmark}/>
+                            <IconX/>
                         </button>
                         <header className="w-full text-center justify-center py-4">
                             <h1 className="text-3xl font-bold tracking-tight text-white my-2">{title}</h1>

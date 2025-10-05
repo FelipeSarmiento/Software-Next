@@ -48,3 +48,9 @@ input[type=number] { -moz-appearance:textfield; }
     border-radius: 6px;
     height: 5px;
 }
+
+.selectedItem {
+    outline-width: 2px !important;
+    outline-color: #06b6d4 !important;
+    outline-offset: 2px !important;
+}

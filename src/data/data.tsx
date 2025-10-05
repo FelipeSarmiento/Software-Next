@@ -410,9 +410,6 @@ export const deleteTemplate = async (idTemplate) => {
 */
 
 export const getIpDevice = async (ip) => {
-    console.log("-------------------IP ADDRESS-------------------")
-    console.log(ip)
-    console.log("-------------------IP ADDRESS-------------------")
     const date = new Date();
     // @ts-ignore
     return await sql`INSERT INTO visitors (ipvisitor, datevisit) VALUES (${ip}, ${date}) RETURNING *`;

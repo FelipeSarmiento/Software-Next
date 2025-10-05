@@ -1,6 +1,4 @@
 ﻿import {Disclosure} from "@headlessui/react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronUp, faChevronRight} from '@fortawesome/free-solid-svg-icons'
 import {PopUpMain} from "@/app/components/PopUpMain";
 import {
     IconPackage,
@@ -16,22 +14,24 @@ import {
     IconLayoutSidebar,
     IconLink,
     IconForms,
-    IconPackages, IconRowInsertBottom, IconEyeOff, IconMenu2
+    IconPackages, IconRowInsertBottom, IconEyeOff, IconMenu2,
+    IconChevronRight,
+    IconChevronUp,
 } from '@tabler/icons-react';
 
-export const Menu = ({items, functions, deleteItemDashboard, addSection, optionSelected, currentPage, viewport}) => {
-    const selectItem = (value) => {
-        functions(value)
+export const Menu = ({items, functions, addSection, optionSelected, currentPage, viewport}) => {
+    const selectItem = (event, value) => {
+        functions(event, value)
     }
 
     const createContent = (section) => {
         return section.map((section, sectionIndex) => (
             section !== undefined ? (
-                <Disclosure defaultOpen={true} as="div" key={section.idUniqueIdentifier} className="span-end">
+                <Disclosure defaultOpen={true} as="div" key={section.idUniqueIdentifier} id={section.idUniqueIdentifier} className="span-end">
                     {({open}) => (
                         <>
                             <h3 className="relative flow-root">
-                                <div onClick={() => selectItem(section)}
+                                <div onClick={(event) => selectItem(event, section)}
                                      className={`relative focus:border-stone-800 border-2 rounded-md mt-1 h-10 xl:h-8 2xl:h-10 z-50 flex w-full items-center justify-between text-sm xl:text-[10px] 2xl:text-sm  px-2 bg-black ${(optionSelected?.idUniqueIdentifier === section?.idUniqueIdentifier ? "border-cyan-400 " : "border-stone-800 ")}`}>
                                     <span className={`font-medium flex items-center text-nowrap truncate "  ${(optionSelected?.idUniqueIdentifier === section?.idUniqueIdentifier ? "text-cyan-400" : "text-white")}`}>
                                         {section.type === "container" ? (
@@ -73,10 +73,10 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                             ) : ''
                                         }
                                     </span>
-                                    <div className="relative">
+                                    <div className="relative flex items-center ">
                                         {
                                             section.group === 'container' ? (
-                                                <div className="absolute top-2/4 text-white -translate-y-2/4 right-6">
+                                                <div className=" right-6">
                                                     <PopUpMain addSection={addSection}
                                                                idUniqueIdentifier={section.idUniqueIdentifier}
                                                                title="Add Item"/>
@@ -84,15 +84,15 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                             ) : ''
                                         }
                                         <div
-                                            className="ml-1 absolute top-2/4 -translate-y-2/4 flex items-center right-0 hover:text-gray-500">
+                                            className="ml-1 flex items-center right-0 hover:text-gray-500">
                                             {
                                                 section.items?.length > 0 ? (
                                                     <Disclosure.Button className="h-full">
                                                         <span className="flex items-center text-white">
                                                           {open ? (
-                                                              <FontAwesomeIcon icon={faChevronUp}/>
+                                                              <IconChevronUp/>
                                                           ) : (
-                                                              <FontAwesomeIcon icon={faChevronRight}/>
+                                                              <IconChevronRight />
                                                           )}
                                                         </span>
                                                     </Disclosure.Button>
@@ -118,12 +118,12 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                                     {createContent([option])}
                                                 </div>
                                             ) : (
-                                                <div key={option.idUniqueIdentifier}
+                                                <div key={option.idUniqueIdentifier} id={option.idUniqueIdentifier}
                                                      className="relative flex items-center">
                                                     <Disclosure as="div" className="w-full flex items-center relative pl-3">
                                                         <h3
-                                                            onClick={() => {
-                                                                selectItem(option)
+                                                            onClick={(event) => {
+                                                                selectItem(event, option)
                                                             }}
                                                             className="relative flow-root w-full">
                                                             <Disclosure.Button
@@ -203,9 +203,9 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                             <Disclosure.Button className="h-full">
                                                         <span className="flex items-center text-white">
                                                           {open ? (
-                                                              <FontAwesomeIcon icon={faChevronUp}/>
+                                                              <IconChevronUp  stroke={2}/>
                                                           ) : (
-                                                              <FontAwesomeIcon icon={faChevronRight}/>
+                                                              <IconChevronRight stroke={2}/>
                                                           )}
                                                         </span>
                                             </Disclosure.Button>
