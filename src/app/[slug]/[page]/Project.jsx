@@ -150,7 +150,7 @@ export const Project = ({ components, viewport, path }) => {
                                                                    ? component.text
                                                                    : 'tab-content-default-' + index
                                                            ).trim().replaceAll(" ", "")
-                                                       } className={className}>>
+                                                       } className={className}>
                                                 {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                             </TabsPanel>
                                         </>
