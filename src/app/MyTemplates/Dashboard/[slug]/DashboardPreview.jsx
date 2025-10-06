@@ -1,5 +1,6 @@
 ﻿import { Disclosure } from '@headlessui/react'
 import {IconMenu2} from "@tabler/icons-react";
+import {Tabs, TabsList, TabsPanel, TabsTab} from "@mantine/core";
 
 export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueIdentifier}) => {
     const createContent = (section) => {
@@ -34,6 +35,14 @@ export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueId
                                         <container key={component.idUniqueIdentifier} onClick={ (event) => { onSelectItem(event, component) } }  id={component.idUniqueIdentifier + "preview"}   className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </container>
+                                    )
+                                case "tabsContainer":
+                                    return (
+                                        <>
+                                            <Tabs key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
+                                                {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
+                                            </Tabs>
+                                        </>
                                     )
                                 case "link":
                                     return (
@@ -114,9 +123,49 @@ export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueId
                                     )
                                 default:
                                     return <div key={component.idUniqueIdentifier}>Component not found</div>
+                            }7
+                        case "tabs":
+                            switch (component.type) {
+                                case "tabsHeader":
+                                    return (
+                                        <>
+                                            <TabsList key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
+                                                {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
+                                            </TabsList>
+                                        </>
+                                    )
+                                case "tabsHeaderItem":
+                                    return (
+                                        <>
+                                            <TabsTab key={"tab-option-" + component.idUniqueIdentifier} id={"tab-option-" + component?.idHTML} name={"tab-option-" + component?.nameHTML}
+                                                     value={
+                                                         (component?.text && component.text.trim() !== ''
+                                                                 ? component.text
+                                                                 : 'tab-content-default-' + index
+                                                         ).trim().replaceAll(" ", "")
+                                                     } className={className}>{component?.text}</TabsTab>
+
+                                        </>
+                                    )
+                                case "tabsContent":
+                                    return (
+                                        <>
+                                            <TabsPanel key={"tab-content-" + component.idUniqueIdentifier} id={"tab-content-" + component?.idHTML} name={"tab-content-" + component?.nameHTML}
+                                                       value={
+                                                           (component?.text && component.text.trim() !== ''
+                                                                   ? component.text
+                                                                   : 'tab-content-default-' + index
+                                                           ).trim().replaceAll(" ", "")
+                                                       } className={className}>
+                                                {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
+                                            </TabsPanel>
+                                        </>
+                                    )
+                                default:
+                                    return <div key={component.idUniqueIdentifier}>Component not found</div>
                             }
                         default:
-                            return <div key={component.idUniqueIdentifier}>Component not found</div>
+                            return <div key={component.idUniqueIdentifier}>Group not found</div>
                     }
                 }
             })

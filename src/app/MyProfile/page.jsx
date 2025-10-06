@@ -319,34 +319,31 @@ export default function Home() {
                     <div className="lg:col-span-2 border-4 rounded-3xl border-stone-800 w-full h-full">
                         <div className="lg:h-5/6 overflow-y-auto p-5">
                             <div
-                                className="grid grid-cols-1 gap-2 2xl:grid-cols-2 justify-center md:place-items-center xl:w-max mx-auto">
+                                className="grid grid-cols-1 gap-2 md:grid-cols-2 justify-center mx-auto">
                                 {
                                     projects.length > 0 ? projects.map((project, index) => (
-                                        <Link key={project.idproject * index} href={"/" + project.projectpublicid}>
-                                            <div
-                                                className="relative grid grid-cols-1 lg:grid-cols-2 p-2 w-full gap-2 md:p-3 md:w-[550px] lg:h-56 lg:max-h-56 rounded-lg border-4 border-stone-800">
+                                        <Link className="w-full" key={project.idproject * index} href={"/" + project.projectpublicid}>
+                                            <div className="relative grid grid-cols-1 md:gap-x-2 w-full lg:grid-cols-2 p-2 md:p-3 lg:col-span-2 rounded-lg border-4 border-stone-800">
                                                 <div
-                                                    className="border-2 flex items-center justify-center select-none border-stone-800 rounded-md lg:h-full">
+                                                    className="border-2 flex items-center justify-center select-none border-stone-800 rounded-md  h-44 lg:h-full">
                                                     <Image src={SoftwareNextLogo} alt="Software Next Logo" width={500}
                                                            height={500} className="size-24 object-cover rounded-md"/>
                                                 </div>
-                                                <div
-                                                    className="rounded-md max-h-60 flex flex-wrap px-3 md:px-3 lg:px-0 text-white">
-                                                    <div
-                                                        className="w-full relative h-10 md:h-1/5 flex flex-wrap items-center text-2xl font-bold ">
+                                                <div className="rounded-md justify-evenly  flex flex-col px-3 md:px-3 lg:px-0 text-white">
+                                                    <div className="w-full relative h-10 md:h-1/5 flex flex-wrap items-center text-2xl font-bold ">
                                                         <h3 className="text-cyan-500 text-nowrap truncate pr-8">{project.projectname}</h3>
                                                     </div>
-                                                    <div className="w-full md:h-2/5 max-h-3/5">
+                                                    <div className="w-full flex-1">
                                                         <div className="h-20 max-h-full overflow-y-auto">
                                                             <span
                                                                 className="max-h-10 text-sm md:text-base">{project.projectdescription}</span>
                                                         </div>
                                                     </div>
                                                     <div
-                                                        className="w-full md:w-full h-10 md:h-1/5 flex overflow-x-auto items-center space-x-2 justify-start">
+                                                        className="w-full md:w-full h-12 flex overflow-x-auto items-center space-x-2 justify-start">
                                                         {project.tags.map((tag, index) => (
                                                             <span key={tag + index}
-                                                                  className="bg-stone-800 rounded-lg p-1 text-xs md:text-sm border-2 border-stone-900">{tag}</span>
+                                                                  className="bg-stone-800 rounded-lg text-nowrap p-1 text-xs md:text-sm border-2 border-stone-900">{tag}</span>
                                                         ))}
                                                     </div>
                                                 </div>

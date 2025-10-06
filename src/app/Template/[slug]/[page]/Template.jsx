@@ -1,5 +1,6 @@
 import {Disclosure} from "@headlessui/react";
 import {IconMenu2} from "@tabler/icons-react";
+import {MantineProvider, Tabs, TabsList, TabsPanel, TabsTab} from "@mantine/core";
 
 export const Template = ({ components, viewport, path }) => {
     const createContent = (section) => {
@@ -30,6 +31,14 @@ export const Template = ({ components, viewport, path }) => {
                                         <container key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
                                             {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                         </container>
+                                    )
+                                case "tabsContainer":
+                                    return (
+                                        <>
+                                            <Tabs key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
+                                                {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
+                                            </Tabs>
+                                        </>
                                     )
                                 case "link":
                                     return (
@@ -109,6 +118,46 @@ export const Template = ({ components, viewport, path }) => {
                                         </Disclosure>
                                     )
                             }
+                        case "tabs":
+                            switch (component.type) {
+                                case "tabsHeader":
+                                    return (
+                                        <>
+                                            <TabsList key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
+                                                {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
+                                            </TabsList>
+                                        </>
+                                    )
+                                case "tabsHeaderItem":
+                                    return (
+                                        <>
+                                            <TabsTab key={"tab-option-" + component.idUniqueIdentifier} id={"tab-option-" + component?.idHTML} name={"tab-option-" + component?.nameHTML}
+                                                     value={
+                                                         (component?.text && component.text.trim() !== ''
+                                                                 ? component.text
+                                                                 : 'tab-content-default-' + index
+                                                         ).trim().replaceAll(" ", "")
+                                                     } className={className}>{component?.text}</TabsTab>
+
+                                        </>
+                                    )
+                                case "tabsContent":
+                                    return (
+                                        <>
+                                            <TabsPanel key={"tab-content-" + component.idUniqueIdentifier} id={"tab-content-" + component?.idHTML} name={"tab-content-" + component?.nameHTML}
+                                                       value={
+                                                           (component?.text && component.text.trim() !== ''
+                                                                   ? component.text
+                                                                   : 'tab-content-default-' + index
+                                                           ).trim().replaceAll(" ", "")
+                                                       } className={className}>
+                                                {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
+                                            </TabsPanel>
+                                        </>
+                                    )
+                                default:
+                                    return <div key={component.idUniqueIdentifier}>Component not found</div>
+                            }
                     }
                 }
             })
@@ -118,7 +167,9 @@ export const Template = ({ components, viewport, path }) => {
 
     return (
         <>
-            {createContent(components?.sections)}
+            <MantineProvider>
+                {createContent(components?.sections)}
+            </MantineProvider>
         </>
     )
 }

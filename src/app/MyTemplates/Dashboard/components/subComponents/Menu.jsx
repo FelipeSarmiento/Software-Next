@@ -36,6 +36,15 @@ export const Menu = ({items, functions, addSection, optionSelected, currentPage,
                                     <span className={`font-medium flex items-center text-nowrap truncate "  ${(optionSelected?.idUniqueIdentifier === section?.idUniqueIdentifier ? "text-cyan-400" : "text-white")}`}>
                                         {section.type === "container" ? (
                                             <IconContainer  stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                        {section.type === "tabsContainer" ? (
+                                            <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                        {section.type === "tabsHeader" ? (
+                                            <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                        {section.type === "tabsHeaderItem" ? (
+                                            <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                        {section.type === "tabsContent" ? (
+                                            <IconContainer stroke={2}
+                                                           className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                         {section.type === "article" ? (
                                             <IconArticle  stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                         {section.type === "section" ? (
@@ -75,9 +84,10 @@ export const Menu = ({items, functions, addSection, optionSelected, currentPage,
                                     </span>
                                     <div className="relative flex items-center ">
                                         {
-                                            section.group === 'container' ? (
+                                            (section.group === 'container' || section?.group === 'tabs')  ? (
                                                 <div className=" right-6">
                                                     <PopUpMain addSection={addSection}
+                                                               actualComponent={section.type}
                                                                idUniqueIdentifier={section.idUniqueIdentifier}
                                                                title="Add Item"/>
                                                 </div>
@@ -113,7 +123,7 @@ export const Menu = ({items, functions, addSection, optionSelected, currentPage,
                                 <div className="ml-3 w-full">
                                     {section.items?.map((option, optionIndex) => (
                                         <>
-                                            {option.group === "container" ? (
+                                            {(option.group === "container" || option.group === "tabs") ? (
                                                 <div key={option.idUniqueIdentifier} className="relative pl-3">
                                                     {createContent([option])}
                                                 </div>
@@ -132,6 +142,15 @@ export const Menu = ({items, functions, addSection, optionSelected, currentPage,
                                                                     className={`font-medium flex items-center text-nowrap size-auto truncate pr-5 ${(optionSelected?.idUniqueIdentifier === option?.idUniqueIdentifier ? "text-cyan-400" : "text-white")}`}>
                                                                     {option.type === "container" ? (
                                                                         <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                                                    {option.type === "tabsContainer" ? (
+                                                                        <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                                                    {option.type === "tabsHeader" ? (
+                                                                        <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                                                    {option.type === "tabsHeaderItem" ? (
+                                                                        <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                                                    {option.type === "tabsContent" ? (
+                                                                        <IconContainer stroke={2}
+                                                                                       className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                                                     {option.type === "article" ? (
                                                                         <IconArticle stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                                                     {option.type === "section" ? (

@@ -40,6 +40,15 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                         className={`font-medium flex items-center text-nowrap truncate w-[calc(100%_-_40px)] "  ${(optionSelected?.idUniqueIdentifier === section?.idUniqueIdentifier ? "text-cyan-400" : "text-white")}`}>
                                         {section.type === "container" ? (
                                             <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                        {section.type === "tabsContainer" ? (
+                                            <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                        {section.type === "tabsHeader" ? (
+                                            <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                        {section.type === "tabsHeaderItem" ? (
+                                            <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                        {section.type === "tabsContent" ? (
+                                            <IconContainer stroke={2}
+                                                           className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                         {section.type === "article" ? (
                                             <IconArticle stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                         {section.type === "section" ? (
@@ -86,9 +95,10 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                     </div>
                                     <div className="relative w-[50px] text-md flex justify-between">
                                         {
-                                            section.group === 'container' ? (
+                                            (section.group === 'container' || section.group === 'tabs') ? (
                                                 <div className="text-white">
                                                     <PopUpMain addSection={addSection}
+                                                               actualComponent={section.type}
                                                                idUniqueIdentifier={section.idUniqueIdentifier}
                                                                title="Add Item"/>
                                                 </div>
@@ -125,7 +135,7 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                 <div className="ml-3 w-full">
                                     {section.items?.map((option, optionIndex) => (
                                         <>
-                                            {option.group === "container" ? (
+                                            {(option.group === "container" || option.group === "tabs")  ? (
                                                 <div key={option.idUniqueIdentifier + "" + optionIndex}
                                                      className="relative pl-3">
                                                     {createContent([option])}
@@ -145,6 +155,15 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                                                 <span
                                                                     className={`font-medium flex items-center text-nowrap size-auto truncate pr-5 ${(optionSelected?.idUniqueIdentifier === option?.idUniqueIdentifier ? "text-cyan-400" : "text-white")}`}>
                                                                     {option.type === "container" ? (
+                                                                        <IconContainer stroke={2}
+                                                                                       className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                                                    {option.type === "tabsContainer" ? (
+                                                                        <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                                                    {option.type === "tabsHeader" ? (
+                                                                        <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                                                    {option.type === "tabsHeaderItem" ? (
+                                                                        <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                                                    {option.type === "tabsContent" ? (
                                                                         <IconContainer stroke={2}
                                                                                        className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                                                     {option.type === "article" ? (

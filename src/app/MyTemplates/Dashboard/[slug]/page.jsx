@@ -1,6 +1,6 @@
 'use client'
 import React, {useEffect, useState} from 'react'
-import { IconBadge4k } from '@tabler/icons-react'
+import {IconBadge4k} from '@tabler/icons-react'
 import {DropMenu} from "../components/DropMenu";
 import {DashboardPreview} from "./DashboardPreview.jsx";
 import {
@@ -16,7 +16,7 @@ import {
 } from '@tabler/icons-react';
 import {Button, Drawer, Group, HoverCard, Text, Menu, Select} from '@mantine/core';
 import Link from "next/link";
-import { getSession, getTemplate, updateTemplate } from "@/data/data";
+import {getSession, getTemplate, updateTemplate} from "@/data/data";
 
 export default function Dashboard({params}) {
     const [session, setSession] = useState()
@@ -223,7 +223,7 @@ export default function Dashboard({params}) {
                     item[key] = setId(item[key]);
                 }
                 if (item.hasOwnProperty('idUniqueIdentifier')) {
-                    let id = window.crypto.randomUUID() + item.label;
+                    let id = window.crypto.randomUUID() + item.label.replace(" ", "");
                     item.id = id;
                     item.idUniqueIdentifier = id;
                 }
@@ -290,6 +290,7 @@ export default function Dashboard({params}) {
         });
         return elements.join(' ');
     }
+
     const [openDrawerSettings, setOpenDrawerSettings] = useState(false)
     const [openDrawerTreeView, setOpenDrawerTreeView] = useState(false)
     const [newPage, setNewPage] = useState()
@@ -297,7 +298,9 @@ export default function Dashboard({params}) {
 
     useEffect(() => {
         if (itemsDashboard) {
-            setPages(Object.keys(itemsDashboard?.pages).map((page, index) => { return (page) }))
+            setPages(Object.keys(itemsDashboard?.pages).map((page, index) => {
+                return (page)
+            }))
         }
     }, [itemsDashboard]);
 
@@ -355,12 +358,16 @@ export default function Dashboard({params}) {
                                     setActualPage(value.toLowerCase())
                                     setOptionItem(undefined)
                                 }}
-                                onSearchChange={ (value) => {
+                                onSearchChange={(value) => {
                                     setNewPage(value.toLowerCase())
                                 }}
                                 searchable
                                 checkIconPosition="right"
-                                nothingFoundMessage={ <button onClick={ () => { addPage(newPage); setUnSaved(true); setNewPage(undefined) } } className="w-full h-full text-white">Add <span className="text-cyan-500 font-bold">{ newPage?.charAt(0).toUpperCase() + newPage?.slice(1)}</span> page</button> }
+                                nothingFoundMessage={<button onClick={() => {
+                                    addPage(newPage);
+                                    setUnSaved(true);
+                                    setNewPage(undefined)
+                                }} className="w-full h-full text-white">Add <span className="text-cyan-500 font-bold">{newPage?.charAt(0).toUpperCase() + newPage?.slice(1)}</span> page</button>}
                             />
                             <div className="size-10 flex items-center justify-center">
                                 {
@@ -383,7 +390,7 @@ export default function Dashboard({params}) {
                                             <Menu.Dropdown>
                                                 <Menu.Item>
                                                     <div>
-                                                        Are you sure you want to delete the <span className="text-cyan-500 font-bold">{ actualPage }</span> page?
+                                                        Are you sure you want to delete the <span className="text-cyan-500 font-bold">{actualPage}</span> page?
                                                     </div>
                                                     <div className="flex items-center justify-around h-10">
                                                         <button
@@ -456,7 +463,16 @@ export default function Dashboard({params}) {
                                                         <IconCopy/>
                                                     </button>
                                                     <button
-                                                        disabled={(!(itemCopied !== undefined && optionItem?.group !== "element"))}
+                                                        disabled={
+                                                            (!((itemCopied !== undefined) ?
+                                                                ((itemCopied?.group === 'tabs') ?
+                                                                    (
+                                                                        (itemCopied?.type === 'tabsHeaderItem' && optionItem?.type === 'tabsHeader') ? true :
+                                                                            (itemCopied?.type === 'tabsHeader' && optionItem?.type === 'tabsContainer') ? true :
+                                                                                (itemCopied?.type === 'tabsContent' && optionItem?.type === 'tabsContainer')
+                                                                    ):
+                                                                    (optionItem?.group !== 'element')) : false))
+                                                        }
                                                         onClick={() => {
                                                             optionItem ? addSection(itemCopied, optionItem?.idUniqueIdentifier) : addSection(itemCopied)
                                                             setItemCopied(undefined)
@@ -528,7 +544,9 @@ export default function Dashboard({params}) {
                                                                     content: "bg-stone-950",
                                                                     header: "bg-stone-950"
                                                                 }}
-                                                                radius="md" opened={openDrawerTreeView} onClose={ () => { setOpenDrawerTreeView(!openDrawerTreeView) } }>
+                                                                radius="md" opened={openDrawerTreeView} onClose={() => {
+                                                                setOpenDrawerTreeView(!openDrawerTreeView)
+                                                            }}>
                                                                 <div className="flex justify-start py-2 lg:justify-start items-center px-2">
                                                                     <button
                                                                         disabled={optionItem === undefined}
@@ -610,7 +628,9 @@ export default function Dashboard({params}) {
                                                                 classNames={{
                                                                     root: "bg-transparent hover:bg-transparent flex items-center text-white m-0 h-auto",
                                                                 }}
-                                                                onClick={ () => { setOpenDrawerTreeView(!openDrawerTreeView) } }>
+                                                                onClick={() => {
+                                                                    setOpenDrawerTreeView(!openDrawerTreeView)
+                                                                }}>
                                                         <span className="italic text-xs">
                                                             <IconBinaryTree/>
                                                         </span>
@@ -674,7 +694,9 @@ export default function Dashboard({params}) {
                                                                 content: "bg-stone-950",
                                                                 header: "bg-stone-950"
                                                             }}
-                                                            radius="md" opened={openDrawerSettings} position="right" onClose={ () => { setOpenDrawerSettings(!openDrawerSettings) }}>
+                                                            radius="md" opened={openDrawerSettings} position="right" onClose={() => {
+                                                            setOpenDrawerSettings(!openDrawerSettings)
+                                                        }}>
                                                             <button
                                                                 onClick={() => {
                                                                     setKeepOptions(!keepOptions)
@@ -683,7 +705,9 @@ export default function Dashboard({params}) {
                                                                 <span>Keep Settings</span>
                                                                 <IconComponents className="mx-2"/>
                                                             </button>
-                                                            <DropMenu pages={Object.keys(itemsDashboard?.pages).map((page, index) => { return (page.charAt(0).toUpperCase() + page.slice(1)) })} items={optionItem} viewport={viewport} keepOptions={keepOptions}
+                                                            <DropMenu pages={Object.keys(itemsDashboard?.pages).map((page, index) => {
+                                                                return (page.charAt(0).toUpperCase() + page.slice(1))
+                                                            })} items={optionItem} viewport={viewport} keepOptions={keepOptions}
                                                                       modifyItemsDashboard={modifyItemsDashboard}
                                                                       title={optionItem !== undefined ? "Settings for " + optionItem.label : "Settings"}
                                                                       type="options"/>
@@ -692,9 +716,11 @@ export default function Dashboard({params}) {
                                                             classNames={{
                                                                 root: "bg-transparent hover:bg-transparent flex items-center text-white m-0 h-auto"
                                                             }}
-                                                            onClick={ () => { setOpenDrawerSettings(!openDrawerSettings) } }>
+                                                            onClick={() => {
+                                                                setOpenDrawerSettings(!openDrawerSettings)
+                                                            }}>
                                                             <span className="hidden lg:block px-2 font-bold">Settings</span>
-                                                        <span className="italic text-xs">
+                                                            <span className="italic text-xs">
                                                             <IconSettings/>
                                                         </span>
                                                         </Button>
@@ -739,14 +765,17 @@ export default function Dashboard({params}) {
                                                           deleteItemDashboard={deleteItemDashboard}/>
                                             </div>
                                             <div className="xl:col-span-3 bg-stone-950 overflow-x-auto  border-dotted border-2 flex justify-start rounded-md border-stone-800 h-[60vh] shrink-0 p-1">
-                                                <div id="dashboard-preview" className={`outline outline-offset-2 relative outline-1 mx-auto outline-white overflow-x-auto rounded-md h-full p-1`} style={{"width": viewport.value, "min-width": viewport.value}}>
+                                                <div id="dashboard-preview" className={`outline outline-offset-2 relative outline-1 mx-auto outline-white overflow-x-auto rounded-md h-full p-1`}
+                                                     style={{"width": viewport.value, "min-width": viewport.value}}>
                                                     <DashboardPreview idUniqueIdentifier={optionItem?.idUniqueIdentifier}
                                                                       viewport={viewport} onSelectItem={onSelectItem}
                                                                       components={itemsDashboard?.pages[actualPage]}/>
                                                 </div>
                                             </div>
                                             <div className="hidden xl:block xl:col-span-1">
-                                                <DropMenu pages={Object.keys(itemsDashboard?.pages).map((page, index) => { return (page.charAt(0).toUpperCase() + page.slice(1)) })} items={optionItem} viewport={viewport} keepOptions={keepOptions}
+                                                <DropMenu pages={Object.keys(itemsDashboard?.pages).map((page, index) => {
+                                                    return (page.charAt(0).toUpperCase() + page.slice(1))
+                                                })} items={optionItem} viewport={viewport} keepOptions={keepOptions}
                                                           modifyItemsDashboard={modifyItemsDashboard}
                                                           title={optionItem !== undefined ? "Settings for " + optionItem.label : "Settings"}
                                                           type="options"/>

@@ -22,11 +22,14 @@ import {
     IconPlus
 } from '@tabler/icons-react';
 
-export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
-
+export const PopUpMain = ({title, idUniqueIdentifier, addSection, actualComponent}) => {
     const items = [
         {label: "Section", type: "section", group: "container", description: "A thematic grouping of content."},
         {label: "Article", type: "article", group: "container", description: "A self-contained composition."},
+        {label: "Tabs Container", type: "tabsContainer", group: "container", description: "A Tabs Container."},
+        {label: "Tab Header", type: "tabsHeader", group: "tabs", description: "A Tab Header."},
+        {label: "Tab Header Item", type: "tabsHeaderItem", group: "tabs", description: "A Tab Header.", specificAttributes: {text: "Text"},},
+        {label: "Tab Content", type: "tabsContent", group: "tabs", description: "A Tab Content.", specificAttributes: {text: "Text"},},
         {label: "Div", type: "div", group: "container", description: "Has no special meaning. Represents its children."},
         {label: "Main", type: "main", group: "container", description: "Represents the main content."},
         {label: "Header", type: "header", group: "container", description: "Introductory or navigational content."},
@@ -52,7 +55,8 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                 borderTop: "border-t-[1]",
             }
         },
-        {label: "Text", type: "text", group: "element", specificAttributes: {text: "Text"}, specificSettings: {
+        {
+            label: "Text", type: "text", group: "element", specificAttributes: {text: "Text"}, specificSettings: {
                 height: "h-[]",
                 width: "w-[]",
                 minHeight: "min-h-[]",
@@ -61,8 +65,10 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                 borderLeft: "border-l-[0px]",
                 borderBottom: "border-b-[0px]",
                 borderTop: "border-t-[0px]",
-            }, description: "Represents text content."},
-        {label: "Image", type: "image", group: "element", specificAttributes: {src: "", alt: ""}, specificSettings: {
+            }, description: "Represents text content."
+        },
+        {
+            label: "Image", type: "image", group: "element", specificAttributes: {src: "", alt: ""}, specificSettings: {
                 height: "h-[]",
                 width: "w-[]",
                 minHeight: "min-h-[]",
@@ -71,8 +77,10 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                 borderLeft: "border-l-[1]",
                 borderBottom: "border-b-[1]",
                 borderTop: "border-t-[1]",
-            }, description: "Represents an image content."},
-        {label: "Menu", type: "menu", group: "container", specificSettings: {
+            }, description: "Represents an image content."
+        },
+        {
+            label: "Menu", type: "menu", group: "container", specificSettings: {
                 height: "h-[]",
                 width: "w-[]",
                 minHeight: "min-h-[]",
@@ -82,12 +90,13 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                 borderBottom: "border-b-[1]",
                 borderTop: "border-t-[1]",
                 flexDirection: "flex-col"
-            }, description: "Dropdown menu."}
+            }, description: "Dropdown menu."
+        }
     ]
 
 
     const buildSection = ({label: section, type, group, specificAttributes, specificSettings}) => {
-        let id = window.crypto.randomUUID() + section;
+        let id = (window.crypto.randomUUID() + section).replace(' ', '');
         let settings = {
             // id: "",
             // idUniqueIdentifier: "",
@@ -162,7 +171,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                 className: classNames(settings, "xl")
             },
         }
-        if (group === "container") {
+        if (group === "container" || group === "tabs") {
             newSection = {
                 ...newSection,
                 items: []
@@ -192,21 +201,25 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                                     }}
                                     key={index}
                                     className="rounded-md relative hover:border-white flex flex-col items-center justify-center border-2 text-white border-gray-500 size-24 lg:size-32">
-                                    {item.type === "container" ? (<IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
-                                    {item.type === "article" ? (<IconArticle stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
-                                    {item.type === "section" ? (<IconSection stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
-                                    {item.type === "div" ? (<IconCrop54 stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
-                                    {item.type === "main" ? (<IconPackage stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
-                                    {item.type === "header" ? (<IconLayoutNavbar stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
-                                    {item.type === "nav" ? (<IconLayoutNavbarCollapse stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
-                                    {item.type === "footer" ? (<IconLayoutBottombar stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
-                                    {item.type === "aside" ? (<IconLayoutSidebar stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
-                                    {item.type === "image" ? (<IconPhoto stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
-                                    {item.type === "text" ? (<IconLetterCase stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
-                                    {item.type === "link" ? (<IconLink stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
-                                    {item.type === "form" ? (<IconForms stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
+                                    {item.type === "container" ? (<IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "tabsContainer" ? (<IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "tabsHeader" ? (<IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "tabsHeaderItem" ? (<IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "tabsContent" ? (<IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "article" ? (<IconArticle stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "section" ? (<IconSection stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "div" ? (<IconCrop54 stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "main" ? (<IconPackage stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "header" ? (<IconLayoutNavbar stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "nav" ? (<IconLayoutNavbarCollapse stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "footer" ? (<IconLayoutBottombar stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "aside" ? (<IconLayoutSidebar stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "image" ? (<IconPhoto stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "text" ? (<IconLetterCase stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "link" ? (<IconLink stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                    {item.type === "form" ? (<IconForms stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                     {item.type === "button" ? (
-                                        <IconRowInsertBottom stroke={2} className=" size-6 xl:size-5 2xl:size-6 " />) : ""}
+                                        <IconRowInsertBottom stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                     <div className="text-sm">
                                         {item.label}
                                     </div>
@@ -234,7 +247,9 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
     return (
         <>
             <Popup className="animate__animated animate__pulse" ref={ref}
-                   trigger={<button className="flex items-center h-full"><IconPlus stroke={2}/></button>} arrow={false}
+                   trigger={<button onClick={() => {
+                       alert("Id Unido" + actualComponent)
+                   }} className="flex items-center h-full"><IconPlus stroke={2}/></button>} arrow={false}
                    position="center center" title={title}>
                 <div
                     className="fixed flex left-2/4 -translate-x-2/4 top-2/4 -translate-y-2/4 h-screen bg-stone-800/90 w-screen  z-50 justify-center items-center">
@@ -242,7 +257,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                         className="relative flex bg-stone-950 border-2 rounded-md border-stone-700 w-[90vw] h-[95vh] overflow-y-hidden">
                         <button className="absolute right-6 top-3 text-white text-2xl" onClick={() => {
                             ref.current.close()
-                        }} title={title}>
+                        }} title="Cerrar">
                             <IconX/>
                         </button>
                         <header className="w-full text-center justify-center py-4">
@@ -254,7 +269,27 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                                     <section
                                         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 place-items-center text-white w-full p-2">
                                         {items.map((item, index) => {
-                                            return (
+
+                                            const visible = () => {
+                                                switch (item.type) {
+                                                    case "tabsContainer":
+                                                        if (actualComponent !== "tabsContainer" && actualComponent !== 'tabsHeader' && actualComponent !== 'tabsHeaderItem') return true
+                                                        break;
+                                                    case "tabsHeader":
+                                                        if (actualComponent === "tabsContainer") return true
+                                                        break
+                                                    case "tabsHeaderItem":
+                                                        if (actualComponent === "tabsHeader") return true
+                                                        break
+                                                    case "tabsContent":
+                                                        if (actualComponent === "tabsContainer") return true
+                                                        break
+                                                    default:
+                                                        return true;
+                                                }
+                                            }
+                                            if (visible()){
+                                                return (
                                                 <div
                                                     onClick={() => {
                                                         buildSection(item)
@@ -264,35 +299,43 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                                                     className="rounded-md relative hover:border-white flex items-center border-2 text-white border-gray-500 h-32 w-64 md:w-60 lg:w-60 xl:w-72  ">
                                                     <div className="w-2/6 flex items-center justify-center">
                                                         {item.type === "container" ? (
-                                                            <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-12 " />) : ""}
+                                                            <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
+                                                        {item.type === "tabsContainer" ? (
+                                                            <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
+                                                        {item.type === "tabsHeader" ? (
+                                                            <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
+                                                        {item.type === "tabsContent" ? (
+                                                            <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
+                                                        {item.type === "tabsHeaderItem" ? (
+                                                            <IconContainer stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "article" ? (
-                                                            <IconArticle stroke={2} className=" size-6 xl:size-5 2xl:size-12 " />) : ""}
+                                                            <IconArticle stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "section" ? (
-                                                            <IconSection stroke={2} className=" size-6 xl:size-5 2xl:size-12 " />) : ""}
+                                                            <IconSection stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "div" ? (
-                                                            <IconCrop54 stroke={2} className=" size-6 xl:size-5 2xl:size-12 " />) : ""}
+                                                            <IconCrop54 stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "main" ? (
-                                                            <IconPackage stroke={2} className=" size-6 xl:size-5 2xl:size-12 " />) : ""}
+                                                            <IconPackage stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "header" ? (
-                                                            <IconLayoutNavbar stroke={2} className=" size-6 xl:size-5 2xl:size-12 " />) : ""}
+                                                            <IconLayoutNavbar stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "nav" ? (
-                                                            <IconLayoutNavbarCollapse stroke={2} className=" size-6 xl:size-5 2xl:size-12 " />) : ""}
+                                                            <IconLayoutNavbarCollapse stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "footer" ? (
-                                                            <IconLayoutBottombar stroke={2} className=" size-6 xl:size-5 2xl:size-12 " />) : ""}
+                                                            <IconLayoutBottombar stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "aside" ? (
-                                                            <IconLayoutSidebar stroke={2} className=" size-6 xl:size-5 2xl:size-12 " />) : ""}
+                                                            <IconLayoutSidebar stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "image" ? (
-                                                            <IconPhoto stroke={2} className=" size-6 xl:size-5 2xl:size-12 " />) : ""}
+                                                            <IconPhoto stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "text" ? (
-                                                            <IconLetterCase stroke={2} className=" size-6 xl:size-5 2xl:size-12 " />) : ""}
+                                                            <IconLetterCase stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "link" ? (
-                                                            <IconLink stroke={2} className=" size-6 xl:size-5 2xl:size-12 " />) : ""}
+                                                            <IconLink stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "form" ? (
-                                                            <IconForms stroke={2} className=" size-6 xl:size-5 2xl:size-12 " />) : ""}
+                                                            <IconForms stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "button" ? (
-                                                            <IconRowInsertBottom stroke={2} className=" size-6 xl:size-5 2xl:size-12 " />) : ""}
+                                                            <IconRowInsertBottom stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "menu" ? (
-                                                            <IconMenu2 stroke={2} className=" size-6 xl:size-5 2xl:size-12 " />) : ""}
+                                                            <IconMenu2 stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                     </div>
                                                     <div className="w-4/6 pr-2 flex flex-col items-start">
                                                         <span className="text-md xl:text-md 2xl:text-lg font-bold">
@@ -304,6 +347,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection}) => {
                                                     </div>
                                                 </div>
                                             )
+                                            }
                                         })}
                                     </section>
                                 </div>

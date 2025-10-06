@@ -16,7 +16,7 @@ Are you looking to build a stunning website without the hassle of coding? Look n
     return (
         <>
             <div className="h-[calc(100vh_-_80px)] w-full flex flex-col py-4 md:py-0 justify-center items-center overflow-hidden rounded-md">
-                <h1 className="md:text-6xl text-5xl 2xl:text-8xl font-bold text-center text-white relative z-20">
+                <h1 className="md:text-6xl text-5xl 2xl:text-8xl font-normal text-center text-white relative z-20">
                     <span translate="no" className="text-cyan-500">Software Next</span>
                 </h1>
                 <div className="w-full md:w-[40rem] flex flex-col items-center h-96 md:h-40 relative">
@@ -30,7 +30,7 @@ Are you looking to build a stunning website without the hassle of coding? Look n
                     <div
                         className="absolute top-3 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-2/4"/>
                     <div className="absolute w-full px-4 xl:w-[200%] left-2/4 -translate-x-2/4 top-12 z-30 text-white">
-                        <TextGenerateEffect className="text-center leading-normal px-6 md:px-24 text-xl md:text-3xl"
+                        <TextGenerateEffect className="text-center font-normal leading-normal px-6 md:px-24 text-xl md:text-3xl"
                                             words={words}/>
                     </div>
 
