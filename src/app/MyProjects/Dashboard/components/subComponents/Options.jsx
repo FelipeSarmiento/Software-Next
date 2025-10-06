@@ -132,6 +132,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
         value: "",
         unit: ""
     })
+    const [lineHeight, setLineHeight] = useState({
+        value: "",
+        unit: ""
+    })
     const [positions, setPositions] = useState({
         top: {
             value: "",
@@ -562,6 +566,11 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                     <Disclosure.Panel className="pl-2 w-full py-1">
                                         <div className="relative flex items-center w-full">
                                             <div className="py-1 border-l-2 w-full pl-1">
+                                                {/*
+
+                                               Font Size
+
+                                                */}
                                                 <div className="py-2 flex items-center relative h-max">
                                                     <div
                                                         className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
@@ -618,6 +627,72 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         </select>
                                                     </div>
                                                 </div>
+                                                {/*
+
+                                               Line Height
+
+                                                */}
+                                                <div className="py-2 flex items-center relative h-max">
+                                                    <div
+                                                        className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
+                                                        <div
+                                                            className="w-[30%] flex items-center justify-center px-1 border-r-[1px] h-full">
+                                                            <IconTextIncrease className="flex xl:hidden 2xl:flex"/>
+                                                            <span className="text-[12px] font-bold text-center text-md xl:text-[10px] 2xl:text-md">Line Height</span>
+                                                        </div>
+                                                        <input
+                                                            onChange={
+                                                                ({target}) => {
+                                                                    setLineHeight({
+                                                                        ...lineHeight,
+                                                                        value: target.value
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "lineHeight",
+                                                                            name: "lineHeight",
+                                                                            value: "leading-[" + target.value + lineHeight.unit + "]"
+                                                                        }
+                                                                    })
+                                                                }
+                                                            }
+                                                            value={lineHeight.value}
+                                                            min={0}
+                                                            type="number"
+                                                            className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
+                                                        <select
+                                                            onChange={
+                                                                ({target}) => {
+                                                                    setLineHeight({
+                                                                        ...lineHeight,
+                                                                        unit: target.value
+                                                                    })
+                                                                    onChangeInput({
+                                                                        target: {
+                                                                            id: "lineHeight",
+                                                                            name: "lineHeight",
+                                                                            value: "leading-[" + lineHeight.value + target.value + "]"
+                                                                        }
+                                                                    })
+                                                                }
+                                                            }
+                                                            value={lineHeight.unit}
+                                                            className="absolute top-2/4 -translate-y-2/4 focus:outline-none rounded-none right-0 w-10 text-center h-8 xl:h-6 2xl:h-8 bg-black appearance-none"
+                                                            name="" id="">
+                                                            {
+                                                                units.map((unit, index) => {
+                                                                    return (<option key={index * Math.random()}
+                                                                                    value={unit}>{unit}</option>)
+                                                                })
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                {/*
+
+                                                FONT COLOR
+
+                                                */}
                                                 <div className="text-white py-2 flex justify-center">
                                                     <h4>Font color</h4>
                                                 </div>
@@ -3751,6 +3826,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 value: newOption['settings' + viewportState.type]?.textSize?.match(/\d+/g) ? newOption['settings' + viewportState.type].textSize.match(/\d+/g).map(Number)[0] : "",
                 unit: newOption['settings' + viewportState.type]?.textSize?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
             })
+            setLineHeight({
+                value: newOption['settings' + viewportState.type]?.lineHeight?.match(/\d+/g) ? newOption['settings' + viewportState.type].lineHeight.match(/\d+/g).map(Number)[0] : "",
+                unit: newOption['settings' + viewportState.type]?.lineHeight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+            })
             setDisplay(newOption['settings' + viewportState.type]?.display)
             setFlexDirection(newOption['settings' + viewportState.type]?.flexDirection)
             setFlexWrap(newOption['settings' + viewportState.type]?.flexWrap)
@@ -3905,6 +3984,10 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
             setFontSize({
                 value: optionItem['settings' + newViewport.type]?.textSize?.match(/\d+/g) ? optionItem['settings' + newViewport.type].textSize.match(/\d+/g).map(Number)[0] : "",
                 unit: optionItem['settings' + newViewport.type]?.textSize?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+            })
+            setLineHeight({
+                value: optionItem['settings' + viewportState.type]?.lineHeight?.match(/\d+/g) ? optionItem['settings' + viewportState.type].lineHeight.match(/\d+/g).map(Number)[0] : "",
+                unit: optionItem['settings' + viewportState.type]?.lineHeight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
             })
             setDisplay(optionItem['settings' + newViewport.type]?.display)
             setFlexDirection(optionItem['settings' + newViewport.type]?.flexDirection)
