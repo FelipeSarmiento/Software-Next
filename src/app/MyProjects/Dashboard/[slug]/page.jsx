@@ -84,7 +84,7 @@ export default function Dashboard({params}) {
 
     const onSelectItem = async (event, value) => {
         setOptionItem(value);
-        scrollToElement(value.idUniqueIdentifier);
+        scrollToElement(value?.idUniqueIdentifier);
         event?.stopPropagation();
     }
     const modifyItemsDashboard = (valorBuscado, nuevoValor) => {

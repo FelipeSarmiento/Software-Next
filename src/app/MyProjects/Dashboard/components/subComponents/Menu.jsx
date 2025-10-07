@@ -17,7 +17,7 @@ import {
     IconChevronUp,
     IconChevronDown,
     IconChevronRight,
-    IconPackages, IconRowInsertBottom, IconEyeOff, IconMenu2
+    IconPackages, IconRowInsertBottom, IconEyeOff, IconMenu2, IconSpace
 } from '@tabler/icons-react';
 
 export const Menu = ({items, functions, deleteItemDashboard, addSection, optionSelected, currentPage, viewport}) => {
@@ -76,6 +76,9 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                                                  className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                         {section.type === "text" ? (
                                             <IconLetterCase stroke={2}
+                                                            className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                        {section.type === "span" ? (
+                                            <IconSpace stroke={2}
                                                             className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                         {section.type === "link" ? (
                                             <IconLink stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
@@ -199,6 +202,9 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                                                     {option.type === "text" ? (
                                                                         <IconLetterCase stroke={2}
                                                                                         className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                                                    {option.type === "span" ? (
+                                                                        <IconSpace stroke={2}
+                                                                                        className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                                                     {option.type === "link" ? (
                                                                         <IconLink stroke={2}
                                                                                   className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
@@ -209,9 +215,9 @@ export const Menu = ({items, functions, deleteItemDashboard, addSection, optionS
                                                                         <IconMenu2 stroke={2}
                                                                                    className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                                                     <span
-                                                                        title={option.type === "text" ? option.text !== "" ? option.text : option.label : option?.nameHTML ? option?.nameHTML : option?.label}
+                                                                        title={(option.type === "text" || option.type === "span") ? option.text !== "" ? option.text : option.label : option?.nameHTML ? option?.nameHTML : option?.label}
                                                                         className="pl-1 text-nowrap truncate w-full">
-                                                                        {option.type === "text" ? option.text !== "" ? option.text : option.label : option?.nameHTML ? option?.nameHTML : option?.label}
+                                                                        {(option.type === "text" || option.type === "span") ? option.text !== "" ? option.text : option.label : option?.nameHTML ? option?.nameHTML : option?.label}
                                                                     </span>
                                                                 </span>
                                                             </Disclosure.Button>

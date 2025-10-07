@@ -16,7 +16,7 @@ import {
     IconForms,
     IconPackages, IconRowInsertBottom, IconEyeOff, IconMenu2,
     IconChevronRight,
-    IconChevronUp,
+    IconChevronUp, IconSpace,
 } from '@tabler/icons-react';
 
 export const Menu = ({items, functions, addSection, optionSelected, currentPage, viewport}) => {
@@ -67,6 +67,8 @@ export const Menu = ({items, functions, addSection, optionSelected, currentPage,
                                             <IconRowInsertBottom  stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                         {section.type === "text" ? (
                                             <IconLetterCase  stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                        {section.type === "span" ? (
+                                            <IconSpace stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                         {section.type === "link" ? (
                                             <IconLink  stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                         {section.type === "form" ? (
@@ -173,6 +175,8 @@ export const Menu = ({items, functions, addSection, optionSelected, currentPage,
                                                                         <IconRowInsertBottom stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                                                     {option.type === "text" ? (
                                                                         <IconLetterCase stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
+                                                                    {section.type === "span" ? (
+                                                                        <IconSpace stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                                                     {option.type === "link" ? (
                                                                         <IconLink stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                                                     {option.type === "form" ? (
@@ -180,7 +184,7 @@ export const Menu = ({items, functions, addSection, optionSelected, currentPage,
                                                                     {option.type === "menu" ? (
                                                                         <IconMenu2 stroke={2} className=" size-6 xl:size-5 2xl:size-6 "/>) : ""}
                                                                     <span className="pl-1 text-nowrap truncate w-full">
-                                                                        { option.type === "text" ? option.text !== "" ? option.text : option.label : option?.nameHTML ? option?.nameHTML : option?.label }
+                                                                        { (option.type === "text" || option.type === "span") ? option.text !== "" ? option.text : option.label : option?.nameHTML ? option?.nameHTML : option?.label }
                                                                     </span>
                                                                 </span>
                                                             </Disclosure.Button>

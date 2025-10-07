@@ -1,6 +1,7 @@
 import {Disclosure} from "@headlessui/react";
 import {IconMenu2} from "@tabler/icons-react";
 import {MantineProvider, Tabs, TabsList, TabsPanel, TabsTab} from "@mantine/core";
+import DOMPurify from "dompurify";
 
 export const Project = ({ components, viewport, path }) => {
     const createContent = (section) => {
@@ -15,9 +16,15 @@ export const Project = ({ components, viewport, path }) => {
                             switch (component.type) {
                                 case "text":
                                     return (
-                                        <p className={className} id={component?.idHTML} name={component?.nameHTML} key={component.idUniqueIdentifier}>
-                                            {component.text}
+                                        <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(component.text) }} className={className} id={component?.idHTML} name={component?.nameHTML} key={component.idUniqueIdentifier}>
+
                                         </p>
+                                    )
+                                case "span":
+                                    return (
+                                        <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(component.text) }} className={className} id={component?.idHTML} name={component?.nameHTML} key={component.idUniqueIdentifier}>
+                                            
+                                        </span>
                                     )
                                 case "image":
                                     return (

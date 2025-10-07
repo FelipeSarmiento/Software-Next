@@ -1,6 +1,7 @@
 ﻿import { Disclosure } from '@headlessui/react'
 import {IconMenu2} from "@tabler/icons-react";
 import {Tabs, TabsList, TabsPanel, TabsTab} from "@mantine/core";
+import DOMPurify from "dompurify";
 
 export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueIdentifier}) => {
     const createContent = (section) => {
@@ -15,11 +16,19 @@ export const DashboardPreview = ({components, onSelectItem, viewport, idUniqueId
                             switch (component.type) {
                                 case "text":
                                     return (
-                                        <p onClick={ (event) => {
+                                        <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(component.text) }} onClick={ (event) => {
                                             onSelectItem(event, component)
                                         } }  id={component.idUniqueIdentifier + "preview"}     className={className} key={component.idUniqueIdentifier}>
-                                            {component.text}
+
                                         </p>
+                                    )
+                                case "span":
+                                    return (
+                                        <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(component.text) }} onClick={ (event) => {
+                                            onSelectItem(event, component)
+                                        } }  id={component.idUniqueIdentifier + "preview"}     className={className} key={component.idUniqueIdentifier}>
+
+                                        </span>
                                     )
                                 case "image":
                                     return (

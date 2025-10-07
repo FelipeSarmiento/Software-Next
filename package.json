@@ -41,6 +41,7 @@
     "@vercel/postgres": "^0.7.2",
     "clsx": "^2.1.0",
     "crypto": "^1.0.1",
+    "dompurify": "^3.2.7",
     "flowbite-react": "^0.7.2",
     "framer-motion": "^11.0.24",
     "keep-react": "^1.2.0",

@@ -27,7 +27,10 @@ import {
     IconAlignJustified,
     IconLink,
     IconId,
-    IconPhoto, IconChevronDown, IconChevronUp
+    IconPhoto,
+    IconChevronUp,
+    IconChevronDown,
+    IconChevronRight,
 } from '@tabler/icons-react';
 import {ColorInput, ColorPicker, NumberInput, Select} from "@mantine/core";
 
@@ -564,6 +567,11 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                     <Disclosure.Panel className="pl-2 w-full py-1">
                                         <div className="relative flex items-center w-full">
                                             <div className="py-1 border-l-2 w-full pl-1">
+                                                {/*
+
+                                               Font Size
+
+                                                */}
                                                 <div className="py-2 flex items-center relative h-max">
                                                     <div
                                                         className="relative flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10 w-full">
@@ -591,6 +599,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             value={fontSize.value}
                                                             min={0}
                                                             type="number"
+                                                            step="0.01" placeholder="0.00"
                                                             className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                         <select
                                                             onChange={
@@ -652,6 +661,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             value={lineHeight.value}
                                                             min={0}
                                                             type="number"
+                                                            step="0.01" placeholder="0.00"
                                                             className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                         <select
                                                             onChange={
@@ -681,6 +691,11 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         </select>
                                                     </div>
                                                 </div>
+                                                {/*
+
+                                                FONT COLOR
+
+                                                */}
                                                 <div className="text-white py-2 flex justify-center">
                                                     <h4>Font color</h4>
                                                 </div>
@@ -1077,6 +1092,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 value={borderWidth.borderTop.value}
                                                                 min={0}
                                                                 type="number"
+                                                                step="0.01" placeholder="0.00"
                                                                 className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             <select
                                                                 onChange={
@@ -1131,6 +1147,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 value={borderWidth.borderBottom.value}
                                                                 min={0}
                                                                 type="number"
+                                                                step="0.01" placeholder="0.00"
                                                                 className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             <select
                                                                 onChange={
@@ -1188,6 +1205,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 value={borderWidth.borderLeft.value}
                                                                 min={0}
                                                                 type="number"
+                                                                step="0.01" placeholder="0.00"
                                                                 className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             <select
                                                                 onChange={
@@ -1242,6 +1260,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 value={borderWidth.borderRight.value}
                                                                 min={0}
                                                                 type="number"
+                                                                step="0.01" placeholder="0.00"
                                                                 className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             <select
                                                                 onChange={
@@ -1302,6 +1321,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             value={rounded.value}
                                                             min={0}
                                                             type="number"
+                                                            step="0.01" placeholder="0.00"
                                                             className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                         <select
                                                             onChange={
@@ -1460,6 +1480,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             value={size.height.value}
                                                             min={0}
                                                             type="number"
+                                                            step="0.01" placeholder="0.00"
                                                             className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                         <select
                                                             onChange={
@@ -1523,6 +1544,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             value={size.minHeight?.value}
                                                             min={0}
                                                             type="number"
+                                                            step="0.01" placeholder="0.00"
                                                             className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                         <select
                                                             onChange={
@@ -1586,6 +1608,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             value={size.maxHeight?.value}
                                                             min={0}
                                                             type="number"
+                                                            step="0.01" placeholder="0.00"
                                                             className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                         <select
                                                             onChange={
@@ -1648,6 +1671,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             value={size.width?.value}
                                                             min={0}
                                                             type="number"
+                                                            step="0.01" placeholder="0.00"
                                                             className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                         <select
                                                             onChange={
@@ -1711,6 +1735,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             value={size.minWidth?.value}
                                                             min={0}
                                                             type="number"
+                                                            step="0.01" placeholder="0.00"
                                                             className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                         <select
                                                             onChange={
@@ -1774,6 +1799,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             value={size.maxWidth?.value}
                                                             min={0}
                                                             type="number"
+                                                            step="0.01" placeholder="0.00"
                                                             className="w-[70%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                         <select
                                                             onChange={
@@ -1839,6 +1865,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 value={margins.marginTop?.value}
                                                                 min={0}
                                                                 type="number"
+                                                                step="0.01" placeholder="0.00"
                                                                 className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             <select
                                                                 onChange={
@@ -1893,6 +1920,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 value={margins.marginBottom.value}
                                                                 min={0}
                                                                 type="number"
+                                                                step="0.01" placeholder="0.00"
                                                                 className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             <select
                                                                 onChange={
@@ -1950,6 +1978,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 value={margins.marginLeft.value}
                                                                 min={0}
                                                                 type="number"
+                                                                step="0.01" placeholder="0.00"
                                                                 className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             <select
                                                                 onChange={
@@ -2004,6 +2033,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 value={margins.marginRight.value}
                                                                 min={0}
                                                                 type="number"
+                                                                step="0.01" placeholder="0.00"
                                                                 className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             <select
                                                                 onChange={
@@ -2060,6 +2090,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 value={paddings.paddingTop.value}
                                                                 min={0}
                                                                 type="number"
+                                                                step="0.01" placeholder="0.00"
                                                                 className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             <select
                                                                 onChange={
@@ -2114,6 +2145,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 value={paddings.paddingBottom.value}
                                                                 min={0}
                                                                 type="number"
+                                                                step="0.01" placeholder="0.00"
                                                                 className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             <select
                                                                 onChange={
@@ -2170,6 +2202,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                    value={paddings.paddingLeft.value}
                                                                    min={0}
                                                                    type="number"
+                                                                   step="0.01" placeholder="0.00"
                                                                    className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             <select
                                                                 onChange={
@@ -2223,6 +2256,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                    value={paddings.paddingRight.value}
                                                                    min={0}
                                                                    type="number"
+                                                                   step="0.01" placeholder="0.00"
                                                                    className="w-full rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                             <select
                                                                 onChange={
@@ -2577,6 +2611,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         value={gaps.gapX?.value}
                                                         min={0}
                                                         type="number"
+                                                        step="0.01" placeholder="0.00"
                                                         className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                     <select
                                                         onChange={
@@ -2636,6 +2671,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         value={gaps.gapY?.value}
                                                         min={0}
                                                         type="number"
+                                                        step="0.01" placeholder="0.00"
                                                         className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                     <select
                                                         onChange={
@@ -2695,6 +2731,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         value={spaces.spaceX?.value}
                                                         min={0}
                                                         type="number"
+                                                        step="0.01" placeholder="0.00"
                                                         className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                     <select
                                                         onChange={
@@ -2754,6 +2791,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         value={spaces.spaceY?.value}
                                                         min={0}
                                                         type="number"
+                                                        step="0.01" placeholder="0.00"
                                                         className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                     <select
                                                         onChange={
@@ -3171,6 +3209,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             value={positions.top.value}
                                                             min={0}
                                                             type="number"
+                                                            step="0.01" placeholder="0.00"
                                                             className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                         <select
                                                             onChange={
@@ -3230,6 +3269,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             value={positions.bottom.value}
                                                             min={0}
                                                             type="number"
+                                                            step="0.01" placeholder="0.00"
                                                             className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                         <select
                                                             onChange={
@@ -3289,6 +3329,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             value={positions.left.value}
                                                             min={0}
                                                             type="number"
+                                                            step="0.01" placeholder="0.00"
                                                             className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                         <select
                                                             onChange={
@@ -3348,6 +3389,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             value={positions.right.value}
                                                             min={0}
                                                             type="number"
+                                                            step="0.01" placeholder="0.00"
                                                             className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 pr-8 text-nowrap truncate"/>
                                                         <select
                                                             onChange={
@@ -3412,6 +3454,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                             value={zIndex}
                                                             min={0}
                                                             type="number"
+                                                            step="0.01" placeholder="0.00"
                                                             className="w-[60%] rounded-r-md appearance-none focus:outline-none bg-black pl-2 text-nowrap truncate"/>
                                                     </div>
                                                 </div>
@@ -3728,142 +3771,142 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
 
             setBorderWidth({
                 borderRight: {
-                    value: newOption['settings' + viewportState.type].borderRight?.match(/\d+/g) ? newOption['settings' + viewportState.type].borderRight.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].borderRight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].borderRight?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].borderRight.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].borderRight?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 borderLeft: {
-                    value: newOption['settings' + viewportState.type].borderLeft?.match(/\d+/g) ? newOption['settings' + viewportState.type].borderLeft.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].borderLeft?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].borderLeft?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].borderLeft.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].borderLeft?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 borderTop: {
-                    value: newOption['settings' + viewportState.type].borderTop?.match(/\d+/g) ? newOption['settings' + viewportState.type].borderTop.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].borderTop?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].borderTop?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].borderTop.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].borderTop?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 borderBottom: {
-                    value: newOption['settings' + viewportState.type].borderBottom?.match(/\d+/g) ? newOption['settings' + viewportState.type].borderBottom.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].borderBottom?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].borderBottom?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].borderBottom.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].borderBottom?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 }
             })
             setPaddings({
                 paddingRight: {
-                    value: newOption['settings' + viewportState.type].paddingRight?.match(/\d+/g) ? newOption['settings' + viewportState.type].paddingRight.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].paddingRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].paddingRight?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].paddingRight.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].paddingRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 paddingLeft: {
-                    value: newOption['settings' + viewportState.type].paddingLeft?.match(/\d+/g) ? newOption['settings' + viewportState.type].paddingLeft.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].paddingLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].paddingLeft?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].paddingLeft.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].paddingLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 paddingTop: {
-                    value: newOption['settings' + viewportState.type].paddingTop?.match(/\d+/g) ? newOption['settings' + viewportState.type].paddingTop.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].paddingTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].paddingTop?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].paddingTop.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].paddingTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 paddingBottom: {
-                    value: newOption['settings' + viewportState.type].paddingBottom?.match(/\d+/g) ? newOption['settings' + viewportState.type].paddingBottom.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].paddingBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].paddingBottom?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].paddingBottom.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].paddingBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 }
             })
             setMargins({
                 marginRight: {
-                    value: newOption['settings' + viewportState.type].marginRight?.match(/\d+/g) ? newOption['settings' + viewportState.type].marginRight.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].marginRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].marginRight?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].marginRight.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].marginRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 marginLeft: {
-                    value: newOption['settings' + viewportState.type].marginLeft?.match(/\d+/g) ? newOption['settings' + viewportState.type].marginLeft.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].marginLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].marginLeft?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].marginLeft.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].marginLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 marginTop: {
-                    value: newOption['settings' + viewportState.type].marginTop?.match(/\d+/g) ? newOption['settings' + viewportState.type].marginTop.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].marginTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].marginTop?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].marginTop.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].marginTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 marginBottom: {
-                    value: newOption['settings' + viewportState.type].marginBottom?.match(/\d+/g) ? newOption['settings' + viewportState.type].marginBottom.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].marginBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].marginBottom?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].marginBottom.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].marginBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 }
             })
             setSize({
                 width: {
-                    value: newOption['settings' + viewportState.type].width?.match(/\d+/g) ? newOption['settings' + viewportState.type].width.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].width?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].width?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].width.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].width?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 minWidth: {
-                    value: newOption['settings' + viewportState.type].minWidth?.match(/\d+/g) ? newOption['settings' + viewportState.type].minWidth.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].minWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].minWidth?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].minWidth.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].minWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 maxWidth: {
-                    value: newOption['settings' + viewportState.type].maxWidth?.match(/\d+/g) ? newOption['settings' + viewportState.type].maxWidth.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].maxWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].maxWidth?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].maxWidth.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].maxWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 height: {
-                    value: newOption['settings' + viewportState.type].height?.match(/\d+/g) ? newOption['settings' + viewportState.type].height.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].height?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].height?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].height.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].height?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 minHeight: {
-                    value: newOption['settings' + viewportState.type].minHeight?.match(/\d+/g) ? newOption['settings' + viewportState.type].minHeight.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].minHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].minHeight?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].minHeight.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].minHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 maxHeight: {
-                    value: newOption['settings' + viewportState.type].maxHeight?.match(/\d+/g) ? newOption['settings' + viewportState.type].maxHeight.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].maxHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].maxHeight?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].maxHeight.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].maxHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
             })
             setRounded({
-                value: newOption['settings' + viewportState.type].borderRadius?.match(/\d+/g) ? newOption['settings' + viewportState.type].borderRadius.match(/\d+/g).map(Number)[0] : "",
-                unit: newOption['settings' + viewportState.type].borderRadius?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                value: newOption['settings' + viewportState.type].borderRadius?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].borderRadius.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                unit: newOption['settings' + viewportState.type].borderRadius?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
             })
             setFontSize({
-                value: newOption['settings' + viewportState.type]?.textSize?.match(/\d+/g) ? newOption['settings' + viewportState.type].textSize.match(/\d+/g).map(Number)[0] : "",
-                unit: newOption['settings' + viewportState.type]?.textSize?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                value: newOption['settings' + viewportState.type]?.textSize?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].textSize.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                unit: newOption['settings' + viewportState.type]?.textSize?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
             })
             setLineHeight({
-                value: newOption['settings' + viewportState.type]?.lineHeight?.match(/\d+/g) ? newOption['settings' + viewportState.type].lineHeight.match(/\d+/g).map(Number)[0] : "",
-                unit: newOption['settings' + viewportState.type]?.lineHeight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                value: newOption['settings' + viewportState.type]?.lineHeight?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].lineHeight.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                unit: newOption['settings' + viewportState.type]?.lineHeight?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
             })
             setDisplay(newOption['settings' + viewportState.type]?.display)
             setFlexDirection(newOption['settings' + viewportState.type]?.flexDirection)
             setFlexWrap(newOption['settings' + viewportState.type]?.flexWrap)
             setPositions({
                 top: {
-                    value: newOption['settings' + viewportState.type].top?.match(/\d+/g) ? newOption['settings' + viewportState.type].top.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].top?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].top?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].top.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].top?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 left: {
-                    value: newOption['settings' + viewportState.type].left?.match(/\d+/g) ? newOption['settings' + viewportState.type].left.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].left?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].left?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].left.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].left?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 right: {
-                    value: newOption['settings' + viewportState.type].right?.match(/\d+/g) ? newOption['settings' + viewportState.type].right.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].right?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].right?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].right.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].right?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 bottom: {
-                    value: newOption['settings' + viewportState.type].bottom?.match(/\d+/g) ? newOption['settings' + viewportState.type].bottom.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].bottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].bottom?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].bottom.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].bottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 }
             })
             setGaps({
                 gapX: {
-                    value: newOption['settings' + viewportState.type].gapX?.match(/\d+/g) ? newOption['settings' + viewportState.type].gapX?.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].gapX?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].gapX?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].gapX?.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].gapX?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 gapY: {
-                    value: newOption['settings' + viewportState.type].gapY?.match(/\d+/g) ? newOption['settings' + viewportState.type].gapY?.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].gapY?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].gapY?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].gapY?.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].gapY?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
             })
             setSpaces({
                 spaceX: {
-                    value: newOption['settings' + viewportState.type].spaceX?.match(/\d+/g) ? newOption['settings' + viewportState.type].spaceX?.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].spaceX?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].spaceX?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].spaceX?.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].spaceX?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 spaceY: {
-                    value: newOption['settings' + viewportState.type].spaceY?.match(/\d+/g) ? newOption['settings' + viewportState.type].spaceY?.match(/\d+/g).map(Number)[0] : "",
-                    unit: newOption['settings' + viewportState.type].spaceY?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: newOption['settings' + viewportState.type].spaceY?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].spaceY?.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: newOption['settings' + viewportState.type].spaceY?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
             })
             setGridTemplate({
-                gridCols: newOption['settings' + viewportState.type].gridCols?.match(/\d+/g) ? newOption['settings' + viewportState.type].gridCols?.match(/\d+/g).map(Number)[0] : "",
-                gridRows: newOption['settings' + viewportState.type].gridRows?.match(/\d+/g) ? newOption['settings' + viewportState.type].gridRows?.match(/\d+/g).map(Number)[0] : ""
+                gridCols: newOption['settings' + viewportState.type].gridCols?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].gridCols?.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                gridRows: newOption['settings' + viewportState.type].gridRows?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].gridRows?.match(/\d+(\.\d+)?/g).map(Number)[0] : ""
             })
-            setZIndex(newOption['settings' + viewportState.type]?.zIndex?.match(/\d+/g) ? newOption['settings' + viewportState.type].zIndex?.match(/\d+/g).map(Number)[0] : "")
+            setZIndex(newOption['settings' + viewportState.type]?.zIndex?.match(/\d+(\.\d+)?/g) ? newOption['settings' + viewportState.type].zIndex?.match(/\d+(\.\d+)?/g).map(Number)[0] : "")
 
         }
     }
@@ -3887,142 +3930,142 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
 
             setBorderWidth({
                 borderRight: {
-                    value: optionItem['settings' + newViewport.type].borderRight?.match(/\d+/g) ? optionItem['settings' + newViewport.type].borderRight.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].borderRight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].borderRight?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].borderRight.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].borderRight?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 borderLeft: {
-                    value: optionItem['settings' + newViewport.type].borderLeft?.match(/\d+/g) ? optionItem['settings' + newViewport.type].borderLeft.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].borderLeft?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].borderLeft?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].borderLeft.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].borderLeft?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 borderTop: {
-                    value: optionItem['settings' + newViewport.type].borderTop?.match(/\d+/g) ? optionItem['settings' + newViewport.type].borderTop.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].borderTop?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].borderTop?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].borderTop.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].borderTop?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 borderBottom: {
-                    value: optionItem['settings' + newViewport.type].borderBottom?.match(/\d+/g) ? optionItem['settings' + newViewport.type].borderBottom.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].borderBottom?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].borderBottom?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].borderBottom.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].borderBottom?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 }
             })
             setPaddings({
                 paddingRight: {
-                    value: optionItem['settings' + newViewport.type].paddingRight?.match(/\d+/g) ? optionItem['settings' + newViewport.type].paddingRight.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].paddingRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].paddingRight?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].paddingRight.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].paddingRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 paddingLeft: {
-                    value: optionItem['settings' + newViewport.type].paddingLeft?.match(/\d+/g) ? optionItem['settings' + newViewport.type].paddingLeft.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].paddingLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].paddingLeft?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].paddingLeft.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].paddingLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 paddingTop: {
-                    value: optionItem['settings' + newViewport.type].paddingTop?.match(/\d+/g) ? optionItem['settings' + newViewport.type].paddingTop.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].paddingTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].paddingTop?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].paddingTop.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].paddingTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 paddingBottom: {
-                    value: optionItem['settings' + newViewport.type].paddingBottom?.match(/\d+/g) ? optionItem['settings' + newViewport.type].paddingBottom.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].paddingBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].paddingBottom?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].paddingBottom.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].paddingBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 }
             })
             setMargins({
                 marginRight: {
-                    value: optionItem['settings' + newViewport.type].marginRight?.match(/\d+/g) ? optionItem['settings' + newViewport.type].marginRight.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].marginRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].marginRight?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].marginRight.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].marginRight?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 marginLeft: {
-                    value: optionItem['settings' + newViewport.type].marginLeft?.match(/\d+/g) ? optionItem['settings' + newViewport.type].marginLeft.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].marginLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].marginLeft?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].marginLeft.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].marginLeft?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 marginTop: {
-                    value: optionItem['settings' + newViewport.type].marginTop?.match(/\d+/g) ? optionItem['settings' + newViewport.type].marginTop.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].marginTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].marginTop?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].marginTop.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].marginTop?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 marginBottom: {
-                    value: optionItem['settings' + newViewport.type].marginBottom?.match(/\d+/g) ? optionItem['settings' + newViewport.type].marginBottom.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].marginBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].marginBottom?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].marginBottom.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].marginBottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 }
             })
             setSize({
                 width: {
-                    value: optionItem['settings' + newViewport.type].width?.match(/\d+/g) ? optionItem['settings' + newViewport.type].width.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].width?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].width?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].width.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].width?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 minWidth: {
-                    value: optionItem['settings' + newViewport.type].minWidth?.match(/\d+/g) ? optionItem['settings' + newViewport.type].minWidth.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].minWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].minWidth?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].minWidth.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].minWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 maxWidth: {
-                    value: optionItem['settings' + newViewport.type].maxWidth?.match(/\d+/g) ? optionItem['settings' + newViewport.type].maxWidth.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].maxWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].maxWidth?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].maxWidth.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].maxWidth?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 height: {
-                    value: optionItem['settings' + newViewport.type].height?.match(/\d+/g) ? optionItem['settings' + newViewport.type].height.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].height?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].height?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].height.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].height?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 minHeight: {
-                    value: optionItem['settings' + newViewport.type].minHeight?.match(/\d+/g) ? optionItem['settings' + newViewport.type].minHeight.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].minHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].minHeight?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].minHeight.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].minHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 maxHeight: {
-                    value: optionItem['settings' + newViewport.type].maxHeight?.match(/\d+/g) ? optionItem['settings' + newViewport.type].maxHeight.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].maxHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].maxHeight?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].maxHeight.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].maxHeight?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
             })
             setRounded({
-                value: optionItem['settings' + newViewport.type].borderRadius?.match(/\d+/g) ? optionItem['settings' + newViewport.type].borderRadius.match(/\d+/g).map(Number)[0] : "",
-                unit: optionItem['settings' + newViewport.type].borderRadius?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                value: optionItem['settings' + newViewport.type].borderRadius?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].borderRadius.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                unit: optionItem['settings' + newViewport.type].borderRadius?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
             })
             setFontSize({
-                value: optionItem['settings' + newViewport.type]?.textSize?.match(/\d+/g) ? optionItem['settings' + newViewport.type].textSize.match(/\d+/g).map(Number)[0] : "",
-                unit: optionItem['settings' + newViewport.type]?.textSize?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                value: optionItem['settings' + newViewport.type]?.textSize?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].textSize.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                unit: optionItem['settings' + newViewport.type]?.textSize?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
             })
             setLineHeight({
-                value: optionItem['settings' + viewportState.type]?.lineHeight?.match(/\d+/g) ? optionItem['settings' + viewportState.type].lineHeight.match(/\d+/g).map(Number)[0] : "",
-                unit: optionItem['settings' + viewportState.type]?.lineHeight?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                value: optionItem['settings' + viewportState.type]?.lineHeight?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + viewportState.type].lineHeight.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                unit: optionItem['settings' + viewportState.type]?.lineHeight?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
             })
             setDisplay(optionItem['settings' + newViewport.type]?.display)
             setFlexDirection(optionItem['settings' + newViewport.type]?.flexDirection)
             setFlexWrap(optionItem['settings' + newViewport.type]?.flexWrap)
             setPositions({
                 top: {
-                    value: optionItem['settings' + newViewport.type].top?.match(/\d+/g) ? optionItem['settings' + newViewport.type].top.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].top?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].top?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].top.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].top?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 left: {
-                    value: optionItem['settings' + newViewport.type].left?.match(/\d+/g) ? optionItem['settings' + newViewport.type].left.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].left?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].left?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].left.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].left?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 right: {
-                    value: optionItem['settings' + newViewport.type].right?.match(/\d+/g) ? optionItem['settings' + newViewport.type].right.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].right?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].right?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].right.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].right?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 bottom: {
-                    value: optionItem['settings' + newViewport.type].bottom?.match(/\d+/g) ? optionItem['settings' + newViewport.type].bottom.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].bottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].bottom?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].bottom.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].bottom?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 }
             })
             setGaps({
                 gapX: {
-                    value: optionItem['settings' + newViewport.type].gapX?.match(/\d+/g) ? optionItem['settings' + newViewport.type].gapX?.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].gapX?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].gapX?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].gapX?.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].gapX?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 gapY: {
-                    value: optionItem['settings' + newViewport.type].gapY?.match(/\d+/g) ? optionItem['settings' + newViewport.type].gapY?.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].gapY?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].gapY?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].gapY?.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].gapY?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
             })
             setSpaces({
                 spaceX: {
-                    value: optionItem['settings' + newViewport.type].spaceX?.match(/\d+/g) ? optionItem['settings' + newViewport.type].spaceX?.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].spaceX?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].spaceX?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].spaceX?.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].spaceX?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
                 spaceY: {
-                    value: optionItem['settings' + newViewport.type].spaceY?.match(/\d+/g) ? optionItem['settings' + newViewport.type].spaceY?.match(/\d+/g).map(Number)[0] : "",
-                    unit: optionItem['settings' + newViewport.type].spaceY?.split("-")[2].replace("[", "").replace("]", "").replace(/[0-9]/g, "")
+                    value: optionItem['settings' + newViewport.type].spaceY?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].spaceY?.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                    unit: optionItem['settings' + newViewport.type].spaceY?.split("-")[2].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
                 },
             })
             setGridTemplate({
-                gridCols: optionItem['settings' + newViewport.type].gridCols?.match(/\d+/g) ? optionItem['settings' + newViewport.type].gridCols?.match(/\d+/g).map(Number)[0] : "",
-                gridRows: optionItem['settings' + newViewport.type].gridRows?.match(/\d+/g) ? optionItem['settings' + newViewport.type].gridRows?.match(/\d+/g).map(Number)[0] : ""
+                gridCols: optionItem['settings' + newViewport.type].gridCols?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].gridCols?.match(/\d+(\.\d+)?/g).map(Number)[0] : "",
+                gridRows: optionItem['settings' + newViewport.type].gridRows?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].gridRows?.match(/\d+(\.\d+)?/g).map(Number)[0] : ""
             })
-            setZIndex(optionItem['settings' + newViewport.type]?.zIndex?.match(/\d+/g) ? optionItem['settings' + newViewport.type].zIndex?.match(/\d+/g).map(Number)[0] : "")
+            setZIndex(optionItem['settings' + newViewport.type]?.zIndex?.match(/\d+(\.\d+)?/g) ? optionItem['settings' + newViewport.type].zIndex?.match(/\d+(\.\d+)?/g).map(Number)[0] : "")
 
         }
     }

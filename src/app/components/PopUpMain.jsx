@@ -19,7 +19,7 @@ import {
     IconRowInsertBottom,
     IconMenu2,
     IconX,
-    IconPlus
+    IconPlus, IconSpace
 } from '@tabler/icons-react';
 
 export const PopUpMain = ({title, idUniqueIdentifier, addSection, actualComponent}) => {
@@ -66,6 +66,18 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection, actualComponen
                 borderBottom: "border-b-[0px]",
                 borderTop: "border-t-[0px]",
             }, description: "Represents text content."
+        },
+        {
+            label: "Span", type: "span", group: "element", specificAttributes: {text: "Span"}, specificSettings: {
+                height: "h-[]",
+                width: "w-[]",
+                minHeight: "min-h-[]",
+                minWidth: "min-w-[]",
+                borderRight: "border-r-[0px]",
+                borderLeft: "border-l-[0px]",
+                borderBottom: "border-b-[0px]",
+                borderTop: "border-t-[0px]",
+            }, description: "Represents span content."
         },
         {
             label: "Image", type: "image", group: "element", specificAttributes: {src: "", alt: ""}, specificSettings: {
@@ -328,6 +340,8 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection, actualComponen
                                                             <IconPhoto stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "text" ? (
                                                             <IconLetterCase stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
+                                                        {item.type === "span" ? (
+                                                            <IconSpace stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "link" ? (
                                                             <IconLink stroke={2} className=" size-6 xl:size-5 2xl:size-12 "/>) : ""}
                                                         {item.type === "form" ? (
