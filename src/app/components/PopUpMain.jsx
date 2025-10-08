@@ -26,7 +26,7 @@ export const PopUpMain = ({title, idUniqueIdentifier, addSection, actualComponen
     const items = [
         {label: "Section", type: "section", group: "container", description: "A thematic grouping of content."},
         {label: "Article", type: "article", group: "container", description: "A self-contained composition."},
-        {label: "Tabs Container", type: "tabsContainer", group: "container", description: "A Tabs Container."},
+        {label: "Tabs Container", type: "tabsContainer", group: "container", description: "A Tabs Container.", specificAttributes: {defaultValue: "DefaultValue"},},
         {label: "Tab Header", type: "tabsHeader", group: "tabs", description: "A Tab Header."},
         {label: "Tab Header Item", type: "tabsHeaderItem", group: "tabs", description: "A Tab Header.", specificAttributes: {text: "Text"},},
         {label: "Tab Content", type: "tabsContent", group: "tabs", description: "A Tab Content.", specificAttributes: {text: "Text"},},

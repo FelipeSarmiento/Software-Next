@@ -136,6 +136,9 @@ export default function Dashboard({params}) {
                     if (newObj.hasOwnProperty('text')) {
                         newObj.text = nuevoValor.text;
                     }
+                    if (newObj.hasOwnProperty('defaultValue')) {
+                        newObj.defaultValue = nuevoValor.defaultValue;
+                    }
                     if (newObj.hasOwnProperty('href')) {
                         newObj.href = nuevoValor.href;
                     }

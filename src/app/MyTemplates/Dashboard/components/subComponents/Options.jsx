@@ -89,6 +89,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
     }, [options])
     const [colorOptions, setColorOptions] = useState({})
     const [specificAttributes, setSpecificAttributes] = useState({
+        defaultValue: "",
         text: "",
         src: "",
         alt: "",
@@ -173,6 +174,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
 
     const [colorsUsed, setColorsUsed] = useState([])
     const [display, setDisplay] = useState()
+    const [shrinkAndGrow, setShrinkAndGrow] = useState()
     const [flexDirection, setFlexDirection] = useState()
     const [flexWrap, setFlexWrap] = useState()
     const [gaps, setGaps] = useState({})
@@ -286,7 +288,33 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                         </div>
                     </div>
                 ) : ""}
-
+                {optionItem.hasOwnProperty("defaultValue") ? (
+                    <div className="py-2 flex items-center relative h-max">
+                        <div className="relative text-md xl:text-xs 2xl:text-md flex flex-col rounded-md border-[1px] border-white min-h-28 w-full">
+                            <div className="w-full flex items-center justify-center border-b-[1px] h-10 xl:h-8 2xl:h-10">
+                                <IconCursorText/>
+                                <span className="font-bold">Default Value</span>
+                            </div>
+                            <textarea
+                                onChange={({target}) => {
+                                    setSpecificAttributes({
+                                        ...specificAttributes,
+                                        defaultValue: target.value
+                                    })
+                                    onChangeInput({
+                                        target: {
+                                            id: "valueInput",
+                                            name: "defaultValue",
+                                            value: target.value
+                                        }
+                                    })
+                                }}
+                                name="defaultValue"
+                                value={specificAttributes.defaultValue}
+                                className="w-full min-h-20 max-h-28 rounded-md text-md xl:text-sm 2xl:text-md appearance-none focus:outline-none bg-black p-1"/>
+                        </div>
+                    </div>
+                ) : ""}
                 {/*
                         HREF
                         HREF
@@ -2338,7 +2366,22 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                     DISPLAY
                                                     */}
                                                 <h3 className="text-sm text-center font-bold">Display</h3>
-                                                <div className="w-full p-3 flex xl:flex-col 2xl:flex-row justify-center space-x-2 xl:space-x-0 2xl:space-x-2 xl:space-y-2 2xl:space-y-0">
+                                                <div className="w-full p-3 grid xl:grid-cols-1 2xl:grid-cols-2 justify-center gap-x-2 xl:gap-x-3 2xl:gap-x-3 xl:gap-y-2 2xl:gap-y-2">
+                                                    <button
+                                                        onClick={() => {
+                                                            setDisplay("")
+                                                            onChangeInput({
+                                                                target: {
+                                                                    id: "display",
+                                                                    name: "display",
+                                                                    value: ""
+                                                                }
+                                                            })
+                                                        }}
+                                                        className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${display === 'none' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        <IconSquareX/>
+                                                        <span className="pl-1">None</span>
+                                                    </button>
                                                     <button
                                                         onClick={() => {
                                                             setDisplay("hidden")
@@ -2350,7 +2393,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-2/6 xl:w-full 2xl:w-2/6 flex items-center justify-center px-2 rounded-md border-2 py-1 ${display === 'hidden' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${display === 'hidden' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                         <IconSquareX/>
                                                         <span className="pl-1">Hidden</span>
                                                     </button>
@@ -2365,7 +2408,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-2/6 xl:w-full 2xl:w-2/6 flex items-center justify-center px-2 rounded-md border-2 py-1 ${display === 'flex' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${display === 'flex' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                         <IconColumns1/>
                                                         <span className="px-2">Flex</span>
                                                     </button>
@@ -2380,7 +2423,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                                 }
                                                             })
                                                         }}
-                                                        className={`w-2/6 xl:w-full 2xl:w-2/6 flex items-center justify-center px-2 rounded-md border-2 py-1 ${display === 'grid' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        className={`w-full flex items-center justify-center px-2 rounded-md border-2 py-1 ${display === 'grid' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
                                                         <IconGrid4x4/>
                                                         <span className="px-2">Grid</span>
                                                     </button>
@@ -2583,6 +2626,72 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                                                         </div>
                                                     ) : ''
                                                 }
+                                                {/*
+                                                    SHRINK AND GROW
+                                                    SHRINK AND GROW
+                                                    SHRINK AND GROW
+                                                    SHRINK AND GROW
+                                                    SHRINK AND GROW
+                                                    SHRINK AND GROW
+                                                    SHRINK AND GROW
+                                                    */}
+                                                <h3 className="text-sm text-center font-bold">Shrink and Grow</h3>
+                                                <div className="w-full p-3 flex text-nowrap xl:flex-col 2xl:flex-row justify-center space-x-2 xl:space-x-0 2xl:space-x-2 xl:space-y-2 2xl:space-y-0">
+                                                    <button
+                                                        onClick={() => {
+                                                            setShrinkAndGrow("")
+                                                            onChangeInput({
+                                                                target: {
+                                                                    id: "shrinkAndGrow",
+                                                                    name: "shrinkAndGrow",
+                                                                    value: ""
+                                                                }
+                                                            })
+                                                        }}
+                                                        className={`w-2/6 xl:w-full 2xl:w-2/6 flex items-center justify-center px-2 rounded-md border-2 py-1 ${shrinkAndGrow === '' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        <IconSquareX/>
+                                                        <span className="pl-1">None</span>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => {
+                                                            setShrinkAndGrow("flex-1")
+                                                            onChangeInput({
+                                                                target: {
+                                                                    id: "shrinkAndGrow",
+                                                                    name: "shrinkAndGrow",
+                                                                    value: "flex-1"
+                                                                }
+                                                            })
+                                                        }}
+                                                        className={`w-2/6 xl:w-full 2xl:w-2/6 flex items-center justify-center px-2 rounded-md border-2 py-1 ${shrinkAndGrow === 'flex-1' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        <IconSquareX/>
+                                                        <span className="pl-1">Flex-1</span>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => {
+                                                            setShrinkAndGrow("grow")
+                                                            onChangeInput({
+                                                                target: {
+                                                                    id: "shrinkAndGrow",
+                                                                    name: "shrinkAndGrow",
+                                                                    value: "grow"
+                                                                }
+                                                            })
+                                                        }}
+                                                        className={`w-2/6 xl:w-full 2xl:w-2/6 flex items-center justify-center px-2 rounded-md border-2 py-1 ${shrinkAndGrow === 'grow' ? 'text-cyan-400 border-cyan-400' : 'border-white'}`}>
+                                                        <IconColumns1/>
+                                                        <span className="px-2">Grow</span>
+                                                    </button>
+                                                </div>
+                                                {/*
+                                                    SPACE DISTRIBUTION
+                                                    SPACE DISTRIBUTION
+                                                    SPACE DISTRIBUTION
+                                                    SPACE DISTRIBUTION
+                                                    SPACE DISTRIBUTION
+                                                    SPACE DISTRIBUTION
+                                                    SPACE DISTRIBUTION
+                                                    */}
                                                 <div
                                                     className="relative my-2 flex rounded-md border-[1px] border-white h-10 xl:h-8 2xl:h-10">
                                                     <div
@@ -3761,6 +3870,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 decorationColor: newOption['settings' + viewportState.type].decorationColor?.split("-")[1].replace("[", "").replace("]", ""),
             })
             setSpecificAttributes({
+                defaultValue: newOption?.defaultValue,
                 text: newOption?.text,
                 src: newOption?.src,
                 alt: newOption?.alt,
@@ -3862,6 +3972,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 unit: newOption['settings' + viewportState.type]?.lineHeight?.split("-")[1].replace("[", "").replace("]", "").replace(/[\d.]/g, "")
             })
             setDisplay(newOption['settings' + viewportState.type]?.display)
+            setShrinkAndGrow(newOption['settings' + viewportState.type]?.shrinkAndGrow)
             setFlexDirection(newOption['settings' + viewportState.type]?.flexDirection)
             setFlexWrap(newOption['settings' + viewportState.type]?.flexWrap)
             setPositions({
@@ -3920,6 +4031,7 @@ export const Options = ({options, modifyItemsDashboard, viewport, keepOptions, p
                 decorationColor: optionItem['settings' + newViewport.type].decorationColor?.split("-")[1].replace("[", "").replace("]", ""),
             })
             setSpecificAttributes({
+                defaultValue: optionItem?.defaultValue,
                 text: optionItem?.text,
                 src: optionItem?.src,
                 alt: optionItem?.alt,

@@ -42,7 +42,12 @@ export const Template = ({ components, viewport, path }) => {
                                 case "tabsContainer":
                                     return (
                                         <>
-                                            <Tabs key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} className={className}>
+                                            <Tabs key={component.idUniqueIdentifier} id={component?.idHTML} name={component?.nameHTML} defaultValue={
+                                                (component?.defaultValue && component.defaultValue.trim() !== ''
+                                                        ? component.defaultValue
+                                                        : 'defaultValue'
+                                                ).trim().replaceAll(" ", "")
+                                            } className={className}>
                                                 {component.items?.length > 0 ? addSelectComponent(component.items) : ""}
                                             </Tabs>
                                         </>
